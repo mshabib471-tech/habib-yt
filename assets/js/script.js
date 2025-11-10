@@ -55,3 +55,12 @@ function proceedToPayment() {
   alert('অর্ডার সফল! @habib1577 কে WhatsApp-এ মেসেজ করুন।');
   document.getElementById('checkout-bar').style.display = 'none';
 }
+
+// ক্লিক করলে WhatsApp-এ মেসেজ
+document.querySelectorAll('.accessory-card').forEach(card => {
+  card.addEventListener('click', function() {
+    const name = this.querySelector('.acc-name').textContent;
+    const msg = আমি "${name}" কিনতে চাই। দাম কত? @habib1577;
+    window.open(https://wa.me/8801868461577?text=${encodeURIComponent(msg)}, '_blank');
+  });
+});
