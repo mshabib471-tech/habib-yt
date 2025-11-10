@@ -441,3 +441,45 @@ img {
     grid-template-columns: repeat(5, 1fr);
   }
 }
+/* =============== USER INFO BANNER =============== */
+.user-info-banner {
+  background: linear-gradient(135deg, #4361ee, #5f27cd);
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 15px 15px 0;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+}
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  color: #4361ee;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+.user-details {
+  flex: 1;
+}
+.user-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.user-location {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+.contact-btn {
+  background: #25d366;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-weight: 600;
