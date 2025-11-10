@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ফ্রি ফায়ার টপআপ - Habib YT</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="product-body">
+
+  <div class="product-header">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+    <h2>ফ্রি ফায়ার টপআপ</h2>
+  </div>
+
+  <div class="container">
+    <div class="step"><span class="step-number">1</span> প্যাকেজ সিলেক্ট করুন</div>
+    <div class="package-grid">
+      <div class="package-card" onclick="selectPackage('উইকলি মেম্বারশিপ', 50)">
+        <img src="https://i.ibb.co.com/fYMHpXsD/Free-Fire-Diamond-Top-Up-Bd-Bkash.jpg" alt="Weekly">
+        <div class="badge">Auto Delivery</div>
+        <h3>উইকলি / মাসিক</h3>
+        <p class="price">৫০৳</p>
+      </div>
+
+      <div class="package-card" onclick="selectPackage('লেভেল আপ পাস', 100)">
+        <img src="https://i.ibb.co.com/fYMHpXsD/Free-Fire-Diamond-Top-Up-Bd-Bkash.jpg" alt="Level">
+        <div class="badge">Auto Delivery</div>
+        <h3>লেভেল আপ পাস</h3>
+        <p class="price">১০০৳</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="checkout-bar" class="checkout-fixed" style="display:none;">
+    <div class="checkout-info">
+      <div>নির্বাচিত: <span id="selected-name">প্যাকেজ</span></div>
+      <div class="selected-price" id="selected-price">০৳</div>
+    </div>
+    <button class="buy-btn" onclick="proceedToPayment()">কিনুন</button>
+  </div>
+
+  <a href="https://wa.me/8801868461577" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
