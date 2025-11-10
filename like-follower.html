@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>লাইক এন্ড ফলোয়ার - Habib YT</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="product-body">
+
+  <div class="product-header">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+    <h2>লাইক এন্ড ফলোয়ার</h2>
+  </div>
+
+  <div class="container">
+    <div class="step"><span class="step-number">1</span> প্যাকেজ সিলেক্ট করুন</div>
+    <div class="social-grid">
+      <div class="social-card" onclick="selectPackage('Facebook 1K Likes', '৫০৳')">
+        <div class="serial">১.</div>
+        <img src="https://i.ibb.co.com/MxNtqCqj/photo-1683721003111-070bcc053d8b.jpg" alt="FB">
+        <h3>Facebook 1K Likes</h3>
+        <p class="price">৫০৳</p>
+      </div>
+      <div class="social-card" onclick="selectPackage('Instagram 1K Followers', '৮০৳')">
+        <div class="serial">২.</div>
+        <img src="https://i.ibb.co.com/MxNtqCqj/photo-1683721003111-070bcc053d8b.jpg" alt="IG">
+        <h3>Instagram 1K Followers</h3>
+        <p class="price">৮০৳</p>
+      </div>
+      <div class="social-card" onclick="selectPackage('TikTok 1K Likes', '৬০৳')">
+        <div class="serial">৩.</div>
+        <img src="https://i.ibb.co.com/MxNtqCqj/photo-1683721003111-070bcc053d8b.jpg" alt="TT">
+        <h3>TikTok 1K Likes</h3>
+        <p class="price">৬০৳</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="checkout-bar" class="checkout-fixed" style="display:none;">
+    <div class="checkout-info">
+      <div>নির্বাচিত: <span id="selected-name">প্যাকেজ</span></div>
+      <div class="selected-price" id="selected-price">০৳</div>
+    </div>
+    <button class="buy-btn" onclick="proceedToPayment()">কিনুন</button>
+  </div>
+
+  <a href="https://wa.me/8801868461577" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
