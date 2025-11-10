@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>লগইন - Habib YT</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="login-body">
+  <div class="login-container">
+    <div class="login-box">
+      <h2>লগইন করুন</h2>
+      <p>অর্ডার ট্র্যাক করুন</p>
+      <button class="login-email" onclick="showForm('email')">ইমেইল দিয়ে লগইন</button>
+      <button class="login-phone" onclick="showForm('phone')">মোবাইল দিয়ে লগইন</button>
+
+      <div id="email-form" class="form-hidden">
+        <input type="email" placeholder="ইমেইল" id="email">
+        <input type="password" placeholder="পাসওয়ার্ড" id="pass">
+        <button onclick="emailLogin()">লগইন</button>
+      </div>
+
+      <div id="phone-form" class="form-hidden">
+        <input type="tel" placeholder="মোবাইল" id="phone">
+        <button onclick="sendOTP()">OTP পাঠান</button>
+        <div id="otp-section" class="form-hidden">
+          <input type="text" placeholder="OTP" id="otp">
+          <button onclick="verifyOTP()">যাচাই</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showForm(t) {
+      document.getElementById('email-form').style.display = t === 'email' ? 'block' : 'none';
+      document.getElementById('phone-form').style.display = t === 'phone' ? 'block' : 'none';
+    }
+    function emailLogin() {
+      const e = document.getElementById('email').value, p = document.getElementById('pass').value;
+      if (e && p) { localStorage.setItem('user', JSON.stringify({email: e})); alert('লগইন সফল!'); window.location.href = 'dashboard.html'; }
+    }
+    function sendOTP() {
+      const ph = document.getElementById('phone').value;
+      if (ph) { alert('OTP: 1234'); document.getElementById('otp-section').classList.remove('form-hidden'); }
+    }
+    function verifyOTP() {
+      if (document.getElementById('otp').value === '1234') {
+        localStorage.setItem('user', JSON.stringify({phone: document.getElementById('phone').value}));
+        alert('লগইন সফল!'); window.location.href = 'dashboard.html';
+      } else alert('ভুল OTP');
+    }
+  </script>
+</body>
+</html>
