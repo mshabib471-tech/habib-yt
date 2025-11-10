@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Habib YT - Auto Delivery</title>
+  <title>Habib YT - Auto Delivery TopUp</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="assets/css/style.css">
@@ -17,64 +17,76 @@
         <h1><span class="gradient-text">Habib</span> <span class="yt">YT</span></h1>
       </div>
       <a href="login.html" class="login-btn">লগইন</a>
+      <button onclick="toggleDarkMode()" class="dark-mode-btn"><i class="fas fa-moon"></i></button>
     </div>
   </header>
 
   <!-- Main Grid -->
   <main class="container main-grid">
-    <!-- FreeFire -->
     <a href="freefire.html" class="card">
-      <div class="badge">Auto Delivery</div>
       <img src="https://i.ibb.co.com/fYMHpXsD/Free-Fire-Diamond-Top-Up-Bd-Bkash.jpg" alt="FreeFire">
+      <div class="badge">Auto Delivery</div>
       <h3>ফ্রি ফায়ার টপআপ</h3>
       <p>[BD]</p>
     </a>
 
-    <!-- EFootball -->
     <a href="efootball.html" class="card">
-      <div class="badge">Auto Delivery</div>
       <img src="https://i.ibb.co.com/nqpvNT5y/main-page-1-sp.png" alt="EFootball">
-      <h3>EFootball Coin</h3>
+      <div class="badge">Auto Delivery</div>
+      <h3>ইফুটবল কয়েন</h3>
       <p>Coin</p>
     </a>
 
-    <!-- Mobile Servicing -->
     <a href="mobile-servicing.html" class="card">
-      <div class="badge">Shop View</div>
       <img src="https://i.ibb.co.com/k6Jn85H7/istockphoto-512756266-612x612-1.jpg" alt="Servicing">
+      <div class="badge">Shop View</div>
       <h3>মোবাইল সার্ভিসিং</h3>
       <p>(শপ ভিউ)</p>
     </a>
 
-    <!-- Like & Follower -->
     <a href="like-follower.html" class="card">
-      <div class="badge">Auto Delivery</div>
       <img src="https://i.ibb.co.com/MxNtqCqj/photo-1683721003111-070bcc053d8b.jpg" alt="Like">
-      <h3>like and followers</h3>
+      <div class="badge">Auto Delivery</div>
+      <h3>লাইক এন্ড ফলোয়ার</h3>
       <p>Facebook, TikTok, Instagram</p>
     </a>
 
-    <!-- Mobile Accessories -->
     <a href="mobile-accessories.html" class="card">
-      <div class="badge">Shop View</div>
       <img src="https://i.ibb.co.com/2YhKNkHx/set-of-icons-on-a-theme-accessories-supplies-for-mobile-phones-in-gray-colors-vector.jpg" alt="Accessories">
+      <div class="badge">Shop View</div>
       <h3>মোবাইল এক্সেসরিজ</h3>
       <p>চার্জার, হেডফোন, কভার</p>
     </a>
 
-    <!-- Coming Soon -->
     <a href="coming-soon.html" class="card">
-      <div class="badge">Coming Soon</div>
       <img src="https://i.ibb.co.com/svZ6PLMJ/01868461577-3-13-21-PM-Nov-9-2025-png-edit-2011098093084274.jpg" alt="Coming">
+      <div class="badge">Coming Soon</div>
       <h3>কামিং সুন</h3>
       <p>নতুন সার্ভিস</p>
     </a>
   </main>
 
+  <!-- Footer - তোমার পরিচয় -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <h3>Habib YT - @habib1577</h3>
+      <p>বাংলাদেশের সেরা টপআপ সার্ভিস | ২৪/৭ সাপোর্ট</p>
+      <div class="social-links">
+        <a href="https://facebook.com/habib1577" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://youtube.com/@habib1577" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://tiktok.com/@habib1577" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://instagram.com/habib1577" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+      <p style="margin-top:15px; font-size:0.8rem;">© 2025 Habib YT | All Rights Reserved</p>
+    </div>
+  </footer>
+
   <!-- Floating Buttons -->
   <div class="floating-buttons">
-    <a href="tel:01868461577" class="call-btn"><i class="fas fa-phone"></i></a>
-    <a href="https://wa.me/8801868461577" class="whatsapp-btn"><i class="fab fa-whatsapp"></i></a>
+    <button onclick="showPaymentQR()" class="qr-btn" title="bKash/Nagad"><i class="fas fa-qrcode"></i></button>
+    <button onclick="openLiveChat()" class="chat-btn" title="লাইভ চ্যাট"><i class="fas fa-comment"></i></button>
+    <a href="tel:01868461577" class="call-btn" title="কল করুন"><i class="fas fa-phone"></i></a>
+    <a href="https://wa.me/8801868461577" class="whatsapp-btn" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
   </div>
 
   <!-- Bottom Nav -->
