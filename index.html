@@ -3,100 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Habib YT - Auto Delivery TopUp</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Habib YT - Auto Delivery BD</title>
+  <meta name="description" content="Free Fire Top-Up, eFootball Coin, Mobile Servicing & Accessories in Bangladesh">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #ff4500;
+      --dark: #1a1a1a;
+      --light: #f8f9fa;
+    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light); }
+    .navbar { background: var(--dark); }
+    .hero { background: linear-gradient(135deg, #ff4500, #ff8c00); color: white; padding: 3rem 0; }
+    .card { transition: 0.3s; border: none; border-radius: 12px; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .btn-primary { background: var(--primary); border: none; }
+    .contact-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+    .time { font-size: 0.9rem; color: #666; }
+  </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="container header-content">
-      <div class="logo">
-        <h1><span class="gradient-text">Habib</span> <span class="yt">YT</span></h1>
-      </div>
-      <a href="login.html" class="login-btn">লগইন</a>
-      <button onclick="toggleDarkMode()" class="dark-mode-btn"><i class="fas fa-moon"></i></button>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        <img src="assets/logo.png" alt="Logo" width="40" class="me-2"> Habib YT
+      </a>
+      <span class="navbar-text ms-auto time">
+        <i class="fas fa-clock"></i> November 10, 2025 04:55 PM +06
+      </span>
     </div>
-  </header>
-
-  <!-- Main Grid -->
-  <main class="container main-grid">
-    <a href="freefire.html" class="card">
-      <img src="https://i.ibb.co.com/fYMHpXsD/Free-Fire-Diamond-Top-Up-Bd-Bkash.jpg" alt="FreeFire">
-      <div class="badge">Auto Delivery</div>
-      <h3>ফ্রি ফায়ার টপআপ</h3>
-      <p>[BD]</p>
-    </a>
-
-    <a href="efootball.html" class="card">
-      <img src="https://i.ibb.co.com/nqpvNT5y/main-page-1-sp.png" alt="EFootball">
-      <div class="badge">Auto Delivery</div>
-      <h3>ইফুটবল কয়েন</h3>
-      <p>Coin</p>
-    </a>
-
-    <a href="mobile-servicing.html" class="card">
-      <img src="https://i.ibb.co.com/k6Jn85H7/istockphoto-512756266-612x612-1.jpg" alt="Servicing">
-      <div class="badge">Shop View</div>
-      <h3>মোবাইল সার্ভিসিং</h3>
-      <p>(শপ ভিউ)</p>
-    </a>
-
-    <a href="like-follower.html" class="card">
-      <img src="https://i.ibb.co.com/MxNtqCqj/photo-1683721003111-070bcc053d8b.jpg" alt="Like">
-      <div class="badge">Auto Delivery</div>
-      <h3>লাইক এন্ড ফলোয়ার</h3>
-      <p>Facebook, TikTok, Instagram</p>
-    </a>
-
-    <a href="mobile-accessories.html" class="card">
-      <img src="https://i.ibb.co.com/2YhKNkHx/set-of-icons-on-a-theme-accessories-supplies-for-mobile-phones-in-gray-colors-vector.jpg" alt="Accessories">
-      <div class="badge">Shop View</div>
-      <h3>মোবাইল এক্সেসরিজ</h3>
-      <p>চার্জার, হেডফোন, কভার</p>
-    </a>
-
-    <a href="coming-soon.html" class="card">
-      <img src="https://i.ibb.co.com/svZ6PLMJ/01868461577-3-13-21-PM-Nov-9-2025-png-edit-2011098093084274.jpg" alt="Coming">
-      <div class="badge">Coming Soon</div>
-      <h3>কামিং সুন</h3>
-      <p>নতুন সার্ভিস</p>
-    </a>
-  </main>
-
-  <!-- Footer - তোমার পরিচয় -->
-  <footer class="site-footer">
-    <div class="container footer-content">
-      <h3>Habib YT - @habib1577</h3>
-      <p>বাংলাদেশের সেরা টপআপ সার্ভিস | ২৪/৭ সাপোর্ট</p>
-      <div class="social-links">
-        <a href="https://facebook.com/habib1577" target="_blank"><i class="fab fa-facebook"></i></a>
-        <a href="https://youtube.com/@habib1577" target="_blank"><i class="fab fa-youtube"></i></a>
-        <a href="https://tiktok.com/@habib1577" target="_blank"><i class="fab fa-tiktok"></i></a>
-        <a href="https://instagram.com/habib1577" target="_blank"><i class="fab fa-instagram"></i></a>
-      </div>
-      <p style="margin-top:15px; font-size:0.8rem;">© 2025 Habib YT | All Rights Reserved</p>
-    </div>
-  </footer>
-
-  <!-- Floating Buttons -->
-  <div class="floating-buttons">
-    <button onclick="showPaymentQR()" class="qr-btn" title="bKash/Nagad"><i class="fas fa-qrcode"></i></button>
-    <button onclick="openLiveChat()" class="chat-btn" title="লাইভ চ্যাট"><i class="fas fa-comment"></i></button>
-    <a href="tel:01868461577" class="call-btn" title="কল করুন"><i class="fas fa-phone"></i></a>
-    <a href="https://wa.me/8801868461577" class="whatsapp-btn" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-  </div>
-
-  <!-- Bottom Nav -->
-  <nav class="bottom-nav">
-    <a href="index.html" class="nav-item active"><i class="fas fa-home"></i> হোম</a>
-    <a href="order-history.html" class="nav-item"><i class="fas fa-shopping-bag"></i> অর্ডার</a>
-    <a href="dashboard.html" class="nav-item"><i class="fas fa-user"></i> প্রোফাইল</a>
-    <a href="admin.html" class="nav-item"><i class="fas fa-cog"></i> অ্যাডমিন</a>
   </nav>
 
-  <script src="assets/js/script.js"></script>
+  <!-- Hero -->
+  <section class="hero text-center">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Habib YT - Auto Delivery</h1>
+      <p class="lead">বাংলাদেশে সবচেয়ে দ্রুত & নিরাপদ সার্ভিস</p>
+      <a href="https://x.com/habib1577" class="btn btn-light btn-lg">
+        <i class="fab fa-twitter"></i> @habib1577
+      </a>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 text-center p-4">
+            <i class="fas fa-gamepad fa-3x text-danger mb-3"></i>
+            <h5>Free Fire Top-Up [BD]</h5>
+            <a href="freefire.html" class="btn btn-outline-primary mt-2">Go →</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 text-center p-4">
+            <i class="fas fa-futbol fa-3x text-success mb-3"></i>
+            <h5>eFootball Coin</h5>
+            <a href="efootball.html" class="btn btn-outline-primary mt-2">Go →</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 text-center p-4">
+            <i class="fas fa-tools fa-3x text-warning mb-3"></i>
+            <h5>Mobile Servicing</h5>
+            <a href="mobile-servicing.html" class="btn btn-outline-primary mt-2">Shop View →</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 text-center p-4">
+            <i class="fas fa-thumbs-up fa-3x text-primary mb-3"></i>
+            <h5>Like & Followers</h5>
+            <a href="like-follower.html" class="btn btn-outline-primary mt-2">Auto Delivery →</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 text-center p-4">
+            <i class="fas fa-headphones fa-3x text-info mb-3"></i>
+            <h5>Mobile Accessories</h5>
+            <a href="mobile-accessories.html" class="btn btn-outline-primary mt-2">Shop View →</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 text-center p-4">
+            <i class="fas fa-hourglass-start fa-3x text-secondary mb-3"></i>
+            <h5>Coming Soon</h5>
+            <a href="coming-soon.html" class="btn btn-outline-secondary mt-2">Preview →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <div class="text-center py-4">
+    <p class="mb-2"><strong>Contact:</strong></p>
+    <a href="tel:01868461577" class="btn btn-success me-2">
+      <i class="fas fa-phone"></i> Call: 01868461577
+    </a>
+    <a href="https://wa.me/8801868461577" class="btn btn-success">
+      <i class="fab fa-whatsapp"></i> WhatsApp
+    </a>
+  </div>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/8801868461577" class="contact-btn btn btn-success rounded-circle p-3 shadow-lg">
+    <i class="fab fa-whatsapp fa-2x"></i>
+  </a>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
