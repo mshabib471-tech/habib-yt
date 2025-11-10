@@ -505,3 +505,77 @@ img {
     grid-template-columns: repeat(5, 1fr);
   }
 }
+
+/* =============== MOBILE ACCESSORIES GRID =============== */
+.accessory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 0 15px 100px;
+  margin-top: 10px;
+}
+
+.accessory-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 12px 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.accessory-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.accessory-card img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin: 0 auto 8px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.serial {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #4361ee;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.acc-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #2f3542;
+  margin-top: 4px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .accessory-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .accessory-card img {
+    width: 50px;
+    height: 50px;
+  }
+}
+@media (min-width: 768px) {
+  .accessory-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
