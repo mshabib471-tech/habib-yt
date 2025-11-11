@@ -8,13 +8,21 @@
   <script type="module" src="firebase.js"></script>
 </head>
 <body>
-  <header><h1><span>Habib</span> YT</h1></header>
+  <header>
+    <h1><span>Habib</span> YT</h1>
+    <div class="nav-buttons">
+      <a href="index.html"><button class="login-btn">Home</button></a>
+      <button id="toggle" class="toggle-btn">🌙 Dark Mode</button>
+    </div>
+  </header>
+
   <section>
-    <h2>Login</h2>
+    <h2>Login to your account</h2>
     <input id="email" type="email" placeholder="Email" /><br /><br />
     <input id="password" type="password" placeholder="Password" /><br /><br />
     <button id="loginBtn" class="login-btn">Login</button>
-    <button id="googleBtn" class="login-btn" style="background:#ea4335">Login with Google</button>
+    <button id="googleBtn" class="login-btn" style="background:#ea4335;">Login with Google</button>
+    <p id="msg"></p>
   </section>
 
   <script type="module">
@@ -23,23 +31,25 @@
 
     const email = document.getElementById("email");
     const password = document.getElementById("password");
+    const msg = document.getElementById("msg");
+
     document.getElementById("loginBtn").addEventListener("click", async () => {
       try {
         await signInWithEmailAndPassword(auth, email.value, password.value);
-        alert("Login Successful!");
+        msg.innerHTML = "✅ Login Successful!";
         window.location.href = "dashboard.html";
       } catch (e) {
-        alert(e.message);
+        msg.innerHTML = "❌ " + e.message;
       }
     });
 
     document.getElementById("googleBtn").addEventListener("click", async () => {
       try {
         await signInWithPopup(auth, provider);
-        alert("Google Login Successful!");
+        msg.innerHTML = "✅ Google Login Successful!";
         window.location.href = "dashboard.html";
       } catch (e) {
-        alert(e.message);
+        msg.innerHTML = "❌ " + e.message;
       }
     });
   </script>
