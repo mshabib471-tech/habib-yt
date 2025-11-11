@@ -8,13 +8,21 @@
   <script type="module" src="firebase.js"></script>
 </head>
 <body>
-  <header><h1><span>Habib</span> YT</h1></header>
+  <header>
+    <h1><span>Habib</span> YT</h1>
+    <div class="nav-buttons">
+      <button id="logoutBtn" class="login-btn">Logout</button>
+      <button id="toggle" class="toggle-btn">🌙 Dark Mode</button>
+    </div>
+  </header>
+
   <section>
     <h2>Welcome, <span id="userEmail"></span></h2>
-    <button id="logoutBtn" class="login-btn">Logout</button>
     <h3>📋 Order History</h3>
     <ul id="ordersList"></ul>
   </section>
+
+  <footer>© 2025 Habib YT — Best Service 🔥</footer>
 
   <script type="module">
     import { auth, db } from "./firebase.js";
@@ -31,7 +39,7 @@
         const querySnapshot = await getDocs(collection(db, "orders"));
         querySnapshot.forEach((doc) => {
           const li = document.createElement("li");
-          li.textContent = `${doc.data().itemName} - ${doc.data().price}৳`;
+          li.textContent = `${doc.data().itemName} — ${doc.data().price}৳`;
           ordersList.appendChild(li);
         });
       } else {
