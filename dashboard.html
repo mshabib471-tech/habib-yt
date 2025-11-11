@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard | Habib YT</title>
-  <link rel="stylesheet" href="assets/style.css" />
-  <script type="module" src="firebase.js"></script>
+  <style>
+    body { font-family: "Poppins", sans-serif; text-align: center; background: #f0f4ff; margin: 0; }
+    header { background: #007bff; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+    h1 { font-size: 22px; }
+    button { border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; }
+    .logout { background: #ff4757; color: white; }
+    .orders { margin-top: 20px; background: white; border-radius: 10px; padding: 10px; width: 90%; max-width: 400px; margin: 20px auto; }
+  </style>
 </head>
 <body>
   <header>
-    <h1><span>Habib</span> YT</h1>
-    <div class="nav-buttons">
-      <button id="logoutBtn" class="login-btn">Logout</button>
-      <button id="toggle" class="toggle-btn">🌙 Dark Mode</button>
-    </div>
+    <h1>Habib YT</h1>
+    <button class="logout" id="logoutBtn">Logout</button>
   </header>
 
-  <section>
-    <h2>Welcome, <span id="userEmail"></span></h2>
-    <h3>📋 Order History</h3>
-    <ul id="ordersList"></ul>
-  </section>
+  <h2>👋 Welcome, <span id="userEmail"></span></h2>
+  <div class="orders">
+    <h3>🧾 Order History</h3>
+    <p id="orderList">No orders yet...</p>
+  </div>
 
-  <footer>© 2025 Habib YT — Best Service 🔥</footer>
+  <footer style="margin-top:40px;">© 2025 Habib YT — Best Service 🔥</footer>
 
   <script type="module">
-    import { auth, db } from "./firebase.js";
-    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-    import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-    const userEmail = document.getElementById("userEmail");
-    const ordersList = document.getElementById("ordersList");
-    const logoutBtn = document.getElementById("logoutBtn");
+    const firebaseConfig = {
+      apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
+      authDomain: "habib-yt.firebaseapp.com",
+      projectId: "habib-yt",
+      storageBucket: "habib-yt.firebasestorage.app",
+      messagingSenderId: "656628491244",
+      appId: "1:656628491244:web:e01ccd42bd8a2b1b4c96c9",
+      measurementId: "G-GNY1T88D34"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        userEmail.textContent = user.email;
-        const querySnapshot = await getDocs(collection(db, "orders"));
-        querySnapshot.forEach((doc) => {
-          const li = document.createElement("li");
-          li.textContent = `${doc.data().itemName} — ${doc.data().price}৳`;
-          ordersList.appendChild(li);
-        });
-      } else {
-        window.location.href = "login.html";
-      }
+    onAuthStateChanged(auth, (user) => {
+      if (user) document.getElementById("userEmail").textContent = user.email;
+      else window.location.href = "login.html";
     });
 
-    logoutBtn.addEventListener("click", async () => {
-      await signOut(auth);
-      window.location.href = "login.html";
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      signOut(auth).then(() => window.location.href = "login.html");
     });
   </script>
 </body>
