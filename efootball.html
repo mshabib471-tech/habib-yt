@@ -2,39 +2,62 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ইফুটবল কয়েন - Habib YT</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EFootball Coin | Habib YT</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="module" src="firebase.js"></script>
 </head>
-<body class="product-body">
-
-  <div class="product-header">
-    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
-    <h2>ইফুটবল কয়েন</h2>
-  </div>
-
-  <div class="container">
-    <div class="step"><span class="step-number">1</span> প্যাকেজ সিলেক্ট করুন</div>
-    <div class="coin-grid">
-      <div class="coin-card" onclick="selectPackage('Jose Mourinho', '৪৯০ TK')">
-        <div class="serial">১.</div>
-        <div class="coin-name">Jose Mourinho</div>
-        <div class="coin-amount">+150 coin</div>
-        <div class="coin-price">৪৯০ TK</div>
-      </div>
-      <!-- আরও ১৫টি -->
+<body>
+  <header>
+    <h1><span>Habib</span> YT</h1>
+    <div class="nav-buttons">
+      <a href="index.html"><button class="login-btn">Home</button></a>
+      <button id="toggle" class="toggle-btn">🌙 Dark Mode</button>
     </div>
+  </header>
+
+  <div class="order-box">
+    <h2>EFootball Coin</h2>
+    <div class="option" data-name="130 coin" data-price="170">130 Coin — 170৳</div>
+    <div class="option" data-name="300 coin" data-price="340">300 Coin — 340৳</div>
+    <div class="option" data-name="550 coin" data-price="540">550 Coin — 540৳</div>
+    <div class="option" data-name="1040 coin" data-price="1030">1040 Coin — 1030৳</div>
+    <button class="submit-btn" id="orderBtn">Confirm Order</button>
+    <p id="msg" style="margin-top:10px;text-align:center;"></p>
   </div>
 
-  <div id="checkout-bar" class="checkout-fixed" style="display:none;">
-    <div class="checkout-info">
-      <div>নির্বাচিত: <span id="selected-name">প্যাকেজ</span></div>
-      <div class="selected-price" id="selected-price">০ TK</div>
-    </div>
-    <button class="buy-btn" onclick="proceedToPayment()">কিনুন</button>
-  </div>
+  <footer>© 2025 Habib YT — Best Service 🔥</footer>
 
-  <a href="https://wa.me/8801868461577" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
-  <script src="assets/js/script.js"></script>
+  <script type="module">
+    import { db, auth } from "./firebase.js";
+    import { addDoc, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+    let selected = null;
+    const options = document.querySelectorAll(".option");
+    const msg = document.getElementById("msg");
+
+    options.forEach(opt => {
+      opt.addEventListener("click", () => {
+        options.forEach(o => o.style.background = "white");
+        opt.style.background = "#d0e6ff";
+        selected = { name: opt.dataset.name, price: opt.dataset.price };
+      });
+    });
+
+    document.getElementById("orderBtn").addEventListener("click", async () => {
+      if (!selected) return msg.textContent = "⚠️ Select a package first!";
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) return msg.textContent = "🔑 Please login first!";
+        await addDoc(collection(db, "orders"), {
+          uid: user.uid,
+          itemName: selected.name,
+          price: selected.price,
+          time: new Date().toLocaleString()
+        });
+        msg.textContent = "✅ Order Confirmed!";
+      });
+    });
+  </script>
 </body>
 </html>
