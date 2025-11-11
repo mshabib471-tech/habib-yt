@@ -1,56 +1,208 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
 <head>
-<link rel="stylesheet" href="assets/style.css" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Habib YT - Auto Delivery</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <script src="https://kit.fontawesome.com/7a9e4a7f9b.js" crossorigin="anonymous"></script>
+
+  <!-- INLINE CSS -->
+  <style>
+    /* Base reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#071026 0%,#081325 100%);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+      overflow-x:hidden;
+    }
+
+    /* Header */
+    .header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 14px;
+      background:rgba(0,0,0,0.25);
+      border-bottom:1px solid rgba(255,255,255,0.04);
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(6px);
+    }
+    .menu-btn{font-size:20px;color:#ff8b3d;cursor:pointer}
+    .logo-text{font-weight:800;color:#ff9a48;font-size:18px}
+    .login-btn{
+      background:#ff7b00;color:#fff;padding:6px 12px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;
+      box-shadow:0 6px 18px rgba(255,123,0,0.12);
+    }
+
+    /* Drawer (mobile menu) */
+    .drawer{
+      position:fixed;left:0;top:0;height:100vh;width:260px;background:linear-gradient(180deg,#061226,#071533);
+      box-shadow: 6px 0 30px rgba(0,0,0,0.6);transform:translateX(-110%);transition:transform .28s ease;
+      padding:20px;z-index:60;border-right:1px solid rgba(255,255,255,0.03);
+    }
+    .drawer.show{transform:translateX(0)}
+    .drawer .close{color:#ff8b3d;font-size:20px;margin-bottom:16px;cursor:pointer}
+    .drawer a{display:block;color:#dbeafe;text-decoration:none;padding:10px 6px;border-radius:8px;margin-bottom:6px}
+    .drawer a:hover{background:rgba(255,255,255,0.03)}
+
+    /* Hero */
+    .hero{padding:28px 18px 18px;text-align:center}
+    .hero h1{font-size:28px;color:#ffb576;margin-bottom:6px}
+    .hero p{color:#bfcbdc;margin-bottom:14px;font-size:14px}
+    .fb-btn{display:inline-block;background:#1877f2;color:#fff;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:700}
+
+    /* Grid cards */
+    .container{max-width:980px;margin:0 auto;padding:12px}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:12px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.04);
+      padding:20px;border-radius:14px;text-align:center;backdrop-filter: blur(6px);
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.5)}
+    .card img{width:56px;height:56px;object-fit:contain;margin-bottom:10px}
+    .card h3{color:#ffd2a6;font-weight:800;margin-bottom:6px;font-size:18px}
+    .card p{color:#c6d2e6;font-size:13px;margin-bottom:10px}
+    .card .go{display:inline-block;background:#ff7b00;color:#fff;padding:8px 18px;border-radius:8px;text-decoration:none;font-weight:700}
+
+    /* Contact row */
+    .contact{display:flex;gap:10px;justify-content:center;margin:18px 10px 28px}
+    .contact a{background:#0f1724;color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;border:1px solid rgba(255,255,255,0.03)}
+    .contact a.call{background:linear-gradient(90deg,#10b981,#059669)}
+
+    /* Footer */
+    footer{padding:14px 10px;text-align:center;background:rgba(0,0,0,0.18);border-top:1px solid rgba(255,255,255,0.02)}
+    footer small{color:#a8b3c8;font-size:13px}
+
+    /* Responsive: bigger screens */
+    @media(min-width:640px){
+      .hero h1{font-size:36px}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(min-width:1100px){
+      .grid{grid-template-columns:repeat(3,1fr)}
+      .container{padding:20px}
+    }
+  </style>
 </head>
 <body>
 
+  <!-- header -->
   <header class="header">
-    <div class="menu-btn"><i class="fas fa-bars"></i></div>
-    <h1 class="logo-text">Habib YT</h1>
-    <a href="#" class="login-btn">লগইন</a>
+    <div class="menu-btn" id="menuBtn" aria-label="menu" title="Menu">☰</div>
+    <div class="logo-text">Habib YT</div>
+    <a class="login-btn" href="login.html">লগইন</a>
   </header>
 
-  <section class="hero">
-    <h2>Habib YT – Auto Delivery</h2>
-    <p>বাংলাদেশের দ্রুত ও নিরাপদ গেম টপ-আপ সার্ভিস</p>
-    <a href="https://facebook.com" target="_blank" class="fb-btn">Follow on Facebook</a>
-  </section>
+  <!-- drawer menu -->
+  <nav id="drawer" class="drawer" aria-hidden="true">
+    <div class="close" id="closeDrawer">✕</div>
+    <a href="index.html">হোম</a>
+    <a href="freefire.html">Free Fire Top-Up [BD]</a>
+    <a href="efootball.html">eFootball Coin</a>
+    <a href="about.html">আমাদের সম্পর্কে</a>
+    <a href="contact.html">যোগাযোগ</a>
+  </nav>
 
-  <section class="services">
-    <div class="card">
-      <img src="https://cdn-icons-png.flaticon.com/512/5693/5693385.png" alt="">
-      <h3>Free Fire Top-Up [BD]</h3>
-      <p>Instant delivery, BD server only</p>
-      <a href="#" class="btn">Go</a>
+  <!-- hero -->
+  <main role="main">
+    <section class="hero">
+      <h1>Habib YT – Auto Delivery</h1>
+      <p>বাংলাদেশের দ্রুত ও নিরাপদ গেম টপ-আপ সার্ভিস</p>
+      <a class="fb-btn" href="https://facebook.com" target="_blank" rel="noopener">Follow on Facebook</a>
+    </section>
+
+    <div class="container">
+      <section class="grid" aria-label="services">
+        <article class="card" role="article">
+          <img src="https://cdn-icons-png.flaticon.com/512/5693/5693385.png" alt="diamond icon" />
+          <h3>Free Fire Top-Up [BD]</h3>
+          <p>Instant delivery, BD server only</p>
+          <a class="go" href="freefire.html">Go</a>
+        </article>
+
+        <article class="card" role="article">
+          <img src="https://cdn-icons-png.flaticon.com/512/533/533489.png" alt="football icon" />
+          <h3>eFootball Coin</h3>
+          <p>Trusted & instant delivery</p>
+          <a class="go" href="efootball.html">Go</a>
+        </article>
+
+        <article class="card" role="article">
+          <img src="https://cdn-icons-png.flaticon.com/512/854/854866.png" alt="service icon" />
+          <h3>Mobile Servicing</h3>
+          <p>Shop view coming soon</p>
+          <a class="go" href="contact.html">Shop View</a>
+        </article>
+
+        <article class="card" role="article">
+          <img src="https://cdn-icons-png.flaticon.com/512/1051/1051309.png" alt="followers icon" />
+          <h3>Like & Followers</h3>
+          <p>Auto Delivery service</p>
+          <a class="go" href="contact.html">Auto Delivery</a>
+        </article>
+
+        <article class="card" role="article">
+          <img src="https://cdn-icons-png.flaticon.com/512/1048/1048927.png" alt="accessories icon" />
+          <h3>Mobile Accessories</h3>
+          <p>Shop view</p>
+          <a class="go" href="contact.html">Shop View</a>
+        </article>
+
+        <article class="card" role="article">
+          <img src="https://cdn-icons-png.flaticon.com/512/709/709496.png" alt="coming soon icon" />
+          <h3>Coming Soon</h3>
+          <p>New features releasing soon</p>
+          <a class="go" href="#" aria-disabled="true" style="opacity:.7;pointer-events:none;background:#666">Preview</a>
+        </article>
+      </section>
+
+      <div class="contact" aria-label="contact">
+        <a class="call" href="tel:01868461577">📞 Call: 01868461577</a>
+        <a href="https://wa.me/01868461577" target="_blank" rel="noopener">💬 WhatsApp</a>
+      </div>
     </div>
+  </main>
 
-    <div class="card">
-      <img src="https://cdn-icons-png.flaticon.com/512/533/533489.png" alt="">
-      <h3>eFootball Coin</h3>
-      <p>Trusted & instant delivery</p>
-      <a href="#" class="btn">Go</a>
-    </div>
-
-    <div class="card">
-      <img src="https://cdn-icons-png.flaticon.com/512/854/854866.png" alt="">
-      <h3>Mobile Servicing</h3>
-      <p>Shop view coming soon</p>
-      <a href="#" class="btn">Shop</a>
-    </div>
-  </section>
-
+  <!-- footer -->
   <footer>
-    © <span id="year"></span> Habib YT — Best Service 💎
+    <small>© <span id="year">2025</span> Habib YT — Best Service 💎</small>
   </footer>
 
+  <!-- INLINE JS -->
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // year auto update
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // drawer toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const drawer = document.getElementById('drawer');
+    const closeDrawer = document.getElementById('closeDrawer');
+
+    function openDrawer() {
+      drawer.classList.add('show');
+      drawer.setAttribute('aria-hidden','false');
+    }
+    function closeD() {
+      drawer.classList.remove('show');
+      drawer.setAttribute('aria-hidden','true');
+    }
+    menuBtn.addEventListener('click', openDrawer);
+    closeDrawer.addEventListener('click', closeD);
+
+    // close drawer when clicking outside (touch)
+    document.addEventListener('click', (e) => {
+      if (!drawer.contains(e.target) && !menuBtn.contains(e.target)) {
+        closeD();
+      }
+    });
   </script>
 </body>
 </html>
