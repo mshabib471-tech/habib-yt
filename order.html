@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Order | Habib YT</title>
+<style>
+body{font-family:'Poppins',sans-serif;background:#f9fafc;padding:20px;}
+.box{background:white;border-radius:10px;padding:20px;max-width:400px;margin:auto;box-shadow:0 3px 8px rgba(0,0,0,0.1);}
+button{background:#007bff;border:none;color:white;padding:10px 20px;border-radius:6px;margin-top:10px;}
+</style>
+</head>
+<body>
+<div class="box">
+  <h2>🛒 সার্ভিস অর্ডার করুন</h2>
+  <label>সার্ভিস নির্বাচন করুন:</label><br>
+  <select id="product" style="width:100%;padding:10px;margin:8px 0;">
+    <option value="Free Fire">Free Fire</option>
+    <option value="EFootball">EFootball</option>
+    <option value="Like & Follower">Like & Follower</option>
+  </select>
+  <label>টাকার পরিমাণ:</label><br>
+  <input type="number" id="amount" style="width:100%;padding:10px;margin:8px 0;" placeholder="৳ লিখুন" />
+  <button id="orderBtn">অর্ডার সাবমিট করুন</button>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
+  authDomain: "habib-yt.firebaseapp.com",
+  projectId: "habib-yt",
+  storageBucket: "habib-yt.firebasestorage.app",
+  messagingSenderId: "656628491244",
+  appId: "1:656628491244:web:e01ccd42bd8a2b1b4c96c9"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+document.getElementById("orderBtn").addEventListener("click", async () => {
+  const product = document.getElementById("product").value;
+  const amount = parseFloat(document.getElementById("amount").value);
+
+  if (!amount) return alert("⚠️ টাকার পরিমাণ দিন");
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) return alert("⚠️ আগে লগইন করুন");
+
+    await addDoc(collection(db, "orders"), {
+      userEmail: user.email,
+      product: product,
+      amount: amount,
+      status: "pending",
+      createdAt: serverTimestamp()
+    });
+
+    alert("✅ আপনার অর্ডার সাবমিট হয়েছে, Admin যাচাই করবেন!");
+    window.location.href = "dashboard.html";
+  });
+});
+</script>
+</body>
+</html>
