@@ -2,50 +2,62 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>লাইক এন্ড ফলোয়ার - Habib YT</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Like & Follower | Habib YT</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="module" src="firebase.js"></script>
 </head>
-<body class="product-body">
-
-  <div class="product-header">
-    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
-    <h2>লাইক এন্ড ফলোয়ার</h2>
-  </div>
-
-  <div class="container">
-    <div class="step"><span class="step-number">1</span> প্যাকেজ সিলেক্ট করুন</div>
-    <div class="social-grid">
-      <div class="social-card" onclick="selectPackage('Facebook 1K Likes', '৫০৳')">
-        <div class="serial">১.</div>
-        <img src="https://i.ibb.co.com/MxNtqCqj/photo-1683721003111-070bcc053d8b.jpg" alt="FB">
-        <h3>Facebook 1K Likes</h3>
-        <p class="price">৫০৳</p>
-      </div>
-      <div class="social-card" onclick="selectPackage('Instagram 1K Followers', '৮০৳')">
-        <div class="serial">২.</div>
-        <img src="https://i.ibb.co.com/MxNtqCqj/photo-1683721003111-070bcc053d8b.jpg" alt="IG">
-        <h3>Instagram 1K Followers</h3>
-        <p class="price">৮০৳</p>
-      </div>
-      <div class="social-card" onclick="selectPackage('TikTok 1K Likes', '৬০৳')">
-        <div class="serial">৩.</div>
-        <img src="https://i.ibb.co.com/MxNtqCqj/photo-1683721003111-070bcc053d8b.jpg" alt="TT">
-        <h3>TikTok 1K Likes</h3>
-        <p class="price">৬০৳</p>
-      </div>
+<body>
+  <header>
+    <h1><span>Habib</span> YT</h1>
+    <div class="nav-buttons">
+      <a href="index.html"><button class="login-btn">Home</button></a>
+      <button id="toggle" class="toggle-btn">🌙 Dark Mode</button>
     </div>
+  </header>
+
+  <div class="order-box">
+    <h2>Like & Follower Services</h2>
+    <div class="option" data-name="Facebook Likes 1K" data-price="80">1K Facebook Likes — 80৳</div>
+    <div class="option" data-name="Instagram Followers 1K" data-price="150">1K Instagram Followers — 150৳</div>
+    <div class="option" data-name="YouTube Subscribers 1K" data-price="180">1K YouTube Subs — 180৳</div>
+    <div class="option" data-name="TikTok Followers 1K" data-price="120">1K TikTok Followers — 120৳</div>
+    <button class="submit-btn" id="orderBtn">Confirm Order</button>
+    <p id="msg" style="margin-top:10px;text-align:center;"></p>
   </div>
 
-  <div id="checkout-bar" class="checkout-fixed" style="display:none;">
-    <div class="checkout-info">
-      <div>নির্বাচিত: <span id="selected-name">প্যাকেজ</span></div>
-      <div class="selected-price" id="selected-price">০৳</div>
-    </div>
-    <button class="buy-btn" onclick="proceedToPayment()">কিনুন</button>
-  </div>
+  <footer>© 2025 Habib YT — Best Service 🔥</footer>
 
-  <a href="https://wa.me/8801868461577" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
-  <script src="assets/js/script.js"></script>
+  <script type="module">
+    import { db, auth } from "./firebase.js";
+    import { addDoc, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+    let selected = null;
+    const options = document.querySelectorAll(".option");
+    const msg = document.getElementById("msg");
+
+    options.forEach(opt => {
+      opt.addEventListener("click", () => {
+        options.forEach(o => o.style.background = "white");
+        opt.style.background = "#d0e6ff";
+        selected = { name: opt.dataset.name, price: opt.dataset.price };
+      });
+    });
+
+    document.getElementById("orderBtn").addEventListener("click", async () => {
+      if (!selected) return msg.textContent = "⚠️ Select a package first!";
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) return msg.textContent = "🔑 Please login first!";
+        await addDoc(collection(db, "orders"), {
+          uid: user.uid,
+          itemName: selected.name,
+          price: selected.price,
+          time: new Date().toLocaleString()
+        });
+        msg.textContent = "✅ Order Confirmed!";
+      });
+    });
+  </script>
 </body>
 </html>
