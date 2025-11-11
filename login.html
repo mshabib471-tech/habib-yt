@@ -1,137 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Habib YT — Login / Register</title>
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif; }
-    body {
-      background: linear-gradient(145deg, #007bff 20%, #00bfff 100%);
-      display: flex; justify-content: center; align-items: center;
-      height: 100vh; color: #333;
-    }
-    .card {
-      width: 90%; max-width: 380px;
-      background: white; border-radius: 15px;
-      padding: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-    h2 { text-align:center; color:#007bff; margin-bottom:10px; }
-    p.sub { text-align:center; color:#666; margin-bottom:20px; }
-    input {
-      width: 100%; padding: 10px; margin-bottom: 10px;
-      border: 1px solid #ddd; border-radius: 8px; outline: none;
-      transition: all 0.3s;
-    }
-    input:focus { border-color:#007bff; box-shadow:0 0 5px rgba(0,123,255,0.3); }
-    button {
-      width: 100%; padding: 10px; border:none; border-radius:8px;
-      font-weight:600; cursor:pointer; transition:0.3s;
-    }
-    .btn-primary { background:#007bff; color:white; }
-    .btn-primary:hover { background:#0056cc; }
-    .btn-google { background:#fff; color:#444; border:1px solid #ccc; }
-    .btn-google:hover { background:#f5f5f5; }
-    .toggle { text-align:center; margin-top:10px; }
-    .toggle span { color:#007bff; font-weight:500; cursor:pointer; }
-    #msg { color:red; text-align:center; margin-top:8px; font-size:14px; }
-    @media (max-width:480px) {
-      .card { padding:20px; }
-      h2 { font-size:22px; }
-    }
-  </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Login | Habib YT</title>
+<style>
+body{font-family:'Poppins',sans-serif;background:#eef3ff;display:flex;justify-content:center;align-items:center;height:100vh;}
+.box{background:white;border-radius:12px;padding:30px;width:320px;box-shadow:0 3px 8px rgba(0,0,0,0.1);}
+input{width:100%;padding:10px;margin:6px 0;border:1px solid #ccc;border-radius:6px;}
+button{width:100%;padding:10px;margin-top:8px;border:none;border-radius:6px;background:#007bff;color:white;font-size:15px;}
+</style>
 </head>
 <body>
-  <div class="card">
-    <h2 id="formTitle">Login to Habib YT</h2>
-    <p class="sub" id="formSubtitle">Access your account</p>
+<div class="box">
+<h2>Login To Habib YT</h2>
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+<button id="loginBtn">Sign In</button>
+<hr>
+<button id="googleBtn" style="background:#ea4335;">Sign in with Google</button>
+</div>
 
-    <input type="text" id="nameField" placeholder="Full Name" style="display:none;">
-    <input type="email" id="email" placeholder="Email Address">
-    <input type="password" id="password" placeholder="Password">
-    <input type="password" id="confirmPassword" placeholder="Confirm Password" style="display:none;">
-
-    <button id="submitBtn" class="btn-primary">Sign In</button>
-    <button id="googleBtn" class="btn-google">Sign in with Google</button>
-
-    <div class="toggle">
-      <p>New User? <span id="toggleForm">Register Now</span></p>
-    </div>
-    <p id="msg"></p>
-  </div>
-
-  <!-- Firebase -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
-      authDomain: "habib-yt.firebaseapp.com",
-      projectId: "habib-yt",
-      storageBucket: "habib-yt.firebasestorage.app",
-      messagingSenderId: "656628491244",
-      appId: "1:656628491244:web:e01ccd42bd8a2b1b4c96c9",
-      measurementId: "G-GNY1T88D34"
-    };
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
-
-    const toggleForm = document.getElementById("toggleForm");
-    const nameField = document.getElementById("nameField");
-    const confirmPassword = document.getElementById("confirmPassword");
-    const submitBtn = document.getElementById("submitBtn");
-    const msg = document.getElementById("msg");
-    let isLogin = true;
-
-    toggleForm.addEventListener("click", () => {
-      isLogin = !isLogin;
-      if (!isLogin) {
-        nameField.style.display = "block";
-        confirmPassword.style.display = "block";
-        submitBtn.textContent = "Create Account";
-        toggleForm.textContent = "Login Now";
-        document.getElementById("formTitle").textContent = "Register Account";
-        document.getElementById("formSubtitle").textContent = "Create your Habib YT account";
-      } else {
-        nameField.style.display = "none";
-        confirmPassword.style.display = "none";
-        submitBtn.textContent = "Sign In";
-        toggleForm.textContent = "Register Now";
-        document.getElementById("formTitle").textContent = "Login to Habib YT";
-        document.getElementById("formSubtitle").textContent = "Access your account";
-      }
-    });
-
-    submitBtn.addEventListener("click", async () => {
-      const email = document.getElementById("email").value;
-      const pass = document.getElementById("password").value;
-      const cpass = document.getElementById("confirmPassword").value;
-
-      try {
-        if (isLogin) {
-          await signInWithEmailAndPassword(auth, email, pass);
-          window.location.href = "dashboard.html";
-        } else {
-          if (pass !== cpass) { msg.innerText = "❌ Passwords do not match"; return; }
-          await createUserWithEmailAndPassword(auth, email, pass);
-          msg.innerText = "✅ Account created! Please log in.";
-          toggleForm.click();
-        }
-      } catch (error) {
-        msg.innerText = "❌ " + error.message;
-      }
-    });
-
-    document.getElementById("googleBtn").addEventListener("click", async () => {
-      try {
-        await signInWithPopup(auth, provider);
-        window.location.href = "dashboard.html";
-      } catch (error) {
-        msg.innerText = "❌ " + error.message;
-      }
-    });
-  </script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+const firebaseConfig={apiKey:"AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",authDomain:"habib-yt.firebaseapp.com",projectId:"habib-yt"};
+const app=initializeApp(firebaseConfig);const auth=getAuth(app);
+document.getElementById("loginBtn").onclick=()=>{signInWithEmailAndPassword(auth,email.value,password.value).then(()=>location.href="dashboard.html").catch(e=>alert(e.message))};
+document.getElementById("googleBtn").onclick=()=>{signInWithPopup(auth,new GoogleAuthProvider()).then(()=>location.href="dashboard.html").catch(e=>alert(e.message))};
+</script>
 </body>
 </html>
