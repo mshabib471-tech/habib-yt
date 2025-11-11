@@ -1,4 +1,4 @@
-// Dark/Light Theme Toggle
+// Theme Toggle
 const toggle = document.getElementById("toggle");
 if (toggle) {
   toggle.addEventListener("click", () => {
