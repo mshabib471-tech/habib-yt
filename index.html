@@ -1,118 +1,63 @@
 <!DOCTYPE html>
 <html lang="bn">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Habib YT - Auto Delivery</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habib YT - Auto Delivery</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1051/1051309.png" />
+  <script src="https://kit.fontawesome.com/7a9e4a7f9b.js" crossorigin="anonymous"></script>
+</head>
+<body>
 
-    <!-- TailwindCSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 🔸 Header -->
+  <header class="header">
+    <div class="menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+    <h1 class="logo-text">Habib YT</h1>
+    <a href="#" class="login-btn">লগইন</a>
+  </header>
 
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1051/1051309.png" />
+  <!-- 🔸 Hero Section -->
+  <section class="hero">
+    <h2>Habib YT – Auto Delivery</h2>
+    <p>বাংলাদেশের দ্রুত ও নিরাপদ গেম টপ-আপ সার্ভিস</p>
+    <a href="https://facebook.com" target="_blank" class="fb-btn">Follow on Facebook</a>
+  </section>
 
-    <style>
-      body {
-        font-family: "Poppins", sans-serif;
-        background: linear-gradient(180deg, #0f172a 0%, #000000 100%);
-        color: white;
-      }
-
-      .glass {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      .hover-glow:hover {
-        box-shadow: 0 0 15px rgba(255, 115, 0, 0.5);
-        transform: scale(1.05);
-      }
-
-      .transition-all {
-        transition: all 0.3s ease;
-      }
-    </style>
-  </head>
-
-  <body class="text-center">
-
-    <!-- Header -->
-    <header class="py-6 border-b border-gray-700">
-      <h1 class="text-4xl font-extrabold text-orange-400">Habib YT - Auto Delivery</h1>
-      <p class="text-gray-400 mt-2">বাংলাদেশের দ্রুত ও নিরাপদ গেম টপ-আপ সার্ভিস</p>
-      <a
-        href="https://facebook.com"
-        target="_blank"
-        class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg text-white mt-4 inline-block font-semibold"
-      >
-        Follow on Facebook
-      </a>
-    </header>
-
-    <!-- Services Section -->
-    <main class="px-4 py-10">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-
-        <div class="glass hover-glow p-8 rounded-2xl transition-all">
-          <div class="text-5xl mb-3">💎</div>
-          <h3 class="text-xl font-semibold mb-2">Free Fire Top-Up [BD]</h3>
-          <p class="text-gray-400 text-sm mb-4">Instant delivery, BD server only</p>
-          <a href="#" class="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-md">Go</a>
-        </div>
-
-        <div class="glass hover-glow p-8 rounded-2xl transition-all">
-          <div class="text-5xl mb-3">⚽</div>
-          <h3 class="text-xl font-semibold mb-2">eFootball Coin</h3>
-          <p class="text-gray-400 text-sm mb-4">Trusted & instant delivery</p>
-          <a href="#" class="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-md">Go</a>
-        </div>
-
-        <div class="glass hover-glow p-8 rounded-2xl transition-all">
-          <div class="text-5xl mb-3">🛠️</div>
-          <h3 class="text-xl font-semibold mb-2">Mobile Servicing</h3>
-          <p class="text-gray-400 text-sm mb-4">Shop view coming soon</p>
-          <a href="#" class="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-md">Shop View</a>
-        </div>
-
-        <div class="glass hover-glow p-8 rounded-2xl transition-all">
-          <div class="text-5xl mb-3">👍</div>
-          <h3 class="text-xl font-semibold mb-2">Like & Followers</h3>
-          <p class="text-gray-400 text-sm mb-4">Auto delivery service</p>
-          <a href="#" class="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-md">Auto Delivery</a>
-        </div>
-
-        <div class="glass hover-glow p-8 rounded-2xl transition-all">
-          <div class="text-5xl mb-3">🎧</div>
-          <h3 class="text-xl font-semibold mb-2">Mobile Accessories</h3>
-          <p class="text-gray-400 text-sm mb-4">Shop view</p>
-          <a href="#" class="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-md">Shop View</a>
-        </div>
-
-        <div class="glass hover-glow p-8 rounded-2xl transition-all">
-          <div class="text-5xl mb-3">⏳</div>
-          <h3 class="text-xl font-semibold mb-2">Coming Soon</h3>
-          <p class="text-gray-400 text-sm mb-4">New features releasing soon</p>
-          <a href="#" class="bg-gray-600 cursor-not-allowed px-4 py-2 rounded-md">Preview</a>
-        </div>
-      </div>
-    </main>
-
-    <!-- Contact Buttons -->
-    <div class="my-10 space-x-3">
-      <a href="tel:01868461577" class="bg-green-600 hover:bg-green-700 px-5 py-2 rounded-md text-white font-semibold">📞 Call</a>
-      <a href="https://wa.me/01868461577" class="bg-green-700 hover:bg-green-800 px-5 py-2 rounded-md text-white font-semibold">💬 WhatsApp</a>
+  <!-- 🔸 Service Cards -->
+  <section class="services">
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/5693/5693385.png" alt="diamond" />
+      <h3>Free Fire Top-Up [BD]</h3>
+      <p>Instant delivery, BD server only</p>
+      <a href="#" class="btn">Go</a>
     </div>
 
-    <!-- Footer -->
-    <footer class="py-6 border-t border-gray-700 text-gray-400 text-sm">
-      © <span id="year"></span> Habib YT BD | All Rights Reserved.
-    </footer>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/533/533489.png" alt="football" />
+      <h3>eFootball Coin</h3>
+      <p>Trusted & instant delivery</p>
+      <a href="#" class="btn">Go</a>
+    </div>
 
-    <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/854/854866.png" alt="service" />
+      <h3>Mobile Servicing</h3>
+      <p>Shop view coming soon</p>
+      <a href="#" class="btn">Shop</a>
+    </div>
+  </section>
 
-  </body>
+  <!-- 🔸 Footer -->
+  <footer>
+    <p>© <span id="year"></span> Habib YT — Best Service 💎</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
 </html>
