@@ -1,55 +1,30 @@
 <!DOCTYPE html>
 <html lang="bn">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>লগইন - Habib YT</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body class="login-body">
-  <div class="login-container">
-    <div class="login-box">
-      <h2>লগইন করুন</h2>
-      <p>অর্ডার ট্র্যাক করুন</p>
-      <button class="login-email" onclick="showForm('email')">ইমেইল দিয়ে লগইন</button>
-      <button class="login-phone" onclick="showForm('phone')">মোবাইল দিয়ে লগইন</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Habib YT</title>
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="menu-btn">☰</div>
+      <h1 class="logo">Habib YT</h1>
+    </header>
 
-      <div id="email-form" class="form-hidden">
-        <input type="email" placeholder="ইমেইল" id="email">
-        <input type="password" placeholder="পাসওয়ার্ড" id="pass">
-        <button onclick="emailLogin()">লগইন</button>
-      </div>
+    <section>
+      <h2>Login</h2>
+      <form style="max-width:300px;margin:auto;margin-top:20px;">
+        <input type="email" placeholder="Email" style="width:100%;padding:10px;margin:5px 0;border-radius:6px;" />
+        <input type="password" placeholder="Password" style="width:100%;padding:10px;margin:5px 0;border-radius:6px;" />
+        <button class="login-btn" style="width:100%;margin-top:10px;">Login</button>
+      </form>
+    </section>
 
-      <div id="phone-form" class="form-hidden">
-        <input type="tel" placeholder="মোবাইল" id="phone">
-        <button onclick="sendOTP()">OTP পাঠান</button>
-        <div id="otp-section" class="form-hidden">
-          <input type="text" placeholder="OTP" id="otp">
-          <button onclick="verifyOTP()">যাচাই</button>
-        </div>
-      </div>
-    </div>
-  </div>
+    <footer>
+      <p>© <span id="year"></span> Habib YT — Best Service 🔥</p>
+    </footer>
 
-  <script>
-    function showForm(t) {
-      document.getElementById('email-form').style.display = t === 'email' ? 'block' : 'none';
-      document.getElementById('phone-form').style.display = t === 'phone' ? 'block' : 'none';
-    }
-    function emailLogin() {
-      const e = document.getElementById('email').value, p = document.getElementById('pass').value;
-      if (e && p) { localStorage.setItem('user', JSON.stringify({email: e})); alert('লগইন সফল!'); window.location.href = 'dashboard.html'; }
-    }
-    function sendOTP() {
-      const ph = document.getElementById('phone').value;
-      if (ph) { alert('OTP: 1234'); document.getElementById('otp-section').classList.remove('form-hidden'); }
-    }
-    function verifyOTP() {
-      if (document.getElementById('otp').value === '1234') {
-        localStorage.setItem('user', JSON.stringify({phone: document.getElementById('phone').value}));
-        alert('লগইন সফল!'); window.location.href = 'dashboard.html';
-      } else alert('ভুল OTP');
-    }
-  </script>
-</body>
+    <script src="assets/script.js"></script>
+  </body>
 </html>
