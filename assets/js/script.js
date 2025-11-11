@@ -1,13 +1,10 @@
-// Habib YT Basic Script
-
-// Footer year auto update
+// Footer year update
 document.addEventListener("DOMContentLoaded", () => {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
 
-// Optional: Menu toggle (future use)
-const menuBtn = document.querySelector(".menu-btn");
-menuBtn?.addEventListener("click", () => {
-  alert("মেনু অপশন আসছে শিগগিরই 🚀");
+// Optional menu alert
+document.querySelector(".menu-btn")?.addEventListener("click", () => {
+  alert("মেনু ফিচার আসছে শীঘ্রই 🚀");
 });
