@@ -2,15 +2,47 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ড্যাশবোর্ড - Habib YT</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Habib YT</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="module" src="firebase.js"></script>
 </head>
-<body class="dashboard-body">
-  <div class="container">
-    <h2>ড্যাশবোর্ড</h2>
-    <p>লগইন সফল! আপনার অ্যাকাউন্টে স্বাগতম।</p>
-    <a href="index.html">হোমে যান</a>
-  </div>
+<body>
+  <header><h1><span>Habib</span> YT</h1></header>
+  <section>
+    <h2>Welcome, <span id="userEmail"></span></h2>
+    <button id="logoutBtn" class="login-btn">Logout</button>
+    <h3>📋 Order History</h3>
+    <ul id="ordersList"></ul>
+  </section>
+
+  <script type="module">
+    import { auth, db } from "./firebase.js";
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+    import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+    const userEmail = document.getElementById("userEmail");
+    const ordersList = document.getElementById("ordersList");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        userEmail.textContent = user.email;
+        const querySnapshot = await getDocs(collection(db, "orders"));
+        querySnapshot.forEach((doc) => {
+          const li = document.createElement("li");
+          li.textContent = `${doc.data().itemName} - ${doc.data().price}৳`;
+          ordersList.appendChild(li);
+        });
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "login.html";
+    });
+  </script>
 </body>
 </html>
