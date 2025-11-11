@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard | Habib YT</title>
-  <style>
-    body { font-family: "Poppins", sans-serif; text-align: center; background: #f0f4ff; margin: 0; }
-    header { background: #007bff; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
-    h1 { font-size: 22px; }
-    button { border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; }
-    .logout { background: #ff4757; color: white; }
-    .orders { margin-top: 20px; background: white; border-radius: 10px; padding: 10px; width: 90%; max-width: 400px; margin: 20px auto; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard | Habib YT</title>
+<style>
+body{font-family:'Poppins',sans-serif;background:#f9fafc;padding:20px;}
+.card{background:white;padding:15px;border-radius:8px;margin:10px 0;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Habib YT</h1>
-    <button class="logout" id="logoutBtn">Logout</button>
-  </header>
+<h2>👋 Welcome, <span id="userEmail"></span></h2>
+<h3>💰 Balance: <span id="balance">0</span>৳</h3>
 
-  <h2>👋 Welcome, <span id="userEmail"></span></h2>
-  <div class="orders">
-    <h3>🧾 Order History</h3>
-    <p id="orderList">No orders yet...</p>
-  </div>
+<h3>📦 My Orders</h3>
+<div id="myOrders"></div>
 
-  <footer style="margin-top:40px;">© 2025 Habib YT — Best Service 🔥</footer>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+import { getFirestore, doc, getDoc, query, where, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
+  authDomain: "habib-yt.firebaseapp.com",
+  projectId: "habib-yt",
+  storageBucket: "habib-yt.firebasestorage.app",
+  messagingSenderId: "656628491244",
+  appId: "1:656628491244:web:e01ccd42bd8a2b1b4c96c9"
+};
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
-      authDomain: "habib-yt.firebaseapp.com",
-      projectId: "habib-yt",
-      storageBucket: "habib-yt.firebasestorage.app",
-      messagingSenderId: "656628491244",
-      appId: "1:656628491244:web:e01ccd42bd8a2b1b4c96c9",
-      measurementId: "G-GNY1T88D34"
-    };
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) document.getElementById("userEmail").textContent = user.email;
-      else window.location.href = "login.html";
-    });
+onAuthStateChanged(auth, async (user) => {
+  if (!user) { window.location.href = "login.html"; return; }
+  document.getElementById("userEmail").textContent = user.email;
 
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      signOut(auth).then(() => window.location.href = "login.html");
-    });
-  </script>
+  const userRef = doc(db, "users", user.email);
+  const u = await getDoc(userRef);
+  if (u.exists()) document.getElementById("balance").textContent = u.data().balance || 0;
+
+  const q = query(collection(db, "orders"), where("userEmail", "==", user.email));
+  const snap = await getDocs(q);
+  const container = document.getElementById("myOrders");
+  container.innerHTML = "";
+  snap.forEach(d=>{
+    const o=d.data();
+    const div=document.createElement("div");
+    div.className="card";
+    div.innerHTML=`${o.product} - ${o.amount}৳ <br>Status: <b>${o.status}</b>`;
+    container.appendChild(div);
+  });
+});
+</script>
 </body>
 </html>
