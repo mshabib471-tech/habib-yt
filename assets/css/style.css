@@ -1,113 +1,101 @@
-body {
-  background: #0b132b;
-  color: white;
-  font-family: "Poppins", sans-serif;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(180deg, #0b132b, #000);
+  color: white;
   text-align: center;
+  overflow-x: hidden;
 }
 
 /* Header */
-.header {
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #111827;
-  padding: 8px 14px;
+  padding: 14px 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid #333;
 }
 
-.menu-btn i {
+.logo {
+  font-size: 22px;
   color: #ff7b00;
-  font-size: 20px;
+  font-weight: 700;
 }
 
-.logo-text {
+.menu-btn {
+  font-size: 22px;
+  cursor: pointer;
   color: #ff7b00;
-  font-size: 20px;
-  font-weight: bold;
 }
 
 .login-btn {
   background: #ff7b00;
+  border: none;
   color: white;
-  padding: 5px 12px;
+  padding: 8px 14px;
   border-radius: 6px;
-  text-decoration: none;
-  font-size: 13px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-/* Hero */
-.hero {
-  padding: 30px 15px;
+.login-btn:hover {
+  background: #ff9500;
 }
 
-.hero h2 {
-  font-size: 22px;
-  color: #ffa343;
+/* Section */
+section {
+  padding: 50px 20px;
 }
 
-.hero p {
+h1, h2, h3 {
+  color: #ff7b00;
+}
+
+p {
   color: #ccc;
-  font-size: 14px;
-  margin: 8px 0 15px;
-}
-
-.fb-btn {
-  background: #1877f2;
-  color: white;
-  padding: 8px 18px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
 }
 
 /* Cards */
-.services {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  padding: 20px;
-}
-
 .card {
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 14px;
+  border: 1px solid #333;
+  border-radius: 12px;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 280px;
+  margin: 10px auto;
+  transition: 0.3s;
 }
 
-.card img {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 10px;
-}
-
-.card h3 {
-  color: #ffa343;
-  margin: 5px 0;
-}
-
-.card p {
-  color: #bbb;
-  font-size: 13px;
-  margin-bottom: 10px;
-}
-
-.btn {
-  display: inline-block;
-  background: #ff7b00;
-  color: white;
-  padding: 6px 18px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 13px;
+.card:hover {
+  transform: scale(1.05);
+  border-color: #ff7b00;
 }
 
 /* Footer */
 footer {
-  background: #111827;
+  margin-top: 40px;
+  padding: 20px;
+  background: #000;
   color: #aaa;
-  font-size: 13px;
-  padding: 14px 10px;
-  border-top: 1px solid #1f2937;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  header {
+    padding: 10px 14px;
+  }
+  .login-btn {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+  section {
+    padding: 30px 10px;
+  }
 }
