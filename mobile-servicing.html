@@ -2,38 +2,31 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>মোবাইল সার্ভিসিং - Habib YT</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile Servicing | Habib YT</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="module" src="firebase.js"></script>
 </head>
-<body class="product-body">
-
-  <div class="product-header">
-    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
-    <h2>মোবাইল সার্ভিসিং</h2>
-  </div>
-
-  <div class="container">
-    <div class="step"><span class="step-number">1</span> সার্ভিস সিলেক্ট করুন</div>
-    <div class="service-grid">
-      <div class="service-card" onclick="selectPackage('স্ক্রিন রিপ্লেসমেন্ট', '১৫০০৳')">
-        <div class="serial">১.</div>
-        <img src="https://i.ibb.co.com/k6Jn85H7/istockphoto-512756266-612x612-1.jpg" alt="Screen">
-        <h3>স্ক্রিন রিপ্লেসমেন্ট</h3>
-        <p class="price">১৫০০৳</p>
-      </div>
-      <!-- আরও ৯টি -->
+<body>
+  <header>
+    <h1><span>Habib</span> YT</h1>
+    <div class="nav-buttons">
+      <a href="index.html"><button class="login-btn">Home</button></a>
+      <button id="toggle" class="toggle-btn">🌙 Dark Mode</button>
     </div>
+  </header>
 
-    <div class="location-section">
-      <h3>সার্ভিসের জন্য এই লোকেশনে আসুন</h3>
-      <a href="https://maps.google.com/?q=Habib+Mobile+Servicing,+Dhaka,+Bangladesh" target="_blank" class="map-link">
-        <i class="fas fa-map-marker-alt"></i> গুগল ম্যাপে দেখুন
-      </a>
-    </div>
-  </div>
+  <section style="padding: 20px;text-align:center;">
+    <h2>🧰 মোবাইল সার্ভিসিং</h2>
+    <p>সার্ভিসিং এর জন্য আমাদের দোকানে যোগাযোগ করুন 👇</p>
+    <a href="https://maps.app.goo.gl/1QdkxJmxQZHvSMFAA" target="_blank" style="text-decoration:none;">
+      <button class="submit-btn" style="margin-top:10px;">📍 আমাদের লোকেশন</button>
+    </a>
+    <p style="margin-top:15px;">📞 যোগাযোগ: <b>01868461577</b></p>
+    <img src="https://i.ibb.co/DWzMXMt/servicing.jpg" alt="Servicing" style="margin-top:20px;width:90%;border-radius:10px;">
+  </section>
 
-  <a href="https://wa.me/8801868461577" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
-  <script src="assets/js/script.js"></script>
+  <footer>© 2025 Habib YT — Best Service 🔥</footer>
+  <script src="assets/script.js"></script>
 </body>
 </html>
