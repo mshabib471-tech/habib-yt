@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habib YT | Home</title>
+  <style>
+    * { box-sizing: border-box; font-family: "Poppins", sans-serif; margin: 0; padding: 0; }
+    body { background: #f7f9fc; color: #222; padding-bottom: 70px; }
+
+    header {
+      background: white; padding: 10px 15px;
+      display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-size: 22px; font-weight: bold; color: #007bff; }
+    .logo span { color: #ff0000; }
+    .login-btn {
+      background: #007bff; color: white; border: none;
+      padding: 6px 12px; border-radius: 5px; font-weight: 500; cursor: pointer;
+    }
+
+    .notice {
+      background: #5e2dfc; color: white; padding: 10px;
+      font-size: 14px; text-align: center; margin: 10px;
+      border-radius: 8px;
+    }
+
+    .services-title { text-align: center; font-weight: bold; margin: 15px 0; color: #333; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding: 10px;
+    }
+    .card {
+      background: white; border-radius: 10px; overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      text-align: center; cursor: pointer;
+      transition: 0.2s;
+    }
+    .card:hover { transform: scale(1.03); }
+    .card img { width: 100%; height: 130px; object-fit: cover; }
+    .card p { font-weight: 600; padding: 5px; }
+
+    .contact {
+      margin-top: 20px; background: white;
+      text-align: center; padding: 15px; border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .support-links {
+      display: flex; justify-content: center; gap: 15px;
+      flex-wrap: wrap; margin: 15px 0;
+    }
+    .support-links img {
+      width: 150px; border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      transition: 0.3s;
+    }
+    .support-links img:hover { transform: scale(1.05); }
+
+    footer {
+      position: fixed; bottom: 0; left: 0; width: 100%;
+      background: white; border-top: 1px solid #ddd;
+      display: flex; justify-content: space-around;
+      padding: 8px 0;
+      z-index: 200;
+    }
+    footer a {
+      text-decoration: none; color: #007bff;
+      text-align: center; font-size: 13px;
+    }
+    footer a span { display: block; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><span>Habib</span> YT</div>
+    <button class="login-btn" onclick="window.location.href='login.html'">Login</button>
+  </header>
+
+  <div class="notice">
+    ⚠️ ১৮ বছরের নিচে কেউ অর্ডার করবেন না! অভিভাবকের অনুমতি ছাড়া টাকা ট্রান্সফার করবেন না।
+  </div>
+
+  <h3 class="services-title">🧩 সার্ভিস সমূহ</h3>
+  <div class="grid">
+    <div class="card" onclick="location.href='freefire.html'">
+      <img src="https://i.ibb.co/pbZWw6n/freefire.jpg" alt="Free Fire">
+      <p>FreeFire Topup [BD]</p>
+    </div>
+    <div class="card" onclick="location.href='efootball.html'">
+      <img src="https://i.ibb.co/2y3gVtV/efootball.jpg" alt="EFootball">
+      <p>EFootball Coin</p>
+    </div>
+    <div class="card" onclick="location.href='like-follower.html'">
+      <img src="https://i.ibb.co/X8tKcQn/social.jpg" alt="Like Follower">
+      <p>Like & Follower</p>
+    </div>
+    <div class="card" onclick="location.href='mobile-accessories.html'">
+      <img src="https://i.ibb.co/hXTV0sD/accessories.jpg" alt="Accessories">
+      <p>Mobile Accessories</p>
+    </div>
+    <div class="card" onclick="location.href='mobile-servicing.html'">
+      <img src="https://i.ibb.co/B2S7CZv/servicing.jpg" alt="Servicing">
+      <p>Mobile Servicing</p>
+    </div>
+    <div class="card" onclick="location.href='coming-soon.html'">
+      <img src="https://i.ibb.co/Fm7K6gY/coming.jpg" alt="Coming Soon">
+      <p>Coming Soon</p>
+    </div>
+  </div>
+
+  <div class="contact">
+    <h3>📞 যোগাযোগ করুন</h3>
+    <div class="support-links">
+      <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank">
+        <img src="https://i.ibb.co/M2k5kLn/telegram.png" alt="Telegram Support">
+      </a>
+      <a href="https://wa.me/8801868461577" target="_blank">
+        <img src="https://i.ibb.co/whV8W7F/whatsapp.png" alt="WhatsApp Support">
+      </a>
+    </div>
+    <p>📧 srbdtopup@gmail.com</p>
+    <p>আমাদের সাথে যোগাযোগ করুন যেকোনো সময়।</p>
+  </div>
+
+  <footer>
+    <a href="index.html"><span>🏠</span>Home</a>
+    <a href="add-money.html"><span>➕</span>Add Money</a>
+    <a href="dashboard.html"><span>📦</span>My Orders</a>
+    <a href="login.html"><span>👤</span>My Account</a>
+  </footer>
+</body>
+</html>
