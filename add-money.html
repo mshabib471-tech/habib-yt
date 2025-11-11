@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Add Money</title>
+<style>body{font-family:'Poppins',sans-serif;background:#f5f8ff;padding:20px;text-align:center;}
+input{padding:10px;width:80%;border:1px solid #ccc;border-radius:6px;margin:10px 0;}
+button{background:#007bff;color:white;border:none;padding:10px 20px;border-radius:6px;}
+</style></head>
+<body>
+<h2>💰 Add Money</h2>
+<input type="number" id="amount" placeholder="Enter Amount">
+<button onclick="goBkash()">Next</button>
+<script>
+function goBkash(){
+ const amt=document.getElementById('amount').value;
+ if(!amt)return alert("Amount দিন");
+ window.location.href=`payment-bkash.html?amount=${amt}`;
+}
+</script>
+</body>
+</html>
