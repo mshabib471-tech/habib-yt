@@ -1,6 +1,63 @@
-<section>
-  <h2>Free Fire Diamond Packages</h2>
-  <div class="card"><h3>100 Diamond – 120৳</h3></div>
-  <div class="card"><h3>520 Diamond – 600৳</h3></div>
-  <div class="card"><h3>1060 Diamond – 1200৳</h3></div>
-</section>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Fire Topup | Habib YT</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="module" src="firebase.js"></script>
+</head>
+<body>
+  <header>
+    <h1><span>Habib</span> YT</h1>
+    <div class="nav-buttons">
+      <a href="index.html"><button class="login-btn">Home</button></a>
+      <button id="toggle" class="toggle-btn">🌙 Dark Mode</button>
+    </div>
+  </header>
+
+  <div class="order-box">
+    <h2>Free Fire Top-Up</h2>
+    <div class="option" data-name="100 Diamond" data-price="95">100 Diamond — 95৳</div>
+    <div class="option" data-name="210 Diamond" data-price="190">210 Diamond — 190৳</div>
+    <div class="option" data-name="560 Diamond" data-price="490">560 Diamond — 490৳</div>
+    <div class="option" data-name="1150 Diamond" data-price="990">1150 Diamond — 990৳</div>
+    <button class="submit-btn" id="orderBtn">Confirm Order</button>
+    <p id="msg" style="margin-top:10px;text-align:center;"></p>
+  </div>
+
+  <footer>© 2025 Habib YT — Best Service 🔥</footer>
+
+  <script type="module">
+    import { db, auth } from "./firebase.js";
+    import { addDoc, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+    let selected = null;
+    const options = document.querySelectorAll(".option");
+    const msg = document.getElementById("msg");
+
+    options.forEach(opt => {
+      opt.addEventListener("click", () => {
+        options.forEach(o => o.style.background = "white");
+        opt.style.background = "#d0e6ff";
+        selected = { name: opt.dataset.name, price: opt.dataset.price };
+      });
+    });
+
+    document.getElementById("orderBtn").addEventListener("click", async () => {
+      if (!selected) return msg.textContent = "⚠️ Select a package first!";
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) return msg.textContent = "🔑 Please login first!";
+        await addDoc(collection(db, "orders"), {
+          uid: user.uid,
+          itemName: selected.name,
+          price: selected.price,
+          time: new Date().toLocaleString()
+        });
+        msg.textContent = "✅ Order Confirmed!";
+      });
+    });
+  </script>
+</body>
+</html>
