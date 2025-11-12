@@ -57,7 +57,7 @@
       color: #333;
     }
 
-    input, select {
+    input {
       width: 100%;
       padding: 10px;
       border-radius: 8px;
@@ -84,6 +84,16 @@
       background: #005ad3;
     }
 
+    .steps {
+      background: #f0f6ff;
+      border-left: 4px solid #007bff;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
     footer {
       text-align: center;
       margin-top: 30px;
@@ -105,12 +115,20 @@
     <label>Amount (BDT)</label>
     <input type="number" id="amount" placeholder="যেমনঃ 100" />
 
-    <label>Method</label>
-    <select id="method">
-      <option value="bkash">bKash</option>
-      <option value="nagad">Nagad</option>
-      <option value="rocket">Rocket</option>
-    </select>
+    <label>Payment Method</label>
+    <input type="text" value="bKash" disabled style="background:#f9f9f9; font-weight:bold;" />
+
+    <label>Send Money করুন এই নম্বরে:</label>
+    <input type="text" value="01868461577" readonly style="background:#fff5f5; font-weight:bold; color:#c82333;" />
+
+    <div class="steps">
+      🧾 <b>নির্দেশনা:</b><br>
+      1️⃣ আপনার বিকাশ অ্যাপে যান বা *247# ডায়াল করুন।<br>
+      2️⃣ "Send Money" অপশন সিলেক্ট করুন।<br>
+      3️⃣ উপরের নম্বরটিতে টাকা পাঠান।<br>
+      4️⃣ টাকা পাঠানোর পর আপনার <b>Transaction ID (TrxID)</b> নিচে দিন।<br>
+      5️⃣ এরপর নিচের <b>Submit</b> বাটনে ক্লিক করুন।
+    </div>
 
     <label>Transaction ID</label>
     <input type="text" id="trxid" placeholder="আপনার TrxID দিন" />
