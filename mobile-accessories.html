@@ -1,39 +1,21 @@
+<!-- mobile-accessories.html -->
 <!DOCTYPE html>
 <html lang="bn">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mobile Accessories | Habib YT</title>
-  <link rel="stylesheet" href="assets/style.css" />
-  <script type="module" src="firebase.js"></script>
-</head>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Accessories | Habib YT</title><link rel="stylesheet" href="style.css"></head>
 <body>
-  <header>
-    <h1><span>Habib</span> YT</h1>
-    <div class="nav-buttons">
-      <a href="index.html"><button class="login-btn">Home</button></a>
-      <button id="toggle" class="toggle-btn">🌙 Dark Mode</button>
-    </div>
-  </header>
+<header class="topbar container"><div class="logo-wrap"><img src="assets/logo.png" alt=""><div><div class="site-title">Accessories</div></div></div><div><button onclick="go('index.html')" class="login-btn">Back</button></div></header>
 
-  <section style="padding: 20px;">
-    <h2 style="text-align:center;">📱 Mobile Accessories</h2>
-    <p style="text-align:center;margin-bottom:10px;">বিভিন্ন মোবাইল এক্সেসরিজ এক জায়গায়</p>
+<div class="container">
+  <h3 class="center">Mobile Accessories</h3>
+  <div class="grid">
+    <div class="card"><img src="assets/accessories.jpg"><p>Phone Case — ৳200</p></div>
+    <div class="card"><img src="assets/accessories.jpg"><p>Charger — ৳250</p></div>
+    <div class="card"><img src="assets/accessories.jpg"><p>Headset — ৳350</p></div>
+    <div class="card"><img src="assets/accessories.jpg"><p>Powerbank — ৳600</p></div>
+  </div>
+</div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:15px;">
-      <img src="https://i.ibb.co/MN9RxnH/accessory1.jpg" alt="Phone Case">
-      <img src="https://i.ibb.co/sqbRbqZ/accessory2.jpg" alt="Charger">
-      <img src="https://i.ibb.co/X8n3FQt/accessory3.jpg" alt="Headset">
-      <img src="https://i.ibb.co/mDgJ7pr/accessory4.jpg" alt="Cable">
-      <img src="https://i.ibb.co/jzXdyTP/accessory5.jpg" alt="Bluetooth Speaker">
-      <img src="https://i.ibb.co/2MZ3TdD/accessory6.jpg" alt="Memory Card">
-      <img src="https://i.ibb.co/YTp4hnR/accessory7.jpg" alt="Powerbank">
-      <img src="https://i.ibb.co/6NN1wDG/accessory8.jpg" alt="Sim Card">
-      <img src="https://i.ibb.co/vhy63FX/accessory9.jpg" alt="Smartwatch">
-    </div>
-  </section>
-
-  <footer>© 2025 Habib YT — Best Service 🔥</footer>
-  <script src="assets/script.js"></script>
+<nav class="bottom-nav"><div onclick="go('index.html')">🏠</div><div onclick="go('add-money.html')">➕</div><div onclick="go('order.html')">📦</div><div onclick="go('dashboard.html')">👤</div></nav>
+<script type="module" src="app.js"></script>
 </body>
 </html>
