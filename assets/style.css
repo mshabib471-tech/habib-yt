@@ -1,122 +1,48 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  background: #f9f9f9;
-  color: #222;
-  transition: 0.3s;
-}
-
-.dark-mode {
-  background: #0b132b;
-  color: white;
-}
-
-/* Header */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-  padding: 12px 16px;
-  border-bottom: 1px solid #ddd;
-}
-
-header h1 span:first-child { color: #0056ff; }
-header h1 span:last-child { color: #ff0040; }
-
-.nav-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  padding: 6px 12px;
-  font-weight: 600;
-}
-
-.login-btn {
-  background: #007bff;
-  color: white;
-}
-
-.toggle-btn {
-  background: #222;
-  color: white;
-}
-
-/* Service Cards */
-.services {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 12px;
-  padding: 20px;
-}
-
-.card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  padding: 12px;
-  text-align: center;
-}
-
-.card img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-/* Order Page */
-.order-box {
-  max-width: 400px;
-  margin: 40px auto;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.order-box h2 {
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-.option {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.option:hover {
-  background: #eef6ff;
-}
-
-button.submit-btn {
-  width: 100%;
-  background: #007bff;
-  color: white;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  margin-top: 15px;
-}
-
-footer {
-  background: #eee;
-  padding: 10px;
-  text-align: center;
-  font-size: 14px;
+/* style.css */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter, Poppins, system-ui, sans-serif;}
+body{background:#f6f9ff;color:#111;padding-bottom:72px;line-height:1.4;}
+a{color:#007bff;text-decoration:none;}
+img{max-width:100%;display:block;}
+/* header */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#fff;box-shadow:0 2px 8px rgba(12,20,30,0.06);position:sticky;top:0;z-index:50;}
+.logo-wrap{display:flex;align-items:center;gap:10px;}
+.logo-wrap img{width:52px;height:52px;border-radius:10px;object-fit:cover;}
+.site-title{font-size:18px;color:#007bff;font-weight:700;}
+.site-sub{font-size:12px;color:#444;margin-top:2px;}
+.login-btn{background:#007bff;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;}
+.notice{background:#6a1b9a;color:#fff;padding:8px;text-align:center;margin:10px;border-radius:8px;max-width:980px;margin-left:auto;margin-right:auto;}
+.container{max-width:980px;margin:16px auto;padding:0 12px;}
+.support-row{display:flex;gap:12px;justify-content:center;margin:10px 0;flex-wrap:wrap;}
+.support-row img{width:150px;border-radius:10px;box-shadow:0 6px 18px rgba(31,41,55,0.08);cursor:pointer;}
+.services h2{text-align:center;color:#007bff;margin-bottom:10px;}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.card{background:#fff;border-radius:12px;padding:8px;box-shadow:0 6px 18px rgba(31,41,55,0.04);cursor:pointer;transition:transform .14s ease;}
+.card:hover{transform:translateY(-4px);}
+.card img{height:130px;object-fit:cover;border-radius:8px;}
+.card p{text-align:center;font-weight:600;margin-top:8px;font-size:14px;}
+.footer{background:#fff;padding:14px;text-align:center;margin-top:18px;box-shadow:0 -6px 18px rgba(12,20,30,0.02);}
+.bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;border-top:1px solid #e6eefc;display:flex;justify-content:space-around;padding:8px 6px;z-index:90;}
+.bottom-nav div{text-align:center;font-size:13px;color:#333;cursor:pointer;}
+.bottom-nav div span{display:block;font-size:18px;margin-bottom:4px;}
+/* utilities */
+.center{text-align:center;}
+.card-small{padding:12px;border-radius:10px;background:#fff;box-shadow:0 6px 18px rgba(31,41,55,0.04);}
+/* forms */
+.input, input, textarea, select{width:100%;padding:10px;border:1px solid #e6eefc;border-radius:8px;margin-top:8px;}
+.btn{background:#007bff;color:#fff;border:none;padding:10px 12px;border-radius:8px;cursor:pointer;margin-top:10px;display:inline-block;}
+.btn-ghost{background:#fff;color:#007bff;border:1px solid #007bff;}
+.small{font-size:13px;color:#666;}
+/* order grid for product pages */
+.options-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.option{background:#fff;padding:12px;border-radius:10px;border:1px solid #edf2ff;cursor:pointer;text-align:center;}
+.option.selected{background:#e8f2ff;border-color:#cfe5ff;box-shadow:0 6px 18px rgba(14,78,255,0.06);}
+/* admin / tables */
+.list-item{background:#fff;padding:12px;border-radius:10px;margin-bottom:10px;box-shadow:0 6px 18px rgba(31,41,55,0.04);}
+.badge{display:inline-block;padding:6px 8px;border-radius:8px;background:#f1f5f9;color:#0f172a;font-weight:700;font-size:12px;}
+.badge.pending{background:#fff3cd;color:#856404;}
+.badge.approved{background:#d4edda;color:#155724;}
+.badge.rejected{background:#f8d7da;color:#721c24;}
+@media (min-width:900px){
+  .grid{grid-template-columns:repeat(3,1fr);}
+  .options-grid{grid-template-columns:repeat(3,1fr);}
 }
