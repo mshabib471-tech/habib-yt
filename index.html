@@ -1,59 +1,88 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Habib YT — আপনার বিশ্বস্ত সহযোগী</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="logo-wrap container">
-      <img src="assets/logo.png" alt="logo">
-      <div>
-        <div class="site-title">Habib YT</div>
-        <div class="site-sub">আপনার বিশ্বস্ত সহযোগী</div>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-section">
+      <img src="assets/logo.png" alt="logo" class="logo" />
+      <div class="title">
+        <h2><span style="color:#007bff;">Habib</span> YT</h2>
+        <p>আপনার বিশ্বস্ত সহযোগী</p>
       </div>
     </div>
-    <div style="margin-right:16px;">
-      <button class="login-btn" onclick="go('login.html')">Login</button>
-    </div>
+    <button class="login-btn" onclick="go('login.html')">Login</button>
   </header>
 
-  <div class="container">
-    <div class="notice">⚠️ ১৮ বছরের নিচে কেউ অর্ডার করবেন না! বাবার/মায়ের অনুমতি ছাড়া টাকা ট্রান্সফার করা নিষেধ।</div>
+  <!-- Notice -->
+  <div class="notice">
+    ⚠️ ১৮ বছরের নিচে কেউ অর্ডার করবেন না! বাবা/মায়ের অনুমতি ছাড়া টাকা ট্রান্সফার করা নিষেধ।
+  </div>
 
-    <div class="support-row">
-      <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank"><img src="assets/telegram.png" alt="telegram"></a>
-      <a href="https://wa.me/8801868461577" target="_blank"><img src="assets/whatsapp.png" alt="whatsapp"></a>
+  <!-- Telegram + WhatsApp -->
+  <div class="support-links">
+    <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank">
+      <img src="assets/telegram.png" alt="telegram" />
+    </a>
+    <a href="https://wa.me/8801868461577" target="_blank">
+      <img src="assets/whatsapp.png" alt="whatsapp" />
+    </a>
+  </div>
+
+  <!-- Service Section -->
+  <h2 class="section-title">সার্ভিস সমূহ</h2>
+  <div class="services">
+    <div class="card" onclick="go('freefire.html')">
+      <img src="assets/ff.jpg" alt="Free Fire" />
+      <p>Free Fire Topup</p>
     </div>
-
-    <section class="services">
-      <h2>সার্ভিস সমূহ</h2>
-      <div class="grid">
-        <div class="card" onclick="go('freefire.html')"><img src="assets/ff.jpg" alt=""><p>Free Fire Topup</p></div>
-        <div class="card" onclick="go('efootball.html')"><img src="assets/efootball.jpg" alt=""><p>EFootball Coin</p></div>
-        <div class="card" onclick="go('like-follower.html')"><img src="assets/like.jpg" alt=""><p>Like & Follower</p></div>
-        <div class="card" onclick="go('mobile-accessories.html')"><img src="assets/accessories.jpg" alt=""><p>Mobile Accessories</p></div>
-        <div class="card" onclick="go('mobile-servicing.html')"><img src="assets/servicing.jpg" alt=""><p>Mobile Servicing</p></div>
-        <div class="card" onclick="go('coming-soon.html')"><img src="assets/coming.jpg" alt=""><p>Coming Soon</p></div>
-      </div>
-    </section>
-
-    <div class="footer">
-      <p>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</p>
-      <p class="small">Contact: <a href="mailto:srbdtopup@gmail.com">srbdtopup@gmail.com</a></p>
+    <div class="card" onclick="go('efootball.html')">
+      <img src="assets/efootball.jpg" alt="EFootball" />
+      <p>EFootball Coin</p>
+    </div>
+    <div class="card" onclick="go('like-follower.html')">
+      <img src="assets/like.jpg" alt="Like Follower" />
+      <p>Like & Follower</p>
+    </div>
+    <div class="card" onclick="go('mobile-accessories.html')">
+      <img src="assets/accessories.jpg" alt="Mobile Accessories" />
+      <p>Mobile Accessories</p>
+    </div>
+    <div class="card" onclick="go('mobile-servicing.html')">
+      <img src="assets/servicing.jpg" alt="Mobile Servicing" />
+      <p>Mobile Servicing</p>
+    </div>
+    <div class="card" onclick="go('coming-soon.html')">
+      <img src="assets/coming.jpg" alt="Coming Soon" />
+      <p>Coming Soon</p>
     </div>
   </div>
 
+  <!-- Footer Nav -->
   <nav class="bottom-nav">
-    <div onclick="go('index.html')"><span>🏠</span>Home</div>
-    <div onclick="go('add-money.html')"><span>➕</span>Add Money</div>
-    <div onclick="go('order.html')"><span>📦</span>My Orders</div>
-    <div onclick="go('dashboard.html')"><span>👤</span>My Account</div>
+    <a href="index.html" class="active">
+      <span>🏠</span><p>Home</p>
+    </a>
+    <a href="add-money.html">
+      <span>➕</span><p>Add Money</p>
+    </a>
+    <a href="order.html">
+      <span>📦</span><p>My Orders</p>
+    </a>
+    <a href="dashboard.html">
+      <span>👤</span><p>My Account</p>
+    </a>
   </nav>
 
+  <!-- JS -->
   <script type="module" src="app.js"></script>
 </body>
 </html>
