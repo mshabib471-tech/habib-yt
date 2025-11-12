@@ -1,43 +1,26 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Firebase Config Test | Habib YT</title>
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      text-align: center;
-      background: #f5f7fa;
-      color: #333;
-      margin-top: 60px;
-    }
-    h2 { color: #007bff; }
-    button {
-      background: #007bff; color: #fff; border: none;
-      padding: 10px 20px; border-radius: 8px;
-      cursor: pointer; margin: 8px;
-    }
-    button:hover { background: #0056d4; }
-    pre {
-      background: #222; color: #0f0;
-      padding: 10px; border-radius: 6px;
-      width: 80%; margin: 15px auto;
-      text-align: left;
-      overflow-x: auto;
-    }
-  </style>
-</head>
-<body>
+/***************************************************
+ 🔥 Habib YT | Firebase Config
+****************************************************/
 
-  <h2>🔥 Habib YT Firebase Test</h2>
-  <p>Config ঠিকভাবে কানেক্টেড আছে কিনা চেক করতে নিচের বাটনে ক্লিক করুন</p>
-  
-  <button id="check">Check Firebase Connection</button>
-  <button onclick="googleLogin()">Google Login Test</button>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-  <pre id="output"></pre>
+// ✅ তোমার Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
+  authDomain: "habib-yt.firebaseapp.com",
+  projectId: "habib-yt",
+  storageBucket: "habib-yt.firebasestorage.app",
+  messagingSenderId: "656628491244",
+  appId: "1:656628491244:web:e01ccd42bd8a2b1b4c96c9",
+  measurementId: "G-GNY1T88D34"
+};
 
-  <script type="module" src="app.js"></script>
-</body>
-</html>
+// ✅ Initialize Firebase
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const provider = new GoogleAuthProvider();
+
+console.log("🔥 Firebase initialized successfully!");
