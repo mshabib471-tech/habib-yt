@@ -58,16 +58,19 @@ window.loginUser = async function() {
   } catch (err) { alert("লগইন ব্যর্থ ❌: " + err.message); }
 };
 
-// ==========================
-// 🔹 GOOGLE LOGIN
-// ==========================
+// ✅ GOOGLE LOGIN (Signup বা Login উভয়ের জন্য)
+import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+const provider = new GoogleAuthProvider();
+
 window.googleLogin = async function() {
   try {
     await signInWithPopup(auth, provider);
-    const user = auth.currentUser;
-    await setDoc(doc(db, "wallets", user.uid), { balance: 0 }, { merge: true });
+    alert("Google Login সফল ✅");
     window.location.href = "dashboard.html";
-  } catch (err) { alert(err.message); }
+  } catch (err) {
+    alert("Google Login ব্যর্থ ❌\n" + err.message);
+  }
 };
 
 // ==========================
