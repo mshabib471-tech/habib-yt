@@ -1,61 +1,94 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Habib YT — আপনার বিশ্বস্ত সহযোগী</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Header -->
+
+  <!-- 🔹 Header -->
   <header class="topbar">
     <div class="logo-area">
-      <img src="assets/logo.png" class="logo">
+      <img src="assets/logo.png" alt="Habib YT" class="logo" />
       <div>
         <h1>Habib <span>YT</span></h1>
         <p>আপনার বিশ্বস্ত সহযোগী</p>
       </div>
     </div>
-    <button onclick="go('login.html')" class="login-btn">Login</button>
+    <button class="login-btn" onclick="go('login.html')">Login</button>
   </header>
 
-  <!-- Notice -->
+  <!-- 🔹 Notice -->
   <div class="notice">
-    ⚠️ ১৮ বছরের নিচে কেউ অর্ডার করবেন না! বাবা/মায়ের অনুমতি ছাড়া টাকা ট্রান্সফার করা নিষেধ।
+    ⚠️ ১৮ বছরের নিচে কেউ অর্ডার করবেন না! অনুমতি ছাড়া লেনদেন করা নিষিদ্ধ।
   </div>
 
-  <!-- Telegram / WhatsApp -->
-  <div class="support-section">
-    <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank"><img src="assets/telegram.png" class="support-img"></a>
-    <a href="https://wa.me/8801868461577" target="_blank"><img src="assets/whatsapp.png" class="support-img"></a>
+  <!-- 🔹 Telegram / WhatsApp -->
+  <div class="support-links">
+    <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank"><img src="assets/telegram.png" alt="Telegram"></a>
+    <a href="https://wa.me/8801868461577" target="_blank"><img src="assets/whatsapp.png" alt="WhatsApp"></a>
   </div>
 
-  <!-- Service Cards -->
+  <!-- 🔹 Service Section -->
   <section class="services">
-    <h2>আমাদের সার্ভিসসমূহ</h2>
+    <h2>Our Services</h2>
     <div class="grid">
-      <div class="card" onclick="go('freefire.html')"><img src="assets/ff.jpg"><p>Free Fire Top-up</p></div>
-      <div class="card" onclick="go('efootball.html')"><img src="assets/efootball.jpg"><p>EFootball Coin</p></div>
-      <div class="card" onclick="go('like-follower.html')"><img src="assets/like.jpg"><p>Like & Followers</p></div>
-      <div class="card" onclick="go('mobile-accessories.html')"><img src="assets/accessories.jpg"><p>Mobile Accessories</p></div>
-      <div class="card" onclick="go('mobile-servicing.html')"><img src="assets/servicing.jpg"><p>Mobile Servicing</p></div>
-      <div class="card" onclick="go('coming-soon.html')"><img src="assets/coming.jpg"><p>Coming Soon</p></div>
+      <div class="card" onclick="go('freefire.html')">
+        <img src="assets/ff.jpg" alt="Free Fire">
+        <p>Free Fire Top-Up</p>
+      </div>
+      <div class="card" onclick="go('efootball.html')">
+        <img src="assets/efootball.jpg" alt="EFootball">
+        <p>EFootball Coin</p>
+      </div>
+      <div class="card" onclick="go('like-follower.html')">
+        <img src="assets/like.jpg" alt="Like & Follower">
+        <p>Like & Follower</p>
+      </div>
+      <div class="card" onclick="go('mobile-accessories.html')">
+        <img src="assets/accessories.jpg" alt="Accessories">
+        <p>Mobile Accessories</p>
+      </div>
+      <div class="card" onclick="go('mobile-servicing.html')">
+        <img src="assets/servicing.jpg" alt="Servicing">
+        <p>Mobile Servicing</p>
+      </div>
+      <div class="card" onclick="go('coming-soon.html')">
+        <img src="assets/coming.jpg" alt="Coming Soon">
+        <p>Coming Soon</p>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- 🔹 Footer -->
   <footer class="footer">
     <p>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</p>
+    <p>Email: <a href="mailto:srbdtopup@gmail.com">srbdtopup@gmail.com</a></p>
   </footer>
 
-  <!-- Bottom Navigation -->
+  <!-- 🔹 Bottom Navigation -->
   <nav class="bottom-nav">
-    <div onclick="go('index.html')">🏠<br>Home</div>
-    <div onclick="go('add-money.html')">💰<br>Add Money</div>
-    <div onclick="go('order.html')">📦<br>My Orders</div>
-    <div onclick="go('dashboard.html')">👤<br>My Account</div>
+    <a href="index.html" class="active">
+      🏠 <span>Home</span>
+    </a>
+    <a href="add-money.html">
+      💰 <span>Add Money</span>
+    </a>
+    <a href="order.html">
+      📦 <span>My Orders</span>
+    </a>
+    <a href="dashboard.html">
+      👤 <span>Account</span>
+    </a>
   </nav>
 
-  <script type="module" src="app.js"></script>
+  <!-- JS -->
+  <script>
+    function go(page){ window.location.href = page; }
+  </script>
+
 </body>
 </html>
