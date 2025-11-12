@@ -172,6 +172,16 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
+// ✅ CHECK LOGIN (if not logged in, redirect)
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+onAuthStateChanged(auth, (user) => {
+  const path = window.location.pathname;
+  const protectedPages = ["dashboard.html", "add-money.html", "order.html"];
+  if (!user && protectedPages.some(p => path.includes(p))) {
+    window.location.href = "login.html";
+  }
+});
+
 // ✅ ADMIN — APPROVE WALLET
 window.approveWallet = async function (docId, uid, amount) {
   const walletRef = doc(db, "wallets", uid);
