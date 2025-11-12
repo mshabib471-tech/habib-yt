@@ -1,80 +1,29 @@
-<!-- dashboard.html -->
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Dashboard | Habib YT</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account — Habib YT</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar container">
-    <div class="logo-wrap">
-      <img src="assets/logo.png" alt="logo">
-      <div>
-        <div class="site-title">Habib YT</div>
-        <div class="site-sub">আপনার বিশ্বস্ত সহযোগী</div>
-      </div>
-    </div>
-    <div>
-      <button id="logoutBtn" class="login-btn">Logout</button>
-    </div>
-  </header>
 
-  <div class="container">
-    <div id="userBox" class="card-small">
-      <h3 id="userEmail">—</h3>
-      <p class="small">Balance: <strong id="balance">0</strong>৳</p>
-    </div>
+<header class="topbar">
+  <h1>👤 My Account</h1>
+  <button onclick="logout()">Logout</button>
+</header>
 
-    <section style="margin-top:12px;">
-      <h3 class="center">My Orders</h3>
-      <div id="ordersList"></div>
-    </section>
-  </div>
+<section class="dash-info">
+  <h2>Welcome, <span id="userEmail">Loading...</span></h2>
+  <p>Wallet Balance: <strong id="walletBalance">0 BDT</strong></p>
+</section>
 
-  <nav class="bottom-nav">
-    <div onclick="go('index.html')"><span>🏠</span>Home</div>
-    <div onclick="go('add-money.html')"><span>➕</span>Add Money</div>
-    <div onclick="go('order.html')"><span>📦</span>My Orders</div>
-    <div onclick="go('dashboard.html')"><span>👤</span>My Account</div>
-  </nav>
+<section class="orders">
+  <h3>Recent Orders</h3>
+  <div id="orderList">Loading...</div>
+</section>
 
-  <script type="module">
-    import { auth, db, ensureUserDoc, requireAuth } from './app.js';
-    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-    import { doc, getDoc, query, where, collection, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-
-    const userEmailEl = document.getElementById('userEmail');
-    const balanceEl = document.getElementById('balance');
-    const ordersList = document.getElementById('ordersList');
-    const logoutBtn = document.getElementById('logoutBtn');
-
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) { window.location.href = 'login.html'; return; }
-      await ensureUserDoc(user);
-      userEmailEl.textContent = user.email;
-      // load balance
-      const uref = doc(db, "users", user.email);
-      const udoc = await getDoc(uref);
-      if (udoc.exists()) balanceEl.textContent = udoc.data().balance || 0;
-
-      // load orders
-      const q = query(collection(db, "orders"), where("userEmail", "==", user.email));
-      const snapshot = await getDocs(q);
-      ordersList.innerHTML = '';
-      snapshot.forEach(d => {
-        const o = d.data();
-        const div = document.createElement('div');
-        div.className = 'list-item';
-        div.innerHTML = `<b>${o.product}</b> — ৳${o.amount} <br> Status: <span class="badge ${o.status}">${o.status}</span> <br> ${o.details ? o.details : ''}`;
-        ordersList.appendChild(div);
-      });
-    });
-
-    logoutBtn.addEventListener('click', () => {
-      signOut(auth).then(()=> location.href='index.html');
-    });
-  </script>
+<footer class="footer">© 2025 Habib YT</footer>
+<script type="module" src="app.js"></script>
 </body>
 </html>
