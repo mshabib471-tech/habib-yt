@@ -3,97 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Habib YT — Admin Panel</title>
+  <title>Admin Panel — Habib YT</title>
   <link rel="stylesheet" href="style.css">
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background-color: #f6f9ff;
-      color: #222;
+      background: #f5f7fb;
       margin: 0;
-      padding: 0;
     }
+
     header {
-      background: linear-gradient(90deg, #0050ef, #0078ff);
-      color: #fff;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header img { height: 40px; border-radius: 50%; }
-    header h1 { font-size: 20px; margin: 0; }
-    header button {
-      background: #fff;
-      color: #0078ff;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    main {
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    h2 {
-      border-left: 4px solid #0078ff;
-      padding-left: 10px;
-      margin-top: 20px;
-      color: #0078ff;
-    }
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 15px;
-      margin-top: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .card p { margin: 6px 0; }
-    .btn {
-      padding: 6px 10px;
-      margin: 4px 4px 0 0;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .btn-approve { background: #00b050; color: #fff; }
-    .btn-reject { background: #f44336; color: #fff; }
-    .footer {
+      background: #007bff;
+      color: white;
       text-align: center;
-      padding: 10px;
-      margin-top: 30px;
-      font-size: 13px;
-      color: #555;
+      padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
-    @media (max-width:600px){
-      header h1{font-size:16px;}
-      main{padding:10px;}
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 25px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: #f8faff;
+      border: 1px solid #e1e5ff;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .card p { margin: 6px 0; color: #333; }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    button {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .approve {
+      background: #28a745;
+      color: white;
+    }
+    .approve:hover { background: #218838; }
+
+    .reject {
+      background: #dc3545;
+      color: white;
+    }
+    .reject:hover { background: #bb2d3b; }
+
+    footer {
+      text-align: center;
+      color: #666;
+      margin-top: 30px;
+      font-size: 14px;
+    }
+
+    .notice {
+      background: #fff3cd;
+      border-left: 5px solid #ffca2c;
+      padding: 12px;
+      margin-bottom: 25px;
+      border-radius: 6px;
+      color: #856404;
     }
   </style>
 </head>
+
 <body>
+  <header>🛠 Habib YT Admin Panel</header>
 
-<header>
-  <div style="display:flex;align-items:center;gap:10px;">
-    <img src="assets/logo.png" alt="Habib YT">
-    <h1>Habib YT — Admin Panel</h1>
+  <div class="container">
+    <div class="notice">
+      ⚠ শুধুমাত্র অনুমোদিত এডমিন (<b>mshabib471@gmail.com</b>) এই প্যানেল ব্যবহার করতে পারবেন।
+    </div>
+
+    <h2>💰 Pending Wallet Requests</h2>
+    <div id="pendingMoney">Loading...</div>
+
+    <h2>📦 Pending Orders</h2>
+    <div id="pendingOrders">Loading...</div>
   </div>
-  <button onclick="logout()">Logout</button>
-</header>
 
-<main>
-  <h2>💰 Pending Add Money Requests</h2>
-  <div id="pendingMoney">Loading...</div>
+  <footer>© 2025 Habib YT — Admin Dashboard</footer>
 
-  <h2>📦 Pending Orders</h2>
-  <div id="pendingOrders">Loading...</div>
-</main>
-
-<div class="footer">© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</div>
-
-<script type="module" src="app.js"></script>
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
