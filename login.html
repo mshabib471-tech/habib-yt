@@ -1,32 +1,60 @@
+<!-- login.html -->
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Login | Habib YT</title>
-<style>
-body{font-family:'Poppins',sans-serif;background:#eef3ff;display:flex;justify-content:center;align-items:center;height:100vh;}
-.box{background:white;border-radius:12px;padding:30px;width:320px;box-shadow:0 3px 8px rgba(0,0,0,0.1);}
-input{width:100%;padding:10px;margin:6px 0;border:1px solid #ccc;border-radius:6px;}
-button{width:100%;padding:10px;margin-top:8px;border:none;border-radius:6px;background:#007bff;color:white;font-size:15px;}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login | Habib YT</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-<div class="box">
-<h2>Login To Habib YT</h2>
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="password" placeholder="Password">
-<button id="loginBtn">Sign In</button>
-<hr>
-<button id="googleBtn" style="background:#ea4335;">Sign in with Google</button>
-</div>
+<body style="background:#eef4ff;">
+  <div style="max-width:420px;margin:40px auto;padding:20px;">
+    <div class="card-small center">
+      <h2>Login to Habib YT</h2>
+      <p class="small">Email বা Google দিয়ে লগইন করুন</p>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-const firebaseConfig={apiKey:"AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",authDomain:"habib-yt.firebaseapp.com",projectId:"habib-yt"};
-const app=initializeApp(firebaseConfig);const auth=getAuth(app);
-document.getElementById("loginBtn").onclick=()=>{signInWithEmailAndPassword(auth,email.value,password.value).then(()=>location.href="dashboard.html").catch(e=>alert(e.message))};
-document.getElementById("googleBtn").onclick=()=>{signInWithPopup(auth,new GoogleAuthProvider()).then(()=>location.href="dashboard.html").catch(e=>alert(e.message))};
-</script>
+      <input id="email" type="email" placeholder="Email" />
+      <input id="password" type="password" placeholder="Password" />
+      <button id="loginBtn" class="btn">Sign in</button>
+
+      <div style="margin-top:10px;text-align:center;">
+        <button id="googleBtn" class="btn btn-ghost">Sign in with Google</button>
+      </div>
+
+      <p id="msg" class="small" style="margin-top:10px;color:#c00;"></p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { auth, provider, ensureUserDoc, go } from './app.js';
+    import { signInWithEmailAndPassword, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const msg = document.getElementById('msg');
+
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+      try {
+        await signInWithEmailAndPassword(auth, email.value, password.value);
+        onAuthStateChanged(auth, async (u) => {
+          if (u) { await ensureUserDoc(u); window.location.href = 'dashboard.html'; }
+        });
+      } catch (e) {
+        msg.textContent = e.message;
+      }
+    });
+
+    document.getElementById('googleBtn').addEventListener('click', async () => {
+      try {
+        await signInWithPopup(auth, provider);
+        onAuthStateChanged(auth, async (u) => {
+          if (u) { await ensureUserDoc(u); window.location.href = 'dashboard.html'; }
+        });
+      } catch (e) {
+        msg.textContent = e.message;
+      }
+    });
+  </script>
 </body>
 </html>
