@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Like & Follower Service | Habib YT</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f4f7fb;
+      color: #222;
+      margin: 0;
+      padding-bottom: 70px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #007bff;
+      color: white;
+      padding: 12px 18px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    header img {
+      height: 40px;
+      border-radius: 50%;
+    }
+    h2 {
+      text-align: center;
+      color: #007bff;
+      margin: 18px 0;
+    }
+
+    /* Service Section */
+    .service-section {
+      background: white;
+      border-radius: 12px;
+      margin: 12px auto;
+      width: 90%;
+      max-width: 800px;
+      padding: 15px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .service-section h3 {
+      text-align: center;
+      color: #007bff;
+    }
+    .package-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .package {
+      background: #fff;
+      border-radius: 10px;
+      text-align: center;
+      padding: 10px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .package:hover {
+      transform: scale(1.03);
+    }
+    .package.selected {
+      border-color: #007bff;
+      background: #e8f1ff;
+    }
+    .package h4 {
+      margin: 5px 0;
+      font-size: 15px;
+    }
+    .package p {
+      color: #007bff;
+      font-weight: bold;
+      margin: 4px 0;
+    }
+
+    .input-box {
+      background: white;
+      margin: 18px auto;
+      width: 90%;
+      max-width: 400px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    button.order {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      width: 100%;
+    }
+    button.order:hover {
+      background: #0056d4;
+    }
+    footer {
+      text-align: center;
+      background: #007bff;
+      color: white;
+      padding: 10px;
+      margin-top: 25px;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+    .bottom-nav button {
+      background: none;
+      border: none;
+      color: #007bff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="assets/like.jpg" alt="Habib YT Logo" />
+    <h3>Habib YT</h3>
+    <button onclick="window.location.href='index.html'"
+      style="background:white;color:#007bff;padding:6px 10px;border:none;border-radius:8px;font-weight:600;">
+      Home
+    </button>
+  </header>
+
+  <h2>📱 Social Media Likes & Followers</h2>
+
+  <!-- Facebook -->
+  <div class="service-section">
+    <h3>📘 Facebook Services</h3>
+    <div class="package-list" id="facebookList"></div>
+  </div>
+
+  <!-- Instagram -->
+  <div class="service-section">
+    <h3>📸 Instagram Services</h3>
+    <div class="package-list" id="instagramList"></div>
+  </div>
+
+  <!-- TikTok -->
+  <div class="service-section">
+    <h3>🎵 TikTok Services</h3>
+    <div class="package-list" id="tiktokList"></div>
+  </div>
+
+  <!-- Order Input -->
+  <div class="input-box">
+    <h4>🔗 আপনার পোস্ট / প্রোফাইল লিংক দিন:</h4>
+    <input type="url" id="linkInput" placeholder="https://example.com/..." />
+
+    <h4>📦 পরিমাণ (সর্বনিম্ন 200)</h4>
+    <input type="number" id="qtyInput" placeholder="যেমন: 500" min="200" />
+
+    <button class="order" onclick="placeSocialOrder()">Order Now</button>
+  </div>
+
+  <footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
+
+  <div class="bottom-nav">
+    <button onclick="window.location.href='index.html'">🏠 Home</button>
+    <button onclick="window.location.href='dashboard.html'">💼 Dashboard</button>
+    <button onclick="window.location.href='add-money.html'">💰 Add Money</button>
+    <button onclick="window.location.href='login.html'">🔐 Login</button>
+  </div>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module">
+    import { auth, db } from "./firebase.js";
+    import { addDoc, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+    const facebookServices = [
+      { name: "Facebook Profile Follower", price: 80 },
+      { name: "Facebook Page Like", price: 100 },
+      { name: "Facebook Post Like", price: 90 },
+      { name: "Facebook Reel View", price: 60 },
+      { name: "Facebook Long Video View", price: 55 },
+    ];
+
+    const instagramServices = [
+      { name: "Instagram Follower", price: 110 },
+      { name: "Instagram Post Like", price: 95 },
+      { name: "Instagram Reel View", price: 75 },
+    ];
+
+    const tiktokServices = [
+      { name: "TikTok Follower", price: 100 },
+      { name: "TikTok Video Like", price: 80 },
+      { name: "TikTok Video View", price: 60 },
+    ];
+
+    const fbList = document.getElementById("facebookList");
+    const igList = document.getElementById("instagramList");
+    const tkList = document.getElementById("tiktokList");
+    let selected = null;
+
+    function render(list, data) {
+      data.forEach((p, i) => {
+        const div = document.createElement("div");
+        div.className = "package";
+        div.innerHTML = `<h4>${p.name}</h4><p>${p.price} TK / 1K</p>`;
+        div.onclick = () => selectPackage(p, div);
+        list.appendChild(div);
+      });
+    }
+
+    function selectPackage(service, div) {
+      document.querySelectorAll(".package").forEach((el) => el.classList.remove("selected"));
+      div.classList.add("selected");
+      selected = service;
+    }
+
+    render(fbList, facebookServices);
+    render(igList, instagramServices);
+    render(tkList, tiktokServices);
+
+    // ✅ Place Order
+    window.placeSocialOrder = async function () {
+      const link = document.getElementById("linkInput").value.trim();
+      const qty = parseInt(document.getElementById("qtyInput").value);
+      if (!selected) return alert("⚠️ প্রথমে একটি সার্ভিস সিলেক্ট করুন!");
+      if (!link) return alert("⚠️ লিংক দিন!");
+      if (!qty || qty < 200) return alert("⚠️ সর্বনিম্ন ২০০ দিতে হবে!");
+
+      const user = auth.currentUser;
+      if (!user) return alert("Please login first!");
+
+      const totalPrice = Math.ceil((qty / 1000) * selected.price);
+
+      await addDoc(collection(db, "orders"), {
+        user: user.uid,
+        email: user.email,
+        product: selected.name,
+        link,
+        quantity: qty,
+        totalPrice,
+        status: "pending",
+        created: new Date(),
+      });
+
+      alert(`✅ অর্ডার সম্পন্ন হয়েছে: ${selected.name} (${qty} Qty | ${totalPrice} TK)`);
+      document.getElementById("linkInput").value = "";
+      document.getElementById("qtyInput").value = "";
+      document.querySelectorAll(".package").forEach((el) => el.classList.remove("selected"));
+      selected = null;
+    };
+  </script>
+</body>
+</html>
