@@ -3,149 +3,111 @@
 **********************************************/
 
 // Firebase Import
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged,
+import { app } from "./firebase.js";
+import { 
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
+  GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged 
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  getDoc,
-  collection,
-  addDoc,
-  getDocs,
-  updateDoc,
+import { 
+  getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, updateDoc 
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-// তোমার Firebase Config
-const firebaseConfig = {
-  apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
-  authDomain: "habib-yt.firebaseapp.com",
-  projectId: "habib-yt",
-  storageBucket: "habib-yt.firebasestorage.app",
-  messagingSenderId: "656628491244",
-  appId: "1:656628491244:web:e01ccd42bd8a2b1b4c96c9",
-  measurementId: "G-GNY1T88D34",
-};
+// Initialize
+const auth = getAuth(app);
+const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-
-// ✅ REGISTER USER
-window.registerUser = async function () {
+/* ===============================
+   ✅ REGISTER (Signup)
+================================ */
+window.registerUser = async function() {
   const email = document.getElementById("signupEmail").value;
   const password = document.getElementById("signupPassword").value;
 
-  if (!email || !password) return alert("সব ঘর পূরণ করুন!");
-
+  if (!email || !password) return alert("⚠️ সব ঘর পূরণ করুন!");
   try {
     await createUserWithEmailAndPassword(auth, email, password);
     alert("✅ একাউন্ট তৈরি হয়েছে!");
     window.location.href = "dashboard.html";
   } catch (err) {
-    alert("⚠ " + err.message);
+    alert("❌ " + err.message);
   }
 };
 
-// ✅ LOGIN USER
-window.loginUser = async function () {
+/* ===============================
+   ✅ LOGIN (Email + Password)
+================================ */
+window.loginUser = async function() {
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
-
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    alert("✅ লগইন সফল!");
     window.location.href = "dashboard.html";
   } catch (err) {
-    alert("⚠ লগইন ব্যর্থ: " + err.message);
+    alert("❌ লগইন ব্যর্থ: " + err.message);
   }
 };
 
-// ✅ GOOGLE LOGIN
-const provider = new GoogleAuthProvider();
-window.googleLogin = async function () {
+/* ===============================
+   ✅ GOOGLE LOGIN
+================================ */
+window.googleLogin = async function() {
   try {
     await signInWithPopup(auth, provider);
+    alert("✅ Google Login Successful!");
     window.location.href = "dashboard.html";
   } catch (err) {
-    alert(err.message);
+    alert("❌ Google Login Failed: " + err.message);
   }
 };
 
-// ✅ LOGOUT
-window.logout = async function () {
+/* ===============================
+   ✅ LOGOUT
+================================ */
+window.logout = async function() {
   await signOut(auth);
+  alert("👋 Logged out successfully!");
   window.location.href = "login.html";
 };
 
-// ✅ AUTO REDIRECT CHECK (Login Required)
-onAuthStateChanged(auth, (user) => {
-  const path = window.location.pathname;
-  const protectedPages = [
-    "dashboard.html",
-    "add-money.html",
-    "order.html",
-    "admin.html",
-  ];
-  if (!user && protectedPages.some((p) => path.includes(p))) {
-    window.location.href = "login.html";
-  }
-});
-
-// ✅ LOAD DASHBOARD INFO
+/* ===============================
+   ✅ DASHBOARD INFO LOAD
+================================ */
 onAuthStateChanged(auth, async (user) => {
-  if (!user) return;
+  if (!user) {
+    if (window.location.pathname.includes("dashboard")) {
+      window.location.href = "login.html";
+    }
+    return;
+  }
 
   const emailField = document.getElementById("userEmail");
   const balanceField = document.getElementById("walletBalance");
 
   if (emailField) emailField.textContent = user.email;
 
+  // Load wallet balance
   const walletDoc = await getDoc(doc(db, "wallets", user.uid));
   if (walletDoc.exists() && balanceField) {
     balanceField.textContent = walletDoc.data().balance + " BDT";
   } else if (balanceField) {
     balanceField.textContent = "0 BDT";
   }
-
-  // Show user orders if available
-  const ordersDiv = document.getElementById("recentOrders");
-  if (ordersDiv) {
-    const snapshot = await getDocs(collection(db, "orders"));
-    let html = "";
-    snapshot.forEach((docSnap) => {
-      const d = docSnap.data();
-      if (d.user === user.uid) {
-        html += `
-          <div style="background:#f8f9ff; padding:10px; margin-bottom:8px; border-radius:8px;">
-            <b>${d.product}</b> — ${d.amount} BDT<br>
-            Status: ${d.status}
-          </div>`;
-      }
-    });
-    ordersDiv.innerHTML = html || "আপনার কোনো অর্ডার নেই।";
-  }
 });
 
-// ✅ ADD MONEY (Firebase Add)
-window.submitAddMoney = async function () {
+/* ===============================
+   ✅ ADD MONEY REQUEST
+================================ */
+window.submitAddMoney = async function() {
   const user = auth.currentUser;
-  if (!user) return alert("⚠ লগইন করুন প্রথমে!");
+  if (!user) return alert("⚠️ লগইন করুন প্রথমে!");
 
   const amount = document.getElementById("amount").value;
-  const method = document.getElementById("method").value;
+  const method = "bKash"; // Only bKash now
   const trxid = document.getElementById("trxid").value;
 
-  if (!amount || !trxid) return alert("সব ঘর পূরণ করুন!");
+  if (!amount || !trxid) return alert("⚠️ সব ঘর পূরণ করুন!");
 
   await addDoc(collection(db, "walletRequests"), {
     user: user.uid,
@@ -154,18 +116,20 @@ window.submitAddMoney = async function () {
     method,
     trxid,
     status: "pending",
-    created: new Date(),
+    created: new Date()
   });
 
   alert("✅ Add Money Request Submitted!");
   window.location.href = "dashboard.html";
 };
 
-// ✅ ADMIN PANEL LOAD
+/* ===============================
+   ✅ ADMIN PANEL LOAD
+================================ */
 onAuthStateChanged(auth, async (user) => {
   if (!user) return;
 
-  // শুধুমাত্র Admin মেইল
+  // শুধুমাত্র এডমিন মেইল
   if (user.email !== "mshabib471@gmail.com") return;
 
   const moneyDiv = document.getElementById("pendingMoney");
@@ -174,30 +138,29 @@ onAuthStateChanged(auth, async (user) => {
   if (moneyDiv) {
     const snapshot = await getDocs(collection(db, "walletRequests"));
     let html = "";
-    snapshot.forEach((docSnap) => {
+    snapshot.forEach(docSnap => {
       const d = docSnap.data();
       if (d.status === "pending") {
         html += `
-          <div class="card">
+          <div style="border:1px solid #ddd; border-radius:8px; padding:10px; margin:10px;">
             <p><b>${d.email}</b> — ${d.amount} BDT (${d.method})</p>
             <p>TrxID: ${d.trxid}</p>
-            <div class="btn-group">
-              <button class="approve" onclick="approveWallet('${docSnap.id}','${d.user}',${d.amount})">Approve</button>
-              <button class="reject" onclick="rejectWallet('${docSnap.id}')">Reject</button>
-            </div>
-          </div>`;
+            <button onclick="approveWallet('${docSnap.id}','${d.user}',${d.amount})" style="background:#28a745;color:white;border:none;padding:5px 10px;border-radius:5px;">Approve</button>
+            <button onclick="rejectWallet('${docSnap.id}')" style="background:#dc3545;color:white;border:none;padding:5px 10px;border-radius:5px;">Reject</button>
+          </div>
+        `;
       }
     });
     moneyDiv.innerHTML = html || "✅ No Pending Requests.";
   }
 
-  if (orderDiv) {
-    orderDiv.innerHTML = "🕓 Order Management coming soon...";
-  }
+  if (orderDiv) orderDiv.innerHTML = "🕓 Order Management coming soon...";
 });
 
-// ✅ ADMIN — APPROVE WALLET
-window.approveWallet = async function (docId, uid, amount) {
+/* ===============================
+   ✅ ADMIN — APPROVE WALLET
+================================ */
+window.approveWallet = async function(docId, uid, amount) {
   const walletRef = doc(db, "wallets", uid);
   const walletDoc = await getDoc(walletRef);
   let newBalance = amount;
@@ -206,64 +169,15 @@ window.approveWallet = async function (docId, uid, amount) {
   }
   await setDoc(walletRef, { balance: newBalance });
   await updateDoc(doc(db, "walletRequests", docId), { status: "approved" });
-  alert("✅ Wallet Updated!");
+  alert("✅ Wallet Approved & Updated");
   window.location.reload();
 };
 
-// ✅ ADMIN — REJECT WALLET
-window.rejectWallet = async function (docId) {
+/* ===============================
+   ✅ ADMIN — REJECT WALLET
+================================ */
+window.rejectWallet = async function(docId) {
   await updateDoc(doc(db, "walletRequests", docId), { status: "rejected" });
   alert("❌ Request Rejected");
   window.location.reload();
-};
-
-/***************************************************
- 🔥 Habib YT | Firebase Test App.js
-****************************************************/
-
-// Firebase Config Import
-import { app, auth, db, provider } from "./firebase.js";
-
-// Firebase Functions Import
-import { signInWithPopup } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-
-/**
- * ✅ Firebase Connection Test
- * Checks whether Firestore is connected properly.
- */
-document.getElementById("check").addEventListener("click", async () => {
-  const output = document.getElementById("output");
-  output.textContent = "⏳ Checking Firebase connection...";
-  
-  try {
-    // Just test by reading 'wallets' collection
-    const testSnapshot = await getDocs(collection(db, "wallets"));
-    output.textContent =
-      "✅ Firebase Connected Successfully!\n\n" +
-      `Found ${testSnapshot.size} wallet documents in database.`;
-  } catch (err) {
-    output.textContent =
-      "❌ Firebase connection failed.\n\nError: " + err.message;
-  }
-});
-
-/**
- * ✅ Google Login Test
- * Opens Google Sign-In popup and displays user info.
- */
-window.googleLogin = async function () {
-  const output = document.getElementById("output");
-  output.textContent = "⏳ Opening Google Login...";
-  
-  try {
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
-
-    output.textContent =
-      "✅ Google Login Successful!\n\n" +
-      `👤 Name: ${user.displayName}\n📧 Email: ${user.email}\n🆔 UID: ${user.uid}`;
-  } catch (err) {
-    output.textContent = "❌ Google Login Failed:\n" + err.message;
-  }
 };
