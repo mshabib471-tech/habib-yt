@@ -3,81 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>লগইন করুন | Habib YT</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Habib YT | Login</title>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #007bff, #ffffff);
-      margin: 0; padding: 0;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
+      color: white;
     }
     .login-box {
-      background: #fff;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      width: 90%; max-width: 380px;
+      background: white;
+      color: #333;
+      padding: 25px 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 380px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
       text-align: center;
     }
-    .login-box img {
-      width: 60px; margin-bottom: 10px;
-    }
-    h2 { color: #007bff; margin-bottom: 10px; }
+    .login-box h2 { margin-bottom: 20px; color: #007bff; }
     input {
-      width: 100%;
-      padding: 10px; margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      width: 100%; padding: 12px; margin: 8px 0;
+      border: 1px solid #ccc; border-radius: 8px;
     }
     button {
-      background: #007bff;
-      color: white; border: none;
-      width: 100%; padding: 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
+      width: 100%; padding: 12px; margin: 10px 0;
+      background: #007bff; color: white; border: none;
+      border-radius: 8px; font-weight: bold; cursor: pointer;
     }
     button:hover { background: #0056d4; }
     .google-btn {
-      background: #db4437; margin-top: 10px;
+      background: #db4437;
     }
-    .google-btn:hover { background: #c23321; }
-    a {
-      color: #007bff; text-decoration: none; font-weight: bold;
-    }
-    footer {
-      position: fixed; bottom: 10px;
-      text-align: center; font-size: 14px;
-      color: #555;
-    }
-    .back-btn {
-      position: absolute; top: 20px; left: 20px;
-      background: #007bff; color: white;
-      border: none; padding: 8px 14px;
-      border-radius: 8px; cursor: pointer;
-    }
+    a { color: #007bff; text-decoration: none; font-weight: bold; }
   </style>
 </head>
 <body>
-  <button class="back-btn" onclick="window.location.href='index.html'">← Back</button>
+
   <div class="login-box">
-    <img src="assets/logo.png" alt="Habib YT">
     <h2>🔐 লগইন করুন</h2>
+    <input id="loginEmail" type="email" placeholder="ইমেইল দিন">
+    <input id="loginPassword" type="password" placeholder="পাসওয়ার্ড দিন">
+    <button onclick="loginUser()">লগইন</button>
+    <button class="google-btn" onclick="googleLogin()">Google দিয়ে লগইন</button>
 
-    <input type="email" id="loginEmail" placeholder="Email" required>
-    <input type="password" id="loginPassword" placeholder="Password" required>
-
-    <button onclick="loginUser()">Login</button>
-    <button class="google-btn" onclick="googleLogin()">🔸 Google Login</button>
-
-    <p>নতুন একাউন্ট নেই? <a href="signup.html">Sign Up</a></p>
+    <p>একাউন্ট নেই? <a href="#" onclick="document.getElementById('signup').style.display='block'">রেজিস্টার করুন</a></p>
   </div>
 
-  <footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
+  <!-- রেজিস্টার -->
+  <div id="signup" class="login-box" style="display:none; position:absolute; top:10%;">
+    <h2>📝 রেজিস্টার করুন</h2>
+    <input id="signupEmail" type="email" placeholder="ইমেইল দিন">
+    <input id="signupPassword" type="password" placeholder="পাসওয়ার্ড দিন">
+    <button onclick="registerUser()">রেজিস্টার</button>
+    <button onclick="document.getElementById('signup').style.display='none'">লগইনে ফিরে যান</button>
+  </div>
+
   <script type="module" src="firebase.js"></script>
-<script type="module" src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
