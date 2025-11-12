@@ -1,0 +1,2 @@
+<script type="module" src="firebase.js"></script>
+<script type="module" src="app.js"></script>
