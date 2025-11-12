@@ -1,125 +1,96 @@
+<!-- admin.html -->
 <!DOCTYPE html>
 <html lang="bn">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Admin | Habib YT</title>
-<style>
-body{font-family:'Poppins',sans-serif;background:#f4f6fa;padding:20px;}
-h2{margin-top:30px;}
-.card{background:white;border-radius:8px;padding:15px;margin:10px 0;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-button{border:none;border-radius:5px;padding:6px 12px;color:#fff;margin:4px;}
-.approve{background:#28a745;}
-.reject{background:#dc3545;}
-</style>
+<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Admin Panel | Habib YT</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<h1>👑 Admin Panel</h1>
-<h2>Pending Transactions</h2>
-<div id="transactions"></div>
-<h2>Pending Orders</h2>
-<div id="orders"></div>
+<header class="topbar container"><div class="logo-wrap"><img src="assets/logo.png" alt=""><div><div class="site-title">Admin</div><div class="site-sub">Habib YT</div></div></div></header>
+
+<div class="container">
+  <h3>Pending Transactions</h3>
+  <div id="txList"></div>
+
+  <h3 style="margin-top:14px;">Pending Orders</h3>
+  <div id="ordersList"></div>
+</div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import { getFirestore, collection, query, where, getDocs, doc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+  import { auth, db, ADMIN_EMAIL } from './app.js';
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+  import { collection, query, where, getDocs, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
-  authDomain: "habib-yt.firebaseapp.com",
-  projectId: "habib-yt",
-  storageBucket: "habib-yt.firebasestorage.app",
-  messagingSenderId: "656628491244",
-  appId: "1:656628491244:web:e01ccd42bd8a2b1b4c96c9"
-};
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) { alert('Login as Admin'); window.location.href='login.html'; return; }
+    if (user.email !== ADMIN_EMAIL) { alert('Unauthorized'); window.location.href='index.html'; return; }
+    await loadPendingTx();
+    await loadPendingOrders();
+  });
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-
-const ADMIN_EMAIL = "mshabib471@gmail.com";
-
-onAuthStateChanged(auth, (user) => {
-  if (!user || user.email !== ADMIN_EMAIL) {
-    alert("Unauthorized!");
-    window.location.href = "login.html";
-    return;
+  async function loadPendingTx(){
+    const q = query(collection(db,'transactions'), where('status','==','pending'));
+    const snap = await getDocs(q);
+    const el = document.getElementById('txList'); el.innerHTML='';
+    snap.forEach(s => {
+      const d = s.data();
+      const div = document.createElement('div'); div.className='list-item';
+      div.innerHTML = `<b>${d.userEmail}</b> — ৳${d.amount} — ${d.method} <br> TrxID: <code>${d.trxId}</code>
+      <div style="margin-top:8px;">
+        <button onclick="approveTx('${s.id}', ${d.amount}, '${d.userEmail}')" class="btn">Approve</button>
+        <button onclick="rejectTx('${s.id}')" class="btn btn-ghost">Reject</button>
+      </div>`;
+      el.appendChild(div);
+    });
   }
-  loadTransactions();
-  loadOrders();
-});
 
-async function loadTransactions() {
-  const q = query(collection(db, "transactions"), where("status", "==", "pending"));
-  const snap = await getDocs(q);
-  const container = document.getElementById("transactions");
-  container.innerHTML = "";
-  snap.forEach((d) => {
-    const t = d.data();
-    const div = document.createElement("div");
-    div.className = "card";
-    div.innerHTML = `
-      <b>${t.userEmail}</b><br>
-      ${t.amount}৳ (${t.method})<br>
-      TxID: ${t.trxId}<br>
-      <button class="approve" onclick="approveTransaction('${d.id}',${t.amount},'${t.userEmail}')">Approve</button>
-      <button class="reject" onclick="rejectTransaction('${d.id}')">Reject</button>
-    `;
-    container.appendChild(div);
-  });
-}
+  window.approveTx = async (id, amt, email) => {
+    // update users balance and tx status
+    const txRef = doc(db,'transactions',id);
+    const userRef = doc(db,'users',email);
+    const userSnap = await getDoc(userRef);
+    const prev = userSnap.exists() ? (userSnap.data().balance || 0) : 0;
+    await updateDoc(userRef, { balance: prev + amt });
+    await updateDoc(txRef, { status: 'approved', approvedAt: new Date() });
+    alert('Approved & balance updated');
+    loadPendingTx();
+  };
 
-window.approveTransaction = async (id, amount, email) => {
-  const txRef = doc(db, "transactions", id);
-  const userRef = doc(db, "users", email);
-  const u = await getDoc(userRef);
-  const bal = (u.exists() ? (u.data().balance || 0) : 0) + amount;
-  await updateDoc(userRef, { balance: bal });
-  await updateDoc(txRef, { status: "approved" });
-  alert("Transaction Approved ✅");
-  loadTransactions();
-};
+  window.rejectTx = async (id) => {
+    const txRef = doc(db,'transactions',id);
+    await updateDoc(txRef, { status: 'rejected', rejectedAt: new Date() });
+    alert('Rejected');
+    loadPendingTx();
+  };
 
-window.rejectTransaction = async (id) => {
-  const txRef = doc(db, "transactions", id);
-  await updateDoc(txRef, { status: "rejected" });
-  alert("Rejected ❌");
-  loadTransactions();
-};
+  async function loadPendingOrders(){
+    const q = query(collection(db,'orders'), where('status','==','pending'));
+    const snap = await getDocs(q);
+    const el = document.getElementById('ordersList'); el.innerHTML='';
+    snap.forEach(s => {
+      const d = s.data();
+      const div = document.createElement('div'); div.className='list-item';
+      div.innerHTML = `<b>${d.userEmail}</b> — ${d.product} — ৳${d.amount} <br> ${d.details || ''} 
+      <div style="margin-top:8px;">
+        <button onclick="completeOrder('${s.id}')" class="btn">Complete</button>
+        <button onclick="cancelOrder('${s.id}')" class="btn btn-ghost">Cancel</button>
+      </div>`;
+      el.appendChild(div);
+    });
+  }
 
-async function loadOrders() {
-  const q = query(collection(db, "orders"), where("status", "==", "pending"));
-  const snap = await getDocs(q);
-  const container = document.getElementById("orders");
-  container.innerHTML = "";
-  snap.forEach((d) => {
-    const o = d.data();
-    const div = document.createElement("div");
-    div.className = "card";
-    div.innerHTML = `
-      <b>${o.userEmail}</b><br>
-      📦 ${o.product} | ৳${o.amount}<br>
-      <button class="approve" onclick="completeOrder('${d.id}')">Complete</button>
-      <button class="reject" onclick="rejectOrder('${d.id}')">Cancel</button>
-    `;
-    container.appendChild(div);
-  });
-}
-
-window.completeOrder = async (id) => {
-  const ref = doc(db, "orders", id);
-  await updateDoc(ref, { status: "completed" });
-  alert("✅ Order Completed!");
-  loadOrders();
-};
-
-window.rejectOrder = async (id) => {
-  const ref = doc(db, "orders", id);
-  await updateDoc(ref, { status: "cancelled" });
-  alert("❌ Order Cancelled!");
-  loadOrders();
-};
+  window.completeOrder = async (id) => {
+    const r = doc(db,'orders',id);
+    await updateDoc(r, { status: 'completed', completedAt: new Date() });
+    alert('Order completed');
+    loadPendingOrders();
+  };
+  window.cancelOrder = async (id) => {
+    const r = doc(db,'orders',id);
+    await updateDoc(r, { status: 'cancelled', cancelledAt: new Date() });
+    alert('Order cancelled');
+    loadPendingOrders();
+  };
 </script>
 </body>
 </html>
