@@ -1,61 +1,92 @@
-<!-- like-follower.html -->
 <!DOCTYPE html>
 <html lang="bn">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Like & Follower | Habib YT</title><link rel="stylesheet" href="style.css"></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Like & Follower | Habib YT</title>
+  <style>
+    body { font-family:"Poppins",sans-serif; margin:0; background:#f4f7fb; color:#333; }
+    header {
+      display:flex; align-items:center; justify-content:space-between;
+      background:#007bff; color:white; padding:12px 18px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    }
+    header img { height:42px; width:42px; border-radius:50%; }
+    nav button {
+      background:white; color:#007bff; border:none; border-radius:8px;
+      padding:8px 12px; cursor:pointer; font-weight:600;
+    }
+    nav button:hover { background:#0056d4; color:white; }
+    .title { text-align:center; padding:20px; color:#007bff; }
+    .cards {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+      gap:15px; margin:20px;
+    }
+    .card {
+      background:white; border-radius:10px; padding:15px;
+      text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      cursor:pointer; transition:0.3s;
+    }
+    .card:hover { transform:translateY(-4px); }
+    .card img { width:100%; height:100px; border-radius:8px; object-fit:cover; }
+    .card h3 { color:#007bff; margin:8px 0 5px; }
+    .card button {
+      background:#007bff; color:white; border:none; padding:8px 12px; border-radius:8px;
+      cursor:pointer; margin-top:8px;
+    }
+    footer {
+      background:#007bff; color:white; text-align:center; padding:12px; margin-top:30px;
+    }
+    .bottom-nav {
+      position:fixed; bottom:0; left:0; width:100%; background:white;
+      border-top:1px solid #ccc; display:flex; justify-content:space-around; padding:10px 0;
+    }
+    .bottom-nav button {
+      background:none; border:none; color:#007bff; font-weight:bold; cursor:pointer;
+    }
+  </style>
+</head>
 <body>
-<header class="topbar container"><div class="logo-wrap"><img src="assets/logo.png" alt=""><div><div class="site-title">Like & Follower</div></div></div><div><button onclick="go('index.html')" class="login-btn">Back</button></div></header>
 
-<div class="container">
-  <h3 class="center">Social Services</h3>
-  <div class="options-grid">
-    <div class="option" data-name="FB Likes 1K" data-price="80">FB Likes 1K<br><span class="small">৳80</span></div>
-    <div class="option" data-name="IG Followers 1K" data-price="150">IG Followers 1K<br><span class="small">৳150</span></div>
-    <div class="option" data-name="YT Subs 1K" data-price="180">YT Subs 1K<br><span class="small">৳180</span></div>
-    <div class="option" data-name="TT Followers 1K" data-price="120">TT Followers 1K<br><span class="small">৳120</span></div>
+  <header>
+    <img src="assets/logo.png" alt="Habib YT Logo">
+    <h2>Habib YT</h2>
+    <nav><button onclick="window.location.href='index.html'">Home</button></nav>
+  </header>
+
+  <h2 class="title">📱 Like & Follower সার্ভিস</h2>
+
+  <section class="cards">
+    <div class="card">
+      <img src="assets/like.jpg" alt="500 Likes">
+      <h3>500 Likes</h3>
+      <p>৳ 80</p>
+      <button>Order Now</button>
+    </div>
+    <div class="card">
+      <img src="assets/like.jpg" alt="1000 Likes">
+      <h3>1000 Likes</h3>
+      <p>৳ 140</p>
+      <button>Order Now</button>
+    </div>
+    <div class="card">
+      <img src="assets/like.jpg" alt="500 Followers">
+      <h3>500 Followers</h3>
+      <p>৳ 100</p>
+      <button>Order Now</button>
+    </div>
+  </section>
+
+  <footer>
+    Habib YT — আপনার বিশ্বস্ত সহযোগী<br><small>© 2025 Habib YT</small>
+  </footer>
+
+  <div class="bottom-nav">
+    <button onclick="window.location.href='index.html'">🏠 Home</button>
+    <button onclick="window.location.href='dashboard.html'">💼 Dashboard</button>
+    <button onclick="window.location.href='login.html'">🔐 Login</button>
+    <button onclick="window.location.href='add-money.html'">💰 Add Money</button>
   </div>
 
-  <div class="card-small" style="margin-top:12px;">
-    <label class="small">Profile Link / Username</label>
-    <input id="profile" placeholder="link or username" />
-    <button id="orderBtn" class="btn">Order Now</button>
-  </div>
-</div>
-
-<nav class="bottom-nav">
-  <div onclick="go('index.html')">🏠</div>
-  <div onclick="go('add-money.html')">➕</div>
-  <div onclick="go('order.html')">📦</div>
-  <div onclick="go('dashboard.html')">👤</div>
-</nav>
-
-<script type="module">
-  import { auth, db, ensureUserDoc } from './app.js';
-  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-  import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-
-  let sel=null;
-  document.querySelectorAll('.option').forEach(o=>o.addEventListener('click', ()=>{document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));o.classList.add('selected');sel={name:o.dataset.name,price:parseFloat(o.dataset.price)};}));
-
-  document.getElementById('orderBtn').addEventListener('click', () => {
-    const profile = document.getElementById('profile').value.trim();
-    if (!sel) return alert('সার্ভিস সিলেক্ট করুন');
-    if (!profile) return alert('Profile/link দিন');
-
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) return alert('Login করুন');
-      await ensureUserDoc(user);
-      await addDoc(collection(db,'orders'), {
-        userEmail: user.email,
-        product: sel.name,
-        amount: sel.price,
-        details: profile,
-        status: 'pending',
-        createdAt: serverTimestamp()
-      });
-      alert('✅ Order submitted');
-      window.location.href='dashboard.html';
-    });
-  });
-</script>
 </body>
 </html>
