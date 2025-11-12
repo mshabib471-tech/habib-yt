@@ -1,32 +1,20 @@
+<!-- mobile-servicing.html -->
 <!DOCTYPE html>
 <html lang="bn">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mobile Servicing | Habib YT</title>
-  <link rel="stylesheet" href="assets/style.css" />
-  <script type="module" src="firebase.js"></script>
-</head>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Mobile Servicing | Habib YT</title><link rel="stylesheet" href="style.css"></head>
 <body>
-  <header>
-    <h1><span>Habib</span> YT</h1>
-    <div class="nav-buttons">
-      <a href="index.html"><button class="login-btn">Home</button></a>
-      <button id="toggle" class="toggle-btn">🌙 Dark Mode</button>
-    </div>
-  </header>
+<header class="topbar container"><div class="logo-wrap"><img src="assets/logo.png" alt=""><div><div class="site-title">Mobile Servicing</div></div></div><div><button onclick="go('index.html')" class="login-btn">Back</button></div></header>
 
-  <section style="padding: 20px;text-align:center;">
-    <h2>🧰 মোবাইল সার্ভিসিং</h2>
-    <p>সার্ভিসিং এর জন্য আমাদের দোকানে যোগাযোগ করুন 👇</p>
-    <a href="https://maps.app.goo.gl/1QdkxJmxQZHvSMFAA" target="_blank" style="text-decoration:none;">
-      <button class="submit-btn" style="margin-top:10px;">📍 আমাদের লোকেশন</button>
-    </a>
-    <p style="margin-top:15px;">📞 যোগাযোগ: <b>01868461577</b></p>
-    <img src="https://i.ibb.co/DWzMXMt/servicing.jpg" alt="Servicing" style="margin-top:20px;width:90%;border-radius:10px;">
-  </section>
+<div class="container">
+  <div class="card-small center">
+    <h3>মোবাইল সার্ভিসিং — আমাদের দোকানে</h3>
+    <p class="small">সার্ভিসিং এর জন্য আমাদের দোকানে যোগাযোগ করুন</p>
+    <a href="https://maps.app.goo.gl/1QdkxJmxQZHvSMFAA" target="_blank" class="btn">📍 Our Location</a>
+    <p style="margin-top:10px;">📞 Contact: <b>01868461577</b></p>
+  </div>
+</div>
 
-  <footer>© 2025 Habib YT — Best Service 🔥</footer>
-  <script src="assets/script.js"></script>
+<nav class="bottom-nav"><div onclick="go('index.html')">🏠</div><div onclick="go('add-money.html')">➕</div><div onclick="go('order.html')">📦</div><div onclick="go('dashboard.html')">👤</div></nav>
+<script type="module" src="app.js"></script>
 </body>
 </html>
