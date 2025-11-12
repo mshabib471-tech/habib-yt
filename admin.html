@@ -1,96 +1,27 @@
-<!-- admin.html -->
 <!DOCTYPE html>
 <html lang="bn">
-<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Admin Panel | Habib YT</title>
-<link rel="stylesheet" href="style.css" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — Habib YT</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="topbar container"><div class="logo-wrap"><img src="assets/logo.png" alt=""><div><div class="site-title">Admin</div><div class="site-sub">Habib YT</div></div></div></header>
 
-<div class="container">
-  <h3>Pending Transactions</h3>
-  <div id="txList"></div>
+<header class="topbar">
+  <h1>🧰 Admin Panel</h1>
+  <button onclick="logout()">Logout</button>
+</header>
 
-  <h3 style="margin-top:14px;">Pending Orders</h3>
-  <div id="ordersList"></div>
-</div>
+<section class="admin-section">
+  <h2>💰 Pending Add Money</h2>
+  <div id="pendingMoney">Loading...</div>
 
-<script type="module">
-  import { auth, db, ADMIN_EMAIL } from './app.js';
-  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-  import { collection, query, where, getDocs, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+  <h2>📦 Pending Orders</h2>
+  <div id="pendingOrders">Loading...</div>
+</section>
 
-  onAuthStateChanged(auth, async (user) => {
-    if (!user) { alert('Login as Admin'); window.location.href='login.html'; return; }
-    if (user.email !== ADMIN_EMAIL) { alert('Unauthorized'); window.location.href='index.html'; return; }
-    await loadPendingTx();
-    await loadPendingOrders();
-  });
-
-  async function loadPendingTx(){
-    const q = query(collection(db,'transactions'), where('status','==','pending'));
-    const snap = await getDocs(q);
-    const el = document.getElementById('txList'); el.innerHTML='';
-    snap.forEach(s => {
-      const d = s.data();
-      const div = document.createElement('div'); div.className='list-item';
-      div.innerHTML = `<b>${d.userEmail}</b> — ৳${d.amount} — ${d.method} <br> TrxID: <code>${d.trxId}</code>
-      <div style="margin-top:8px;">
-        <button onclick="approveTx('${s.id}', ${d.amount}, '${d.userEmail}')" class="btn">Approve</button>
-        <button onclick="rejectTx('${s.id}')" class="btn btn-ghost">Reject</button>
-      </div>`;
-      el.appendChild(div);
-    });
-  }
-
-  window.approveTx = async (id, amt, email) => {
-    // update users balance and tx status
-    const txRef = doc(db,'transactions',id);
-    const userRef = doc(db,'users',email);
-    const userSnap = await getDoc(userRef);
-    const prev = userSnap.exists() ? (userSnap.data().balance || 0) : 0;
-    await updateDoc(userRef, { balance: prev + amt });
-    await updateDoc(txRef, { status: 'approved', approvedAt: new Date() });
-    alert('Approved & balance updated');
-    loadPendingTx();
-  };
-
-  window.rejectTx = async (id) => {
-    const txRef = doc(db,'transactions',id);
-    await updateDoc(txRef, { status: 'rejected', rejectedAt: new Date() });
-    alert('Rejected');
-    loadPendingTx();
-  };
-
-  async function loadPendingOrders(){
-    const q = query(collection(db,'orders'), where('status','==','pending'));
-    const snap = await getDocs(q);
-    const el = document.getElementById('ordersList'); el.innerHTML='';
-    snap.forEach(s => {
-      const d = s.data();
-      const div = document.createElement('div'); div.className='list-item';
-      div.innerHTML = `<b>${d.userEmail}</b> — ${d.product} — ৳${d.amount} <br> ${d.details || ''} 
-      <div style="margin-top:8px;">
-        <button onclick="completeOrder('${s.id}')" class="btn">Complete</button>
-        <button onclick="cancelOrder('${s.id}')" class="btn btn-ghost">Cancel</button>
-      </div>`;
-      el.appendChild(div);
-    });
-  }
-
-  window.completeOrder = async (id) => {
-    const r = doc(db,'orders',id);
-    await updateDoc(r, { status: 'completed', completedAt: new Date() });
-    alert('Order completed');
-    loadPendingOrders();
-  };
-  window.cancelOrder = async (id) => {
-    const r = doc(db,'orders',id);
-    await updateDoc(r, { status: 'cancelled', cancelledAt: new Date() });
-    alert('Order cancelled');
-    loadPendingOrders();
-  };
-</script>
+<footer class="footer">© 2025 Habib YT</footer>
+<script type="module" src="app.js"></script>
 </body>
 </html>
