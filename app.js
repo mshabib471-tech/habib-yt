@@ -244,3 +244,21 @@ window.cancelOrder = async function(docId) {
   alert("❌ Order Cancelled!");
   window.location.reload();
 };
+
+// ✅ SESSION SAVE / AUTO LOGIN
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User logged in, auto redirect
+    if (window.location.pathname.includes("login.html")) {
+      window.location.href = "dashboard.html";
+    }
+  } else {
+    // Not logged in, redirect if on protected page
+    const protectedPages = ["dashboard.html", "add-money.html", "order.html", "admin.html"];
+    if (protectedPages.some(p => window.location.pathname.includes(p))) {
+      window.location.href = "login.html";
+    }
+  }
+});
