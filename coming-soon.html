@@ -1,52 +1,18 @@
+<!-- coming-soon.html -->
 <!DOCTYPE html>
 <html lang="bn">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coming Soon | Habib YT</title>
-  <link rel="stylesheet" href="assets/style.css" />
-  <style>
-    .coming {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 80vh;
-      text-align: center;
-      background: linear-gradient(135deg, #f0f0f0, #cce5ff);
-      border-radius: 10px;
-      margin: 20px;
-      animation: fadeIn 1s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .coming h1 {
-      color: #007bff;
-      margin-bottom: 10px;
-    }
-    .coming p {
-      font-size: 18px;
-      color: #333;
-    }
-  </style>
-  <script src="assets/script.js" defer></script>
-</head>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Coming Soon | Habib YT</title><link rel="stylesheet" href="style.css"></head>
 <body>
-  <header>
-    <h1><span>Habib</span> YT</h1>
-    <div class="nav-buttons">
-      <a href="index.html"><button class="login-btn">Home</button></a>
-      <button id="toggle" class="toggle-btn">🌙 Dark Mode</button>
-    </div>
-  </header>
+<header class="topbar container"><div class="logo-wrap"><img src="assets/logo.png" alt=""><div><div class="site-title">Coming Soon</div></div></div><div><button onclick="go('index.html')" class="login-btn">Back</button></div></header>
 
-  <section class="coming">
-    <h1>🚧 Coming Soon</h1>
-    <p>আমরা নতুন সার্ভিস আনছি — আমাদের সাথে থাকুন 💖</p>
-  </section>
+<div class="container">
+  <div class="card-small center" style="padding:36px;">
+    <h2>🚧 Coming Soon</h2>
+    <p class="small">আমরা নতুন সার্ভিস আনছি — সঙ্গে থাকুন!</p>
+  </div>
+</div>
 
-  <footer>© 2025 Habib YT — Best Service 🔥</footer>
+<nav class="bottom-nav"><div onclick="go('index.html')">🏠</div><div onclick="go('add-money.html')">➕</div><div onclick="go('order.html')">📦</div><div onclick="go('dashboard.html')">👤</div></nav>
+<script type="module" src="app.js"></script>
 </body>
 </html>
