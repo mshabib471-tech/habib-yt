@@ -1,28 +1,53 @@
+<!-- payment-bkash.html -->
 <!DOCTYPE html>
 <html lang="bn">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>bKash Payment</title>
-<style>body{font-family:'Poppins',sans-serif;background:#f5f8ff;padding:20px;text-align:center;}
-input{padding:10px;width:80%;border:1px solid #ccc;border-radius:6px;margin:10px 0;}
-button{background:#e2136e;color:white;border:none;padding:10px 20px;border-radius:6px;}
-</style></head>
+<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>bKash Payment | Habib YT</title>
+<link rel="stylesheet" href="style.css" />
+</head>
 <body>
-<h2>📱 bKash Payment</h2>
-<p>Send money to <b>01868461577</b></p>
-<p>Amount: <span id="showAmount"></span>৳</p>
-<input id="trxId" placeholder="Transaction ID দিন">
-<button id="verifyBtn">Verify</button>
+<header class="topbar container"><div class="logo-wrap"><img src="assets/logo.png" alt=""><div><div class="site-title">Habib YT</div></div></div><div><button onclick="go('add-money.html')" class="login-btn">Back</button></div></header>
+
+<div class="container">
+  <div class="card-small center">
+    <h3>bKash Payment</h3>
+    <p class="small">Send money to: <b>01868461577</b></p>
+    <p class="small">Amount: <strong id="showAmount">0</strong>৳</p>
+
+    <input id="trxId" placeholder="Transaction ID (যেমন: 12345ABC)" />
+    <button id="submitBtn" class="btn">Submit for Verification</button>
+    <p class="small" style="margin-top:8px;">After submission admin will verify the transaction. Do not try fake IDs.</p>
+  </div>
+</div>
 
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import{getFirestore,collection,addDoc,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-import{getAuth,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-const firebaseConfig={apiKey:"AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",authDomain:"habib-yt.firebaseapp.com",projectId:"habib-yt"};
-const app=initializeApp(firebaseConfig),db=getFirestore(app),auth=getAuth(app);
-const amount=new URLSearchParams(location.search).get("amount");document.getElementById("showAmount").textContent=amount;
-document.getElementById("verifyBtn").onclick=()=>{const trx=document.getElementById("trxId").value.trim();if(!trx)return alert("Transaction ID দিন");
-onAuthStateChanged(auth,async(u)=>{if(!u)return alert("Login করুন");
-await addDoc(collection(db,"transactions"),{userEmail:u.email,amount:parseFloat(amount),method:"bKash",trxId:trx,status:"pending",createdAt:serverTimestamp()});
-alert("✅ Payment pending!");location.href="dashboard.html";});};
+  import { auth, db } from './app.js';
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+  import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+  const params = new URLSearchParams(location.search);
+  const amount = parseFloat(params.get('amount')) || 0;
+  document.getElementById('showAmount').textContent = amount;
+
+  document.getElementById('submitBtn').addEventListener('click', () => {
+    const trx = document.getElementById('trxId').value.trim();
+    if (!trx) return alert('Transaction ID লিখুন');
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) return alert('আগে Login করুন');
+      // create pending transaction
+      await addDoc(collection(db, 'transactions'), {
+        userEmail: user.email,
+        method: 'bKash',
+        amount: amount,
+        trxId: trx,
+        status: 'pending',
+        createdAt: serverTimestamp()
+      });
+      alert('✅ Payment submitted for admin verification');
+      window.location.href = 'dashboard.html';
+    });
+  });
 </script>
-</body></html>
+</body>
+</html>
