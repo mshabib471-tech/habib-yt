@@ -1,21 +1,49 @@
+<!-- add-money.html -->
 <!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Add Money</title>
-<style>body{font-family:'Poppins',sans-serif;background:#f5f8ff;padding:20px;text-align:center;}
-input{padding:10px;width:80%;border:1px solid #ccc;border-radius:6px;margin:10px 0;}
-button{background:#007bff;color:white;border:none;padding:10px 20px;border-radius:6px;}
-</style></head>
+<html lang="bn">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Add Money | Habib YT</title>
+<link rel="stylesheet" href="style.css" />
+</head>
 <body>
-<h2>💰 Add Money</h2>
-<input type="number" id="amount" placeholder="Enter Amount">
-<button onclick="goBkash()">Next</button>
-<script>
-function goBkash(){
- const amt=document.getElementById('amount').value;
- if(!amt)return alert("Amount দিন");
- window.location.href=`payment-bkash.html?amount=${amt}`;
-}
-</script>
+  <header class="topbar container">
+    <div class="logo-wrap"><img src="assets/logo.png" alt=""><div><div class="site-title">Habib YT</div></div></div>
+    <div><button onclick="go('dashboard.html')" class="login-btn">Back</button></div>
+  </header>
+
+  <div class="container">
+    <div class="card-small center">
+      <h3>Add Money to Wallet</h3>
+      <p class="small">Enter amount you want to add (৳)</p>
+      <input id="amount" type="number" placeholder="৳ Amount" />
+      <div style="margin-top:10px;display:flex;gap:10px;justify-content:center;">
+        <button id="toBkash" class="btn">bKash</button>
+        <button id="toNagad" class="btn" style="background:#ff8c00;">Nagad</button>
+      </div>
+      <p class="small" style="margin-top:8px;color:#444;">Your transaction will be pending until admin approval.</p>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <div onclick="go('index.html')"><span>🏠</span>Home</div>
+    <div onclick="go('add-money.html')"><span>➕</span>Add Money</div>
+    <div onclick="go('order.html')"><span>📦</span>My Orders</div>
+    <div onclick="go('dashboard.html')"><span>👤</span>My Account</div>
+  </nav>
+
+  <script type="module">
+    import { auth } from './app.js';
+    document.getElementById('toBkash').addEventListener('click', () => {
+      const amt = parseFloat(document.getElementById('amount').value);
+      if (!amt || amt <= 0) return alert('অনুগ্রহ করে সঠিক পরিমাণ লিখুন');
+      window.location.href = `payment-bkash.html?amount=${amt}`;
+    });
+    document.getElementById('toNagad').addEventListener('click', () => {
+      const amt = parseFloat(document.getElementById('amount').value);
+      if (!amt || amt <= 0) return alert('অনুগ্রহ করে সঠিক পরিমাণ লিখুন');
+      window.location.href = `payment-nagad.html?amount=${amt}`;
+    });
+  </script>
 </body>
 </html>
