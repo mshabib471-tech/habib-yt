@@ -216,3 +216,54 @@ window.rejectWallet = async function (docId) {
   alert("❌ Request Rejected");
   window.location.reload();
 };
+
+/***************************************************
+ 🔥 Habib YT | Firebase Test App.js
+****************************************************/
+
+// Firebase Config Import
+import { app, auth, db, provider } from "./firebase.js";
+
+// Firebase Functions Import
+import { signInWithPopup } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+/**
+ * ✅ Firebase Connection Test
+ * Checks whether Firestore is connected properly.
+ */
+document.getElementById("check").addEventListener("click", async () => {
+  const output = document.getElementById("output");
+  output.textContent = "⏳ Checking Firebase connection...";
+  
+  try {
+    // Just test by reading 'wallets' collection
+    const testSnapshot = await getDocs(collection(db, "wallets"));
+    output.textContent =
+      "✅ Firebase Connected Successfully!\n\n" +
+      `Found ${testSnapshot.size} wallet documents in database.`;
+  } catch (err) {
+    output.textContent =
+      "❌ Firebase connection failed.\n\nError: " + err.message;
+  }
+});
+
+/**
+ * ✅ Google Login Test
+ * Opens Google Sign-In popup and displays user info.
+ */
+window.googleLogin = async function () {
+  const output = document.getElementById("output");
+  output.textContent = "⏳ Opening Google Login...";
+  
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    output.textContent =
+      "✅ Google Login Successful!\n\n" +
+      `👤 Name: ${user.displayName}\n📧 Email: ${user.email}\n🆔 UID: ${user.uid}`;
+  } catch (err) {
+    output.textContent = "❌ Google Login Failed:\n" + err.message;
+  }
+};
