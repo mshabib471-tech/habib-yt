@@ -1,116 +1,190 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Habib YT | Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Habib YT</title>
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background:#f7f9fc;
-      margin:0;
-      padding-bottom:80px; /* নিচের navbar এর জন্য জায়গা */
+      background: #f4f7fb;
+      color: #222;
+      margin: 0;
+      padding-bottom: 70px;
     }
     header {
-      background:#007bff;
-      color:white;
-      padding:15px;
-      text-align:center;
-      font-size:20px;
-      font-weight:bold;
-      box-shadow:0 2px 6px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #007bff;
+      color: white;
+      padding: 12px 18px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    header h2 { margin: 0; }
+    .logout {
+      background: white;
+      color: #007bff;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-weight: bold;
     }
     .container {
-      padding:20px;
-      text-align:center;
+      width: 90%;
+      max-width: 500px;
+      margin: 25px auto;
+      background: white;
+      padding: 18px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    h3 {
+      color: #007bff;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .info {
+      text-align: center;
+      line-height: 1.7;
     }
     .wallet {
-      background:white;
-      border-radius:10px;
-      padding:20px;
-      box-shadow:0 4px 8px rgba(0,0,0,0.1);
-      max-width:350px;
-      margin:20px auto;
+      text-align: center;
+      background: #e8f1ff;
+      color: #007bff;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 10px 0;
     }
-    .wallet p { font-size:16px; }
-    .wallet span { color:#007bff; font-weight:bold; }
-    button {
-      background:#007bff;
-      color:white;
-      border:none;
-      padding:10px 20px;
-      border-radius:8px;
-      cursor:pointer;
-      margin:10px;
-      font-weight:bold;
+    .btns {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 15px;
     }
-    button:hover { background:#0056d4; }
-
-    /* নিচের Navigation Bar */
-    .bottom-nav {
-      position:fixed;
-      bottom:0;
-      left:0;
-      width:100%;
-      background:white;
-      border-top:1px solid #ccc;
-      display:flex;
-      justify-content:space-around;
-      align-items:center;
-      padding:8px 0;
-      box-shadow:0 -2px 6px rgba(0,0,0,0.1);
+    .btns button {
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-weight: bold;
     }
-    .bottom-nav button {
-      flex:1;
-      background:none;
-      color:#007bff;
-      border:none;
-      font-size:14px;
-      cursor:pointer;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
+    .btns button:hover {
+      background: #0056d4;
     }
-    .bottom-nav button:hover { color:#0056d4; }
-    .bottom-nav i { font-size:20px; margin-bottom:3px; }
+    .orders {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .order-item {
+      background: #f9f9f9;
+      border-left: 4px solid #007bff;
+      margin: 8px 0;
+      padding: 8px;
+      border-radius: 6px;
+    }
+    .order-item p {
+      margin: 4px 0;
+      font-size: 14px;
+    }
+    footer {
+      text-align: center;
+      background: #007bff;
+      color: white;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
   </style>
-
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <header>
+    <h2>👤 My Account</h2>
+    <button class="logout" onclick="logout()">Logout</button>
+  </header>
 
-<header>💼 Habib YT Dashboard</header>
+  <div class="container">
+    <h3>Welcome Back!</h3>
+    <div class="info">
+      <p><b>Email:</b> <span id="userEmail">Loading...</span></p>
+      <div class="wallet">💰 Wallet Balance: <span id="walletBalance">Loading...</span></div>
+    </div>
 
-<div class="container">
-  <div class="wallet">
-    <p><b>ইমেইল:</b> <span id="userEmail">লোড হচ্ছে...</span></p>
-    <p><b>ওয়ালেট ব্যালান্স:</b> <span id="walletBalance">0 BDT</span></p>
-    <button onclick="window.location.href='add-money.html'">💰 Add Money</button>
+    <div class="btns">
+      <button onclick="window.location.href='add-money.html'">➕ Add Money</button>
+      <button onclick="window.location.href='index.html'">🏠 Home</button>
+    </div>
   </div>
-</div>
 
-<!-- ✅ নিচের Navigation Bar -->
-<div class="bottom-nav">
-  <button onclick="window.location.href='index.html'">
-    <i class="fas fa-home"></i>
-    Home
-  </button>
-  <button onclick="window.location.href='add-money.html'">
-    <i class="fas fa-wallet"></i>
-    Add Money
-  </button>
-  <button onclick="window.location.href='order.html'">
-    <i class="fas fa-list"></i>
-    My Orders
-  </button>
-  <button onclick="logout()">
-    <i class="fas fa-sign-out-alt"></i>
-    Logout
-  </button>
-</div>
+  <div class="orders">
+    <h3>🛒 Recent Orders</h3>
+    <div id="recentOrders">Loading...</div>
+  </div>
 
-<script type="module" src="firebase.js"></script>
-<script type="module" src="app.js"></script>
+  <footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module">
+    import { auth, db } from "./firebase.js";
+    import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+    import { getDoc, doc, collection, getDocs, query, where, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+    const emailField = document.getElementById("userEmail");
+    const balanceField = document.getElementById("walletBalance");
+    const ordersDiv = document.getElementById("recentOrders");
+
+    // ✅ Auth Check
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      // User info
+      emailField.textContent = user.email;
+
+      // Wallet Balance
+      const walletRef = doc(db, "wallets", user.uid);
+      const walletSnap = await getDoc(walletRef);
+      if (walletSnap.exists()) {
+        balanceField.textContent = walletSnap.data().balance + " BDT";
+      } else {
+        balanceField.textContent = "0 BDT";
+      }
+
+      // Recent Orders
+      const q = query(collection(db, "orders"), where("user", "==", user.uid), orderBy("created", "desc"), limit(5));
+      const snapshot = await getDocs(q);
+      if (snapshot.empty) {
+        ordersDiv.innerHTML = "<p>কোনো অর্ডার পাওয়া যায়নি।</p>";
+      } else {
+        let html = "";
+        snapshot.forEach((docSnap) => {
+          const d = docSnap.data();
+          html += `
+            <div class="order-item">
+              <p><b>${d.product}</b></p>
+              <p>Price: ${d.price || d.totalPrice} TK</p>
+              <p>Status: ${d.status}</p>
+            </div>
+          `;
+        });
+        ordersDiv.innerHTML = html;
+      }
+    });
+
+    // ✅ Logout
+    window.logout = async function () {
+      await signOut(auth);
+      window.location.href = "login.html";
+    };
+  </script>
 </body>
 </html>
