@@ -1,29 +1,130 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Account — Habib YT</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habib YT Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #007bff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 20px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    header button {
+      background: white;
+      color: #007bff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .dashboard-container {
+      padding: 20px;
+    }
+
+    .wallet-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .wallet-card h2 {
+      color: #007bff;
+      margin: 0;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .action-buttons a {
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .action-buttons a:hover {
+      background: #0056c7;
+    }
+
+    .orders-section {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #555;
+      font-size: 14px;
+      padding-bottom: 20px;
+    }
+  </style>
 </head>
+
 <body>
+  <header>
+    <h1>💼 Habib YT Dashboard</h1>
+    <button onclick="logout()">Logout</button>
+  </header>
 
-<header class="topbar">
-  <h1>👤 My Account</h1>
-  <button onclick="logout()">Logout</button>
-</header>
+  <div class="dashboard-container">
+    <div class="wallet-card">
+      <h2>👋 স্বাগতম, <span id="userEmail">Loading...</span></h2>
+      <p>Wallet Balance: <strong id="walletBalance">0 BDT</strong></p>
+    </div>
 
-<section class="dash-info">
-  <h2>Welcome, <span id="userEmail">Loading...</span></h2>
-  <p>Wallet Balance: <strong id="walletBalance">0 BDT</strong></p>
-</section>
+    <div class="action-buttons">
+      <a href="index.html">🏠 Home</a>
+      <a href="add-money.html">💰 Add Money</a>
+      <a href="order.html">📦 My Orders</a>
+    </div>
 
-<section class="orders">
-  <h3>Recent Orders</h3>
-  <div id="orderList">Loading...</div>
-</section>
+    <br />
 
-<footer class="footer">© 2025 Habib YT</footer>
-<script type="module" src="app.js"></script>
+    <div class="orders-section">
+      <h3>🧾 Recent Orders</h3>
+      <div id="recentOrders">Loading...</div>
+    </div>
+  </div>
+
+  <footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
