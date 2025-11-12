@@ -1,63 +1,61 @@
+<!-- like-follower.html -->
 <!DOCTYPE html>
 <html lang="bn">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Like & Follower | Habib YT</title>
-  <link rel="stylesheet" href="assets/style.css" />
-  <script type="module" src="firebase.js"></script>
-</head>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Like & Follower | Habib YT</title><link rel="stylesheet" href="style.css"></head>
 <body>
-  <header>
-    <h1><span>Habib</span> YT</h1>
-    <div class="nav-buttons">
-      <a href="index.html"><button class="login-btn">Home</button></a>
-      <button id="toggle" class="toggle-btn">🌙 Dark Mode</button>
-    </div>
-  </header>
+<header class="topbar container"><div class="logo-wrap"><img src="assets/logo.png" alt=""><div><div class="site-title">Like & Follower</div></div></div><div><button onclick="go('index.html')" class="login-btn">Back</button></div></header>
 
-  <div class="order-box">
-    <h2>Like & Follower Services</h2>
-    <div class="option" data-name="Facebook Likes 1K" data-price="80">1K Facebook Likes — 80৳</div>
-    <div class="option" data-name="Instagram Followers 1K" data-price="150">1K Instagram Followers — 150৳</div>
-    <div class="option" data-name="YouTube Subscribers 1K" data-price="180">1K YouTube Subs — 180৳</div>
-    <div class="option" data-name="TikTok Followers 1K" data-price="120">1K TikTok Followers — 120৳</div>
-    <button class="submit-btn" id="orderBtn">Confirm Order</button>
-    <p id="msg" style="margin-top:10px;text-align:center;"></p>
+<div class="container">
+  <h3 class="center">Social Services</h3>
+  <div class="options-grid">
+    <div class="option" data-name="FB Likes 1K" data-price="80">FB Likes 1K<br><span class="small">৳80</span></div>
+    <div class="option" data-name="IG Followers 1K" data-price="150">IG Followers 1K<br><span class="small">৳150</span></div>
+    <div class="option" data-name="YT Subs 1K" data-price="180">YT Subs 1K<br><span class="small">৳180</span></div>
+    <div class="option" data-name="TT Followers 1K" data-price="120">TT Followers 1K<br><span class="small">৳120</span></div>
   </div>
 
-  <footer>© 2025 Habib YT — Best Service 🔥</footer>
+  <div class="card-small" style="margin-top:12px;">
+    <label class="small">Profile Link / Username</label>
+    <input id="profile" placeholder="link or username" />
+    <button id="orderBtn" class="btn">Order Now</button>
+  </div>
+</div>
 
-  <script type="module">
-    import { db, auth } from "./firebase.js";
-    import { addDoc, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+<nav class="bottom-nav">
+  <div onclick="go('index.html')">🏠</div>
+  <div onclick="go('add-money.html')">➕</div>
+  <div onclick="go('order.html')">📦</div>
+  <div onclick="go('dashboard.html')">👤</div>
+</nav>
 
-    let selected = null;
-    const options = document.querySelectorAll(".option");
-    const msg = document.getElementById("msg");
+<script type="module">
+  import { auth, db, ensureUserDoc } from './app.js';
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+  import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-    options.forEach(opt => {
-      opt.addEventListener("click", () => {
-        options.forEach(o => o.style.background = "white");
-        opt.style.background = "#d0e6ff";
-        selected = { name: opt.dataset.name, price: opt.dataset.price };
+  let sel=null;
+  document.querySelectorAll('.option').forEach(o=>o.addEventListener('click', ()=>{document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));o.classList.add('selected');sel={name:o.dataset.name,price:parseFloat(o.dataset.price)};}));
+
+  document.getElementById('orderBtn').addEventListener('click', () => {
+    const profile = document.getElementById('profile').value.trim();
+    if (!sel) return alert('সার্ভিস সিলেক্ট করুন');
+    if (!profile) return alert('Profile/link দিন');
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) return alert('Login করুন');
+      await ensureUserDoc(user);
+      await addDoc(collection(db,'orders'), {
+        userEmail: user.email,
+        product: sel.name,
+        amount: sel.price,
+        details: profile,
+        status: 'pending',
+        createdAt: serverTimestamp()
       });
+      alert('✅ Order submitted');
+      window.location.href='dashboard.html';
     });
-
-    document.getElementById("orderBtn").addEventListener("click", async () => {
-      if (!selected) return msg.textContent = "⚠️ Select a package first!";
-      onAuthStateChanged(auth, async (user) => {
-        if (!user) return msg.textContent = "🔑 Please login first!";
-        await addDoc(collection(db, "orders"), {
-          uid: user.uid,
-          itemName: selected.name,
-          price: selected.price,
-          time: new Date().toLocaleString()
-        });
-        msg.textContent = "✅ Order Confirmed!";
-      });
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
