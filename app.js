@@ -1,13 +1,10 @@
-// app.js
-// Copy-paste this file as /habibyt/app.js
-// Exports: go, auth, db, provider, ensureUserDoc, requireAuth, ADMIN_EMAIL
-
+// Import Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-/* ====== Put your Firebase config here (already confirmed) ====== */
-export const firebaseConfig = {
+// Firebase Config (তোমার নিজের config নিচে রাখো)
+const firebaseConfig = {
   apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
   authDomain: "habib-yt.firebaseapp.com",
   projectId: "habib-yt",
@@ -16,51 +13,67 @@ export const firebaseConfig = {
   appId: "1:656628491244:web:e01ccd42bd8a2b1b4c96c9",
   measurementId: "G-GNY1T88D34"
 };
-/* =============================================================== */
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const provider = new GoogleAuthProvider();
-export const db = getFirestore(app);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-export const ADMIN_EMAIL = "mshabib471@gmail.com"; // admin email (use this to protect admin page)
-
-export function go(page) {
+// 🔹 Page Navigation Function
+window.go = function(page) {
   window.location.href = page;
-}
+};
 
-/**
- * ensureUserDoc(user)
- * Create user doc in "users" collection with default fields (if not exists)
- * user: firebase user object with .email and .displayName
- */
-export async function ensureUserDoc(user) {
-  if (!user || !user.email) return;
-  const userRef = doc(db, "users", user.email);
-  const snap = await getDoc(userRef);
-  if (!snap.exists()) {
-    await setDoc(userRef, {
-      name: user.displayName || user.email.split("@")[0],
-      email: user.email,
-      balance: 0,
-      createdAt: serverTimestamp()
+// 🔹 Login System (যদি login.html এ থাকে)
+if (window.location.pathname.includes("login.html")) {
+  const loginForm = document.getElementById("loginForm");
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("✅ লগইন সফল হয়েছে!");
+        window.location.href = "dashboard.html";
+      } catch (error) {
+        alert("❌ Login Failed: " + error.message);
+      }
     });
   }
 }
 
-/**
- * requireAuth(redirectTo)
- * simple helper to redirect to login if not auth
- */
-export function requireAuth(redirectTo = "login.html") {
-  return new Promise((resolve) => {
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = redirectTo;
-        resolve(null);
-      } else {
-        resolve(user);
+// 🔹 Dashboard Info Loader
+if (window.location.pathname.includes("dashboard.html")) {
+  auth.onAuthStateChanged(async (user) => {
+    if (user) {
+      document.getElementById("userEmail").innerText = user.email;
+      const userDoc = doc(db, "users", user.uid);
+      const snap = await getDoc(userDoc);
+      if (snap.exists()) {
+        document.getElementById("walletBalance").innerText = snap.data().balance || 0;
       }
-    });
+    } else {
+      window.location.href = "login.html";
+    }
   });
 }
+
+// 🔹 Add Money Request
+if (window.location.pathname.includes("add-money.html")) {
+  document.getElementById("addMoneyBtn")?.addEventListener("click", async () => {
+    const amount = parseFloat(document.getElementById("amount").value);
+    const user = auth.currentUser;
+    if (!user) return alert("Please login first!");
+    const ref = doc(db, "walletRequests", user.uid);
+    await setDoc(ref, { amount, status: "pending", createdAt: new Date() });
+    alert("✅ Request submitted! Pending verification.");
+  });
+}
+
+// 🔹 Logout
+window.logout = function() {
+  signOut(auth).then(() => {
+    window.location.href = "index.html";
+  });
+};
