@@ -1,92 +1,224 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EFootball Coins | Habib YT</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EFootball Coin | Habib YT</title>
   <style>
-    body { font-family:"Poppins",sans-serif; margin:0; background:#f4f7fb; color:#333; }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f4f7fb;
+      color: #222;
+      margin: 0;
+      padding-bottom: 70px;
+    }
     header {
-      display:flex; align-items:center; justify-content:space-between;
-      background:#007bff; color:white; padding:12px 18px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #007bff;
+      color: white;
+      padding: 12px 18px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
-    header img { height:42px; width:42px; border-radius:50%; }
-    nav button {
-      background:white; color:#007bff; border:none; border-radius:8px;
-      padding:8px 12px; cursor:pointer; font-weight:600;
+    header img {
+      height: 40px;
+      border-radius: 50%;
     }
-    nav button:hover { background:#0056d4; color:white; }
-    .title { text-align:center; padding:20px; color:#007bff; }
-    .cards {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-      gap:15px; margin:20px;
+    h2 {
+      text-align: center;
+      color: #007bff;
+      margin: 18px 0;
     }
-    .card {
-      background:white; border-radius:10px; padding:15px;
-      text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.1);
-      cursor:pointer; transition:0.3s;
+
+    /* Grid of Packages */
+    .package-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      padding: 15px;
     }
-    .card:hover { transform:translateY(-4px); }
-    .card img { width:100%; height:100px; border-radius:8px; object-fit:cover; }
-    .card h3 { color:#007bff; margin:8px 0 5px; }
-    .card button {
-      background:#007bff; color:white; border:none; padding:8px 12px; border-radius:8px;
-      cursor:pointer; margin-top:8px;
+    .package {
+      background: white;
+      border-radius: 10px;
+      text-align: center;
+      padding: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      transition: 0.2s;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    .package:hover {
+      transform: scale(1.03);
+    }
+    .package.selected {
+      border-color: #007bff;
+      background: #e8f1ff;
+    }
+    .package h4 {
+      margin: 5px 0;
+      color: #333;
+    }
+    .package p {
+      color: #007bff;
+      font-weight: bold;
+      margin: 4px 0;
+    }
+    .input-box {
+      background: white;
+      margin: 18px auto;
+      width: 90%;
+      max-width: 400px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    button.order {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      width: 100%;
+    }
+    button.order:hover {
+      background: #0056d4;
     }
     footer {
-      background:#007bff; color:white; text-align:center; padding:12px; margin-top:30px;
+      text-align: center;
+      background: #007bff;
+      color: white;
+      padding: 10px;
+      margin-top: 25px;
     }
     .bottom-nav {
-      position:fixed; bottom:0; left:0; width:100%; background:white;
-      border-top:1px solid #ccc; display:flex; justify-content:space-around; padding:10px 0;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
     }
     .bottom-nav button {
-      background:none; border:none; color:#007bff; font-weight:bold; cursor:pointer;
+      background: none;
+      border: none;
+      color: #007bff;
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="assets/logo.png" alt="Habib YT Logo">
-    <h2>Habib YT</h2>
-    <nav><button onclick="window.location.href='index.html'">Home</button></nav>
+    <img src="assets/efootball.jpg" alt="Habib YT Logo" />
+    <h3>Habib YT</h3>
+    <button onclick="window.location.href='index.html'"
+      style="background:white;color:#007bff;padding:6px 10px;border:none;border-radius:8px;font-weight:600;">
+      Home
+    </button>
   </header>
 
-  <h2 class="title">⚽ EFootball Coins টপ-আপ</h2>
+  <h2>⚽ EFootball Coin টপ-আপ</h2>
 
-  <section class="cards">
-    <div class="card">
-      <img src="assets/efootball.jpg" alt="100 Coins">
-      <h3>100 Coins</h3>
-      <p>৳ 120</p>
-      <button>Order Now</button>
-    </div>
-    <div class="card">
-      <img src="assets/efootball.jpg" alt="500 Coins">
-      <h3>500 Coins</h3>
-      <p>৳ 550</p>
-      <button>Order Now</button>
-    </div>
-    <div class="card">
-      <img src="assets/efootball.jpg" alt="1000 Coins">
-      <h3>1000 Coins</h3>
-      <p>৳ 1000</p>
-      <button>Order Now</button>
-    </div>
-  </section>
+  <!-- Packages -->
+  <div class="package-list" id="packageList"></div>
 
-  <footer>
-    Habib YT — আপনার বিশ্বস্ত সহযোগী<br><small>© 2025 Habib YT</small>
-  </footer>
+  <!-- Username Input -->
+  <div class="input-box">
+    <h4>🎮 আপনার EFootball ID / Username দিন:</h4>
+    <input type="text" id="usernameInput" placeholder="আপনার ID বা Username লিখুন" />
+    <button class="order" onclick="placeEFOOrder()">Order Now</button>
+  </div>
+
+  <footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
 
   <div class="bottom-nav">
     <button onclick="window.location.href='index.html'">🏠 Home</button>
     <button onclick="window.location.href='dashboard.html'">💼 Dashboard</button>
-    <button onclick="window.location.href='login.html'">🔐 Login</button>
     <button onclick="window.location.href='add-money.html'">💰 Add Money</button>
+    <button onclick="window.location.href='login.html'">🔐 Login</button>
   </div>
 
+  <script type="module" src="firebase.js"></script>
+  <script type="module">
+    import { auth, db } from "./firebase.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+    import { addDoc, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+    // 🔹 প্যাকেজ লিস্ট
+    const packages = [
+      { name: "Jose Mourinho", price: 490 },
+      { name: "Mourinho + Silvester + Vsn", price: 880 },
+      { name: "Silvester +50 coin", price: 98 },
+      { name: "Van Nistelrooij + 100 coin", price: 299 },
+      { name: "Yoichiro Kakitani + 10 coin", price: 110 },
+      { name: "130 Coin", price: 170 },
+      { name: "300 Coin", price: 340 },
+      { name: "550 Coin", price: 540 },
+      { name: "1040 Coin", price: 1030 },
+      { name: "2130 Coin", price: 2030 },
+      { name: "3250 Coin", price: 3130 },
+      { name: "5700 Coin", price: 5200 },
+      { name: "12800 Coin", price: 11300 },
+      { name: "25600 Coin", price: 22700 }
+    ];
+
+    const list = document.getElementById("packageList");
+    let selected = null;
+    packages.forEach((p, i) => {
+      const div = document.createElement("div");
+      div.className = "package";
+      div.innerHTML = `<h4>${p.name}</h4><p>${p.price} TK</p>`;
+      div.onclick = () => selectPackage(i, div);
+      list.appendChild(div);
+    });
+
+    function selectPackage(i, div) {
+      document.querySelectorAll(".package").forEach((el) => el.classList.remove("selected"));
+      div.classList.add("selected");
+      selected = packages[i];
+    }
+
+    // ✅ অর্ডার সাবমিট
+    window.placeEFOOrder = async function () {
+      const username = document.getElementById("usernameInput").value.trim();
+      if (!selected) return alert("⚠️ প্রথমে একটি প্যাকেজ সিলেক্ট করুন!");
+      if (!username) return alert("⚠️ আপনার ID বা Username দিন!");
+
+      const user = auth.currentUser;
+      if (!user) return alert("Please login first!");
+
+      await addDoc(collection(db, "orders"), {
+        user: user.uid,
+        email: user.email,
+        product: `EFootball ${selected.name}`,
+        username: username,
+        price: selected.price,
+        status: "pending",
+        created: new Date(),
+      });
+
+      alert(`✅ অর্ডার সম্পন্ন হয়েছে: ${selected.name} (${selected.price} TK)`);
+      document.getElementById("usernameInput").value = "";
+      document.querySelectorAll(".package").forEach((el) => el.classList.remove("selected"));
+      selected = null;
+    };
+  </script>
 </body>
 </html>
