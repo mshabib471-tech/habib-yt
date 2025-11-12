@@ -1,59 +1,22 @@
-<!-- order.html -->
 <!DOCTYPE html>
 <html lang="bn">
-<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Place Order | Habib YT</title>
-<link rel="stylesheet" href="style.css" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders — Habib YT</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="topbar container"><div class="logo-wrap"><img src="assets/logo.png" alt=""><div><div class="site-title">Habib YT</div></div></div><div><button onclick="go('dashboard.html')" class="login-btn">Back</button></div></header>
 
-<div class="container">
-  <div class="card-small">
-    <h3 class="center">Place an Order</h3>
-    <label class="small">Service</label>
-    <select id="product">
-      <option value="Free Fire">Free Fire</option>
-      <option value="EFootball">EFootball</option>
-      <option value="Like & Follower">Like & Follower</option>
-    </select>
+<header class="topbar">
+  <h1>📦 My Orders</h1>
+</header>
 
-    <label class="small">Amount (৳)</label>
-    <input id="amount" type="number" placeholder="৳ Price">
+<section class="orders">
+  <div id="ordersContainer">Loading...</div>
+</section>
 
-    <label class="small">Details (UID / Username / Note)</label>
-    <input id="details" placeholder="e.g. Free Fire UID 1234567890">
-
-    <button id="orderBtn" class="btn">Submit Order</button>
-  </div>
-</div>
-
-<script type="module">
-  import { auth, db, ensureUserDoc } from './app.js';
-  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-  import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-
-  document.getElementById('orderBtn').addEventListener('click', () => {
-    const product = document.getElementById('product').value;
-    const amount = parseFloat(document.getElementById('amount').value);
-    const details = document.getElementById('details').value.trim();
-    if (!amount || amount <= 0) return alert('Amount সঠিক লিখুন');
-
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) return alert('Login করুন');
-      await ensureUserDoc(user);
-      await addDoc(collection(db, 'orders'), {
-        userEmail: user.email,
-        product: product,
-        amount: amount,
-        details: details,
-        status: 'pending',
-        createdAt: serverTimestamp()
-      });
-      alert('✅ Order submitted — admin will process it.');
-      window.location.href = 'dashboard.html';
-    });
-  });
-</script>
+<footer class="footer">© 2025 Habib YT</footer>
+<script type="module" src="app.js"></script>
 </body>
 </html>
