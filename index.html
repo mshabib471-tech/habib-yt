@@ -4,91 +4,254 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Habib YT — আপনার বিশ্বস্ত সহযোগী</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: #f4f7fb;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #007bff;
+      color: white;
+      padding: 12px 18px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    header img {
+      height: 42px;
+      width: 42px;
+      border-radius: 50%;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    nav button {
+      background: white;
+      color: #007bff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    nav button:hover {
+      background: #0056d4;
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    .hero h1 {
+      color: #007bff;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    /* Service Cards */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
+      margin: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+      color: #007bff;
+    }
+
+    /* Support Section */
+    .support {
+      background: #fff;
+      margin: 25px 15px;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .support h2 {
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
+    .support a {
+      display: inline-block;
+      margin: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+    }
+
+    .telegram {
+      background: #0088cc;
+    }
+
+    .whatsapp {
+      background: #25d366;
+    }
+
+    .support a:hover {
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    footer {
+      background: #007bff;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      margin-top: 30px;
+      font-weight: bold;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    footer small {
+      font-size: 13px;
+      display: block;
+      margin-top: 5px;
+      color: #e0e0e0;
+    }
+
+    /* Bottom Nav (Mobile) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .bottom-nav button {
+      background: none;
+      border: none;
+      color: #007bff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 500px) {
+      header h2 { font-size: 18px; }
+      .hero h1 { font-size: 22px; }
+      .services { gap: 10px; margin: 15px; }
+    }
+  </style>
 </head>
+
 <body>
 
-  <!-- 🔹 Header -->
-  <header class="topbar">
-    <div class="logo-area">
-      <img src="assets/logo.png" alt="Habib YT" class="logo" />
-      <div>
-        <h1>Habib <span>YT</span></h1>
-        <p>আপনার বিশ্বস্ত সহযোগী</p>
-      </div>
-    </div>
-    <button class="login-btn" onclick="go('login.html')">Login</button>
+  <!-- Header -->
+  <header>
+    <img src="assets/logo.png" alt="Habib YT Logo">
+    <h2>Habib YT</h2>
+    <nav>
+      <button onclick="window.location.href='login.html'">Login</button>
+      <button onclick="window.location.href='dashboard.html'">Dashboard</button>
+    </nav>
   </header>
 
-  <!-- 🔹 Notice -->
-  <div class="notice">
-    ⚠️ ১৮ বছরের নিচে কেউ অর্ডার করবেন না! অনুমতি ছাড়া লেনদেন করা নিষিদ্ধ।
-  </div>
+  <!-- Hero -->
+  <section class="hero">
+    <h1>🔥 গেমিং টপ-আপ ও মোবাইল সার্ভিস</h1>
+    <p>Free Fire, EFootball, Like & Follower সার্ভিস এখন আরও সহজে</p>
+  </section>
 
-  <!-- 🔹 Telegram / WhatsApp -->
-  <div class="support-links">
-    <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank"><img src="assets/telegram.png" alt="Telegram"></a>
-    <a href="https://wa.me/8801868461577" target="_blank"><img src="assets/whatsapp.png" alt="WhatsApp"></a>
-  </div>
-
-  <!-- 🔹 Service Section -->
+  <!-- Services -->
   <section class="services">
-    <h2>Our Services</h2>
-    <div class="grid">
-      <div class="card" onclick="go('freefire.html')">
-        <img src="assets/ff.jpg" alt="Free Fire">
-        <p>Free Fire Top-Up</p>
-      </div>
-      <div class="card" onclick="go('efootball.html')">
-        <img src="assets/efootball.jpg" alt="EFootball">
-        <p>EFootball Coin</p>
-      </div>
-      <div class="card" onclick="go('like-follower.html')">
-        <img src="assets/like.jpg" alt="Like & Follower">
-        <p>Like & Follower</p>
-      </div>
-      <div class="card" onclick="go('mobile-accessories.html')">
-        <img src="assets/accessories.jpg" alt="Accessories">
-        <p>Mobile Accessories</p>
-      </div>
-      <div class="card" onclick="go('mobile-servicing.html')">
-        <img src="assets/servicing.jpg" alt="Servicing">
-        <p>Mobile Servicing</p>
-      </div>
-      <div class="card" onclick="go('coming-soon.html')">
-        <img src="assets/coming.jpg" alt="Coming Soon">
-        <p>Coming Soon</p>
-      </div>
+    <div class="card" onclick="window.location.href='freefire.html'">
+      <img src="assets/ff.jpg" alt="Free Fire">
+      <h3>Free Fire Diamond</h3>
+    </div>
+    <div class="card" onclick="window.location.href='efootball.html'">
+      <img src="assets/efootball.jpg" alt="Efootball">
+      <h3>EFootball Coins</h3>
+    </div>
+    <div class="card" onclick="window.location.href='like-follower.html'">
+      <img src="assets/like.jpg" alt="Like">
+      <h3>Like & Followers</h3>
+    </div>
+    <div class="card" onclick="window.location.href='mobile-accessories.html'">
+      <img src="assets/accessories.jpg" alt="Accessories">
+      <h3>Mobile Accessories</h3>
+    </div>
+    <div class="card" onclick="window.location.href='mobile-servicing.html'">
+      <img src="assets/servicing.jpg" alt="Servicing">
+      <h3>Mobile Servicing</h3>
+    </div>
+    <div class="card" onclick="window.location.href='coming-soon.html'">
+      <img src="assets/coming.jpg" alt="Coming Soon">
+      <h3>Coming Soon</h3>
     </div>
   </section>
 
-  <!-- 🔹 Footer -->
-  <footer class="footer">
-    <p>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</p>
-    <p>Email: <a href="mailto:srbdtopup@gmail.com">srbdtopup@gmail.com</a></p>
+  <!-- Support Section -->
+  <section class="support">
+    <h2>📞 কাস্টমার সাপোর্ট</h2>
+    <p>যেকোনো সমস্যা বা সাহায্যের জন্য আমাদের সাথে যোগাযোগ করুন:</p>
+    <a class="telegram" href="https://t.me/H_A_B_I_B_Top_1" target="_blank">💬 Telegram</a>
+    <a class="whatsapp" href="https://wa.me/8801868461577" target="_blank">📱 WhatsApp</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    Habib YT — আপনার বিশ্বস্ত সহযোগী
+    <small>© 2025 Habib YT. All Rights Reserved.</small>
   </footer>
 
-  <!-- 🔹 Bottom Navigation -->
-  <nav class="bottom-nav">
-    <a href="index.html" class="active">
-      🏠 <span>Home</span>
-    </a>
-    <a href="add-money.html">
-      💰 <span>Add Money</span>
-    </a>
-    <a href="order.html">
-      📦 <span>My Orders</span>
-    </a>
-    <a href="dashboard.html">
-      👤 <span>Account</span>
-    </a>
-  </nav>
-
-  <!-- JS -->
-  <script>
-    function go(page){ window.location.href = page; }
-  </script>
-
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <button onclick="window.location.href='index.html'">🏠 Home</button>
+    <button onclick="window.location.href='dashboard.html'">💼 Dashboard</button>
+    <button onclick="window.location.href='login.html'">🔐 Login</button>
+    <button onclick="window.location.href='add-money.html'">💰 Add Money</button>
+  </div>
 </body>
 </html>
