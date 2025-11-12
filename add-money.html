@@ -1,34 +1,126 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Add Money — Habib YT</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #007bff;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    header a {
+      background: white;
+      color: #007bff;
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 40px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .container h2 {
+      color: #007bff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 8px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #005ad3;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #777;
+      font-size: 14px;
+    }
+  </style>
 </head>
+
 <body>
+  <header>
+    <span>💰 Add Money</span>
+    <a href="dashboard.html">Back</a>
+  </header>
 
-<header class="topbar">
-  <h1>💰 Add Money</h1>
-</header>
+  <div class="container">
+    <h2>ওয়ালেটে টাকা যোগ করুন</h2>
 
-<section class="money-box">
-  <label>Amount (BDT)</label>
-  <input type="number" id="amount" placeholder="Enter amount">
+    <label>Amount (BDT)</label>
+    <input type="number" id="amount" placeholder="যেমনঃ 100" />
 
-  <label>Payment Method</label>
-  <select id="method">
-    <option value="bkash">bKash</option>
-    <option value="nagad">Nagad</option>
-  </select>
+    <label>Method</label>
+    <select id="method">
+      <option value="bkash">bKash</option>
+      <option value="nagad">Nagad</option>
+      <option value="rocket">Rocket</option>
+    </select>
 
-  <label>Transaction ID</label>
-  <input type="text" id="trxid" placeholder="Enter transaction ID">
+    <label>Transaction ID</label>
+    <input type="text" id="trxid" placeholder="আপনার TrxID দিন" />
 
-  <button onclick="submitAddMoney()">Submit</button>
-</section>
+    <button onclick="submitAddMoney()">Submit</button>
+  </div>
 
-<footer class="footer">© 2025 Habib YT</footer>
-<script type="module" src="app.js"></script>
+  <footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
