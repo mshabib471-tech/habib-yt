@@ -1,28 +1,17 @@
-/***************************************************
- 🔥 Habib YT — Firebase Configuration (Final)
-****************************************************/
+/**********************************************
+ 🔥 firebase.js — HABIB YT (Final Stable Version)
+**********************************************/
 
 // Firebase Imports
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
 import { 
-  getAuth, 
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged 
+  getAuth, GoogleAuthProvider 
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 import { 
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  getDoc,
-  doc,
-  setDoc,
-  updateDoc
+  getFirestore 
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-// ✅ তোমার Firebase Config (Habib YT)
+// 🔥 Your Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
   authDomain: "habib-yt.firebaseapp.com",
@@ -33,10 +22,16 @@ const firebaseConfig = {
   measurementId: "G-GNY1T88D34"
 };
 
-// ✅ Initialize Firebase
+// 🔥 Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+
+// 🔥 Auth System
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+
+// 🔥 Google Provider
 export const provider = new GoogleAuthProvider();
 
-console.log("🔥 Firebase initialized successfully! (Habib YT)");
+// 🔥 Firestore Database
+export const db = getFirestore(app);
+
+console.log("🔥 Firebase Connected Successfully!");
