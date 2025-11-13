@@ -1,5 +1,5 @@
 /**********************************************
- 🔥 HABIB YT — FINAL Firebase System (No Conflicts)
+ 🔥 HABIB YT — FINAL FIXED VERSION (Balance Check Added)
 **********************************************/
 
 import { auth, db, provider } from "./firebase.js";
@@ -27,11 +27,8 @@ window.registerUser = async function () {
 
   try {
     await createUserWithEmailAndPassword(auth, email, password);
-
-    // New wallet create
     await setDoc(doc(db, "wallets", auth.currentUser.uid), { balance: 0 });
 
-    alert("একাউন্ট তৈরি হয়েছে!");
     window.location.href = "dashboard.html";
   } catch (err) {
     alert(err.message);
@@ -59,12 +56,11 @@ window.loginUser = async function () {
 window.googleLogin = async function () {
   try {
     const result = await signInWithPopup(auth, provider);
-
     await setDoc(doc(db, "wallets", result.user.uid), { balance: 0 }, { merge: true });
 
     window.location.href = "dashboard.html";
   } catch (err) {
-    alert("Google Login ব্যর্থ: " + err.message);
+    alert(err.message);
   }
 };
 
@@ -103,12 +99,23 @@ window.submitAddMoney = async function () {
 };
 
 /* ---------------------------------------------------
-   ORDER PRODUCT
+   ORDER PRODUCT (with Balance Check)
 --------------------------------------------------- */
 window.orderProduct = async function (name, price) {
   const user = auth.currentUser;
   if (!user) return alert("Please login first!");
 
+  // 🔥 CHECK BALANCE
+  const walletRef = doc(db, "wallets", user.uid);
+  const walletSnap = await getDoc(walletRef);
+
+  let balance = walletSnap.exists() ? walletSnap.data().balance : 0;
+
+  if (balance < price) {
+    return alert(`❌ আপনার ওয়ালেটে পর্যাপ্ত টাকা নেই!\n\nপ্রয়োজনঃ ${price} TK\nবর্তমানঃ ${balance} TK`);
+  }
+
+  // 🔥 Create Order
   await addDoc(collection(db, "orders"), {
     user: user.uid,
     email: user.email,
@@ -118,11 +125,16 @@ window.orderProduct = async function (name, price) {
     created: new Date()
   });
 
-  alert("Order Submitted!");
+  // 🔥 Deduct Balance
+  await updateDoc(walletRef, {
+    balance: balance - price
+  });
+
+  alert(`✅ অর্ডার সম্পন্ন হয়েছে: ${name} (${price} TK)`);
 };
 
 /* ---------------------------------------------------
-   DASHBOARD LOAD
+   DASHBOARD LOAD (fixed)
 --------------------------------------------------- */
 window.loadDashboard = function () {
   onAuthStateChanged(auth, async (user) => {
@@ -131,15 +143,15 @@ window.loadDashboard = function () {
       return;
     }
 
-    // Email show
     document.getElementById("userEmail").textContent = user.email;
 
-    // Wallet balance
-    const wallet = await getDoc(doc(db, "wallets", user.uid));
-    document.getElementById("walletBalance").textContent =
-      wallet.exists() ? wallet.data().balance + " BDT" : "0 BDT";
+    // 🔥 Wallet Load
+    const walletRef = doc(db, "wallets", user.uid);
+    const snap = await getDoc(walletRef);
+    const bal = snap.exists() ? snap.data().balance : 0;
+    document.getElementById("walletBalance").textContent = bal + " BDT";
 
-    // Recent orders
+    // 🔥 Recent Orders
     const q = query(
       collection(db, "orders"),
       where("user", "==", user.uid),
@@ -147,24 +159,21 @@ window.loadDashboard = function () {
       limit(5)
     );
 
-    const snap = await getDocs(q);
+    const orders = await getDocs(q);
     let html = "";
 
-    if (snap.empty) {
-      html = "<p>কোনো অর্ডার পাওয়া যায়নি</p>";
-    } else {
-      snap.forEach((docx) => {
-        const o = docx.data();
-        html += `
-          <div class="order-item">
-            <p><b>${o.product}</b></p>
-            <p>Price: ${o.price}৳</p>
-            <p>Status: ${o.status}</p>
-          </div>
-        `;
-      });
-    }
+    orders.forEach((o) => {
+      const d = o.data();
+      html += `
+        <div class="order-item">
+          <p><b>${d.product}</b></p>
+          <p>Price: ${d.price} TK</p>
+          <p>Status: ${d.status}</p>
+        </div>
+      `;
+    });
 
-    document.getElementById("recentOrders").innerHTML = html;
+    document.getElementById("recentOrders").innerHTML =
+      html || "<p>কোনো অর্ডার পাওয়া যায়নি</p>";
   });
 };
