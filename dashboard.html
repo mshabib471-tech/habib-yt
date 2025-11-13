@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard | Habib YT</title>
 
   <style>
@@ -14,113 +14,184 @@
     }
     header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       background: #007bff;
       color: white;
       padding: 12px 18px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
+    header h2 { margin: 0; }
     .logout {
       background: white;
       color: #007bff;
-      padding: 6px 12px;
-      border-radius: 8px;
       border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
       cursor: pointer;
       font-weight: bold;
     }
     .container {
       width: 90%;
       max-width: 500px;
-      background: white;
       margin: 25px auto;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      background: white;
+      padding: 18px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    h3 {
+      color: #007bff;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .info {
+      text-align: center;
+      line-height: 1.7;
     }
     .wallet {
-      background: #eaf1ff;
-      padding: 12px;
-      border-radius: 8px;
       text-align: center;
-      font-weight: bold;
+      background: #e8f1ff;
       color: #007bff;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 10px 0;
     }
     .btns {
       display: flex;
       justify-content: space-around;
-      margin-top: 20px;
+      margin-top: 15px;
     }
     .btns button {
       background: #007bff;
-      border: none;
-      padding: 12px 15px;
-      border-radius: 8px;
-      font-weight: bold;
       color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
       cursor: pointer;
+      font-weight: bold;
+    }
+    .btns button:hover {
+      background: #0056d4;
     }
     .orders {
-      margin-top: 20px;
       background: white;
       padding: 15px;
       border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .order-item {
-      background: #f8f8f8;
-      padding: 8px;
+      background: #f9f9f9;
       border-left: 4px solid #007bff;
       margin: 8px 0;
+      padding: 8px;
       border-radius: 6px;
     }
     footer {
       text-align: center;
       background: #007bff;
       color: white;
-      padding: 12px;
+      padding: 10px;
       position: fixed;
-      width: 100%;
       bottom: 0;
+      width: 100%;
     }
   </style>
 </head>
-
 <body>
+  <header>
+    <h2>👤 My Account</h2>
+    <button class="logout" onclick="logout()">Logout</button>
+  </header>
 
-<header>
-  <h2>👤 My Account</h2>
-  <button onclick="logout()" class="logout">Logout</button>
-</header>
+  <div class="container">
+    <h3>Welcome Back!</h3>
+    <div class="info">
+      <p><b>Email:</b> <span id="userEmail">Loading...</span></p>
+      <div class="wallet">💰 Wallet Balance: <span id="walletBalance">Loading...</span></div>
+    </div>
 
-<div class="container">
-  <h3 style="text-align:center;color:#007bff;">Welcome Back!</h3>
-
-  <p style="text-align:center;">
-    <b>Email:</b> <span id="userEmail">Loading...</span>
-  </p>
-
-  <div class="wallet">💰 Wallet Balance: <span id="walletBalance">0 BDT</span></div>
-
-  <div class="btns">
-    <button onclick="window.location.href='add-money.html'">➕ Add Money</button>
-    <button onclick="window.location.href='index.html'">🏠 Home</button>
+    <div class="btns">
+      <button onclick="window.location.href='add-money.html'">➕ Add Money</button>
+      <button onclick="window.location.href='index.html'">🏠 Home</button>
+    </div>
   </div>
-</div>
 
-<div class="orders">
-  <h3 style="color:#007bff;">🛒 Recent Orders</h3>
-  <div id="recentOrders">Loading...</div>
-</div>
+  <div class="orders">
+    <h3>🛒 Recent Orders</h3>
+    <div id="recentOrders">Loading...</div>
+  </div>
 
-<footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
+  <footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
 
-<script type="module" src="firebase.js"></script>
-<script type="module" src="app.js"></script>
+  <!-- Firebase Config -->
+  <script type="module" src="firebase.js"></script>
 
-<script>
-  loadDashboard();
-</script>
+  <!-- Dashboard Logic -->
+  <script type="module">
+    import { auth, db } from "./firebase.js";
+    import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+    import { 
+      getDoc, doc, collection, getDocs, query, where, orderBy, limit 
+    } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+    const emailField = document.getElementById("userEmail");
+    const balanceField = document.getElementById("walletBalance");
+    const ordersDiv = document.getElementById("recentOrders");
+
+    // 🔥 Auto-login check
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      // ✔ Set Email
+      emailField.textContent = user.email;
+
+      // ✔ Load Wallet Balance
+      const walletRef = doc(db, "wallets", user.uid);
+      const walletSnap = await getDoc(walletRef);
+      balanceField.textContent = walletSnap.exists()
+        ? walletSnap.data().balance + " BDT"
+        : "0 BDT";
+
+      // ✔ Load Recent Orders
+      const q = query(
+        collection(db, "orders"),
+        where("user", "==", user.uid),
+        orderBy("created", "desc"),
+        limit(10)
+      );
+
+      const snapshot = await getDocs(q);
+
+      if (snapshot.empty) {
+        ordersDiv.innerHTML = "<p>কোনো অর্ডার পাওয়া যায়নি।</p>";
+      } else {
+        let html = "";
+        snapshot.forEach((docSnap) => {
+          const d = docSnap.data();
+          html += `
+            <div class="order-item">
+              <p><b>${d.product}</b></p>
+              <p>Price: ${d.price} TK</p>
+              <p>Status: ${d.status}</p>
+            </div>
+          `;
+        });
+        ordersDiv.innerHTML = html;
+      }
+    });
+
+    // ✔ Logout Function
+    window.logout = async function () {
+      await signOut(auth);
+      window.location.href = "login.html";
+    };
+  </script>
 
 </body>
 </html>
