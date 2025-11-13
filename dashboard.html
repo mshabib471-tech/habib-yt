@@ -1,47 +1,105 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard | Habib YT</title>
 
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background: #f4f7fb;
       margin: 0;
-      padding-bottom: 80px;
+      background: #f4f7fb;
+      padding-bottom: 70px;
     }
+
     header {
-      background: #007bff;
-      padding: 15px;
-      color: white;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      background: #007bff;
+      color: white;
+      padding: 12px 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
+
+    header h2 { margin: 0; }
     .logout {
       background: white;
       color: #007bff;
-      padding: 5px 12px;
-      border-radius: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
       border: none;
+      cursor: pointer;
       font-weight: bold;
     }
+
     .container {
       background: white;
-      margin: 20px auto;
+      max-width: 500px;
+      margin: 22px auto;
       padding: 20px;
-      width: 90%;
-      max-width: 480px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
+
+    h3 {
+      color: #007bff;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .wallet {
+      background: #eaf1ff;
+      padding: 12px;
+      border-radius: 10px;
+      color: #007bff;
+      text-align: center;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .btns {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 15px;
+    }
+
+    .btns button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .orders {
+      margin: 25px auto;
+      background: white;
+      padding: 20px;
+      max-width: 500px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
     .order-item {
       background: #f8f8f8;
+      margin: 8px 0;
       padding: 10px;
       border-left: 4px solid #007bff;
-      margin: 8px 0;
       border-radius: 6px;
+    }
+
+    footer {
+      text-align: center;
+      background: #007bff;
+      color: white;
+      padding: 12px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
     }
   </style>
 </head>
@@ -49,31 +107,98 @@
 <body>
 
 <header>
-  <h2>👤 My Account</h2>
-  <button class="logout" onclick="logout()">Logout</button>
+  <h2>👤 Dashboard</h2>
+  <button onclick="logout()" class="logout">Logout</button>
 </header>
 
 <div class="container">
   <h3>Welcome Back!</h3>
+  <p style="text-align:center;">
+    <b>Email:</b> <span id="userEmail">Loading...</span>
+  </p>
 
-  <p><b>Email:</b> <span id="userEmail">Loading...</span></p>
+  <div class="wallet">
+    💰 Wallet Balance: <span id="walletBalance">Loading...</span>
+  </div>
 
-  <div class="wallet">💰 Wallet Balance: <span id="walletBalance">0 BDT</span></div>
-
-  <button onclick="window.location='add-money.html'">➕ Add Money</button>
-  <button onclick="window.location='index.html'">🏠 Home</button>
+  <div class="btns">
+    <button onclick="window.location.href='add-money.html'">➕ Add Money</button>
+    <button onclick="window.location.href='index.html'">🏠 Home</button>
+  </div>
 </div>
 
-<div class="container">
+<div class="orders">
   <h3>🛒 Recent Orders</h3>
   <div id="recentOrders">Loading...</div>
 </div>
 
+<footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
+
+<!-- Firebase Scripts -->
 <script type="module" src="firebase.js"></script>
 <script type="module" src="app.js"></script>
 
-<script>
-  loadDashboard();
+<!-- Dashboard Logic -->
+<script type="module">
+  import { auth, db } from "./firebase.js";
+  import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+  import { getDoc, doc, collection, getDocs, query, where, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+  const emailEl = document.getElementById("userEmail");
+  const balanceEl = document.getElementById("walletBalance");
+  const ordersEl = document.getElementById("recentOrders");
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    // Email
+    emailEl.textContent = user.email;
+
+    // Wallet Balance
+    const walletRef = doc(db, "wallets", user.uid);
+    const wSnap = await getDoc(walletRef);
+    if (wSnap.exists()) {
+      balanceEl.textContent = wSnap.data().balance + " BDT";
+    } else {
+      balanceEl.textContent = "0 BDT";
+    }
+
+    // Recent Orders
+    const q = query(
+      collection(db, "orders"),
+      where("user", "==", user.uid),
+      orderBy("created", "desc"),
+      limit(5)
+    );
+
+    const snap = await getDocs(q);
+
+    if (snap.empty) {
+      ordersEl.innerHTML = "<p>কোনো অর্ডার পাওয়া যায়নি।</p>";
+    } else {
+      let html = "";
+      snap.forEach((d) => {
+        let o = d.data();
+        html += `
+          <div class="order-item">
+            <p><b>${o.product}</b></p>
+            <p>Price: ${o.price} TK</p>
+            <p>Status: ${o.status}</p>
+          </div>
+        `;
+      });
+      ordersEl.innerHTML = html;
+    }
+  });
+
+  // Logout
+  window.logout = async function () {
+    await signOut(auth);
+    window.location.href = "login.html";
+  };
 </script>
 
 </body>
