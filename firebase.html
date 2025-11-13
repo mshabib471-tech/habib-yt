@@ -1,15 +1,8 @@
-/**********************************************
- 🔥 firebase.js — HABIB YT (Final Stable Version)
-**********************************************/
+// firebase.js (Final)
 
-// Firebase Imports
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import { 
-  getAuth, GoogleAuthProvider 
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-import { 
-  getFirestore 
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
 // 🔥 Your Firebase Config
 const firebaseConfig = {
@@ -22,16 +15,8 @@ const firebaseConfig = {
   measurementId: "G-GNY1T88D34"
 };
 
-// 🔥 Initialize Firebase
+// Initialize Firebase
 export const app = initializeApp(firebaseConfig);
-
-// 🔥 Auth System
 export const auth = getAuth(app);
-
-// 🔥 Google Provider
-export const provider = new GoogleAuthProvider();
-
-// 🔥 Firestore Database
 export const db = getFirestore(app);
-
-console.log("🔥 Firebase Connected Successfully!");
+export const provider = new GoogleAuthProvider();
