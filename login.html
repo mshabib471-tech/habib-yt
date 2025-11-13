@@ -1,228 +1,175 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Habib YT — আপনার বিশ্বস্ত সহযোগী</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Habib YT</title>
 
   <style>
     body {
-      font-family: "Poppins", sans-serif;
       margin: 0;
+      padding: 0;
       background: #f4f7fb;
-      color: #333;
+      font-family: "Poppins", sans-serif;
     }
 
-    /* Header */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #007bff;
-      color: white;
-      padding: 12px 18px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    header img {
-      height: 42px;
-      width: 42px;
-      border-radius: 50%;
-    }
-
-    nav {
-      display: flex;
-      gap: 10px;
-    }
-
-    nav button {
+    .container {
+      max-width: 420px;
+      margin: 60px auto;
       background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+
+    h2 {
       color: #007bff;
-      border: none;
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-top: 12px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
       border-radius: 8px;
-      padding: 8px 12px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background: #007bff;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #005ad3;
+    }
+
+    .google {
+      background: #db4437 !important;
+      margin-top: 10px;
+    }
+
+    .home-btn {
+      background: #28a745 !important;
+      margin-top: 20px;
+    }
+
+    .signup-link {
+      margin-top: 15px;
+      display: block;
+      font-size: 14px;
+      color: #007bff;
       cursor: pointer;
       font-weight: 600;
     }
 
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: 40px 20px 20px;
-    }
-
-    .hero h1 {
-      color: #007bff;
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    /* Services */
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 15px;
-      margin: 20px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      transition: 0.3s;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card img {
-      width: 100%;
-      border-radius: 8px;
-      height: 120px;
-      object-fit: cover;
-    }
-
-    .card h3 {
-      margin: 10px 0 5px;
-      color: #007bff;
-    }
-
-    /* Support Section */
-    .support {
-      background: #fff;
-      margin: 25px 15px;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    footer {
-      background: #007bff;
-      color: white;
-      text-align: center;
-      padding: 12px;
-      margin-top: 30px;
-      font-weight: bold;
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Bottom Nav */
-    .bottom-nav {
+    /* Signup Modal */
+    #signupBox {
+      display: none;
       position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: white;
-      border-top: 1px solid #ccc;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
     }
 
-    .bottom-nav button {
-      background: none;
-      border: none;
-      color: #007bff;
-      font-weight: bold;
-      cursor: pointer;
+    #signupForm {
+      background: white;
+      width: 90%;
+      max-width: 420px;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+      animation: fadeIn 0.25s ease-in-out;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .closeBtn {
+      background: #dc3545;
+      margin-top: 10px;
+    }
+
   </style>
 </head>
-
 <body>
 
-  <!-- Header -->
-  <header>
-    <img src="assets/logo.png" alt="Habib YT Logo">
-    <h2>Habib YT</h2>
-    <nav>
-      <button id="loginBtn">Login</button>
-      <button onclick="window.location.href='dashboard.html'">Dashboard</button>
-    </nav>
-  </header>
+  <div class="container">
+    <h2>🔐 Login</h2>
 
-  <!-- Hero -->
-  <section class="hero">
-    <h1>🔥 গেমিং টপ-আপ ও মোবাইল সার্ভিস</h1>
-    <p>Free Fire, EFootball, Like & Follower সার্ভিস এখন আরও সহজে</p>
-  </section>
+    <label>Email</label>
+    <input type="email" id="loginEmail" placeholder="Email লিখুন">
 
-  <!-- Services -->
-  <section class="services">
-    
-    <div class="card" onclick="window.location.href='freefire.html'">
-      <img src="assets/ff.jpg" alt="Free Fire">
-      <h3>Free Fire Diamond</h3>
-    </div>
+    <label>Password</label>
+    <input type="password" id="loginPassword" placeholder="Password লিখুন">
 
-    <div class="card" onclick="window.location.href='efootball.html'">
-      <img src="assets/efootball.jpg" alt="Efootball">
-      <h3>EFootball Coins</h3>
-    </div>
+    <button onclick="loginUser()">Login</button>
+    <button onclick="googleLogin()" class="google">Login with Google</button>
+    <button onclick="window.location.href='index.html'" class="home-btn">🏠 Go to Home</button>
 
-    <div class="card" onclick="window.location.href='like-follower.html'">
-      <img src="assets/like.jpg" alt="Like">
-      <h3>Like & Followers</h3>
-    </div>
-
-    <div class="card" onclick="window.location.href='mobile-accessories.html'">
-      <img src="assets/accessories.jpg" alt="Accessories">
-      <h3>Mobile Accessories</h3>
-    </div>
-
-    <div class="card" onclick="window.location.href='mobile-servicing.html'">
-      <img src="assets/servicing.jpg" alt="Servicing">
-      <h3>Mobile Servicing</h3>
-    </div>
-
-    <div class="card" onclick="window.location.href='coming-soon.html'">
-      <img src="assets/coming.jpg" alt="Coming Soon">
-      <h3>Coming Soon</h3>
-    </div>
-
-  </section>
-
-  <!-- Support -->
-  <section class="support">
-    <h2>📞 কাস্টমার সাপোর্ট</h2>
-    <p>যেকোনো সমস্যা বা সাহায্যের জন্য যোগাযোগ করুন:</p>
-    <a class="telegram" href="https://t.me/H_A_B_I_B_Top_1" target="_blank" style="background:#0088cc;padding:10px 15px;border-radius:8px;color:white;text-decoration:none;">Telegram</a>
-    <a class="whatsapp" href="https://wa.me/8801868461577" target="_blank" style="background:#25d366;padding:10px 15px;border-radius:8px;color:white;text-decoration:none;">WhatsApp</a>
-  </section>
-
-  <footer>
-    Habib YT — আপনার বিশ্বস্ত সহযোগী
-    <small>© 2025 Habib YT. All Rights Reserved.</small>
-  </footer>
-
-  <!-- Bottom Nav -->
-  <div class="bottom-nav">
-    <button onclick="window.location.href='index.html'">🏠 Home</button>
-    <button onclick="window.location.href='dashboard.html'">💼 Dashboard</button>
-    <button onclick="window.location.href='add-money.html'">💰 Add Money</button>
-    <button onclick="window.location.href='login.html'">🔐 Login</button>
+    <span class="signup-link" onclick="openSignup()">আপনার একাউন্ট নেই? Sign Up করুন</span>
   </div>
 
-  <!-- Firebase Auth Check -->
+  <!-- SIGNUP POPUP -->
+  <div id="signupBox">
+    <div id="signupForm">
+      <h2 style="color:#007bff;text-align:center;">📝 Sign Up</h2>
+
+      <label>Email</label>
+      <input type="email" id="signupEmail" placeholder="নতুন Email দিন">
+
+      <label>Password</label>
+      <input type="password" id="signupPassword" placeholder="নতুন Password দিন">
+
+      <button onclick="registerUser()">Create Account</button>
+      <button class="closeBtn" onclick="closeSignup()">Close</button>
+    </div>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="app.js"></script>
+
+  <script>
+    function openSignup() {
+      document.getElementById("signupBox").style.display = "flex";
+    }
+
+    function closeSignup() {
+      document.getElementById("signupBox").style.display = "none";
+    }
+  </script>
+
+  <!-- Auto Redirect If Already Logged In -->
   <script type="module">
     import { auth } from "./firebase.js";
     import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
-    const loginBtn = document.getElementById("loginBtn");
-
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        loginBtn.innerText = "My Account";
-        loginBtn.onclick = () => window.location.href = "dashboard.html";
-      } else {
-        loginBtn.innerText = "Login";
-        loginBtn.onclick = () => window.location.href = "login.html";
+        window.location.href = "dashboard.html";
       }
     });
   </script>
