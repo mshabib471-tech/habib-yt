@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Money — Habib YT</title>
-  <link rel="stylesheet" href="style.css">
+
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
       background: #f5f7fb;
       margin: 0;
       padding: 0;
@@ -15,12 +15,12 @@
     header {
       background: #007bff;
       color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       padding: 15px 20px;
       font-size: 20px;
       font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     header a {
       background: white;
@@ -31,20 +31,16 @@
       font-weight: bold;
     }
     .container {
-      max-width: 420px;
+      width: 90%;
+      max-width: 430px;
       background: white;
-      margin: 40px auto;
-      padding: 25px;
+      margin: 30px auto;
+      padding: 20px;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: 600;
-      color: #333;
-    }
-    input, select {
+    label { font-weight: bold; margin-top: 10px; display: block; }
+    input {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
@@ -64,119 +60,60 @@
       font-weight: bold;
       cursor: pointer;
     }
-    button:hover {
-      background: #005ad3;
-    }
     .steps {
       background: #eef5ff;
       border-left: 4px solid #007bff;
       padding: 12px;
-      border-radius: 6px;
-      font-size: 14px;
+      border-radius: 8px;
+      margin-top: 15px;
       line-height: 1.8;
-      margin-top: 20px;
     }
     footer {
       text-align: center;
-      margin-top: 30px;
+      padding: 20px;
       color: #777;
     }
   </style>
 </head>
+
 <body>
 
-  <header>
-    <span>💰 Add Money</span>
-    <a href="dashboard.html">Back</a>
-  </header>
+<header>
+  <span>💰 Add Money</span>
+  <a href="dashboard.html">Back</a>
+</header>
 
-  <div class="container">
-    <h2 style="text-align:center; color:#007bff;">ওয়ালেটে টাকা যোগ করুন</h2>
+<div class="container">
+  <h2 style="text-align:center;color:#007bff;">ওয়ালেটে টাকা যোগ করুন</h2>
 
-    <label>Amount (BDT)</label>
-    <input type="number" id="amount" placeholder="যেমনঃ 100">
+  <label>Amount (BDT)</label>
+  <input id="amount" type="number" placeholder="যেমনঃ 100">
 
-    <label>Payment Method</label>
-    <input type="text" value="bKash" disabled style="background:#f9f9f9; font-weight:bold;">
+  <label>Payment Method</label>
+  <input type="text" value="bKash" disabled>
 
-    <label>Send Money করুন এই নম্বরে:</label>
-    <input type="text" value="01868461577" readonly style="background:#fff5f5; color:#c82333; font-weight:bold;">
+  <label>Send Money করুন এই নম্বরে:</label>
+  <input type="text" value="01868461577" readonly style="color:#c82333;font-weight:bold;">
 
-    <div class="steps">
-      🧾 <b>নির্দেশনা:</b><br>
-      1️⃣ বিকাশ অ্যাপে যান বা *247# ডায়াল করুন।<br>
-      2️⃣ “Send Money” অপশন সিলেক্ট করুন।<br>
-      3️⃣ উপরের নম্বরে টাকা পাঠান।<br>
-      4️⃣ টাকা পাঠানোর পর TrxID নিচে লিখুন।<br>
-      5️⃣ Submit বাটনে ক্লিক করুন।
-    </div>
-
-    <label>Transaction ID</label>
-    <input type="text" id="trxid" placeholder="আপনার TrxID দিন">
-
-    <button id="submitBtn">Submit</button>
+  <div class="steps">
+    🧾 <b>নির্দেশনা:</b><br>
+    1️⃣ বিকাশ অ্যাপে যান বা *247# ডায়াল করুন।<br>
+    2️⃣ “Send Money” সিলেক্ট করুন।<br>
+    3️⃣ উপরের নম্বরে টাকা পাঠান।<br>
+    4️⃣ TrxID নিচে লিখুন।<br>
+    5️⃣ Submit চাপুন।
   </div>
 
-  <footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
+  <label>Transaction ID</label>
+  <input id="trxid" type="text" placeholder="আপনার TrxID দিন">
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-    import { 
-      getAuth, onAuthStateChanged 
-    } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-    import { 
-      getFirestore, collection, addDoc 
-    } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+  <button onclick="submitAddMoney()">Submit</button>
+</div>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
-      authDomain: "habib-yt.firebaseapp.com",
-      projectId: "habib-yt",
-      storageBucket: "habib-yt.firebasestorage.app",
-      messagingSenderId: "656628491244",
-      appId: "1:656628491244:web:e01ccd42bd8a2b1b4c96c9",
-      measurementId: "G-GNY1T88D34"
-    };
+<footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    // ✅ যদি লগইন না থাকে → login.html এ পাঠাও
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        alert("⚠ লগইন করুন প্রথমে!");
-        window.location.href = "login.html";
-      }
-    });
-
-    // ✅ Submit Add Money
-    document.getElementById("submitBtn").addEventListener("click", async () => {
-      const user = auth.currentUser;
-      if (!user) return alert("⚠ লগইন করুন প্রথমে!");
-
-      const amount = document.getElementById("amount").value;
-      const trxid = document.getElementById("trxid").value;
-
-      if (!amount || !trxid) return alert("সব ঘর পূরণ করুন!");
-
-      try {
-        await addDoc(collection(db, "walletRequests"), {
-          user: user.uid,
-          email: user.email,
-          amount: parseInt(amount),
-          method: "bkash",
-          trxid: trxid,
-          status: "pending",
-          created: new Date()
-        });
-        alert("✅ Add Money Request Submitted!");
-        window.location.href = "dashboard.html";
-      } catch (err) {
-        alert("❌ Error: " + err.message);
-      }
-    });
-  <script type="module" src="firebase.js"></script>
+<script type="module" src="firebase.js"></script>
 <script type="module" src="app.js"></script>
+
 </body>
 </html>
