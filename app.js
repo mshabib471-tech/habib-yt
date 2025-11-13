@@ -1,96 +1,113 @@
 /**********************************************
-🔥 HABIB YT — Full Firebase System (Final)
+ 🔥 HABIB YT — FINAL Firebase System (No Conflicts)
 **********************************************/
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+import { auth, db, provider } from "./firebase.js";
 import { 
-  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged 
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
-import {
-  getFirestore, doc, setDoc, getDoc, addDoc,
-  collection, getDocs, updateDoc, query, where, orderBy, limit
+import { 
+  doc, setDoc, getDoc, addDoc, updateDoc,
+  collection, getDocs, query, where, orderBy, limit
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-// ✅ Firebase Config
-const firebaseConfig = {
-  apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
-  authDomain: "habib-yt.firebaseapp.com",
-  projectId: "habib-yt",
-  storageBucket: "habib-yt.firebasestorage.app",
-  messagingSenderId: "656628491244",
-  appId: "1:656628491244:web:e01ccd42bd8a2b1b4c96c9"
-};
+/* ---------------------------------------------------
+   SIGNUP
+--------------------------------------------------- */
+window.registerUser = async function () {
+  const email = document.getElementById("signupEmail")?.value;
+  const password = document.getElementById("signupPassword")?.value;
 
-// Initialize
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const provider = new GoogleAuthProvider();
+  if (!email || !password) return alert("সব ঘর পূরণ করুন!");
 
-/************* LOGIN SYSTEM *************/
-window.loginUser = async function () {
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    await createUserWithEmailAndPassword(auth, email, password);
+
+    // New wallet create
+    await setDoc(doc(db, "wallets", auth.currentUser.uid), { balance: 0 });
+
+    alert("একাউন্ট তৈরি হয়েছে!");
     window.location.href = "dashboard.html";
   } catch (err) {
     alert(err.message);
   }
 };
 
-window.registerUser = async function () {
-  const email = document.getElementById("signupEmail").value;
-  const password = document.getElementById("signupPassword").value;
-  await createUserWithEmailAndPassword(auth, email, password);
-  await setDoc(doc(db, "wallets", auth.currentUser.uid), { balance: 0 });
-  window.location.href = "dashboard.html";
+/* ---------------------------------------------------
+   LOGIN
+--------------------------------------------------- */
+window.loginUser = async function () {
+  const email = document.getElementById("loginEmail")?.value;
+  const password = document.getElementById("loginPassword")?.value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    window.location.href = "dashboard.html";
+  } catch (err) {
+    alert("লগইন ব্যর্থ: " + err.message);
+  }
 };
 
+/* ---------------------------------------------------
+   GOOGLE LOGIN
+--------------------------------------------------- */
 window.googleLogin = async function () {
-  await signInWithPopup(auth, provider);
-  await setDoc(doc(db, "wallets", auth.currentUser.uid), { balance: 0 }, { merge: true });
-  window.location.href = "dashboard.html";
+  try {
+    const result = await signInWithPopup(auth, provider);
+
+    await setDoc(doc(db, "wallets", result.user.uid), { balance: 0 }, { merge: true });
+
+    window.location.href = "dashboard.html";
+  } catch (err) {
+    alert("Google Login ব্যর্থ: " + err.message);
+  }
 };
 
+/* ---------------------------------------------------
+   LOGOUT
+--------------------------------------------------- */
 window.logout = async function () {
   await signOut(auth);
   window.location.href = "login.html";
 };
 
-/************* ADD MONEY *************/
+/* ---------------------------------------------------
+   ADD MONEY SUBMIT
+--------------------------------------------------- */
 window.submitAddMoney = async function () {
   const user = auth.currentUser;
-  const amount = document.getElementById("amount").value;
-  const trxid = document.getElementById("trxid").value;
+  if (!user) return alert("Please login first!");
+
+  const amount = document.getElementById("amount")?.value;
+  const trxid = document.getElementById("trxid")?.value;
 
   if (!amount || !trxid) return alert("সব ঘর পূরণ করুন!");
 
   await addDoc(collection(db, "walletRequests"), {
     user: user.uid,
     email: user.email,
-    amount: Number(amount),
+    amount: parseInt(amount),
     method: "bKash",
     trxid,
     status: "pending",
-    created: Date.now()
+    created: new Date()
   });
 
   alert("Add Money Request Submitted!");
   window.location.href = "dashboard.html";
 };
 
-/************* ORDER PRODUCT *************/
+/* ---------------------------------------------------
+   ORDER PRODUCT
+--------------------------------------------------- */
 window.orderProduct = async function (name, price) {
   const user = auth.currentUser;
-  const walletRef = doc(db, "wallets", user.uid);
-  const walletSnap = await getDoc(walletRef);
-
-  const balance = walletSnap.exists() ? walletSnap.data().balance : 0;
-
-  if (balance < price) return alert("❌ পর্যাপ্ত ব্যালেন্স নেই!");
+  if (!user) return alert("Please login first!");
 
   await addDoc(collection(db, "orders"), {
     user: user.uid,
@@ -98,30 +115,31 @@ window.orderProduct = async function (name, price) {
     product: name,
     price: price,
     status: "pending",
-    created: Date.now()
+    created: new Date()
   });
 
-  alert("Order submitted!");
+  alert("Order Submitted!");
 };
 
-/************* DASHBOARD LOAD *************/
-onAuthStateChanged(auth, async (user) => {
-  if (!user) return;
+/* ---------------------------------------------------
+   DASHBOARD LOAD
+--------------------------------------------------- */
+window.loadDashboard = function () {
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.href = "login.html";
+      return;
+    }
 
-  const emailField = document.getElementById("userEmail");
-  const balField = document.getElementById("walletBalance");
-  const ordersDiv = document.getElementById("recentOrders");
+    // Email show
+    document.getElementById("userEmail").textContent = user.email;
 
-  if (emailField) emailField.textContent = user.email;
+    // Wallet balance
+    const wallet = await getDoc(doc(db, "wallets", user.uid));
+    document.getElementById("walletBalance").textContent =
+      wallet.exists() ? wallet.data().balance + " BDT" : "0 BDT";
 
-  // Load Wallet
-  const walletDoc = await getDoc(doc(db, "wallets", user.uid));
-  if (walletDoc.exists() && balField) {
-    balField.textContent = walletDoc.data().balance + " BDT";
-  }
-
-  // Load Recent Orders
-  if (ordersDiv) {
+    // Recent orders
     const q = query(
       collection(db, "orders"),
       where("user", "==", user.uid),
@@ -130,21 +148,23 @@ onAuthStateChanged(auth, async (user) => {
     );
 
     const snap = await getDocs(q);
+    let html = "";
 
     if (snap.empty) {
-      ordersDiv.innerHTML = "<p>কোনো অর্ডার পাওয়া যায়নি।</p>";
+      html = "<p>কোনো অর্ডার পাওয়া যায়নি</p>";
     } else {
-      let html = "";
-      snap.forEach((docSnap) => {
-        const d = docSnap.data();
+      snap.forEach((docx) => {
+        const o = docx.data();
         html += `
-        <div class="order-item">
-          <p><b>${d.product}</b></p>
-          <p>Price: ${d.price} TK</p>
-          <p>Status: ${d.status}</p>
-        </div>`;
+          <div class="order-item">
+            <p><b>${o.product}</b></p>
+            <p>Price: ${o.price}৳</p>
+            <p>Status: ${o.status}</p>
+          </div>
+        `;
       });
-      ordersDiv.innerHTML = html;
     }
-  }
-});
+
+    document.getElementById("recentOrders").innerHTML = html;
+  });
+};
