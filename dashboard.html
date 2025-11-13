@@ -10,188 +10,71 @@
       font-family: "Poppins", sans-serif;
       background: #f4f7fb;
       margin: 0;
-      padding-bottom: 70px;
+      padding-bottom: 80px;
     }
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       background: #007bff;
+      padding: 15px;
       color: white;
-      padding: 12px 18px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
     }
-    header h2 { margin: 0; }
     .logout {
       background: white;
       color: #007bff;
+      padding: 5px 12px;
+      border-radius: 6px;
       border: none;
-      border-radius: 8px;
-      padding: 6px 12px;
-      cursor: pointer;
       font-weight: bold;
     }
     .container {
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
       width: 90%;
-      max-width: 500px;
-      margin: 25px auto;
-      background: white;
-      padding: 18px;
+      max-width: 480px;
       border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-    h3 {
-      color: #007bff;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .info {
-      text-align: center;
-      line-height: 1.7;
-    }
-    .wallet {
-      text-align: center;
-      background: #e8f1ff;
-      color: #007bff;
-      font-weight: bold;
-      padding: 10px;
-      border-radius: 8px;
-      margin: 10px 0;
-    }
-    .btns {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 15px;
-    }
-    .btns button {
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 15px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .btns button:hover {
-      background: #0056d4;
-    }
-    .orders {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      margin-top: 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     .order-item {
-      background: #f9f9f9;
+      background: #f8f8f8;
+      padding: 10px;
       border-left: 4px solid #007bff;
       margin: 8px 0;
-      padding: 8px;
       border-radius: 6px;
-    }
-    footer {
-      text-align: center;
-      background: #007bff;
-      color: white;
-      padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <h2>👤 My Account</h2>
-    <button class="logout" onclick="logout()">Logout</button>
-  </header>
 
-  <div class="container">
-    <h3>Welcome Back!</h3>
-    <div class="info">
-      <p><b>Email:</b> <span id="userEmail">Loading...</span></p>
-      <div class="wallet">💰 Wallet Balance: <span id="walletBalance">Loading...</span></div>
-    </div>
+<header>
+  <h2>👤 My Account</h2>
+  <button class="logout" onclick="logout()">Logout</button>
+</header>
 
-    <div class="btns">
-      <button onclick="window.location.href='add-money.html'">➕ Add Money</button>
-      <button onclick="window.location.href='index.html'">🏠 Home</button>
-    </div>
-  </div>
+<div class="container">
+  <h3>Welcome Back!</h3>
 
-  <div class="orders">
-    <h3>🛒 Recent Orders</h3>
-    <div id="recentOrders">Loading...</div>
-  </div>
+  <p><b>Email:</b> <span id="userEmail">Loading...</span></p>
 
-  <footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
+  <div class="wallet">💰 Wallet Balance: <span id="walletBalance">0 BDT</span></div>
 
-  <!-- Firebase Config -->
-  <script type="module" src="firebase.js"></script>
+  <button onclick="window.location='add-money.html'">➕ Add Money</button>
+  <button onclick="window.location='index.html'">🏠 Home</button>
+</div>
 
-  <!-- Dashboard Logic -->
-  <script type="module">
-    import { auth, db } from "./firebase.js";
-    import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-    import { 
-      getDoc, doc, collection, getDocs, query, where, orderBy, limit 
-    } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+<div class="container">
+  <h3>🛒 Recent Orders</h3>
+  <div id="recentOrders">Loading...</div>
+</div>
 
-    const emailField = document.getElementById("userEmail");
-    const balanceField = document.getElementById("walletBalance");
-    const ordersDiv = document.getElementById("recentOrders");
+<script type="module" src="firebase.js"></script>
+<script type="module" src="app.js"></script>
 
-    // 🔥 Auto-login check
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        window.location.href = "login.html";
-        return;
-      }
-
-      // ✔ Set Email
-      emailField.textContent = user.email;
-
-      // ✔ Load Wallet Balance
-      const walletRef = doc(db, "wallets", user.uid);
-      const walletSnap = await getDoc(walletRef);
-      balanceField.textContent = walletSnap.exists()
-        ? walletSnap.data().balance + " BDT"
-        : "0 BDT";
-
-      // ✔ Load Recent Orders
-      const q = query(
-        collection(db, "orders"),
-        where("user", "==", user.uid),
-        orderBy("created", "desc"),
-        limit(10)
-      );
-
-      const snapshot = await getDocs(q);
-
-      if (snapshot.empty) {
-        ordersDiv.innerHTML = "<p>কোনো অর্ডার পাওয়া যায়নি।</p>";
-      } else {
-        let html = "";
-        snapshot.forEach((docSnap) => {
-          const d = docSnap.data();
-          html += `
-            <div class="order-item">
-              <p><b>${d.product}</b></p>
-              <p>Price: ${d.price} TK</p>
-              <p>Status: ${d.status}</p>
-            </div>
-          `;
-        });
-        ordersDiv.innerHTML = html;
-      }
-    });
-
-    // ✔ Logout Function
-    window.logout = async function () {
-      await signOut(auth);
-      window.location.href = "login.html";
-    };
-  </script>
+<script>
+  loadDashboard();
+</script>
 
 </body>
 </html>
