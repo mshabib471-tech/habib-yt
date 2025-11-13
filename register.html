@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register — Habib YT</title>
+
+<style>
+  body { font-family:Poppins; background:#f4f7fb; padding-top:70px; text-align:center; }
+  .box { background:white; width:90%; max-width:380px; padding:25px; margin:auto; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.2); }
+  input { width:100%; padding:10px; margin-top:7px; border:1px solid #ccc; border-radius:6px; }
+  button { width:100%; padding:12px; margin-top:14px; background:#007bff; color:white; border:none; border-radius:6px; font-weight:bold; }
+</style>
+</head>
+
+<body>
+
+<h2 style="color:#007bff;">📝 Create New Account</h2>
+
+<div class="box">
+  <input type="email" id="signupEmail" placeholder="Email">
+  <input type="password" id="signupPassword" placeholder="Password">
+
+  <button onclick="registerUser()">Register</button>
+
+  <p>Already have account? <a href="login.html">Login</a></p>
+</div>
+
+<script type="module" src="firebase.js"></script>
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
