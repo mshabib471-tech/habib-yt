@@ -1,104 +1,86 @@
-// app.js (Final Full System)
+/**********************************************
+ 🔥 HABIB YT — FINAL FULL FIREBASE SYSTEM
+**********************************************/
 
 import { auth, db, provider } from "./firebase.js";
 
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signInWithPopup,
   signOut,
+  signInWithPopup,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
 import {
-  doc,
-  setDoc,
-  getDoc,
-  addDoc,
-  updateDoc,
-  collection,
-  query,
-  where,
-  orderBy,
-  limit,
-  getDocs
+  doc, setDoc, getDoc,
+  addDoc, collection, updateDoc,
+  getDocs, query, where, orderBy, limit
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-/************************************
-      🚀 REGISTER USER
-*************************************/
+
+/* -------------------- REGISTER -------------------- */
 window.registerUser = async function () {
   const email = document.getElementById("signupEmail")?.value;
-  const password = document.getElementById("signupPassword")?.value;
+  const pass = document.getElementById("signupPassword")?.value;
 
-  if (!email || !password) return alert("সব ঘর পূরণ করুন!");
+  if (!email || !pass) return alert("সব ঘর পূরণ করুন!");
 
   try {
-    await createUserWithEmailAndPassword(auth, email, password);
+    let user = await createUserWithEmailAndPassword(auth, email, pass);
 
-    // Create wallet for new user
-    await setDoc(doc(db, "wallets", auth.currentUser.uid), {
+    await setDoc(doc(db, "wallets", user.user.uid), {
       balance: 0
     });
 
-    alert("একাউন্ট তৈরি হয়েছে!");
     window.location.href = "dashboard.html";
-
   } catch (err) {
     alert(err.message);
   }
 };
 
-/************************************
-      🚀 LOGIN USER
-*************************************/
+
+/* -------------------- LOGIN -------------------- */
 window.loginUser = async function () {
   const email = document.getElementById("loginEmail")?.value;
-  const password = document.getElementById("loginPassword")?.value;
+  const pass = document.getElementById("loginPassword")?.value;
 
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth, email, pass);
     window.location.href = "dashboard.html";
   } catch (err) {
-    alert("লগইন ব্যর্থ: " + err.message);
+    alert(err.message);
   }
 };
 
-/************************************
-      🚀 GOOGLE LOGIN
-*************************************/
+
+/* -------------------- GOOGLE LOGIN -------------------- */
 window.googleLogin = async function () {
   try {
-    await signInWithPopup(auth, provider);
+    const result = await signInWithPopup(auth, provider);
 
-    // Wallet create if not exists
-    const walletRef = doc(db, "wallets", auth.currentUser.uid);
-    const w = await getDoc(walletRef);
-    if (!w.exists()) {
-      await setDoc(walletRef, { balance: 0 });
-    }
+    await setDoc(doc(db, "wallets", result.user.uid), {
+      balance: 0
+    }, { merge: true });
 
     window.location.href = "dashboard.html";
-
   } catch (err) {
-    alert("Google Login ব্যর্থ: " + err.message);
+    alert(err.message);
   }
 };
 
-/************************************
-      🚀 LOGOUT
-*************************************/
+
+/* -------------------- LOGOUT -------------------- */
 window.logout = async function () {
   await signOut(auth);
   window.location.href = "login.html";
 };
 
-/************************************
-      🚀 ADD MONEY (Wallet Request)
-*************************************/
+
+/* -------------------- ADD MONEY -------------------- */
 window.submitAddMoney = async function () {
   const user = auth.currentUser;
-  if (!user) return alert("Login First!");
+  if (!user) return alert("Please login first!");
 
   const amount = document.getElementById("amount")?.value;
   const trxid = document.getElementById("trxid")?.value;
@@ -108,72 +90,87 @@ window.submitAddMoney = async function () {
   await addDoc(collection(db, "walletRequests"), {
     user: user.uid,
     email: user.email,
-    amount: Number(amount),
+    amount: parseInt(amount),
     trxid,
     method: "bkash",
     status: "pending",
     created: new Date()
   });
 
-  alert("Add Money Request Submitted!");
+  alert("Request Sent!");
   window.location.href = "dashboard.html";
 };
 
-/************************************
-      🚀 ORDER PRODUCT
-*************************************/
-window.orderProduct = async function (product, price) {
+
+/* -------------------- ORDER PRODUCT -------------------- */
+window.orderProduct = async function (name, price) {
   const user = auth.currentUser;
   if (!user) return alert("লগইন করুন!");
 
   const walletRef = doc(db, "wallets", user.uid);
-  const walletSnap = await getDoc(walletRef);
+  const snap = await getDoc(walletRef);
 
-  const balance = walletSnap.exists() ? walletSnap.data().balance : 0;
+  const balance = snap.exists() ? snap.data().balance : 0;
 
   if (balance < price) {
-    return alert("❌ ব্যালেন্স পর্যাপ্ত না!");
+    return alert("ব্যালেন্স নেই!");
   }
 
-  // Create order
   await addDoc(collection(db, "orders"), {
     user: user.uid,
     email: user.email,
-    product,
-    price,
+    product: name,
+    price: price,
     status: "pending",
     created: new Date()
   });
 
-  // Deduct wallet balance
-  await updateDoc(walletRef, { balance: balance - price });
+  await updateDoc(walletRef, {
+    balance: balance - price
+  });
 
-  alert(`✅ অর্ডার সম্পন্ন: ${product} (${price} TK)`);
+  alert("অর্ডার সম্পন্ন!");
 };
 
-/************************************
-      🚀 LOAD DASHBOARD
-*************************************/
-window.loadDashboard = function () {
+
+/* -------------------- ADMIN PANEL -------------------- */
+window.approveWallet = async function (docId, uid, amount) {
+  const walletRef = doc(db, "wallets", uid);
+  const snap = await getDoc(walletRef);
+
+  let newBalance = amount;
+  if (snap.exists()) newBalance += snap.data().balance;
+
+  await setDoc(walletRef, { balance: newBalance });
+  await updateDoc(doc(db, "walletRequests", docId), { status: "approved" });
+
+  alert("Approved!");
+  location.reload();
+};
+
+window.approveOrder = async function (orderId) {
+  await updateDoc(doc(db, "orders", orderId), { status: "approved" });
+  alert("Order Done!");
+  location.reload();
+};
+
+
+/* -------------------- DASHBOARD LOAD -------------------- */
+window.loadDashboard = async function () {
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
       window.location.href = "login.html";
       return;
     }
 
-    // Load Email
-    document.getElementById("userEmail").textContent = user.email;
+    document.getElementById("userEmail").innerText = user.email;
 
-    // Load Balance
-    const walletRef = doc(db, "wallets", user.uid);
-    const w = await getDoc(walletRef);
+    // Balance
+    const walletSnap = await getDoc(doc(db, "wallets", user.uid));
+    const bal = walletSnap.exists() ? walletSnap.data().balance : 0;
+    document.getElementById("walletBalance").innerText = bal + " BDT";
 
-    document.getElementById("walletBalance").textContent =
-      w.exists() ? w.data().balance + " BDT" : "0 BDT";
-
-    // Load Recent Orders
-    const ordersDiv = document.getElementById("recentOrders");
-
+    // Orders
     const q = query(
       collection(db, "orders"),
       where("user", "==", user.uid),
@@ -181,25 +178,19 @@ window.loadDashboard = function () {
       limit(5)
     );
 
-    const snap = await getDocs(q);
-
-    if (snap.empty) {
-      ordersDiv.innerHTML = "<p>কোনো অর্ডার নেই</p>";
-      return;
-    }
-
+    const docs = await getDocs(q);
     let html = "";
-    snap.forEach((d) => {
-      const x = d.data();
+
+    docs.forEach(d => {
+      const data = d.data();
       html += `
         <div class="order-item">
-          <p><b>${x.product}</b></p>
-          <p>${x.price} TK</p>
-          <p>Status: ${x.status}</p>
-        </div>
-      `;
+          <b>${data.product}</b><br>
+          ${data.price}৳ — <span>${data.status}</span>
+        </div>`;
     });
 
-    ordersDiv.innerHTML = html;
+    document.getElementById("recentOrders").innerHTML =
+      html || "<p>কোনো অর্ডার নেই</p>";
   });
 };
