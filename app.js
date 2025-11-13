@@ -1,5 +1,5 @@
 /**********************************************
- 🔥 HABIB YT — FINAL FULL FIREBASE SYSTEM
+ 🔥 HABIB YT — FINAL FULL FIREBASE SYSTEM (FIXED)
 **********************************************/
 
 import { auth, db, provider } from "./firebase.js";
@@ -102,20 +102,22 @@ window.submitAddMoney = async function () {
 };
 
 
-/* -------------------- ORDER PRODUCT -------------------- */
+/* -------------------- ORDER PRODUCT (Wallet Check + Auto Deduct) -------------------- */
 window.orderProduct = async function (name, price) {
   const user = auth.currentUser;
-  if (!user) return alert("লগইন করুন!");
+  if (!user) return alert("⚠ প্রথমে লগইন করুন!");
 
   const walletRef = doc(db, "wallets", user.uid);
   const snap = await getDoc(walletRef);
 
   const balance = snap.exists() ? snap.data().balance : 0;
 
+  // ❌ ব্যালেন্স কম হলে অর্ডার হবে না
   if (balance < price) {
-    return alert("ব্যালেন্স নেই!");
+    return alert(`❌ পর্যাপ্ত ব্যালেন্স নেই!\nপ্রয়োজন: ${price}৳\nবর্তমান: ${balance}৳`);
   }
 
+  // অর্ডার Save
   await addDoc(collection(db, "orders"), {
     user: user.uid,
     email: user.email,
@@ -125,15 +127,16 @@ window.orderProduct = async function (name, price) {
     created: new Date()
   });
 
+  // Wallet deduct
   await updateDoc(walletRef, {
     balance: balance - price
   });
 
-  alert("অর্ডার সম্পন্ন!");
+  alert(`✅ অর্ডার সম্পন্ন হয়েছে: ${name} (${price}৳)`);
 };
 
 
-/* -------------------- ADMIN PANEL -------------------- */
+/* -------------------- ADMIN PANEL — APPROVE WALLET -------------------- */
 window.approveWallet = async function (docId, uid, amount) {
   const walletRef = doc(db, "wallets", uid);
   const snap = await getDoc(walletRef);
@@ -144,13 +147,15 @@ window.approveWallet = async function (docId, uid, amount) {
   await setDoc(walletRef, { balance: newBalance });
   await updateDoc(doc(db, "walletRequests", docId), { status: "approved" });
 
-  alert("Approved!");
+  alert("Wallet Approved!");
   location.reload();
 };
 
+
+/* -------------------- ADMIN PANEL — APPROVE ORDER -------------------- */
 window.approveOrder = async function (orderId) {
   await updateDoc(doc(db, "orders", orderId), { status: "approved" });
-  alert("Order Done!");
+  alert("Order Approved!");
   location.reload();
 };
 
@@ -165,12 +170,12 @@ window.loadDashboard = async function () {
 
     document.getElementById("userEmail").innerText = user.email;
 
-    // Balance
+    // Load Wallet
     const walletSnap = await getDoc(doc(db, "wallets", user.uid));
     const bal = walletSnap.exists() ? walletSnap.data().balance : 0;
     document.getElementById("walletBalance").innerText = bal + " BDT";
 
-    // Orders
+    // Load Orders
     const q = query(
       collection(db, "orders"),
       where("user", "==", user.uid),
