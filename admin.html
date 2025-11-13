@@ -1,233 +1,103 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel | Habib YT</title>
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      background: #f4f7fb;
-      margin: 0;
-      color: #222;
-    }
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #007bff;
-      color: white;
-      padding: 12px 18px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    header h2 {
-      margin: 0;
-    }
-    button.logout {
-      background: white;
-      color: #007bff;
-      border: none;
-      border-radius: 8px;
-      padding: 6px 12px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    main {
-      padding: 15px;
-    }
-    .tab-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .tab-buttons button {
-      background: #ddd;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.2s;
-    }
-    .tab-buttons button.active {
-      background: #007bff;
-      color: white;
-    }
-    .section {
-      display: none;
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-    .section.active {
-      display: block;
-    }
-    .card {
-      background: #f9f9f9;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      padding: 10px;
-      border-left: 4px solid #007bff;
-    }
-    .card p {
-      margin: 4px 0;
-    }
-    button.approve {
-      background: #28a745;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 6px 10px;
-      margin-right: 5px;
-      cursor: pointer;
-    }
-    button.reject {
-      background: #dc3545;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 6px 10px;
-      cursor: pointer;
-    }
-    footer {
-      text-align: center;
-      background: #007bff;
-      color: white;
-      padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habib YT — Admin Panel</title>
+
+<style>
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  background: #f4f7fb;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #007bff;
+  padding: 12px 18px;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+}
+.logout {
+  background: white;
+  color: #007bff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 12px 0;
+}
+.tabs button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.active { background: #007bff; color: white; }
+.card {
+  background: white;
+  padding: 12px;
+  margin: 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.btn-green {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-red {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+footer {
+  text-align: center;
+  background: #007bff;
+  color: white;
+  padding: 12px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+</style>
 </head>
+
 <body>
-  <header>
-    <h2>👑 Habib YT — Admin Panel</h2>
-    <button class="logout" onclick="logout()">Logout</button>
-  </header>
 
-  <main>
-    <div class="tab-buttons">
-      <button id="tab1" class="active" onclick="switchTab('wallets')">💰 Wallet Requests</button>
-      <button id="tab2" onclick="switchTab('orders')">🛒 Orders</button>
-    </div>
+<header>
+  👑 Habib YT — Admin Panel
+  <button class="logout" onclick="logout()">Logout</button>
+</header>
 
-    <div id="wallets" class="section active">
-      <h3>💰 Pending Wallet Requests</h3>
-      <div id="walletRequests"></div>
-    </div>
+<div class="tabs">
+  <button class="active" id="tabWallet">💰 Wallet Requests</button>
+  <button id="tabOrders">🛒 Orders</button>
+</div>
 
-    <div id="orders" class="section">
-      <h3>🛒 All Pending Orders</h3>
-      <div id="ordersList"></div>
-    </div>
-  </main>
+<div id="walletArea"></div>
+<div id="ordersArea" style="display:none;"></div>
 
-  <footer>© 2025 Habib YT — Admin Dashboard</footer>
+<footer>© 2025 Habib YT — Admin Dashboard</footer>
 
-  <script type="module" src="firebase.js"></script>
-  <script type="module">
-    import { auth, db } from "./firebase.js";
-    import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-    import { getDocs, collection, doc, getDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+<script type="module" src="firebase.js"></script>
+<script type="module" src="admin.js"></script>
 
-    const walletDiv = document.getElementById("walletRequests");
-    const ordersDiv = document.getElementById("ordersList");
-
-    // ✅ ট্যাব সুইচিং
-    window.switchTab = function (tab) {
-      document.querySelectorAll(".section").forEach((el) => el.classList.remove("active"));
-      document.querySelectorAll(".tab-buttons button").forEach((el) => el.classList.remove("active"));
-      document.getElementById(tab).classList.add("active");
-      if (tab === "wallets") document.getElementById("tab1").classList.add("active");
-      else document.getElementById("tab2").classList.add("active");
-    };
-
-    // ✅ লগআউট
-    window.logout = async function () {
-      await signOut(auth);
-      window.location.href = "login.html";
-    };
-
-    // ✅ Admin Load Data
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) return (window.location.href = "login.html");
-      if (user.email !== "mshabib471@gmail.com") {
-        alert("❌ Access Denied! Admin only.");
-        return (window.location.href = "index.html");
-      }
-
-      // 🔹 Wallet Requests Load
-      const walletSnap = await getDocs(collection(db, "walletRequests"));
-      walletDiv.innerHTML = "";
-      walletSnap.forEach((docSnap) => {
-        const d = docSnap.data();
-        if (d.status === "pending") {
-          walletDiv.innerHTML += `
-            <div class="card">
-              <p><b>${d.email}</b></p>
-              <p>Amount: ${d.amount} BDT</p>
-              <p>Method: ${d.method}</p>
-              <p>TrxID: ${d.trxid}</p>
-              <button class="approve" onclick="approveWallet('${docSnap.id}', '${d.user}', ${d.amount})">Approve</button>
-              <button class="reject" onclick="rejectWallet('${docSnap.id}')">Reject</button>
-            </div>`;
-        }
-      });
-
-      // 🔹 Orders Load
-      const orderSnap = await getDocs(collection(db, "orders"));
-      ordersDiv.innerHTML = "";
-      orderSnap.forEach((docSnap) => {
-        const d = docSnap.data();
-        if (d.status === "pending") {
-          ordersDiv.innerHTML += `
-            <div class="card">
-              <p><b>${d.email}</b></p>
-              <p>Product: ${d.product}</p>
-              <p>Details: ${d.uid || d.username || d.link || "N/A"}</p>
-              <p>Price: ${d.price || d.totalPrice} TK</p>
-              <button class="approve" onclick="approveOrder('${docSnap.id}')">Mark Complete</button>
-              <button class="reject" onclick="rejectOrder('${docSnap.id}')">Reject</button>
-            </div>`;
-        }
-      });
-    });
-
-    // ✅ Approve Wallet
-    window.approveWallet = async function (docId, uid, amount) {
-      const walletRef = doc(db, "wallets", uid);
-      const walletDoc = await getDoc(walletRef);
-      let newBalance = amount;
-      if (walletDoc.exists()) newBalance += walletDoc.data().balance || 0;
-      await setDoc(walletRef, { balance: newBalance });
-      await updateDoc(doc(db, "walletRequests", docId), { status: "approved" });
-      alert("✅ Wallet Approved!");
-      window.location.reload();
-    };
-
-    // ✅ Reject Wallet
-    window.rejectWallet = async function (docId) {
-      await updateDoc(doc(db, "walletRequests", docId), { status: "rejected" });
-      alert("❌ Request Rejected");
-      window.location.reload();
-    };
-
-    // ✅ Approve Order
-    window.approveOrder = async function (docId) {
-      await updateDoc(doc(db, "orders", docId), { status: "completed" });
-      alert("✅ Order Marked Completed!");
-      window.location.reload();
-    };
-
-    // ✅ Reject Order
-    window.rejectOrder = async function (docId) {
-      await updateDoc(doc(db, "orders", docId), { status: "rejected" });
-      alert("❌ Order Rejected");
-      window.location.reload();
-    };
-  </script>
 </body>
 </html>
