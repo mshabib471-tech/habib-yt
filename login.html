@@ -1,35 +1,231 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login — Habib YT</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habib YT — আপনার বিশ্বস্ত সহযোগী</title>
 
-<style>
-  body { font-family: Poppins; background:#f5f7fb; text-align:center; margin:0; padding-top:70px; }
-  .box { width:90%; max-width:380px; margin:auto; background:white; padding:25px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-  input { width:100%; padding:10px; border-radius:6px; border:1px solid #ccc; margin-top:6px; }
-  button { width:100%; padding:10px; margin-top:14px; background:#007bff; color:white; border:none; border-radius:6px; font-weight:bold; }
-  .google { background:#db4437 !important; }
-</style>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: #f4f7fb;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #007bff;
+      color: white;
+      padding: 12px 18px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    header img {
+      height: 42px;
+      width: 42px;
+      border-radius: 50%;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    nav button {
+      background: white;
+      color: #007bff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    .hero h1 {
+      color: #007bff;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    /* Services */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
+      margin: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+      color: #007bff;
+    }
+
+    /* Support Section */
+    .support {
+      background: #fff;
+      margin: 25px 15px;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    footer {
+      background: #007bff;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      margin-top: 30px;
+      font-weight: bold;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .bottom-nav button {
+      background: none;
+      border: none;
+      color: #007bff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
 
-<h2 style="color:#007bff;">🔐 Login to Your Account</h2>
+  <!-- Header -->
+  <header>
+    <img src="assets/logo.png" alt="Habib YT Logo">
+    <h2>Habib YT</h2>
+    <nav>
+      <button id="loginBtn">Login</button>
+      <button onclick="window.location.href='dashboard.html'">Dashboard</button>
+    </nav>
+  </header>
 
-<div class="box">
-  <input type="email" id="loginEmail" placeholder="Enter Email">
-  <input type="password" id="loginPassword" placeholder="Enter Password">
+  <!-- Hero -->
+  <section class="hero">
+    <h1>🔥 গেমিং টপ-আপ ও মোবাইল সার্ভিস</h1>
+    <p>Free Fire, EFootball, Like & Follower সার্ভিস এখন আরও সহজে</p>
+  </section>
 
-  <button onclick="loginUser()">Login</button>
-  <button class="google" onclick="googleLogin()">Login With Google</button>
+  <!-- Services -->
+  <section class="services">
+    
+    <div class="card" onclick="window.location.href='freefire.html'">
+      <img src="assets/ff.jpg" alt="Free Fire">
+      <h3>Free Fire Diamond</h3>
+    </div>
 
-  <p>Don't have an account? <a href="register.html">Register</a></p>
-</div>
+    <div class="card" onclick="window.location.href='efootball.html'">
+      <img src="assets/efootball.jpg" alt="Efootball">
+      <h3>EFootball Coins</h3>
+    </div>
 
-<script type="module" src="firebase.js"></script>
-<script type="module" src="app.js"></script>
+    <div class="card" onclick="window.location.href='like-follower.html'">
+      <img src="assets/like.jpg" alt="Like">
+      <h3>Like & Followers</h3>
+    </div>
+
+    <div class="card" onclick="window.location.href='mobile-accessories.html'">
+      <img src="assets/accessories.jpg" alt="Accessories">
+      <h3>Mobile Accessories</h3>
+    </div>
+
+    <div class="card" onclick="window.location.href='mobile-servicing.html'">
+      <img src="assets/servicing.jpg" alt="Servicing">
+      <h3>Mobile Servicing</h3>
+    </div>
+
+    <div class="card" onclick="window.location.href='coming-soon.html'">
+      <img src="assets/coming.jpg" alt="Coming Soon">
+      <h3>Coming Soon</h3>
+    </div>
+
+  </section>
+
+  <!-- Support -->
+  <section class="support">
+    <h2>📞 কাস্টমার সাপোর্ট</h2>
+    <p>যেকোনো সমস্যা বা সাহায্যের জন্য যোগাযোগ করুন:</p>
+    <a class="telegram" href="https://t.me/H_A_B_I_B_Top_1" target="_blank" style="background:#0088cc;padding:10px 15px;border-radius:8px;color:white;text-decoration:none;">Telegram</a>
+    <a class="whatsapp" href="https://wa.me/8801868461577" target="_blank" style="background:#25d366;padding:10px 15px;border-radius:8px;color:white;text-decoration:none;">WhatsApp</a>
+  </section>
+
+  <footer>
+    Habib YT — আপনার বিশ্বস্ত সহযোগী
+    <small>© 2025 Habib YT. All Rights Reserved.</small>
+  </footer>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <button onclick="window.location.href='index.html'">🏠 Home</button>
+    <button onclick="window.location.href='dashboard.html'">💼 Dashboard</button>
+    <button onclick="window.location.href='add-money.html'">💰 Add Money</button>
+    <button onclick="window.location.href='login.html'">🔐 Login</button>
+  </div>
+
+  <!-- Firebase Auth Check -->
+  <script type="module">
+    import { auth } from "./firebase.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+    const loginBtn = document.getElementById("loginBtn");
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        loginBtn.innerText = "My Account";
+        loginBtn.onclick = () => window.location.href = "dashboard.html";
+      } else {
+        loginBtn.innerText = "Login";
+        loginBtn.onclick = () => window.location.href = "login.html";
+      }
+    });
+  </script>
 
 </body>
 </html>
