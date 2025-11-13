@@ -8,70 +8,61 @@
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background: #f5f7fb;
+      background: #f4f7fb;
       margin: 0;
-      padding: 0;
+      padding-bottom: 50px;
     }
     header {
       background: #007bff;
       color: white;
-      padding: 15px 20px;
+      padding: 15px;
       font-size: 20px;
-      font-weight: bold;
       display: flex;
       justify-content: space-between;
-      align-items: center;
     }
     header a {
-      background: white;
       color: #007bff;
+      background: white;
       padding: 6px 12px;
       border-radius: 6px;
-      text-decoration: none;
       font-weight: bold;
+      text-decoration: none;
     }
     .container {
       width: 90%;
       max-width: 430px;
       background: white;
-      margin: 30px auto;
+      margin: 25px auto;
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    label { font-weight: bold; margin-top: 10px; display: block; }
     input {
       width: 100%;
       padding: 10px;
+      font-size: 16px;
+      margin-top: 6px;
       border: 1px solid #ccc;
-      border-radius: 8px;
-      margin-top: 5px;
-      font-size: 15px;
+      border-radius: 6px;
     }
     button {
       width: 100%;
+      padding: 12px;
+      margin-top: 18px;
       background: #007bff;
       color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
-      margin-top: 20px;
       font-size: 16px;
       font-weight: bold;
-      cursor: pointer;
+      border: none;
+      border-radius: 8px;
     }
     .steps {
-      background: #eef5ff;
-      border-left: 4px solid #007bff;
+      background: #eef4ff;
       padding: 12px;
-      border-radius: 8px;
-      margin-top: 15px;
-      line-height: 1.8;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #777;
+      border-radius: 6px;
+      margin-top: 20px;
+      line-height: 1.7;
+      border-left: 4px solid #007bff;
     }
   </style>
 </head>
@@ -87,30 +78,28 @@
   <h2 style="text-align:center;color:#007bff;">ওয়ালেটে টাকা যোগ করুন</h2>
 
   <label>Amount (BDT)</label>
-  <input id="amount" type="number" placeholder="যেমনঃ 100">
-
-  <label>Payment Method</label>
-  <input type="text" value="bKash" disabled>
+  <input type="number" id="amount" placeholder="যেমন: 200">
 
   <label>Send Money করুন এই নম্বরে:</label>
-  <input type="text" value="01868461577" readonly style="color:#c82333;font-weight:bold;">
+  <input type="text" value="01868461577" readonly style="background:#fff5f5; color:#c82333;">
 
   <div class="steps">
-    🧾 <b>নির্দেশনা:</b><br>
-    1️⃣ বিকাশ অ্যাপে যান বা *247# ডায়াল করুন।<br>
-    2️⃣ “Send Money” সিলেক্ট করুন।<br>
-    3️⃣ উপরের নম্বরে টাকা পাঠান।<br>
-    4️⃣ TrxID নিচে লিখুন।<br>
-    5️⃣ Submit চাপুন।
+      1️⃣ বিকাশ অ্যাপে যান অথবা *247# ডায়াল করুন।<br>
+      2️⃣ Send Money সিলেক্ট করুন।<br>
+      3️⃣ উপরের নম্বরে টাকা পাঠান।<br>
+      4️⃣ পাঠানো TrxID নিচে লিখুন।<br>
+      5️⃣ Submit ক্লিক করুন।
   </div>
 
   <label>Transaction ID</label>
-  <input id="trxid" type="text" placeholder="আপনার TrxID দিন">
+  <input type="text" id="trxid" placeholder="যেমন: 8GDF67D5">
 
   <button onclick="submitAddMoney()">Submit</button>
 </div>
 
-<footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
+<footer style="text-align:center;margin-top:20px;color:#777;">
+  © 2025 Habib YT — আপনার বিশ্বস্ত সঙ্গী
+</footer>
 
 <script type="module" src="firebase.js"></script>
 <script type="module" src="app.js"></script>
