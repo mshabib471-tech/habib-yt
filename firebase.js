@@ -1,19 +1,10 @@
-/**********************************************
-🔥 Habib YT — Firebase Connection File
-**********************************************/
+// firebase.js — Habib YT Firebase Configuration
 
-// Import Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import { 
-  getAuth, GoogleAuthProvider 
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-import { 
-  getFirestore 
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-/* ============================
- 🧩 তোমার Firebase Config Details
-============================ */
+// Your Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
   authDomain: "habib-yt.firebaseapp.com",
@@ -24,15 +15,8 @@ const firebaseConfig = {
   measurementId: "G-GNY1T88D34"
 };
 
-/* ============================
- ⚙️ Firebase Initialize
-============================ */
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const provider = new GoogleAuthProvider();
-
-/* ============================
- ✅ Export (যাতে অন্য ফাইল ব্যবহার করতে পারে)
-============================ */
-export { app, auth, db, provider };
+// Initialize Firebase
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const provider = new GoogleAuthProvider();
