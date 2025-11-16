@@ -5,229 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Habib YT — আপনার বিশ্বস্ত সহযোগী</title>
 
-  <style>
-    /* ============================
-       GLOBAL
-    ============================ */
-    body {
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(180deg, #e9f0ff, #f7f9ff);
-      overflow-x: hidden;
-      color: #222;
-    }
-
-    /* Fade + Slide Animation */
-    .fade-in { animation: fadeIn .7s ease-in-out forwards; opacity: 0; }
-    @keyframes fadeIn { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
-
-    .slide-up { animation: slideUp .7s ease; }
-    @keyframes slideUp { from {opacity:0; transform: translateY(40px);} to {opacity:1; transform: translateY(0);} }
-
-    /* ============================
-       PREMIUM GRADIENT HEADER
-    ============================ */
-    header {
-      background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
-      box-shadow: 0 5px 18px rgba(0,0,0,0.25);
-    }
-
-    header img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-    }
-
-    header h2 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    header small {
-      font-size: 13px;
-      opacity: 0.9;
-      margin-top: -4px;
-      display: block;
-    }
-
-    nav button {
-      background: rgba(255,255,255,0.20);
-      padding: 8px 14px;
-      border: 1px solid rgba(255,255,255,0.5);
-      border-radius: 10px;
-      color: white;
-      backdrop-filter: blur(6px);
-      cursor: pointer;
-      font-weight: 600;
-      transition: .25s;
-    }
-
-    nav button:hover {
-      transform: translateY(-3px);
-      background: rgba(255,255,255,0.35);
-    }
-
-    /* ============================
-       HERO SECTION
-    ============================ */
-    .hero {
-      text-align: center;
-      padding: 40px 20px 20px;
-    }
-
-    .hero h1 {
-      font-size: 28px;
-      color: #0057e7;
-      font-weight: 700;
-      text-shadow: 0 0 10px rgba(0,102,255,0.3);
-    }
-
-    .hero p {
-      font-size: 15px;
-      color: #444;
-    }
-
-    /* ============================
-       GLASSMORPHISM CARDS
-    ============================ */
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-      gap: 15px;
-      padding: 20px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.45);
-      border-radius: 16px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.4);
-      padding: 12px;
-      text-align: center;
-      transition: .35s;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
-
-    .card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.20);
-    }
-
-    .card img {
-      width: 100%;
-      height: 105px;
-      object-fit: cover;
-      border-radius: 12px;
-    }
-
-    .card h3 {
-      color: #0057e7;
-      font-size: 15px;
-      margin-top: 10px;
-      font-weight: 600;
-    }
-
-    /* ============================
-       SUPPORT SECTION
-    ============================ */
-    .support {
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(6px);
-      border-radius: 16px;
-      padding: 20px;
-      margin: 25px 15px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .support h2 {
-      color: #0057e7;
-      margin-bottom: 10px;
-    }
-
-    .support a {
-      padding: 10px 16px;
-      display: inline-block;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: 600;
-      margin: 8px;
-    }
-
-    .telegram { background: #0088cc; }
-    .whatsapp { background: #25d366; }
-
-    /* ============================
-       FOOTER
-    ============================ */
-    footer {
-      background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);
-      text-align: center;
-      padding: 15px;
-      color: white;
-      margin-top: 30px;
-      font-weight: bold;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
-      box-shadow: 0 -5px 18px rgba(0,0,0,0.25);
-    }
-    footer small {
-      font-size: 13px;
-      opacity: 0.8;
-    }
-
-    /* ============================
-       NEON BOTTOM NAV
-    ============================ */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: rgba(255,255,255,0.25);
-      backdrop-filter: blur(12px);
-      border-top: 2px solid rgba(255,255,255,0.5);
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-      z-index: 999;
-      animation: slideUp .7s ease;
-    }
-
-    .bottom-nav button {
-      background: transparent;
-      border: none;
-      font-size: 14px;
-      color: #0052d4;
-      font-weight: 700;
-      text-shadow: 0 0 8px rgba(0,102,255,0.5);
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .bottom-nav button:hover {
-      transform: scale(1.15);
-      color: #003bb8;
-      text-shadow: 0 0 12px rgba(0,102,255,0.8);
-    }
-  </style>
+  <!-- External CSS -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
 <!-- HEADER -->
 <header class="fade-in">
-  <div style="display:flex; align-items:center; gap:12px;">
-    <img src="assets/logo.png">
+  <div class="header-left">
+    <img src="assets/logo.png" alt="Logo">
     <div>
       <h2>Habib YT</h2>
       <small>আপনার বিশ্বস্ত সহযোগী</small>
@@ -236,7 +23,7 @@
 
   <nav>
     <button id="loginBtn">Login</button>
-    <button onclick="window.location.href='dashboard.html'">Dashboard</button>
+    <button onclick="location.href='dashboard.html'">Dashboard</button>
   </nav>
 </header>
 
@@ -248,6 +35,7 @@
 
 <!-- SERVICES -->
 <section class="services fade-in">
+
   <div class="card" onclick="location.href='freefire.html'">
     <img src="assets/ff.jpg"><h3>Free Fire Diamond</h3>
   </div>
@@ -271,6 +59,7 @@
   <div class="card" onclick="location.href='coming-soon.html'">
     <img src="assets/coming.jpg"><h3>Coming Soon</h3>
   </div>
+
 </section>
 
 <!-- SUPPORT -->
@@ -282,77 +71,10 @@
   <a class="whatsapp" href="https://wa.me/8801868461577">📱 WhatsApp</a>
 </section>
 
-<!-- =======================
-     LEGAL / TERMS SECTION
-======================== -->
-<section class="legal fade-in" style="
-  background: rgba(255,255,255,0.60);
-  backdrop-filter: blur(10px);
-  padding: 22px;
-  margin: 25px 15px;
-  border-radius: 16px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
-  font-size: 14px;
-  line-height: 1.6;
-  color: #333;
-">
-  <h2 style="text-align:center; color:#0057e7; margin-bottom:15px;">
-    📜 শর্তাবলী ও নীতি
-  </h2>
-
-  <h3 style="color:#0057e7; font-size:16px; margin-top:10px;">✔ সার্ভিস টার্মস</h3>
-  <p>
-    Habib YT একটি ডিজিটাল গেমিং টপ-আপ এবং অনলাইন সার্ভিস প্ল্যাটফর্ম।  
-    এখানে সকল অর্ডার কেবলমাত্র ব্যবহারকারীর দেওয়া UID/ID অনুযায়ী প্রসেস করা হয়।  
-    ভুল তথ্য দিলে অর্ডারের দায়ভার ব্যবহারকারীর নিজের।
-  </p>
-
-  <h3 style="color:#0057e7; font-size:16px;">✔ প্রাইভেসি পলিসি</h3>
-  <p>
-    আপনার ইমেইল, UID অথবা অন্য তথ্য আমরা সম্পূর্ণ সুরক্ষিতভাবে Firebase–এ সংরক্ষণ করি।  
-    কোনো ব্যক্তিগত তথ্য তৃতীয় পক্ষের কাছে হস্তান্তর করা হয় না।
-  </p>
-
-  <h3 style="color:#0057e7; font-size:16px;">✔ রিফান্ড / বাতিল নীতি</h3>
-  <p>
-    অর্ডার প্রসেসিং শুরু হয়ে গেলে তা বাতিল করা যায় না।  
-    ভুল UID/ID দিলে রিফান্ড প্রযোজ্য নয়।  
-    যদি কোনো কারণে অর্ডার ব্যর্থ হয়, টাকা 100% আপনার ওয়ালেটে ফেরত দেওয়া হবে।
-  </p>
-
-  <h3 style="color:#0057e7; font-size:16px;">✔ কপিরাইট বিষয়ক</h3>
-  <p>
-    সকল ডিজাইন, লোগো, কনটেন্ট এবং সিস্টেম কোড Habib YT এর সম্পত্তি।  
-    অনুমতি ছাড়া কপি বা রিপ্রডিউস করা আইনত দণ্ডনীয়।
-  </p>
-
-  <h3 style="color:#0057e7; font-size:16px;">✔ দায়িত্ব অস্বীকার</h3>
-  <p>
-    আমরা শুধুমাত্র টপ-আপ সার্ভিস প্রদান করি।  
-    গেম/অ্যাপের আপডেট বা সার্ভার সমস্যার কারণে দেরির জন্য  
-    Habib YT দায়ী থাকবে না।
-  </p>
-</section>
-
+<!-- FOOTER -->
 <footer class="fade-in">
-  <div style="margin-bottom:8px; font-size:16px; font-weight:600;">
-    Habib YT — Your Trusted Partner
-  </div>
-
-  <!-- Footer Links -->
-  <div style="margin-bottom:10px;">
-    <a href="about.html" style="color:#fff; margin:0 10px; text-decoration:none; font-size:14px;">About Us</a>
-    |
-    <a href="terms.html" style="color:#fff; margin:0 10px; text-decoration:none; font-size:14px;">Terms</a>
-    |
-    <a href="privacy.html" style="color:#fff; margin:0 10px; text-decoration:none; font-size:14px;">Privacy</a>
-    |
-    <a href="refund.html" style="color:#fff; margin:0 10px; text-decoration:none; font-size:14px;">Refund</a>
-  </div>
-
-  <small style="font-size:13px; opacity:0.85;">
-    © 2025 Habib YT. All Rights Reserved.
-  </small>
+  <div>Habib YT — Your Trusted Partner</div>
+  <small>© 2025 Habib YT. All Rights Reserved.</small>
 </footer>
 
 <!-- BOTTOM NAV -->
@@ -363,21 +85,17 @@
   <button onclick="location.href='login.html'">🔐 Login</button>
 </div>
 
-<!-- Firebase Login Button Auto Switch -->
+<!-- Firebase System -->
+<script type="module" src="js/firebase.js"></script>
 <script type="module">
-  import { auth } from "./firebase.js";
+  import { auth } from "./js/firebase.js";
   import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
   const loginBtn = document.getElementById("loginBtn");
 
   onAuthStateChanged(auth, (user) => {
-    if (user) {
-      loginBtn.innerText = "My Account";
-      loginBtn.onclick = () => location.href = "dashboard.html";
-    } else {
-      loginBtn.innerText = "Login";
-      loginBtn.onclick = () => location.href = "login.html";
-    }
+    loginBtn.innerText = user ? "My Account" : "Login";
+    loginBtn.onclick = () => location.href = user ? "dashboard.html" : "login.html";
   });
 </script>
 
