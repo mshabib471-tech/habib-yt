@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" translate="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,36 +27,55 @@
     /* ============================
        PREMIUM GRADIENT HEADER
     ============================ */
-    header {
-      background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);
+    <header class="fade-in" style="
+  background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);
+  color: white;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+">
+
+  <div style="display:flex; align-items:center; gap:10px;">
+    <img src='assets/logo.png' 
+         style="width:44px;height:44px;border-radius:50%;">
+
+    <div>
+      <h2 style="margin:0;font-size:20px;font-weight:700;">Habib YT</h2>
+      <small style="opacity:0.9;font-size:12px;">আপনার বিশ্বস্ত সহযোগী</small>
+    </div>
+  </div>
+
+  <div style="display:flex; gap:8px;">
+    <button id="loginBtn" style="
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.55);
+      padding: 6px 12px;
+      border-radius: 8px;
       color: white;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
-      box-shadow: 0 5px 18px rgba(0,0,0,0.25);
-    }
+      backdrop-filter: blur(6px);
+      font-weight: 600;
+      cursor: pointer;
+      font-size:13px;
+    ">Login</button>
 
-    header img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-    }
+    <button onclick="window.location.href='dashboard.html'" style="
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.55);
+      padding: 6px 12px;
+      border-radius: 8px;
+      color: white;
+      backdrop-filter: blur(6px);
+      font-weight: 600;
+      cursor: pointer;
+      font-size:13px;
+    ">Dashboard</button>
+  </div>
 
-    header h2 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    header small {
-      font-size: 13px;
-      opacity: 0.9;
-      margin-top: -4px;
-      display: block;
-    }
+</header>
 
     nav button {
       background: rgba(255,255,255,0.20);
