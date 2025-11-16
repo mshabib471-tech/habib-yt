@@ -25,8 +25,8 @@
     }
 
     header img {
-      height: 42px;
-      width: 42px;
+      height: 45px;
+      width: 45px;
       border-radius: 50%;
     }
 
@@ -53,45 +53,47 @@
 
     .hero h1 {
       color: #007bff;
-      font-size: 28px;
+      font-size: 26px;
       margin-bottom: 10px;
     }
 
-    /* Services */
+    /* ---------- Compact Service Cards ---------- */
     .services {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 15px;
-      margin: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+      gap: 12px;
+      padding: 15px;
     }
 
-    .card {
+    .service-card {
       background: white;
       border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      transition: 0.3s;
+      padding: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       cursor: pointer;
       text-align: center;
+      transition: 0.25s;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
+    .service-card:hover {
+      transform: translateY(-4px);
     }
 
-    .card img {
+    .service-card img {
       width: 100%;
-      border-radius: 8px;
-      height: 120px;
+      height: 95px;
+      border-radius: 10px;
       object-fit: cover;
     }
 
-    .card h3 {
-      margin: 10px 0 5px;
+    .service-card h3 {
+      margin-top: 8px;
+      font-size: 15px;
       color: #007bff;
+      font-weight: 600;
     }
 
-    /* Support Section */
+    /* Support */
     .support {
       background: #fff;
       margin: 25px 15px;
@@ -132,6 +134,7 @@
       font-weight: bold;
       cursor: pointer;
     }
+
   </style>
 </head>
 
@@ -141,6 +144,7 @@
   <header>
     <img src="assets/logo.png" alt="Habib YT Logo">
     <h2>Habib YT</h2>
+
     <nav>
       <button id="loginBtn">Login</button>
       <button onclick="window.location.href='dashboard.html'">Dashboard</button>
@@ -155,33 +159,33 @@
 
   <!-- Services -->
   <section class="services">
-    
-    <div class="card" onclick="window.location.href='freefire.html'">
+
+    <div class="service-card" onclick="window.location.href='freefire.html'">
       <img src="assets/ff.jpg" alt="Free Fire">
       <h3>Free Fire Diamond</h3>
     </div>
 
-    <div class="card" onclick="window.location.href='efootball.html'">
+    <div class="service-card" onclick="window.location.href='efootball.html'">
       <img src="assets/efootball.jpg" alt="Efootball">
       <h3>EFootball Coins</h3>
     </div>
 
-    <div class="card" onclick="window.location.href='like-follower.html'">
+    <div class="service-card" onclick="window.location.href='like-follower.html'">
       <img src="assets/like.jpg" alt="Like">
       <h3>Like & Followers</h3>
     </div>
 
-    <div class="card" onclick="window.location.href='mobile-accessories.html'">
+    <div class="service-card" onclick="window.location.href='mobile-accessories.html'">
       <img src="assets/accessories.jpg" alt="Accessories">
       <h3>Mobile Accessories</h3>
     </div>
 
-    <div class="card" onclick="window.location.href='mobile-servicing.html'">
+    <div class="service-card" onclick="window.location.href='mobile-servicing.html'">
       <img src="assets/servicing.jpg" alt="Servicing">
       <h3>Mobile Servicing</h3>
     </div>
 
-    <div class="card" onclick="window.location.href='coming-soon.html'">
+    <div class="service-card" onclick="window.location.href='coming-soon.html'">
       <img src="assets/coming.jpg" alt="Coming Soon">
       <h3>Coming Soon</h3>
     </div>
@@ -191,13 +195,22 @@
   <!-- Support -->
   <section class="support">
     <h2>📞 কাস্টমার সাপোর্ট</h2>
-    <p>যেকোনো সমস্যা বা সাহায্যের জন্য যোগাযোগ করুন:</p>
-    <a class="telegram" href="https://t.me/H_A_B_I_B_Top_1" target="_blank" style="background:#0088cc;padding:10px 15px;border-radius:8px;color:white;text-decoration:none;">Telegram</a>
-    <a class="whatsapp" href="https://wa.me/8801868461577" target="_blank" style="background:#25d366;padding:10px 15px;border-radius:8px;color:white;text-decoration:none;">WhatsApp</a>
+    <p>যেকোনো সময় সাহায্যের জন্য যোগাযোগ করুন:</p>
+
+    <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank"
+      style="background:#0088cc;padding:10px 15px;border-radius:8px;color:white;text-decoration:none; display:inline-block; margin:6px;">
+      Telegram
+    </a>
+
+    <a href="https://wa.me/8801868461577" target="_blank"
+      style="background:#25d366;padding:10px 15px;border-radius:8px;color:white;text-decoration:none; display:inline-block; margin:6px;">
+      WhatsApp
+    </a>
   </section>
 
+  <!-- Footer -->
   <footer>
-    Habib YT — আপনার বিশ্বস্ত সহযোগী
+    Habib YT — আপনার বিশ্বস্ত সহযোগী  
     <small>© 2025 Habib YT. All Rights Reserved.</small>
   </footer>
 
