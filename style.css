@@ -20,14 +20,41 @@ a{text-decoration:none;color:inherit;}
 .support-links{display:flex;justify-content:center;gap:15px;margin:15px 0;}
 .support-links img{width:120px;height:auto;border-radius:10px;box-shadow:0 2px 4px rgba(0,0,0,.1);}
 
-/* 🔹 Services */
-.services{text-align:center;padding:10px;}
-.services h2{margin-bottom:10px;color:#007bff;}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 10px;}
-.card{background:#fff;border-radius:12px;box-shadow:0 2px 5px rgba(0,0,0,0.1);overflow:hidden;cursor:pointer;transition:transform 0.2s;}
-.card:hover{transform:scale(1.03);}
-.card img{width:100%;height:120px;object-fit:cover;}
-.card p{padding:8px;font-weight:600;font-size:14px;}
+/* Service Cards */
+.services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 12px;
+  margin: 15px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.12);
+  transition: 0.2s;
+  cursor: pointer;
+  text-align: center;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card img {
+  width: 100%;
+  height: 95px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 8px 0 4px;
+  color: #007bff;
+  font-size: 15px;
+  font-weight: 600;
+}
 
 /* 🔹 Footer */
 .footer{text-align:center;background:#fff;padding:15px 10px;margin-top:20px;box-shadow:0 -2px 5px rgba(0,0,0,0.05);}
