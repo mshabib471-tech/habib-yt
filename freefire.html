@@ -3,110 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Fire TopUp | Habib YT</title>
+  <title>Free Fire Topup | Habib YT</title>
 
   <style>
     body {
       font-family: "Poppins", sans-serif;
       background: #f4f7fb;
       margin: 0;
-      color: #222;
       padding-bottom: 80px;
     }
 
     header {
       background: #007bff;
-      color: white;
       padding: 12px 18px;
+      color: white;
       display: flex;
       justify-content: space-between;
       align-items: center;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    header img { height: 40px; border-radius: 50%; }
 
-    h2 { text-align:center; margin:15px 0; color:#007bff; }
+    header img {
+      height: 40px;
+      border-radius: 50%;
+    }
 
-    /* Packages */
+    h2 {
+      text-align: center;
+      margin: 15px 0;
+      color: #007bff;
+    }
+
+    /* Step Title */
+    .stepTitle {
+      font-size: 20px;
+      margin: 12px 15px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* Package Grid */
     .package-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 10px;
-      padding: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 12px;
+      padding: 15px;
     }
+
     .package {
       background: white;
       padding: 10px;
       border-radius: 10px;
       text-align: center;
-      border: 2px solid transparent;
       cursor: pointer;
-      transition: .2s;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border: 2px solid transparent;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: 0.2s;
     }
+
     .package.selected {
       border-color: #007bff;
-      background: #e8f1ff;
-    }
-    .package:hover { transform: scale(1.03); }
-
-    /* Input Box */
-    .box {
-      background: white;
-      width: 90%;
-      max-width: 430px;
-      padding: 15px;
-      margin: 15px auto;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      text-align: center;
+      background: #e9f2ff;
     }
 
-    input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-top: 8px;
-      font-size: 16px;
+    .package h4 {
+      margin: 6px 0;
+      font-size: 15px;
     }
 
-    button {
-      background: #007bff;
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 8px;
-      margin-top: 12px;
-      width: 100%;
-      cursor: pointer;
+    .package p {
+      color: #007bff;
       font-weight: bold;
-    }
-    button:hover { background:#0056d4; }
-
-    /* SUCCESS POPUP */
-    #popupSuccess {
-      position: fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      background: rgba(0,0,0,0.6);
-      display:none;
-      justify-content:center;
-      align-items:center;
-      z-index:9999;
-    }
-    #popupSuccess .card {
-      background:white;
-      padding:20px;
-      border-radius:15px;
-      width:85%;
-      max-width:350px;
-      text-align:center;
-      animation: pop .3s ease;
-    }
-    @keyframes pop {
-      from { transform:scale(.7); opacity:0; }
-      to   { transform:scale(1); opacity:1; }
+      margin: 4px 0;
     }
   </style>
 </head>
@@ -114,144 +82,272 @@
 <body>
 
 <header>
-  <img src="assets/logo.png">
-  <h3>Free Fire Diamond</h3>
-  <button onclick="location.href='index.html'" style="background:white;color:#007bff;">Home</button>
+  <img src="assets/logo.png" />
+  <h3>Habib YT</h3>
+  <button onclick="location.href='index.html'"
+    style="padding:6px 12px; background:white; border:none; border-radius:8px; color:#007bff; font-weight:600;">
+    Home
+  </button>
 </header>
 
-<h2>🔥 Diamond Packages</h2>
+<h2>🔥 Free Fire Diamond Topup</h2>
 
-<!-- PACKAGE LIST -->
+<h3 class="stepTitle">1️⃣ Select Recharge</h3>
+
 <div class="package-list" id="packageList"></div>
 
-<!-- BALANCE + PRICE INFO -->
-<div class="box">
-  <p><b>💰 Wallet Balance:</b> <span id="walletBalance">0</span> TK</p>
-  <p><b>🛒 Selected Package:</b> <span id="selectedPack">None</span></p>
-  <p><b>💵 Price Required:</b> <span id="requiredPrice">0</span> TK</p>
+<!-- ============================
+     STEP 2 — ACCOUNT INFO
+============================ -->
+<h3 class="stepTitle">2️⃣ Account Info</h3>
+
+<div style="
+  background:white;
+  margin:15px;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+">
+  <label style="font-weight:600;">Player UID:</label>
+  <input type="text" id="uidInput"
+    placeholder="Enter your Free Fire UID"
+    style="width:100%; padding:10px; margin-top:6px; border-radius:8px; border:1px solid #ccc; font-size:15px;">
+  
+  <button onclick="checkPlayerName()" style="
+    margin-top:10px;
+    width:100%;
+    background:#ff8800;
+    color:white;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:600;
+  ">🔍 Click to Check Player Name</button>
+
+  <p id="playerNameBox" style="margin-top:10px; font-size:15px; font-weight:600; color:#007bff;"></p>
 </div>
 
-<!-- UID -->
-<div class="box">
-  <h3>🎮 Enter Free Fire UID</h3>
-  <input type="text" id="uidInput" placeholder="Enter your UID">
 
-  <button onclick="checkName()">Check Player Name</button>
-  <p id="playerName" style="margin-top:10px;color:#007bff;font-weight:bold;"></p>
+<!-- ============================
+     STEP 3 — PAYMENT METHOD
+============================ -->
+<h3 class="stepTitle">3️⃣ Select Payment Option</h3>
 
-  <button onclick="placeFFOrder()">Order Now</button>
-</div>
+<div style="display:flex; gap:10px; margin:15px;">
+  
+  <!-- Wallet Pay -->
+  <div id="walletBox"
+    onclick="selectPay('wallet')"
+    style="
+      flex:1; background:white; padding:12px; border-radius:12px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+      border:2px solid transparent;
+      text-align:center; cursor:pointer;">
+    <img src="assets/wallet.png" style="height:60px;">
+    <h4>Wallet Pay</h4>
+  </div>
 
-<!-- SUCCESS POPUP -->
-<div id="popupSuccess">
-  <div class="card">
-    <h3 style="color:#00c851;">✅ Order Successful!</h3>
-    <p>Your Free Fire top-up request has been received.</p>
-    <button onclick="location.href='index.html'">Go To Home</button>
+  <!-- Instant Pay -->
+  <div id="instantBox"
+    onclick="selectPay('instant')"
+    style="
+      flex:1; background:white; padding:12px; border-radius:12px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+      border:2px solid transparent;
+      text-align:center; cursor:pointer;">
+    <img src="assets/payment.png" style="height:60px;">
+    <h4>Instant Pay</h4>
   </div>
 </div>
 
-<!-- BOTTOM NAV -->
-<div class="bottom-nav" style="
-position:fixed;bottom:0;width:100%;background:white;
-border-top:1px solid #ccc;display:flex;justify-content:space-around;padding:10px 0;">
-  <button onclick="location.href='index.html'">🏠 Home</button>
-  <button onclick="location.href='dashboard.html'">💼 Dashboard</button>
-  <button onclick="location.href='add-money.html'">💰 Add Money</button>
-  <button onclick="location.href='login.html'">🔐 Login</button>
+
+<!-- ============================
+     BALANCE & REQUIREMENT DISPLAY
+============================ -->
+<div style="
+  background:white;
+  margin:15px;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  font-size:15px;">
+  
+  <p>ℹ️ আপনার অ্যাকাউন্ট ব্যালেন্স: <b id="walletBalance">Loading...</b></p>
+  <p>ℹ️ প্রোডাক্ট কিনতে প্রয়োজন: <b id="needAmount">0</b> টাকা</p>
 </div>
 
 
-<!-- FIREBASE -->
-<script type="module" src="firebase.js"></script>
+<!-- BUY NOW BUTTON -->
+<button onclick="placeFFOrder()" style="
+  width:92%;
+  margin:20px auto;
+  display:block;
+  background:#6a00ff;
+  padding:14px;
+  color:white;
+  border:none;
+  border-radius:10px;
+  font-size:18px;
+  font-weight:700;
+  box-shadow:0 4px 8px rgba(0,0,0,0.2);
+">
+  Buy Now
+</button>
 
 <script type="module">
+import { auth, db } from "./firebase.js";
+import {
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
-  import { auth, db } from "./firebase.js";
-  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-  import { doc, getDoc, addDoc, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import {
+  doc, getDoc, updateDoc, addDoc, collection
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-  let selected = null;
 
-  // PACKAGES
-  const packages = [
-    { name: "25 Diamond", price: 23 },
-    { name: "50 Diamond", price: 38 },
-    { name: "100 Diamond", price: 74 },
-    { name: "240 Diamond", price: 156 },
-    { name: "355 Diamond", price: 235 },
-    { name: "480 Diamond", price: 315 },
-    { name: "610 Diamond", price: 395 },
-    { name: "850 Diamond", price: 550 }
-  ];
+// ================================
+// GLOBAL VARIABLES
+// ================================
+let selectedPackage = null;
+let selectedPayMethod = "instant"; // default
+let walletAmount = 0;
 
-  const list = document.getElementById("packageList");
-  const walletText = document.getElementById("walletBalance");
-  const selectedPack = document.getElementById("selectedPack");
-  const requiredPrice = document.getElementById("requiredPrice");
 
-  packages.forEach((p, i) => {
-    const div = document.createElement("div");
-    div.className = "package";
-    div.innerHTML = `<h4>${p.name}</h4><p>${p.price} TK</p>`;
-    div.onclick = () => selectPack(i, div);
-    list.appendChild(div);
-  });
+// ================================
+// SHOW PACKAGE PRICE IN “NEED AMOUNT”
+// ================================
+function updateNeedAmount() {
+  if (!selectedPackage) return;
+  document.getElementById("needAmount").innerText = selectedPackage.price + " টাকা";
+}
 
-  function selectPack(i, div) {
-    document.querySelectorAll(".package").forEach(el => el.classList.remove("selected"));
-    div.classList.add("selected");
 
-    selected = packages[i];
-    selectedPack.textContent = selected.name;
-    requiredPrice.textContent = selected.price;
+// ================================
+// PAYMENT BOX SELECT
+// ================================
+window.selectPay = function (method) {
+  selectedPayMethod = method;
+
+  document.getElementById("walletBox").style.borderColor =
+    method === "wallet" ? "#6a00ff" : "transparent";
+
+  document.getElementById("instantBox").style.borderColor =
+    method === "instant" ? "#6a00ff" : "transparent";
+};
+
+
+// ================================
+// PLAYER NAME CHECK (DUMMY API)
+// ================================
+window.checkPlayerName = function () {
+  const uid = document.getElementById("uidInput").value.trim();
+
+  if (!uid) {
+    alert("⚠️ UID দিন!");
+    return;
   }
 
-  // LOAD WALLET
-  onAuthStateChanged(auth, async (user) => {
-    if (!user) return;
+  // 🔥 আপনার API থাকলে এখানে যোগ করবেন
+  const fakeName = "Player_" + uid.slice(-4); // Demo Name
+  
+  document.getElementById("playerNameBox").innerText =
+    "✔ Player Name: " + fakeName;
+};
 
-    const snap = await getDoc(doc(db, "wallets", user.uid));
-    walletText.textContent = snap.exists() ? snap.data().balance : 0;
-  });
 
-  // CHECK PLAYER NAME (Dummy)
-  window.checkName = function() {
-    const uid = document.getElementById("uidInput").value;
-    if (!uid) return alert("Enter UID!");
+// ================================
+// LOAD WALLET BALANCE
+// ================================
+async function loadWallet(user) {
+  const ref = doc(db, "users", user.uid);
+  const snap = await getDoc(ref);
 
-    document.getElementById("playerName").textContent = "Player Found ✔ (Demo)";
+  if (snap.exists()) {
+    walletAmount = snap.data().wallet || 0;
+    document.getElementById("walletBalance").innerText = walletAmount + " টাকা";
+  } else {
+    document.getElementById("walletBalance").innerText = "0 টাকা";
+  }
+}
+
+
+// ================================
+// LOAD USER & WALLET AUTOMATICALLY
+// ================================
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    alert("Please login!");
+    window.location.href = "login.html";
+    return;
   }
 
-  // ORDER SUBMIT
-  window.placeFFOrder = async function() {
+  await loadWallet(user);
+});
 
-    const user = auth.currentUser;
-    if (!user) return alert("Please login!");
 
-    if (!selected) return alert("Select a package!");
+// ================================
+// PACKAGE CLICK SYSTEM (FROM UI)
+// ================================
+window.selectPackageUI = function (name, price) {
+  selectedPackage = { name, price };
+  updateNeedAmount();
 
-    const uid = document.getElementById("uidInput").value;
-    if (!uid) return alert("Enter UID!");
+  // Remove previous selection
+  document.querySelectorAll(".package").forEach(box => {
+    box.classList.remove("selected");
+  });
 
-    const snap = await getDoc(doc(db, "wallets", user.uid));
-    let bal = snap.exists() ? snap.data().balance : 0;
+  // Highlight current
+  event.currentTarget.classList.add("selected");
+};
 
-    if (bal < selected.price) return alert("Not enough balance!");
 
-    await addDoc(collection(db, "orders"), {
-      user: user.uid,
-      email: user.email,
-      product: "FF " + selected.name,
-      uid,
-      price: selected.price,
-      status: "pending",
-      created: new Date()
+// ================================
+// PLACE ORDER
+// ================================
+window.placeFFOrder = async function () {
+  const uidInput = document.getElementById("uidInput").value.trim();
+
+  if (!uidInput) return alert("⚠️ UID দিন!");
+  if (!selectedPackage) return alert("⚠️ প্যাকেজ সিলেক্ট করুন!");
+
+  const user = auth.currentUser;
+  if (!user) return alert("Please login!");
+
+  // Wallet payment check
+  if (selectedPayMethod === "wallet") {
+    if (walletAmount < selectedPackage.price) {
+      return alert("❌ আপনার ব্যালেন্স পর্যাপ্ত নয়!");
+    }
+  }
+
+  // Create ORDER
+  await addDoc(collection(db, "orders"), {
+    user: user.uid,
+    email: user.email,
+    product: selectedPackage.name,
+    uid: uidInput,
+    price: selectedPackage.price,
+    method: selectedPayMethod,
+    status: "pending",
+    created: new Date()
+  });
+
+  // Deduct wallet if wallet pay
+  if (selectedPayMethod === "wallet") {
+    const userRef = doc(db, "users", user.uid);
+    await updateDoc(userRef, {
+      wallet: walletAmount - selectedPackage.price
     });
-
-    document.getElementById("popupSuccess").style.display = "flex";
   }
 
+  alert("✅ অর্ডার সম্পন্ন হয়েছে!\n" + selectedPackage.name);
+
+  // Reset input
+  document.getElementById("uidInput").value = "";
+  document.getElementById("playerNameBox").innerText = "";
+  selectedPackage = null;
+  updateNeedAmount();
+};
 </script>
-</body>
-</html>
