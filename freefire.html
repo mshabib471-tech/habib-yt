@@ -6,301 +6,342 @@
 <title>Free Fire Topup | Habib YT</title>
 
 <style>
-  body {
+body {
     font-family: "Poppins", sans-serif;
-    background: #f5f7fb;
+    background: #f4f7fb;
+    color: #222;
     margin: 0;
-    padding-bottom: 85px;
-  }
+    padding-bottom: 80px;
+}
 
-  /* HEADER */
-  header {
-    background: #007bff;
-    color: #fff;
-    padding: 14px;
+header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-  }
-  header img {
-    width: 42px;
-    height: 42px;
+    justify-content: space-between;
+    background: #007bff;
+    color: white;
+    padding: 12px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+header img {
+    height: 40px;
     border-radius: 50%;
-  }
-  header h1 {
-    font-size: 20px;
-    margin: 0;
-  }
-  header button {
-    background: #fff;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 10px;
-    font-weight: 600;
-    color: #007bff;
-  }
+}
 
-  /* TITLE */
-  .title {
-    font-size: 22px;
-    font-weight: 700;
+h2 {
     text-align: center;
-    margin: 18px 0;
     color: #007bff;
-  }
+    margin: 18px 0;
+}
 
-  /* STEP TITLE */
-  .step-title {
-    font-size: 18px;
-    font-weight: 700;
-    margin: 18px 15px 10px;
-    color: #333;
-  }
-
-  /* PACKAGE GRID */
-  .grid {
+/* Package Grid */
+.package-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 10px;
-    padding: 10px 15px;
-  }
-
-  .box {
-    background: #fff;
-    padding: 10px;
-    border-radius: 12px;
-    text-align: center;
-    border: 1.5px solid #e6e6e6;
-    cursor: pointer;
-    transition: .2s;
-  }
-
-  .box:hover {
-    border-color: #007bff;
-  }
-
-  .box.selected {
-    border-color: #007bff;
-    background: #eaf2ff;
-  }
-
-  .box h4 {
-    margin: 4px 0;
-    font-size: 15px;
-  }
-
-  .box p {
-    margin: 3px 0;
-    font-size: 15px;
-    font-weight: 700;
-    color: #007bff;
-  }
-
-  /* UID SECTION */
-  .uid-box {
-    background: #fff;
-    margin: 15px;
     padding: 15px;
-    border-radius: 14px;
-    border: 1px solid #eee;
-  }
-  .uid-box input {
-    width: 100%;
-    padding: 12px;
+}
+
+.package {
+    background: white;
     border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-  }
-
-  /* PAYMENT METHODS */
-  .pay-box {
-    background: #fff;
-    margin: 15px;
-    padding: 15px;
-    border-radius: 14px;
-    border: 1px solid #eee;
-  }
-
-  .payment-methods {
-    display: flex;
-    gap: 10px;
-  }
-
-  .pay-method {
-    flex: 1;
-    padding: 12px;
-    background: #f1f5ff;
-    border-radius: 12px;
     text-align: center;
-    border: 1px solid #d6e4ff;
-    font-weight: 600;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.package:hover {
+    transform: scale(1.03);
+}
+
+.package.selected {
+    border-color: #007bff;
+    background: #e8f1ff;
+}
+
+.package h4 {
+    margin: 5px 0;
+}
+
+.package p {
     color: #007bff;
-  }
+    font-weight: bold;
+}
 
-  /* BUY BUTTON */
-  .buy-btn {
-    margin: 15px;
-    background: #007bff;
-    padding: 14px;
-    width: calc(100% - 30px);
-    border-radius: 12px;
-    font-size: 18px;
-    border: none;
-    color: #fff;
-    font-weight: 700;
-  }
-
-  /* RULES */
-  .rules {
-    background: #fff;
-    margin: 15px;
+.input-box {
+    background: white;
+    margin: 18px auto;
+    width: 92%;
     padding: 15px;
-    border-radius: 14px;
-    border: 1px solid #eee;
-    font-size: 14px;
-    line-height: 22px;
-  }
-
-  /* FOOTER */
-  footer {
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     text-align: center;
-    padding: 12px;
-    margin-top: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button.order {
     background: #007bff;
     color: white;
-  }
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 12px;
+    font-size: 16px;
+}
 
-  /* BOTTOM NAV */
-  .bottom-nav {
+button.order:hover {
+    background: #0056d4;
+}
+
+/* Payment Options */
+.pay-box {
+    margin: 15px auto;
+    width: 92%;
+    background: white;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.pay-box label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0;
+    font-size: 15px;
+}
+
+/* Success Popup */
+#popupSuccess {
     position: fixed;
-    bottom: 0;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.55);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#popupSuccess .box {
+    background: white;
+    width: 85%;
+    max-width: 350px;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    animation: pop .3s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+#popupSuccess button {
+    margin-top: 15px;
+    background: #007bff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    margin-top: 25px;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0; left: 0;
     width: 100%;
     background: #fff;
-    border-top: 1px solid #ccc;
+    padding: 10px 0;
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
-  }
-  .bottom-nav button {
+    border-top: 1px solid #ccc;
+}
+.bottom-nav button {
     background: none;
     border: none;
     color: #007bff;
-    font-weight: 700;
-  }
+    font-weight: bold;
+    cursor: pointer;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <img src="assets/logo.png">
-  <h1>Habib YT</h1>
-  <button onclick="location.href='index.html'">Home</button>
+    <img src="assets/logo.png">
+    <h3>Free Fire Topup</h3>
+    <button onclick="location.href='index.html'"
+    style="background:white;color:#007bff;padding:5px 10px;border-radius:8px;border:none;font-weight:600;">
+      Home
+    </button>
 </header>
 
-<h2 class="title">🔥 Free Fire Diamond টপ-আপ</h2>
+<h2>🔥 Free Fire Diamond Top-Up</h2>
 
-<!-- STEP 1 -->
-<h3 class="step-title">1️⃣ Select Recharge</h3>
-<div class="grid" id="packageGrid"></div>
+<!-- Packages -->
+<div class="package-list" id="packageList"></div>
 
-<!-- STEP 2 -->
-<h3 class="step-title">2️⃣ Account Info</h3>
-<div class="uid-box">
-  <label>Player UID</label>
-  <input type="text" id="uidInput" placeholder="আপনার UID লিখুন">
+<!-- UID + Player Name -->
+<div class="input-box">
+    <h4>🎮 Free Fire UID:</h4>
+    <input type="text" id="uidInput" placeholder="Enter FF UID">
+    <button onclick="checkPlayer()" class="order" style="background:#28a745;">Check Player</button>
+
+    <p id="playerName" style="margin-top:10px;color:#333;font-weight:600;"></p>
 </div>
 
-<!-- STEP 3 -->
-<h3 class="step-title">3️⃣ Payment Methods</h3>
+<!-- Payment -->
 <div class="pay-box">
-  <div class="payment-methods">
-    <div class="pay-method">Pay With Wallet</div>
-    <div class="pay-method">Bkash / Nagad Auto Pay</div>
-  </div>
+    <label><input type="radio" name="pay" value="wallet" checked> Pay from Wallet</label>
+    <label><input type="radio" name="pay" value="instant"> Instant bKash Payment</label>
 </div>
 
-<button class="buy-btn" onclick="placeOrder()">BUY NOW</button>
+<button class="order" onclick="placeOrder()">Order Now</button>
 
-<!-- RULES -->
-<div class="rules">
-  ✔ Player ID ভুল দিলে Diamond না পেলে কোন দায় নেই। <br>
-  ✔ Order করার পর আইডিতে Diamond না গেলে চেক করে দিন। <br>
-  ✔ OfferTopUp এর মতো অর্ডার instantly প্রসেস হয়।
+<!-- Success Popup -->
+<div id="popupSuccess">
+  <div class="box">
+    <h2 style="color:#28a745;">Order Successful!</h2>
+    <p>Your order has been placed successfully.</p>
+    <button onclick="location.href='index.html'">Go Home</button>
+  </div>
 </div>
 
 <footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
 
 <div class="bottom-nav">
-  <button onclick="location.href='index.html'">🏠 Home</button>
-  <button onclick="location.href='dashboard.html'">💼 Dashboard</button>
-  <button onclick="location.href='add-money.html'">💰 Add Money</button>
-  <button onclick="location.href='login.html'">🔐 Login</button>
+    <button onclick="location.href='index.html'">🏠 Home</button>
+    <button onclick="location.href='dashboard.html'">💼 Dashboard</button>
+    <button onclick="location.href='add-money.html'">💰 Add Money</button>
+    <button onclick="location.href='login.html'">🔐 Login</button>
 </div>
 
 <script type="module">
-  import { auth, db } from "./firebase.js";
-  import { addDoc, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { auth, db } from "./firebase.js";
+import {
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import {
+  addDoc, collection, doc, updateDoc
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-  const packages = [
-    { name: "25 Diamond", price: 23 },
-    { name: "50 Diamond", price: 38 },
-    { name: "100 Diamond", price: 74 },
-    { name: "240 Diamond", price: 156 },
-    { name: "355 Diamond", price: 235 },
-    { name: "480 Diamond", price: 315 },
-    { name: "610 Diamond", price: 395 },
-    { name: "725 Diamond", price: 475 },
-    { name: "850 Diamond", price: 550 },
-    { name: "1090 Diamond", price: 705 },
-    { name: "1240 Diamond", price: 790 },
-    { name: "1595 Diamond", price: 1015 },
-    { name: "1850 Diamond", price: 1175 },
-    { name: "2530 Diamond", price: 1580 },
-    { name: "3140 Diamond", price: 1970 },
-    { name: "Weekly", price: 155 },
-    { name: "Monthly", price: 768 },
-    { name: "1 Weekly + 1 Monthly", price: 921 },
-    { name: "2 Weekly + 1 Monthly", price: 1080 },
-    { name: "3 Weekly + 1 Monthly", price: 1230 },
-    { name: "4 Weekly + 1 Monthly", price: 1385 }
-  ];
+/* Package List */
+const packages = [
+  { name: "25 Diamond", price: 23 },
+  { name: "50 Diamond", price: 38 },
+  { name: "100 Diamond", price: 74 },
+  { name: "240 Diamond", price: 156 },
+  { name: "355 Diamond", price: 235 },
+  { name: "480 Diamond", price: 315 },
+  { name: "610 Diamond", price: 395 },
+  { name: "850 Diamond", price: 550 },
+  { name: "1240 Diamond", price: 790 },
+];
 
-  const grid = document.getElementById("packageGrid");
-  let selectedPackage = null;
+let selected = null;
 
-  packages.forEach((p, index) => {
-    const box = document.createElement("div");
-    box.className = "box";
-    box.innerHTML = `<h4>${p.name}</h4><p>${p.price} TK</p>`;
-    box.onclick = () => {
-      document.querySelectorAll(".box").forEach(b => b.classList.remove("selected"));
-      box.classList.add("selected");
-      selectedPackage = p;
+// Render package UI
+const list = document.getElementById("packageList");
+packages.forEach((p, i) => {
+    const div = document.createElement("div");
+    div.className = "package";
+    div.innerHTML = `<h4>${p.name}</h4><p>${p.price} TK</p>`;
+    div.onclick = () => {
+        document.querySelectorAll(".package").forEach(e => e.classList.remove("selected"));
+        div.classList.add("selected");
+        selected = p;
     };
-    grid.appendChild(box);
-  });
+    list.appendChild(div);
+});
 
-  window.placeOrder = async function() {
+/* Player Name Check */
+window.checkPlayer = async function () {
     const uid = document.getElementById("uidInput").value.trim();
-    if (!selectedPackage) return alert("⚠️ একটি প্যাকেজ সিলেক্ট করুন");
-    if (!uid) return alert("⚠️ UID লিখুন");
+    if (!uid) return alert("Enter UID!");
+
+    document.getElementById("playerName").innerText = "Checking...";
+
+    try {
+        const res = await fetch(`https://api.duniagames.co.id/api/transaction/v1/top-up/inquiry?productId=1&itemId=1&catalogId=1&paymentId=0&gameId=${uid}`);
+        const data = await res.json();
+
+        if (!data?.data?.gameDetail) {
+            document.getElementById("playerName").innerText = "Player Not Found!";
+        } else {
+            document.getElementById("playerName").innerText =
+            "Player: " + data.data.gameDetail.userName;
+        }
+    } catch {
+        document.getElementById("playerName").innerText = "Failed!";
+    }
+};
+
+/* ORDER PLACE */
+window.placeOrder = async function () {
+
+    const uid = document.getElementById("uidInput").value.trim();
+    if (!selected) return alert("Select a package!");
+    if (!uid) return alert("Enter UID!");
+
+    const payMethod = document.querySelector("input[name='pay']:checked").value;
 
     const user = auth.currentUser;
-    if (!user) return alert("Please login first!");
+    if (!user) return alert("Please login!");
 
+    // Wallet deduct if selected
+    if (payMethod === "wallet") {
+
+        const bal = parseInt(localStorage.getItem("wallet") || 0);
+        if (bal < selected.price)
+            return alert("Not enough wallet balance!");
+
+        await updateDoc(doc(db, "wallets", user.uid), {
+            balance: bal - selected.price
+        });
+    }
+
+    // If instant pay
+    if (payMethod === "instant") {
+        window.location.href =
+         `https://pay.offertopup.com/checkout/mobilebank/1924654/${selected.price}`;
+        return;
+    }
+
+    // Save order
     await addDoc(collection(db, "orders"), {
-      user: user.uid,
-      email: user.email,
-      uid: uid,
-      product: selectedPackage.name,
-      price: selectedPackage.price,
-      created: new Date(),
-      status: "pending"
+        user: user.uid,
+        uid,
+        product: selected.name,
+        price: selected.price,
+        method: payMethod,
+        status: "pending",
+        created: new Date()
     });
 
-    alert("✅ অর্ডার সফলভাবে সম্পন্ন হয়েছে!");
-  };
+    document.getElementById("popupSuccess").style.display = "flex";
+};
 </script>
 
 </body>
