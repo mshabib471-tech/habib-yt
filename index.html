@@ -1,22 +1,93 @@
 <!DOCTYPE html>
 <html lang="bn" translate="no">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Habib YT — আপনার বিশ্বস্ত সহযোগী</title>
 
-  <!-- LINK CORRECT CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /***************************
+       GLOBAL SETTINGS
+    ****************************/
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(180deg, #e9f0ff, #f7f9ff);
+      overflow-x: hidden;
+      color: #222;
+    }
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    /* Fade Animation */
+    .fade-in { animation: fadeIn .7s ease-in-out forwards; opacity: 0; }
+    @keyframes fadeIn {
+      from { opacity:0; transform: translateY(20px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    /* Slide Up Animation */
+    .slide-up { animation: slideUp .7s ease; }
+    @keyframes slideUp {
+      from { opacity:0; transform: translateY(40px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    /***************************
+         GRADIENT HEADER
+    ****************************/
+    header {
+      background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.25);
+    }
+    header img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    header h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    header small {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-top: -4px;
+      display: block;
+    }
+
+    /* Header Buttons */
+    nav button {
+      background: rgba(255,255,255,0.20);
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 10px;
+      color: white;
+      backdrop-filter: blur(6px);
+      cursor: pointer;
+      font-weight: 600;
+      transition: .25s;
+    }
+    nav button:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.35);
+    }
+  </style>
 </head>
 
-<body>
+<body>  <!-- ✅ FIXED: BODY ADDED -->
 
-<!-- HEADER -->
+<!-- ==========================
+          HEADER
+========================== -->
 <header class="fade-in">
-  <div class="header-left">
+  <div style="display:flex; align-items:center; gap:12px;">
     <img src="assets/logo.png" alt="Logo">
     <div>
       <h2>Habib YT</h2>
@@ -30,75 +101,141 @@
   </nav>
 </header>
 
-<!-- HERO -->
+
+<!-- ==========================
+         HERO SECTION
+========================== -->
 <section class="hero fade-in">
   <h1>🔥 দ্রুত ও নিরাপদ গেমিং টপ-আপ</h1>
   <p>Free Fire • EFootball • Like/Followers • Mobile Services</p>
 </section>
 
-<!-- SERVICES -->
+
+<!-- ==========================
+        SERVICES SECTION
+========================== -->
 <section class="services fade-in">
 
   <div class="card" onclick="location.href='freefire.html'">
-    <img src="assets/ff.jpg"><h3>Free Fire Diamond</h3>
+    <img src="assets/ff.jpg" alt="Free Fire">
+    <h3>Free Fire Diamond</h3>
   </div>
 
   <div class="card" onclick="location.href='efootball.html'">
-    <img src="assets/efootball.jpg"><h3>EFootball Coins</h3>
+    <img src="assets/efootball.jpg" alt="EFootball">
+    <h3>EFootball Coins</h3>
   </div>
 
   <div class="card" onclick="location.href='like-follower.html'">
-    <img src="assets/like.jpg"><h3>Like & Followers</h3>
+    <img src="assets/like.jpg" alt="Like">
+    <h3>Like & Followers</h3>
   </div>
 
   <div class="card" onclick="location.href='mobile-accessories.html'">
-    <img src="assets/accessories.jpg"><h3>Mobile Accessories</h3>
+    <img src="assets/accessories.jpg" alt="Mobile Accessories">
+    <h3>Mobile Accessories</h3>
   </div>
 
   <div class="card" onclick="location.href='mobile-servicing.html'">
-    <img src="assets/servicing.jpg"><h3>Mobile Servicing</h3>
+    <img src="assets/servicing.jpg" alt="Mobile Servicing">
+    <h3>Mobile Servicing</h3>
   </div>
 
   <div class="card" onclick="location.href='coming-soon.html'">
-    <img src="assets/coming.jpg"><h3>Coming Soon</h3>
+    <img src="assets/coming.jpg" alt="Coming Soon">
+    <h3>Coming Soon</h3>
   </div>
 
 </section>
 
-<!-- SUPPORT -->
-<section class="support fade-in">
-  <h2>📞 কাস্টমার সাপোর্ট</h2>
-  <p>যেকোনো সমস্যা বা সাহায্যের জন্য যোগাযোগ করুন:</p>
 
-  <a class="telegram" href="https://t.me/H_A_B_I_B_Top_1">💬 Telegram</a>
-  <a class="whatsapp" href="https://wa.me/8801868461577">📱 WhatsApp</a>
+<!-- ==========================
+       SUPPORT SECTION
+========================== -->
+<section class="support fade-in">
+  <h2>📞 Customer Support</h2>
+  <p>If you need any help, feel free to contact us:</p>
+
+  <a class="telegram" href="https://t.me/H_A_B_I_B_Top_1" target="_blank">💬 Telegram</a>
+  <a class="whatsapp" href="https://wa.me/8801868461577" target="_blank">📱 WhatsApp</a>
 </section>
 
-<!-- FOOTER -->
+
+<!-- ==========================
+         LEGAL / TERMS
+========================== -->
+<section class="legal fade-in" style="
+  background: rgba(255,255,255,0.60);
+  backdrop-filter: blur(10px);
+  padding: 22px;
+  margin: 25px 15px;
+  border-radius: 16px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+">
+  <h2 style="text-align:center; color:#0057e7; margin-bottom:15px;">
+    📜 Terms & Policies
+  </h2>
+
+  <h3 style="color:#0057e7;">✔ Service Terms</h3>
+  <p>Top-up processed exactly as per submitted UID/ID.</p>
+
+  <h3 style="color:#0057e7;">✔ Privacy Policy</h3>
+  <p>Your data is securely stored in Firebase.</p>
+
+  <h3 style="color:#0057e7;">✔ Refund Policy</h3>
+  <p>If order not delivered, refund will be added to wallet.</p>
+
+  <h3 style="color:#0057e7;">✔ Disclaimer</h3>
+  <p>Game server delays are not under our control.</p>
+</section>
+
+
+<!-- ==========================
+            FOOTER
+========================== -->
 <footer class="fade-in">
-  <div>Habib YT — Your Trusted Partner</div>
-  <small>© 2025 Habib YT. All Rights Reserved.</small>
+  <div style="margin-bottom:8px; font-size:16px; font-weight:600;">
+    Habib YT — Your Trusted Partner
+  </div>
+
+  <small style="font-size:13px; opacity:0.85;">
+    © 2025 Habib YT. All Rights Reserved.
+  </small>
 </footer>
 
-<!-- BOTTOM NAV -->
-<div class="bottom-nav slide-up">
+
+<!-- ==========================
+       BOTTOM NAVIGATION
+========================== -->
+<div class="bottom-nav slide-up" style="
+  position:fixed; bottom:0; width:100%; background:white;
+  display:flex; justify-content:space-around; padding:10px 0;
+  border-top:1px solid #ccc; box-shadow:0 -4px 12px rgba(0,0,0,0.15);
+">
   <button onclick="location.href='index.html'">🏠 Home</button>
   <button onclick="location.href='dashboard.html'">💼 Dashboard</button>
   <button onclick="location.href='add-money.html'">💰 Add Money</button>
   <button onclick="location.href='login.html'">🔐 Login</button>
 </div>
 
-<!-- Firebase System -->
-<script type="module" src="js/firebase.js"></script>
+
+<!-- ==========================
+     AUTO LOGIN SWITCH
+========================== -->
 <script type="module">
-  import { auth } from "./js/firebase.js";
+  import { auth } from "./firebase.js";
   import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
   const loginBtn = document.getElementById("loginBtn");
 
   onAuthStateChanged(auth, (user) => {
-    loginBtn.innerText = user ? "My Account" : "Login";
-    loginBtn.onclick = () => location.href = user ? "dashboard.html" : "login.html";
+    if (user) {
+      loginBtn.innerText = "My Account";
+      loginBtn.onclick = () => location.href = "dashboard.html";
+    } else {
+      loginBtn.innerText = "Login";
+      loginBtn.onclick = () => location.href = "login.html";
+    }
   });
 </script>
 
