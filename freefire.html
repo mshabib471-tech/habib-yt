@@ -24,7 +24,6 @@
       box-shadow: 0 3px 10px rgba(0,0,0,0.15);
     }
     header img { width: 45px; height: 45px; border-radius: 50%; }
-    header h2 { margin: 0; font-size: 20px; font-weight: 600; }
     .home-btn {
       background: #fff;
       padding: 7px 15px;
@@ -35,7 +34,7 @@
       cursor: pointer;
     }
 
-    .section-title {
+    h3.section-title {
       font-size: 20px;
       font-weight: 600;
       margin: 20px 10px 10px;
@@ -63,7 +62,7 @@
     .box h4 { margin: 0; font-size: 15px; color: #222; }
     .box p { margin: 5px 0 0; color: #0a7cff; font-weight: 600; }
 
-    /* PLAYER UID */
+    /* UID INPUT */
     .input-area {
       background: #fff;
       margin: 15px;
@@ -91,7 +90,14 @@
       cursor: pointer;
     }
 
-    /* PAYMENT BOX */
+    #playerName {
+      color:#0a7cff;
+      font-weight:600;
+      margin-top:8px;
+      min-height: 20px;
+    }
+
+    /* PAYMENT */
     .payment-box {
       background: #fff;
       margin: 15px;
@@ -113,14 +119,15 @@
       cursor: pointer;
     }
     .pay.selected { border-color: #0a7cff; background: #e8f1ff; }
-    .pay img { width: 75%; }
+    .pay img { width: 75%; pointer-events:none; }
 
     #infoText {
       margin-top: 12px;
       background: #eef5ff;
-      padding: 8px;
+      padding: 10px;
       border-radius: 10px;
       font-size: 14px;
+      line-height: 1.5;
     }
 
     /* BUY BUTTON */
@@ -149,12 +156,13 @@
 
     /* FOOTER */
     footer {
-      background: #081a51;
+      background: #071a44;
       color: white;
-      padding: 20px;
+      padding: 25px;
       text-align: center;
-      margin-top: 20px;
+      margin-top: 25px;
     }
+
     footer a { color: #fff; margin: 0 8px; }
   </style>
 </head>
@@ -168,7 +176,6 @@
 </header>
 
 <h3 class="section-title">1️⃣ Select Recharge</h3>
-
 <div class="package-grid" id="packageGrid"></div>
 
 <h3 class="section-title">2️⃣ Account Info</h3>
@@ -177,14 +184,15 @@
   <b>Player UID</b>
   <input type="number" id="uid" placeholder="Enter Free Fire UID">
   <button class="check-btn" onclick="checkUID()">Click to check player name</button>
-  <p id="playerName" style="color:#0a7cff;font-weight:600;margin-top:8px;"></p>
+  <p id="playerName"></p>
 </div>
 
 <h3 class="section-title">3️⃣ Payment Methods</h3>
 
 <div class="payment-box">
+
   <div class="pay-option">
-    <div class="pay" id="walletPay" onclick="selectPay('wallet')">
+    <div class="pay selected" id="walletPay" onclick="selectPay('wallet')">
       <img src="assets/wallet.png">
       <h4>Wallet Pay</h4>
     </div>
@@ -201,60 +209,33 @@
   </div>
 
   <button class="buy-btn" onclick="placeOrder()">BUY NOW</button>
+
 </div>
 
 <!-- RULES -->
 <div class="rules">
   <b>Rules & Conditions</b><br><br>
-  • Player ID ভুল দিলে Diamond না পেলে Habib YT দায়ী নয়।<br>
-  • Order complete হওয়ার পর আইডিতে Diamond না গেলে ID check করে নিতে হবে।<br>
-  • অর্ডার Cancel হয় না (কারণ শুরু হলেই)।<br>
-  • ভুল UID দিলে রিফান্ড নেই। অর্ডার ব্যর্থ হলে 100% Wallet refund।  
+  • Player ID ভুল দিলে Diamond না পেলে Habib YT দায়ী নয়।<br>
+  • Order complete হওয়ার পর আইডিতে Diamond না গেলে ID check করতে হবে।<br>
+  • অর্ডার শুরু হলে Cancel করা যায় না।<br>
+  • ভুল UID দিলে রিফান্ড নেই। অর্ডার ব্যর্থ হলে 100% Wallet refund।
 </div>
 
-<!-- =======================
-    SOCIAL + SUPPORT SECTION
-======================== -->
-<div style="
-  background:#071a44;
-  color:white;
-  padding:25px 15px;
-  margin-top:25px;
-  border-top-left-radius:18px;
-  border-top-right-radius:18px;
-">
+<!-- SOCIAL + SUPPORT -->
+<footer>
+  <h2>STAY CONNECTED</h2>
 
-  <h2 style="margin:0 0 10px;">STAY CONNECTED</h2>
-  <p style="opacity:0.8; font-size:14px;">
-    নিজের টপআপ নিজেই করতে চাইলে, Watch Video এ ক্লিক করে ভিডিওটি দেখুন
-  </p>
+  <p style="opacity:0.8;">নিজের টপআপ নিজে করতে চাইলে Watch Video দেখুন</p>
 
-  <div style="display:flex; gap:15px; margin:15px 0;">
-    <a href="https://www.facebook.com/share/1Apo7eSRei/" style="background:#0d2b66; padding:12px; border-radius:12px;">
-      <img src="assets/fb.svg" width="30">
-    </a>
-    <a href="https://www.instagram.com/md__habibur_rahman?igsh=YWRyNW1mNWUyenk2" style="background:#0d2b66; padding:12px; border-radius:12px;">
-      <img src="assets/ig.svg" width="30">
-    </a>
-    <a href="https://youtube.com/@h_a_b_i_b-yt?si=DXLV7rkzlJuTsOz1" style="background:#0d2b66; padding:12px; border-radius:12px;">
-      <img src="assets/yt.svg" width="30">
-    </a>
-    <a href="mailto:mshabib471@gmail.com" style="background:#0d2b66; padding:12px; border-radius:12px;">
-      <img src="assets/mail.svg" width="30">
-    </a>
+  <div style="display:flex; justify-content:center; gap:15px; margin:15px 0;">
+    <a href="https://facebook.com/" target="_blank"><img src="assets/fb.svg" width="35"></a>
+    <a href="https://instagram.com/" target="_blank"><img src="assets/ig.svg" width="35"></a>
+    <a href="https://youtube.com/" target="_blank"><img src="assets/yt.svg" width="35"></a>
+    <a href="mailto:mshabib471@gmail.com" target="_blank"><img src="assets/mail.svg" width="35"></a>
   </div>
 
-  <h2 style="margin-top:20px;">SUPPORT CENTER</h2>
-
-  <div style="
-    background:#0d2b66;
-    padding:20px;
-    border-radius:14px;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    margin-top:10px;
-  ">
+  <h3>SUPPORT CENTER</h3>
+  <div style="background:#0d2b66;padding:15px;border-radius:12px;display:flex;align-items:center;gap:10px;">
     <img src="assets/telegram.svg" width="40">
     <div>
       <b>Help line [9AM–12PM]</b><br>
@@ -262,56 +243,32 @@
     </div>
   </div>
 
-</div>
-
-<footer>
-  © 2025 Habib YT — All Rights Reserved.<br>
-  <a href="https://www.facebook.com/share/1Apo7eSRei/">Facebook</a> |
-  <a href="https://youtube.com/@h_a_b_i_b-yt?si=DXLV7rkzlJuTsOz1">YouTube</a> |
-  <a href="https://www.instagram.com/md__habibur_rahman?igsh=YWRyNW1mNWUyenk2">Instagram</a>
+  <br>
+  © 2025 Habib YT — All Rights Reserved.
 </footer>
 
-<!-- FIREBASE -->
+<!-- FIREBASE SCRIPT -->
 <script type="module">
+
   import { auth, db } from "./firebase.js";
-  import {
-    onAuthStateChanged
-  } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-  import {
-    addDoc, collection, doc, getDoc
-  } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+  import { addDoc, collection, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
   let selectedPackage = null;
   let selectedPayment = "wallet";
   let userUID = null;
   let userBalance = 0;
 
-  /* ===========================
-       PACKAGES
-  =========================== */
+  /* PACKAGES */
   const packages = [
-    {name: "25 Diamond", price: 23},
-    {name: "50 Diamond", price: 38},
-    {name: "100 Diamond", price: 74},
-    {name: "115 Diamond", price: 78},
-    {name: "240 Diamond", price: 156},
-    {name: "355 Diamond", price: 235},
-    {name: "480 Diamond", price: 315},
-    {name: "610 Diamond", price: 395},
-    {name: "725 Diamond", price: 475},
-    {name: "850 Diamond", price: 550},
-    {name: "1090 Diamond", price: 705},
-    {name: "1240 Diamond", price: 790},
-    {name: "1595 Diamond", price: 1015},
-    {name: "1850 Diamond", price: 1175},
-    {name: "2530 Diamond", price: 1580},
-    {name: "3140 Diamond", price: 1970},
-    {name: "Weekly Pass", price: 155},
-    {name: "Monthly Pass", price: 768},
-    {name: "1 Weekly + 1 Monthly", price: 921},
-    {name: "2 Weekly + 1 Monthly", price: 1080},
-    {name: "3 Weekly + 1 Monthly", price: 1230},
-    {name: "4 Weekly + 1 Monthly", price: 1385},
+    {name:"25 Diamond",price:23},{name:"50 Diamond",price:38},{name:"100 Diamond",price:74},
+    {name:"115 Diamond",price:78},{name:"240 Diamond",price:156},{name:"355 Diamond",price:235},
+    {name:"480 Diamond",price:315},{name:"610 Diamond",price:395},{name:"725 Diamond",price:475},
+    {name:"850 Diamond",price:550},{name:"1090 Diamond",price:705},{name:"1240 Diamond",price:790},
+    {name:"1595 Diamond",price:1015},{name:"1850 Diamond",price:1175},{name:"2530 Diamond",price:1580},
+    {name:"3140 Diamond",price:1970},{name:"Weekly Pass",price:155},{name:"Monthly Pass",price:768},
+    {name:"1 Weekly + 1 Monthly",price:921},{name:"2 Weekly + 1 Monthly",price:1080},
+    {name:"3 Weekly + 1 Monthly",price:1230},{name:"4 Weekly + 1 Monthly",price:1385},
   ];
 
   const grid = document.getElementById("packageGrid");
@@ -325,15 +282,14 @@
   });
 
   function selectPackage(i, div) {
-    document.querySelectorAll(".box").forEach(el => el.classList.remove("selected"));
+    document.querySelectorAll(".box").forEach(x => x.classList.remove("selected"));
     div.classList.add("selected");
     selectedPackage = packages[i];
+
     document.getElementById("need").innerText = selectedPackage.price;
   }
 
-  /* ===========================
-       LOGIN + BALANCE LOAD
-  =========================== */
+  /* LOGIN + BALANCE */
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
       alert("Please login first!");
@@ -349,44 +305,42 @@
     document.getElementById("balance").innerText = userBalance;
   });
 
-  /* ===========================
-       UID → PLAYER NAME CHECK
-  =========================== */
-  function checkUID() {
+  /* UID CHECK */
+  window.checkUID = function() {
     let uid = document.getElementById("uid").value;
-
-    if (!uid) return alert("Enter UID!");
+    if (!uid) return alert("UID দিন!");
 
     document.getElementById("playerName").innerHTML =
-      "✔ Official Garena server connected — UID valid";
-  }
+      "✔ UID সফলভাবে যাচাই হয়েছে (Garena Server Connected)";
+  };
 
-  /* ===========================
-       PAYMENT SELECT
-  =========================== */
-  function selectPay(type) {
+  /* PAYMENT SELECT */
+  window.selectPay = function(type) {
     selectedPayment = type;
+
     document.getElementById("walletPay").classList.toggle("selected", type === "wallet");
     document.getElementById("instantPay").classList.toggle("selected", type === "instant");
-  }
+  };
 
-  /* ===========================
-       PLACE ORDER
-  =========================== */
+  /* PLACE ORDER */
   window.placeOrder = async function () {
-    if (!selectedPackage) return alert("Select a package!");
+    if (!selectedPackage) return alert("আপনি একটি প্যাকেজ সিলেক্ট করুন!");
     let uid = document.getElementById("uid").value;
-    if (!uid) return alert("Enter Player UID!");
+    if (!uid) return alert("UID দিন!");
 
     if (selectedPayment === "wallet") {
       if (userBalance < selectedPackage.price) {
-        return alert("Insufficient balance!");
+        return alert("❌ আপনার ওয়ালেটে পর্যাপ্ত টাকা নেই!");
       }
+      // deduct wallet balance
+      await updateDoc(doc(db, "wallets", userUID), {
+        balance: userBalance - selectedPackage.price
+      });
     }
 
     await addDoc(collection(db, "orders"), {
       user: userUID,
-      product: selectedPackage.name,
+      package: selectedPackage.name,
       uid: uid,
       price: selectedPackage.price,
       payment: selectedPayment,
@@ -394,9 +348,10 @@
       created: new Date()
     });
 
-    alert("✔ Order placed successfully!");
+    alert("✔ অর্ডার সফলভাবে সম্পন্ন হয়েছে!");
     location.href = "dashboard.html";
-  }
+  };
+
 </script>
 
 </body>
