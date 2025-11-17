@@ -1,228 +1,291 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" translate="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Fire Topup | Habib YT</title>
+  <title>Free Fire Diamond | Habib YT</title>
+
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background: #f4f7fb;
-      color: #222;
       margin: 0;
-      padding-bottom: 70px;
+      background: #f2f6ff;
+      padding-bottom: 80px;
     }
+
+    /* HEADER */
     header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      background: #007bff;
+      align-items: center;
+      padding: 15px 20px;
+      background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);
       color: white;
-      padding: 12px 18px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.25);
     }
     header img {
-      height: 40px;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
     }
-    h2 {
-      text-align: center;
-      color: #007bff;
-      margin: 18px 0;
+    header h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+    .home-btn {
+      background:white;
+      color:#0052d4;
+      padding:8px 14px;
+      border-radius:10px;
+      border:none;
+      font-weight:600;
+      cursor:pointer;
     }
 
-    /* Grid of Packages */
-    .package-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 12px;
-      padding: 15px;
+    /* TITLE */
+    h2 {
+      text-align:center;
+      margin:18px 0;
+      color:#0052d4;
+      font-size:24px;
+      font-weight:700;
     }
-    .package {
-      background: white;
-      border-radius: 10px;
-      text-align: center;
-      padding: 12px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      transition: 0.2s;
-      cursor: pointer;
-      border: 2px solid transparent;
+
+    /* PACKAGE SMALL CARDS */
+    .pkg-card {
+      background:white;
+      margin:10px 15px;
+      padding:12px 16px;
+      border-radius:14px;
+      box-shadow:0 3px 10px rgba(0,0,0,0.08);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      cursor:pointer;
+      transition:.25s;
     }
-    .package:hover {
-      transform: scale(1.03);
+    .pkg-card:hover {
+      transform:translateY(-3px);
+      box-shadow:0 6px 14px rgba(0,0,0,0.15);
     }
-    .package.selected {
-      border-color: #007bff;
-      background: #e8f1ff;
+    .pkg-name {
+      font-size:15px;
+      font-weight:600;
+      color:#333;
     }
-    .package h4 {
-      margin: 5px 0;
-      color: #333;
+    .pkg-price {
+      font-size:16px;
+      font-weight:700;
+      color:#0066ff;
     }
-    .package p {
-      color: #007bff;
-      font-weight: bold;
-      margin: 4px 0;
+    .selected {
+      background:#e8f1ff;
+      border-left:4px solid #0052d4;
     }
+
+    /* UID INPUT */
     .input-box {
-      background: white;
-      margin: 18px auto;
-      width: 90%;
-      max-width: 400px;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
+      background:white;
+      width:90%;
+      margin:18px auto;
+      padding:15px;
+      text-align:center;
+      border-radius:14px;
+      box-shadow:0 3px 10px rgba(0,0,0,0.08);
     }
     input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-top: 10px;
-      font-size: 16px;
+      width:100%;
+      padding:10px;
+      margin-top:10px;
+      border:1px solid #ccc;
+      border-radius:8px;
+      font-size:16px;
     }
-    button.order {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
-      width: 100%;
+    .order-btn {
+      width:100%;
+      padding:12px;
+      margin-top:12px;
+      background:#0057e7;
+      border:none;
+      border-radius:10px;
+      color:white;
+      font-weight:700;
+      cursor:pointer;
     }
-    button.order:hover {
-      background: #0056d4;
+
+    /* SUCCESS POPUP */
+    #popupSuccess {
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(0,0,0,0.55);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:9999;
     }
-    footer {
-      text-align: center;
-      background: #007bff;
-      color: white;
-      padding: 10px;
-      margin-top: 25px;
+    #popupSuccess .box {
+      background:white;
+      width:80%;
+      max-width:360px;
+      padding:25px;
+      text-align:center;
+      border-radius:18px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.25);
+      animation:pop .4s ease;
     }
+    @keyframes pop {
+      from {transform:scale(.7); opacity:0;}
+      to   {transform:scale(1); opacity:1;}
+    }
+
+    /* BOTTOM NAV */
     .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #fff;
-      border-top: 1px solid #ccc;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
+      position:fixed;
+      bottom:0;
+      width:100%;
+      background:white;
+      padding:10px 0;
+      display:flex;
+      justify-content:space-around;
+      border-top:1px solid #ccc;
+      box-shadow:0 -4px 10px rgba(0,0,0,0.08);
     }
     .bottom-nav button {
-      background: none;
-      border: none;
-      color: #007bff;
-      font-weight: bold;
-      cursor: pointer;
+      background:none;
+      border:none;
+      color:#0052d4;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
     }
+
   </style>
 </head>
+
 <body>
 
-  <header>
-    <img src="assets/logo.png" alt="Habib YT Logo" />
-    <h3>Habib YT</h3>
-    <button onclick="window.location.href='index.html'"
-      style="background:white;color:#007bff;padding:6px 10px;border:none;border-radius:8px;font-weight:600;">
-      Home
-    </button>
-  </header>
-
-  <h2>🔥 Free Fire Diamond টপ-আপ</h2>
-
-  <!-- Packages -->
-  <div class="package-list" id="packageList"></div>
-
-  <!-- UID Input -->
-  <div class="input-box">
-    <h4>🎮 আপনার Free Fire UID দিন:</h4>
-    <input type="text" id="uidInput" placeholder="আপনার UID লিখুন" />
-    <button class="order" onclick="placeFFOrder()">Order Now</button>
+<!-- HEADER -->
+<header>
+  <div style="display:flex;align-items:center;">
+    <img src="assets/logo.png">
+    <h2>Habib YT</h2>
   </div>
 
-  <footer>© 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী</footer>
+  <button class="home-btn" onclick="location.href='index.html'">Home</button>
+</header>
 
-  <div class="bottom-nav">
-    <button onclick="window.location.href='index.html'">🏠 Home</button>
-    <button onclick="window.location.href='dashboard.html'">💼 Dashboard</button>
-    <button onclick="window.location.href='add-money.html'">💰 Add Money</button>
-    <button onclick="window.location.href='login.html'">🔐 Login</button>
+<h2>🔥 Free Fire Diamond টপ-আপ</h2>
+
+<!-- PACKAGES -->
+<div id="pkgList"></div>
+
+<!-- UID INPUT -->
+<div class="input-box">
+  <h3>🎮 আপনার Free Fire UID দিন</h3>
+  <input id="uidInput" placeholder="আপনার UID লিখুন">
+  <button class="order-btn" onclick="placeFFOrder()">Order Now</button>
+</div>
+
+<!-- SUCCESS POPUP -->
+<div id="popupSuccess">
+  <div class="box">
+    <h3 style="color:#00c851;">✔ অর্ডার সম্পন্ন!</h3>
+    <p id="popupMsg"></p>
+    <button onclick="location.href='index.html'">Go to Home</button>
   </div>
+</div>
 
-  <script type="module" src="firebase.js"></script>
-  <script type="module">
-    import { auth, db } from "./firebase.js";
-    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-    import { addDoc, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+<!-- FOOTER -->
+<footer style="background:#0052d4;color:white;text-align:center;padding:12px;margin-top:25px;">
+  © 2025 Habib YT — আপনার বিশ্বস্ত সহযোগী
+</footer>
 
-    // 🔹 প্যাকেজ লিস্ট (UI)
-    const packages = [
-      { name: "25 Diamond", price: 23 },
-      { name: "50 Diamond", price: 38 },
-      { name: "100 Diamond", price: 74 },
-      { name: "240 Diamond", price: 156 },
-      { name: "355 Diamond", price: 235 },
-      { name: "480 Diamond", price: 315 },
-      { name: "610 Diamond", price: 395 },
-      { name: "850 Diamond", price: 550 },
-      { name: "1240 Diamond", price: 790 },
-      { name: "1850 Diamond", price: 1175 },
-      { name: "3140 Diamond", price: 1970 },
-      { name: "Weekly Pass", price: 155 },
-      { name: "Monthly Pass", price: 768 },
-      { name: "1 Weekly + 1 Monthly", price: 921 },
-      { name: "2 Weekly + 1 Monthly", price: 1080 },
-      { name: "3 Weekly + 1 Monthly", price: 1230 },
-      { name: "4 Weekly + 1 Monthly", price: 1385 },
-    ];
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button onclick="location.href='index.html'">🏠 Home</button>
+  <button onclick="location.href='dashboard.html'">💼 Dashboard</button>
+  <button onclick="location.href='add-money.html'">💰 Add Money</button>
+  <button onclick="location.href='login.html'">🔐 Login</button>
+</div>
 
-    // প্যাকেজ রেন্ডার
-    const list = document.getElementById("packageList");
-    let selected = null;
-    packages.forEach((p, i) => {
-      const div = document.createElement("div");
-      div.className = "package";
-      div.innerHTML = `<h4>${p.name}</h4><p>${p.price} TK</p>`;
-      div.onclick = () => selectPackage(i, div);
-      list.appendChild(div);
+<!-- JS + FIREBASE -->
+<script type="module">
+  import { auth, db } from "./firebase.js";
+  import { addDoc, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+  const packages = [
+    { name:"25 Diamond", price:23 },
+    { name:"50 Diamond", price:38 },
+    { name:"100 Diamond", price:74 },
+    { name:"240 Diamond", price:156 },
+    { name:"355 Diamond", price:235 },
+    { name:"480 Diamond", price:315 },
+    { name:"610 Diamond", price:395 },
+    { name:"850 Diamond", price:550 },
+    { name:"1240 Diamond", price:790 },
+    { name:"1850 Diamond", price:1175 },
+    { name:"3140 Diamond", price:1970 },
+    { name:"Weekly Pass", price:155 },
+    { name:"Monthly Pass", price:768 },
+    { name:"1 Weekly + 1 Monthly", price:921 },
+    { name:"2 Weekly + 1 Monthly", price:1080 },
+    { name:"3 Weekly + 1 Monthly", price:1230 },
+    { name:"4 Weekly + 1 Monthly", price:1385 },
+  ];
+
+  const pkgList = document.getElementById("pkgList");
+  let selected = null;
+
+  packages.forEach((p,i)=>{
+    const div = document.createElement("div");
+    div.className="pkg-card";
+    div.innerHTML = `
+      <span class="pkg-name">${p.name}</span>
+      <span class="pkg-price">${p.price} TK</span>
+    `;
+    div.onclick = ()=>selectPkg(i,div);
+    pkgList.appendChild(div);
+  });
+
+  function selectPkg(i,div){
+    document.querySelectorAll(".pkg-card").forEach(el=>el.classList.remove("selected"));
+    div.classList.add("selected");
+    selected = packages[i];
+  }
+
+  window.placeFFOrder = async function(){
+    const uid = document.getElementById("uidInput").value.trim();
+    if(!selected) return alert("⚠️ একটি প্যাকেজ সিলেক্ট করুন!");
+    if(!uid) return alert("⚠️ UID দিন!");
+
+    const user = auth.currentUser;
+    if(!user) return alert("Please login!");
+
+    await addDoc(collection(db,"orders"),{
+      user:user.uid,
+      email:user.email,
+      uid,
+      product:"Free Fire "+selected.name,
+      price:selected.price,
+      status:"pending",
+      created:new Date()
     });
 
-    function selectPackage(i, div) {
-      document.querySelectorAll(".package").forEach((el) => el.classList.remove("selected"));
-      div.classList.add("selected");
-      selected = packages[i];
-    }
+    // SUCCESS POPUP SHOW
+    document.getElementById("popupMsg").innerText = 
+      `${selected.name} (${selected.price} TK)`;
 
-    // অর্ডার সাবমিট
-    window.placeFFOrder = async function () {
-      const uid = document.getElementById("uidInput").value.trim();
-      if (!selected) return alert("⚠️ প্রথমে একটি প্যাকেজ সিলেক্ট করুন!");
-      if (!uid) return alert("⚠️ আপনার UID দিন!");
+    document.getElementById("popupSuccess").style.display="flex";
 
-      const user = auth.currentUser;
-      if (!user) return alert("Please login first!");
+    document.getElementById("uidInput").value="";
+    document.querySelectorAll(".pkg-card").forEach(el=>el.classList.remove("selected"));
+    selected=null;
+  }
+</script>
 
-      await addDoc(collection(db, "orders"), {
-        user: user.uid,
-        email: user.email,
-        product: `Free Fire ${selected.name}`,
-        uid: uid,
-        price: selected.price,
-        status: "pending",
-        created: new Date(),
-      });
-
-      alert(`✅ অর্ডার সম্পন্ন হয়েছে: ${selected.name} (${selected.price} TK)`);
-      document.getElementById("uidInput").value = "";
-      document.querySelectorAll(".package").forEach((el) => el.classList.remove("selected"));
-      selected = null;
-    };
-  </script>
 </body>
 </html>
