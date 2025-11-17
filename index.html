@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="bn" translate="no">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Habib YT — আপনার বিশ্বস্ত সহযোগী</title>
 
   <style>
-    /***************************
+    /* ============================
        GLOBAL SETTINGS
-    ****************************/
+    ============================ */
     body {
       margin: 0;
       font-family: "Poppins", sans-serif;
@@ -17,78 +17,246 @@
       color: #222;
     }
 
-    /* Fade Animation */
     .fade-in { animation: fadeIn .7s ease-in-out forwards; opacity: 0; }
     @keyframes fadeIn {
       from { opacity:0; transform: translateY(20px); }
       to   { opacity:1; transform: translateY(0); }
     }
 
-    /* Slide Up Animation */
     .slide-up { animation: slideUp .7s ease; }
     @keyframes slideUp {
       from { opacity:0; transform: translateY(40px); }
       to   { opacity:1; transform: translateY(0); }
     }
 
-    /***************************
-         GRADIENT HEADER
-    ****************************/
+    /* ============================
+       HEADER
+    ============================ */
     header {
       background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);
-      color: white;
       padding: 15px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      color: white;
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
       box-shadow: 0 5px 18px rgba(0,0,0,0.25);
     }
+
     header img {
       width: 50px;
       height: 50px;
       border-radius: 50%;
     }
+
     header h2 {
       margin: 0;
       font-size: 22px;
       font-weight: bold;
     }
+
     header small {
       font-size: 13px;
       opacity: 0.9;
-      margin-top: -4px;
       display: block;
+      margin-top: -3px;
     }
 
-    /* Header Buttons */
     nav button {
       background: rgba(255,255,255,0.20);
       padding: 8px 14px;
       border: 1px solid rgba(255,255,255,0.5);
       border-radius: 10px;
       color: white;
+      font-weight: 600;
       backdrop-filter: blur(6px);
       cursor: pointer;
-      font-weight: 600;
       transition: .25s;
     }
+
     nav button:hover {
       transform: translateY(-3px);
       background: rgba(255,255,255,0.35);
     }
+
+    /* ============================
+       HERO SECTION
+    ============================ */
+    .hero {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #0057e7;
+      text-shadow: 0 0 10px rgba(0,102,255,0.3);
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: #555;
+    }
+
+    /* ============================
+       SERVICE CARD GRID
+    ============================ */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.55);
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.45);
+      text-align: center;
+      cursor: pointer;
+      transition: 0.35s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.20);
+    }
+
+    .card img {
+      width: 100%;
+      height: 105px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .card h3 {
+      margin-top: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #0057e7;
+    }
+
+    /* ============================
+       SUPPORT BOX
+    ============================ */
+    .support {
+      background: rgba(255,255,255,0.65);
+      padding: 18px;
+      margin: 25px 15px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    }
+
+    .support h2 {
+      color: #0057e7;
+      margin-bottom: 10px;
+    }
+
+    .support a {
+      padding: 10px 16px;
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      border-radius: 10px;
+      font-weight: 600;
+      margin: 8px;
+    }
+
+    .telegram { background: #0088cc; }
+    .whatsapp { background: #25d366; }
+
+    /* ============================
+       LEGAL SECTION
+    ============================ */
+    .legal {
+      background: rgba(255,255,255,0.60);
+      margin: 25px 15px;
+      padding: 22px;
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .legal h2 {
+      text-align: center;
+      color: #0057e7;
+      margin-bottom: 15px;
+    }
+
+    .legal h3 {
+      color: #0057e7;
+      margin-top: 12px;
+      font-size: 16px;
+    }
+
+    /* ============================
+       FOOTER
+    ============================ */
+    footer {
+      background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);
+      color: white;
+      text-align: center;
+      padding: 16px;
+      font-weight: bold;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      margin-top: 30px;
+      box-shadow: 0 -5px 18px rgba(0,0,0,0.25);
+    }
+
+    footer small {
+      opacity: 0.85;
+      font-size: 13px;
+    }
+
+    /* ============================
+       BOTTOM NAV
+    ============================ */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(15px);
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      border-top: 2px solid rgba(255,255,255,0.6);
+      z-index: 999;
+    }
+
+    .bottom-nav button {
+      background: transparent;
+      border: none;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0052d4;
+      cursor: pointer;
+      text-shadow: 0 0 8px rgba(0,90,255,0.5);
+      transition: .2s;
+    }
+
+    .bottom-nav button:hover {
+      transform: scale(1.1);
+      color: #003bb8;
+    }
   </style>
 </head>
 
-<body>  <!-- ✅ FIXED: BODY ADDED -->
+<body>
 
-<!-- ==========================
-          HEADER
-========================== -->
+<!-- HEADER -->
 <header class="fade-in">
   <div style="display:flex; align-items:center; gap:12px;">
-    <img src="assets/logo.png" alt="Logo">
+    <img src="assets/logo.png">
     <div>
       <h2>Habib YT</h2>
       <small>আপনার বিশ্বস্ত সহযোগী</small>
@@ -101,117 +269,85 @@
   </nav>
 </header>
 
-
-<!-- ==========================
-         HERO SECTION
-========================== -->
+<!-- HERO -->
 <section class="hero fade-in">
   <h1>🔥 দ্রুত ও নিরাপদ গেমিং টপ-আপ</h1>
   <p>Free Fire • EFootball • Like/Followers • Mobile Services</p>
 </section>
 
-
-<!-- ==========================
-        SERVICES SECTION
-========================== -->
+<!-- SERVICES -->
 <section class="services fade-in">
 
   <div class="card" onclick="location.href='freefire.html'">
-    <img src="assets/ff.jpg" alt="Free Fire">
+    <img src="assets/ff.jpg">
     <h3>Free Fire Diamond</h3>
   </div>
 
   <div class="card" onclick="location.href='efootball.html'">
-    <img src="assets/efootball.jpg" alt="EFootball">
+    <img src="assets/efootball.jpg">
     <h3>EFootball Coins</h3>
   </div>
 
   <div class="card" onclick="location.href='like-follower.html'">
-    <img src="assets/like.jpg" alt="Like">
+    <img src="assets/like.jpg">
     <h3>Like & Followers</h3>
   </div>
 
   <div class="card" onclick="location.href='mobile-accessories.html'">
-    <img src="assets/accessories.jpg" alt="Mobile Accessories">
+    <img src="assets/accessories.jpg">
     <h3>Mobile Accessories</h3>
   </div>
 
   <div class="card" onclick="location.href='mobile-servicing.html'">
-    <img src="assets/servicing.jpg" alt="Mobile Servicing">
+    <img src="assets/servicing.jpg">
     <h3>Mobile Servicing</h3>
   </div>
 
   <div class="card" onclick="location.href='coming-soon.html'">
-    <img src="assets/coming.jpg" alt="Coming Soon">
+    <img src="assets/coming.jpg">
     <h3>Coming Soon</h3>
   </div>
 
 </section>
 
-
-<!-- ==========================
-       SUPPORT SECTION
-========================== -->
+<!-- SUPPORT -->
 <section class="support fade-in">
   <h2>📞 Customer Support</h2>
   <p>If you need any help, feel free to contact us:</p>
 
-  <a class="telegram" href="https://t.me/H_A_B_I_B_Top_1" target="_blank">💬 Telegram</a>
-  <a class="whatsapp" href="https://wa.me/8801868461577" target="_blank">📱 WhatsApp</a>
+  <a class="telegram" href="https://t.me/H_A_B_I_B_Top_1">💬 Telegram</a>
+  <a class="whatsapp" href="https://wa.me/8801868461577">📱 WhatsApp</a>
 </section>
 
+<!-- LEGAL SECTION -->
+<section class="legal fade-in">
+  <h2>📜 Terms & Policies</h2>
 
-<!-- ==========================
-         LEGAL / TERMS
-========================== -->
-<section class="legal fade-in" style="
-  background: rgba(255,255,255,0.60);
-  backdrop-filter: blur(10px);
-  padding: 22px;
-  margin: 25px 15px;
-  border-radius: 16px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
-">
-  <h2 style="text-align:center; color:#0057e7; margin-bottom:15px;">
-    📜 Terms & Policies
-  </h2>
+  <h3>✔ Service Terms</h3>
+  <p>Habib YT provides digital top-up service. Wrong UID/ID is customer responsibility.</p>
 
-  <h3 style="color:#0057e7;">✔ Service Terms</h3>
-  <p>Top-up processed exactly as per submitted UID/ID.</p>
+  <h3>✔ Privacy Policy</h3>
+  <p>Your data is kept safe in Firebase. We do not share with 3rd parties.</p>
 
-  <h3 style="color:#0057e7;">✔ Privacy Policy</h3>
-  <p>Your data is securely stored in Firebase.</p>
+  <h3>✔ Refund Policy</h3>
+  <p>Refund only if order is not delivered. Wrong input is not refundable.</p>
 
-  <h3 style="color:#0057e7;">✔ Refund Policy</h3>
-  <p>If order not delivered, refund will be added to wallet.</p>
+  <h3>✔ Copyright</h3>
+  <p>Design, logo & code are owned by Habib YT. Copying is prohibited.</p>
 
-  <h3 style="color:#0057e7;">✔ Disclaimer</h3>
-  <p>Game server delays are not under our control.</p>
+  <h3>✔ Disclaimer</h3>
+  <p>Delays caused by game servers or maintenance are not in our control.</p>
 </section>
 
-
-<!-- ==========================
-            FOOTER
-========================== -->
+<!-- FOOTER -->
 <footer class="fade-in">
-  <div style="margin-bottom:8px; font-size:16px; font-weight:600;">
-    Habib YT — Your Trusted Partner
-  </div>
-
-  <small style="font-size:13px; opacity:0.85;">
-    © 2025 Habib YT. All Rights Reserved.
-  </small>
+  Habib YT — Your Trusted Partner
+  <br>
+  <small>© 2025 Habib YT. All Rights Reserved.</small>
 </footer>
 
-
-<!-- ==========================
-       BOTTOM NAVIGATION
-========================== -->
-<div class="bottom-nav slide-up" style="
-  position:fixed; bottom:0; width:100%; background:white;
-  display:flex; justify-content:space-around; padding:10px 0;
-  border-top:1px solid #ccc; box-shadow:0 -4px 12px rgba(0,0,0,0.15);
-">
+<!-- BOTTOM NAV -->
+<div class="bottom-nav slide-up">
   <button onclick="location.href='index.html'">🏠 Home</button>
   <button onclick="location.href='dashboard.html'">💼 Dashboard</button>
   <button onclick="location.href='add-money.html'">💰 Add Money</button>
@@ -219,9 +355,7 @@
 </div>
 
 
-<!-- ==========================
-     AUTO LOGIN SWITCH
-========================== -->
+<!-- AUTO LOGIN BUTTON CHANGE -->
 <script type="module">
   import { auth } from "./firebase.js";
   import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
