@@ -1,230 +1,195 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard | Habib YT</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | Habib YT</title>
 
-  <style>
-    body {
-      margin: 0;
-      padding-bottom: 80px;
-      font-family: "Poppins", sans-serif;
-      background: #f2f5ff;
-    }
+<style>
+  body{
+    margin:0;
+    font-family:Poppins, sans-serif;
+    background:#eef2ff;
+    padding-bottom:80px;
+  }
 
-    /* Header */
-    header {
-      background: #0066ff;
-      padding: 15px;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+  /* HEADER */
+  header{
+    background:#0a7cff;
+    color:white;
+    padding:15px;
+    text-align:center;
+    font-size:22px;
+    font-weight:600;
+    box-shadow:0 3px 10px rgba(0,0,0,0.15);
+  }
 
-    header h2 { margin: 0; font-size: 20px; }
-    .logout-btn {
-      background: white;
-      padding: 8px 15px;
-      border-radius: 10px;
-      color: #0066ff;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-    }
+  /* BALANCE BOX */
+  .wallet-box{
+    margin:15px;
+    padding:18px;
+    background:white;
+    border-radius:14px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    text-align:center;
+  }
+  .wallet-box h2{ margin:0; font-size:30px; color:#0a7cff; }
+  .wallet-box p{ margin:5px 0 0; font-size:14px; color:#555; }
 
-    /* Box */
-    .box {
-      background: white;
-      margin: 15px;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    }
+  /* BUTTONS */
+  .top-buttons{
+    margin:15px;
+    display:flex;
+    gap:12px;
+  }
+  .btn{
+    flex:1;
+    background:#0a7cff;
+    padding:12px;
+    border-radius:12px;
+    text-align:center;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .btn:hover{ background:#0068d1; }
 
-    .balance {
-      font-size: 22px;
-      color: #0066ff;
-      font-weight: bold;
-    }
+  /* ORDER LIST */
+  .section-title{
+    margin:15px;
+    font-weight:600;
+    font-size:18px;
+    color:#222;
+  }
 
-    .btn {
-      background: #0066ff;
-      padding: 10px;
-      color: white;
-      font-weight: 600;
-      border-radius: 10px;
-      display: inline-block;
-      margin-top: 12px;
-      cursor: pointer;
-      width: 48%;
-      text-align: center;
-    }
+  .order{
+    background:white;
+    margin:12px 15px;
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  }
 
-    /* Order card */
-    .order-card {
-      background: white;
-      padding: 15px;
-      margin: 12px;
-      border-left: 5px solid #0066ff;
-      border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    }
+  .order-top{
+    display:flex;
+    justify-content:space-between;
+    font-weight:600;
+  }
 
-    .status-pending { color: #ff9800; font-weight: bold; }
-    .status-complete { color: #28a745; font-weight: bold; }
+  .pending{ color:#ff9800; font-weight:700; }
+  .approved{ color:#28a745; font-weight:700; }
+  .rejected{ color:#e91e63; font-weight:700; }
 
-    footer {
-      background: #0066ff;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-      font-size: 14px;
-    }
-  </style>
+  .order p{
+    margin:5px 0;
+    font-size:14px;
+    color:#444;
+  }
+
+  /* FOOTER NAV */
+  .bottom-nav{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    padding:10px 0;
+    border-top:1px solid #ccc;
+  }
+  .bottom-nav button{
+    background:none;
+    border:none;
+    font-weight:600;
+    color:#0a7cff;
+    font-size:15px;
+    cursor:pointer;
+  }
+</style>
 </head>
 
 <body>
 
-<header>
-  <h2>Dashboard</h2>
-  <button class="logout-btn" onclick="logout()">Logout</button>
-</header>
+<header>Dashboard</header>
 
-<!-- USER BOX -->
-<div class="box">
-  <h3>Welcome!</h3>
-  <b>Email:</b> <span id="userEmail"></span>
-  <br><br>
-  <div class="balance">Wallet: <span id="wallet">0</span> BDT</div>
-
-  <div style="display:flex; gap:4%;">
-    <div class="btn" onclick="location.href='add-money.html'">Add Money</div>
-    <div class="btn" onclick="location.href='index.html'">Home</div>
-  </div>
+<!-- BALANCE CARD -->
+<div class="wallet-box">
+  <p>Your Wallet Balance</p>
+  <h2 id="balance">0</h2>
 </div>
 
-<!-- ORDER LIST -->
-<div class="box">
-  <h3>Recent Orders</h3>
-  <div id="orderList">Loading...</div>
+<!-- TOP BUTTONS -->
+<div class="top-buttons">
+  <div class="btn" onclick="location.href='add-money.html'">Add Money</div>
+  <div class="btn" onclick="location.href='freefire.html'">Buy Diamond</div>
 </div>
 
-<footer>
-  © 2025 Habib YT — All Rights Reserved
-</footer>
+<!-- RECENT ORDERS -->
+<h3 class="section-title">📦 Recent Orders</h3>
+<div id="orderList"></div>
 
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button onclick="location.href='index.html'">🏠 Home</button>
+  <button onclick="location.href='dashboard.html'">📊 Dashboard</button>
+  <button onclick="location.href='add-money.html'">💰 Add Money</button>
+  <button onclick="location.href='login.html'">🔐 Login</button>
+</div>
 
-<!-- FIREBASE -->
+<!-- FIREBASE SCRIPT -->
 <script type="module">
-  import { auth, db } from "./firebase.js";
 
-  import {
-    signOut,
-    onAuthStateChanged
-  } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { auth, db } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { collection, query, where, orderBy, getDocs, getDoc, doc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-  import {
-    collection, query, where, orderBy, onSnapshot,
-    doc, getDoc, updateDoc
-  } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+/* LOGIN CHECK + LOAD DATA */
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    alert("Login required!");
+    location.href = "login.html";
+    return;
+  }
 
-  let USER_ID = null;
+  /* LOAD BALANCE */
+  const walletSnap = await getDoc(doc(db, "wallets", user.uid));
+  let balance = walletSnap.exists() ? walletSnap.data().balance : 0;
+  document.getElementById("balance").innerText = balance + " TK";
 
-  /* ================================
-        AUTH CHECK + LOAD BALANCE
-  =================================== */
-  onAuthStateChanged(auth, async (user) => {
-    if (!user) return location.href = "login.html";
+  /* LOAD ORDERS */
+  const q = query(
+    collection(db, "orders"),
+    where("user", "==", user.uid),
+    orderBy("created", "desc")
+  );
 
-    USER_ID = user.uid;
-    document.getElementById("userEmail").innerText = user.email;
+  const snap = await getDocs(q);
 
-    const snap = await getDoc(doc(db, "wallets", USER_ID));
-    if (snap.exists()) {
-      document.getElementById("wallet").innerText = snap.data().balance;
-    }
+  let html = "";
+  let count = 1;
 
-    loadOrders();
+  snap.forEach(d => {
+    const data = d.data();
+
+    html += `
+      <div class="order">
+        <div class="order-top">
+          <span>Order #${count}</span>
+          <span class="${data.status}">${data.status.toUpperCase()}</span>
+        </div>
+
+        <p><b>Product:</b> ${data.product || data.package}</p>
+        <p><b>UID:</b> ${data.uid}</p>
+        <p><b>Price:</b> ${data.price} TK</p>
+      </div>
+    `;
+
+    count++;
   });
 
-  /* ================================
-        SERIAL GENERATOR
-  =================================== */
-  function serial(id) {
-    return parseInt(id.substring(0, 6).replace(/\D/g, "")) || Math.floor(Math.random() * 999999);
-  }
+  document.getElementById("orderList").innerHTML = html || "<p style='text-align:center;color:#666'>No orders found</p>";
+});
 
-  /* ================================
-        LOAD RECENT ORDERS
-  =================================== */
-  function loadOrders() {
-    const q = query(
-      collection(db, "orders"),
-      where("user", "==", USER_ID),
-      orderBy("created", "desc")
-    );
-
-    onSnapshot(q, async (snapshot) => {
-      if (snapshot.empty) {
-        document.getElementById("orderList").innerHTML = "<p>No orders found</p>";
-        return;
-      }
-
-      let html = "";
-
-      snapshot.forEach(async (docSnap) => {
-        const d = docSnap.data();
-        let s = serial(docSnap.id);
-
-        /* ================================
-              AUTO REFUND WHEN COMPLETE
-        =================================== */
-        if (d.status === "complete" && !d.refunded) {
-          if (d.payment === "wallet") {
-
-            const walletRef = doc(db, "wallets", USER_ID);
-            const w = await getDoc(walletRef);
-
-            let newBalance = (w.data().balance || 0) + d.price;
-
-            await updateDoc(walletRef, { balance: newBalance });
-            await updateDoc(docSnap.ref, { refunded: true });
-
-            document.getElementById("wallet").innerText = newBalance;
-          }
-        }
-
-        html += `
-          <div class="order-card">
-            <b>Serial:</b> #${s}<br>
-            <b>Date:</b> ${d.created.toDate().toLocaleString()}<br>
-            <b>Package:</b> ${d.package || d.product}<br>
-            <b>UID:</b> ${d.uid}<br>
-            <b>Price:</b> ৳${d.price}<br>
-            <b>Status:</b> 
-              <span class="${d.status === 'complete' ? 'status-complete' : 'status-pending'}">
-                ${d.status}
-              </span>
-          </div>
-        `;
-      });
-
-      document.getElementById("orderList").innerHTML = html;
-    });
-  }
-
-  /* ================================
-        LOGOUT
-  =================================== */
-  window.logout = () => {
-    signOut(auth);
-  };
 </script>
-
 </body>
 </html>
