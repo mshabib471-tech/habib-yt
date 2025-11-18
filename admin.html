@@ -3,101 +3,249 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Habib YT — Admin Panel</title>
+<title>Admin Panel | Habib YT</title>
 
 <style>
-body {
-  font-family: "Poppins", sans-serif;
-  margin: 0;
-  background: #f4f7fb;
-}
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #007bff;
-  padding: 12px 18px;
-  color: white;
-  font-size: 22px;
-  font-weight: bold;
-}
-.logout {
-  background: white;
-  color: #007bff;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-.tabs {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 12px 0;
-}
-.tabs button {
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.active { background: #007bff; color: white; }
-.card {
-  background: white;
-  padding: 12px;
-  margin: 12px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-.btn-green {
-  background: #28a745;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.btn-red {
-  background: #dc3545;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-footer {
-  text-align: center;
-  background: #007bff;
-  color: white;
-  padding: 12px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
+  body{
+    margin:0;
+    font-family:Poppins, sans-serif;
+    background:#eef2ff;
+    padding-bottom:40px;
+  }
+
+  header{
+    background:#071a44;
+    color:white;
+    text-align:center;
+    padding:16px;
+    font-size:22px;
+    font-weight:600;
+  }
+
+  .section-title{
+    margin:20px 15px 10px;
+    font-size:20px;
+    font-weight:600;
+    color:#333;
+  }
+
+  .box{
+    background:white;
+    margin:12px;
+    padding:15px;
+    border-radius:14px;
+    box-shadow:0 2px 7px rgba(0,0,0,0.15);
+  }
+
+  .order-top{
+    display:flex;
+    justify-content:space-between;
+    font-weight:600;
+  }
+
+  .pending{ color:#ff9800; }
+  .approved{ color:#28a745; }
+  .rejected{ color:#e91e63; }
+
+  .btn{
+    padding:8px 14px;
+    border:none;
+    border-radius:10px;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    margin-right:6px;
+  }
+  .approve-btn{ background:#28a745; }
+  .reject-btn{ background:#e91e63; }
+
+  .w-btn{
+    background:#0a7cff;
+    padding:10px 14px;
+    border-radius:10px;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    display:block;
+    text-align:center;
+    margin-top:10px;
+  }
+
 </style>
 </head>
 
 <body>
 
-<header>
-  👑 Habib YT — Admin Panel
-  <button class="logout" onclick="logout()">Logout</button>
-</header>
+<header>Admin Panel</header>
 
-<div class="tabs">
-  <button class="active" id="tabWallet">💰 Wallet Requests</button>
-  <button id="tabOrders">🛒 Orders</button>
-</div>
+<h3 class="section-title">📦 Pending Orders</h3>
+<div id="pendingOrders"></div>
 
-<div id="walletArea"></div>
-<div id="ordersArea" style="display:none;"></div>
+<h3 class="section-title">💰 Wallet Requests</h3>
+<div id="walletRequests"></div>
 
-<footer>© 2025 Habib YT — Admin Dashboard</footer>
+<!-- FIREBASE -->
+<script type="module">
 
-<script type="module" src="firebase.js"></script>
-<script type="module" src="admin.js"></script>
+import { auth, db } from "./firebase.js";
+import {
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+import {
+  collection, query, where, orderBy, getDocs,
+  getDoc, doc, updateDoc, deleteDoc
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+
+/* ==============================
+     ADMIN LOGIN CHECK
+================================= */
+onAuthStateChanged(auth, async (user) => {
+  if (!user || user.email !== "mshabib471@gmail.com") {
+    alert("❌ Admin access denied!");
+    location.href = "index.html";
+    return;
+  }
+
+  loadOrders();
+  loadWalletRequests();
+});
+
+/* ==============================
+        LOAD PENDING ORDERS
+================================= */
+async function loadOrders() {
+  const q = query(
+    collection(db, "orders"),
+    where("status", "==", "pending"),
+    orderBy("created", "desc")
+  );
+
+  const snap = await getDocs(q);
+  let html = "";
+
+  snap.forEach(d => {
+    const o = d.data();
+
+    html += `
+      <div class="box">
+        <div class="order-top">
+          <span><b>${o.product}</b></span>
+          <span class="pending">PENDING</span>
+        </div>
+
+        <p><b>UID:</b> ${o.uid}</p>
+        <p><b>Price:</b> ${o.price} TK</p>
+        <p><b>User:</b> ${o.user}</p>
+
+        <button class="btn approve-btn" onclick="approveOrder('${d.id}', '${o.user}', ${o.price})">Approve</button>
+        <button class="btn reject-btn" onclick="rejectOrder('${d.id}', '${o.user}', ${o.price})">Reject</button>
+      </div>
+    `;
+  });
+
+  document.getElementById("pendingOrders").innerHTML =
+    html || "<p style='text-align:center;color:#666'>No pending orders</p>";
+}
+
+/* ==============================
+        APPROVE ORDER 
+================================= */
+window.approveOrder = async function(orderId, userId, price) {
+
+  await updateDoc(doc(db, "orders", orderId), {
+    status: "approved"
+  });
+
+  alert("✔ Order Approved!");
+  loadOrders();
+}
+
+/* ==============================
+        REJECT ORDER + REFUND
+================================= */
+window.rejectOrder = async function(orderId, userId, price) {
+
+  // Get wallet balance
+  const walletRef = doc(db, "wallets", userId);
+  const walletSnap = await getDoc(walletRef);
+  let currentBal = walletSnap.exists() ? walletSnap.data().balance : 0;
+
+  // Refund rule (Option C)
+  await updateDoc(walletRef, {
+    balance: currentBal + price
+  });
+
+  // Update order status
+  await updateDoc(doc(db, "orders", orderId), {
+    status: "rejected"
+  });
+
+  alert("❌ Order Rejected + Refund Processed");
+  loadOrders();
+}
+
+
+/* ==============================
+       LOAD WALLET REQUESTS
+================================= */
+async function loadWalletRequests() {
+  const snap = await getDocs(collection(db, "walletRequests"));
+
+  let html = "";
+
+  snap.forEach(d => {
+    const r = d.data();
+
+    html += `
+      <div class="box">
+        <p><b>User:</b> ${r.user}</p>
+        <p><b>Amount:</b> ${r.amount} TK</p>
+
+        <button class="btn approve-btn" onclick="approveWallet('${d.id}', '${r.user}', ${r.amount})">
+          Approve
+        </button>
+
+        <button class="btn reject-btn" onclick="deleteWallet('${d.id}')">
+          Reject
+        </button>
+      </div>
+    `;
+  });
+
+  document.getElementById("walletRequests").innerHTML =
+    html || "<p style='text-align:center;color:#666'>No wallet requests</p>";
+}
+
+/* ==============================
+     APPROVE WALLET REQUEST
+================================= */
+window.approveWallet = async function(reqId, userId, amount) {
+
+  const walletRef = doc(db, "wallets", userId);
+  const snap = await getDoc(walletRef);
+  let bal = snap.exists() ? snap.data().balance : 0;
+
+  await updateDoc(walletRef, {
+    balance: bal + amount
+  });
+
+  await deleteDoc(doc(db, "walletRequests", reqId));
+
+  alert("✔ Wallet Added Successfully");
+  loadWalletRequests();
+}
+
+/* ==============================
+     DELETE WALLET REQUEST
+================================= */
+window.deleteWallet = async function(reqId){
+  await deleteDoc(doc(db, "walletRequests", reqId));
+  alert("❌ Wallet Request Rejected");
+  loadWalletRequests();
+}
+</script>
 
 </body>
 </html>
