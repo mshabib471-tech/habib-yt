@@ -1,4 +1,4 @@
-// firebase.js — Habib YT Firebase Configuration
+// firebase.js — Final Setup for Habib YT
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
@@ -15,7 +15,7 @@ const firebaseConfig = {
   measurementId: "G-GNY1T88D34"
 };
 
-// Initialize Firebase
+// Initialize
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
