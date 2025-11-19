@@ -1,159 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="utf-8">
-<title>Habibur Rahman | Creative Developer</title>
-<meta name="description" content="Habibur Rahman - Creative Developer & Content Creator">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Favicon -->
-<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
-
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- CSS -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habibur Rahman | God Level Dev</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Roboto+Mono&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Poppins',sans-serif; background:#111; color:#fff; overflow-x:hidden; }
-a { text-decoration:none; }
-ul { list-style:none; }
-
-/* Preloader */
-#preloader { position:fixed; top:0; left:0; width:100%; height:100%; background:#111; z-index:9999; display:flex; align-items:center; justify-content:center; }
-#preloader:after { content:''; width:60px; height:60px; border:6px solid #333; border-top:6px solid #8b5cf6; border-radius:50%; animation:spin 1s linear infinite; }
-@keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
-
-/* Header */
-.header { position:fixed; top:0; left:0; width:100%; padding:30px 5%; z-index:1000; display:flex; justify-content:space-between; align-items:center; transition:.3s; }
-.header.sticky { background:rgba(17,17,17,0.95); padding:20px 5%; backdrop-filter:blur(10px); }
-.logo { font-size:28px; font-weight:700; color:#fff; }
-.nav-menu a { color:#fff; margin:0 20px; font-weight:500; position:relative; }
-.nav-menu a:after { content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px; background:#8b5cf6; transition:.3s; }
-.nav-menu a:hover:after { width:100%; }
-
-/* Hero */
-.hero { height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; background:linear-gradient(135deg, #1a1a2e, #16213e); position:relative; }
-.hero::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:url('https://i.ibb.co/KqK9Y3Y/habib-bg.jpg') center/cover no-repeat; opacity:0.2; }
-.hero-content { position:relative; z-index:2; }
-.hero-img { width:220px; height:220px; border-radius:50%; border:8px solid #8b5cf6; box-shadow:0 0 40px rgba(139,92,246,0.6); }
-.hero h1 { font-size:56px; margin:20px 0 10px; }
-.hero h1 span { color:#8b5cf6; }
-.hero p { font-size:20px; margin-bottom:30px; color:#aaa; }
-.social-icons a { display:inline-block; width:50px; height:50px; background:rgba(139,92,246,0.2); color:#fff; line-height:50px; border-radius:50%; margin:0 8px; font-size:20px; transition:.3s; }
-.social-icons a:hover { background:#8b5cf6; transform:translateY(-10px); }
-
-/* Sections */
-.section { padding:100px 5%; }
-.section-title { font-size:42px; text-align:center; margin-bottom:60px; }
-.section-title span { color:#8b5cf6; }
-
-/* About, Services, Portfolio, Contact - simple placeholders */
-.about, .services, .portfolio, .contact { min-height:80vh; display:flex; align-items:center; justify-content:center; flex-direction:column; }
-.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:30px; margin-top:40px; }
-.card { background:rgba(255,255,255,0.05); padding:30px; border-radius:15px; text-align:center; transition:.3s; }
-.card:hover { background:rgba(139,92,246,0.1); transform:translateY(-10px); }
-
-/* Footer */
-.footer { text-align:center; padding:40px; background:#0a0a0a; }
+  body { background: #000; color: #fff; font-family: 'Roboto Mono', monospace; overflow-x: hidden; }
+  .orbitron { font-family: 'Orbitron', sans-serif; }
+  .cursor { position: fixed; width: 30px; height: 30px; border: 2px solid #ff00ff; border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: difference; transform: translate(-50%, -50%); transition: all 0.1s; }
+  .glitch { position: relative; }
+  .glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .glitch::before { animation: glitch1 0.8s infinite; color: #00ffff; clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); }
+  .glitch::after { animation: glitch2 0.8s infinite; color: #ff00ff; clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%); }
+  @keyframes glitch1 { 0%,100% { transform: translate(0); } 20% { transform: translate(-5px,5px); } 40% { transform: translate(5px,-5px); } }
+  @keyframes glitch2 { 0%,100% { transform: translate(0); } 60% { transform: translate(-5px,-5px); } 80% { transform: translate(5px,5px); } }
+  .grain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: url('https://grainy-gradients.vercel.app/noise.svg'); opacity: 0.08; z-index: 1; }
 </style>
 </head>
-<body>
+<body class="relative">
 
-<!-- Preloader -->
-<div id="preloader"></div>
+<div class="cursor" id="cursor"></div>
+<div class="grain"></div>
 
-<!-- Header -->
-<header class="header" id="header">
-  <div class="logo">Habibur<span style="color:#8b5cf6;">.</span></div>
-  <nav class="nav-menu">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<!-- Hero -->
-<section class="hero" id="home">
-  <div class="hero-content">
-    <img src="https://i.ibb.co/4pQZR3k/habib.jpg" alt="Habibur Rahman" class="hero-img">
-    <h1>Hi, I'm <span>Habibur Rahman</span></h1>
-    <p>Creative Developer & Content Creator</p>
-    <div class="social-icons">
-      <a href="https://www.facebook.com/share/1A8xKKdbec/" target="_blank"><i class="fab fa-facebook-f">FB</i></a>
-      <a href="https://www.instagram.com/md__habibur_rahman" target="_blank"><i class="fab fa-instagram">IG</i></a>
-      <a href="https://www.tiktok.com/@habibur_._rahman" target="_blank"><i class="fab fa-tiktok">TT</i></a>
-      <a href="https://youtube.com/@h_a_b_i_b-yt" target="_blank"><i class="fab fa-youtube">YT</i></a>
-      <a href="https://twitter.com/habib1577" target="_blank"><i class="fab fa-twitter">X</i></a>
-      <a href="mailto:mshabib471@gmail.com"><i class="fas fa-envelope">✉</i></a>
-      <a href="https://wa.me/01868461577" target="_blank"><i class="fab fa-whatsapp">WA</i></a>
-      <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank"><i class="fab fa-telegram">TG</i></a>
+<!-- HERO -->
+<section class="min-h-screen flex items-center justify-center relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-purple-900 via-black to-pink-900 animate-pulse"></div>
+  
+  <div class="text-center relative z-10 px-6">
+    <img src="https://i.ibb.co/4pQZR3k/habib.jpg" class="w-64 h-64 mx-auto rounded-full border-8 border-transparent bg-gradient-to-r from-cyan-500 to-pink-500 p-1 shadow-2xl hover:scale-110 transition" id="avatar">
+    
+    <h1 class="text-6xl md:text-9xl orbitron mt-10 glitch" data-text="HABIBUR RAHMAN">HABIBUR RAHMAN</h1>
+    <p class="text-2xl md:text-4xl mt-6 text-cyan-400 typing">Full-Stack Wizard × Content Creator × Cyberpunk Lover</p>
+    
+    <div class="mt-12 flex justify-center gap-6 flex-wrap">
+      <a href="https://facebook.com" target="_blank" class="w-16 h-16 bg-cyan-600/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-cyan-500 hover:scale-125 transition text-2xl">FB</a>
+      <a href="https://instagram.com/md__habibur_rahman" target="_blank" class="w-16 h-16 bg-pink-600/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-pink-500 hover:scale-125 transition text-2xl">IG</a>
+      <a href="https://tiktok.com/@habibur_._rahman" target="_blank" class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center hover:scale-125 transition text-2xl">TT</a>
+      <a href="https://youtube.com/@h_a_b_i_b-yt" target="_blank" class="w-16 h-16 bg-red-600/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-red-500 hover:scale-125 transition text-2xl">YT</a>
+      <a href="https://wa.me/01868461577" target="_blank" class="w-16 h-16 bg-green-600/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-green-500 hover:scale-125 transition text-2xl">WA</a>
+      <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank" class="w-16 h-16 bg-blue-600/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-blue-500 hover:scale-125 transition text-2xl">TG</a>
+    </div>
+    
+    <div class="mt-20">
+      <a href="#about" class="px-12 py-5 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full text-xl font-bold hover:shadow-2xl hover:shadow-pink-500/50 transition animate-bounce">Enter My World</a>
     </div>
   </div>
 </section>
 
-<!-- About -->
-<section class="section about" id="about">
-  <h2 class="section-title">About <span>Me</span></h2>
-  <p style="max-width:800px; margin:0 auto; font-size:18px; line-height:1.8;">
-    আমি Habibur Rahman। ফ্রন্টএন্ড ডেভেলপার, কন্টেন্ট ক্রিয়েটর এবং ক্রিয়েটিভ মাইন্ডেড মানুষ।  
-    HTML, CSS, JavaScript, React দিয়ে কাজ করি। ভালোবাসি নতুন নতুন ডিজাইন এক্সপেরিমেন্ট করতে।
-  </p>
-</section>
-
-<!-- Services -->
-<section class="section services" id="services">
-  <h2 class="section-title">My <span>Services</span></h2>
-  <div class="grid">
-    <div class="card"><h3>Web Development</h3></div>
-    <div class="card"><h3>UI/UX Design</h3></div>
-    <div class="card"><h3>Content Creation</h3></div>
+<!-- REST OF SECTIONS (simple but crazy) -->
+<section id="about" class="min-h-screen flex items-center justify-center text-center px-10 bg-black/50">
+  <div>
+    <h2 class="text-7xl orbitron text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-600">I Create Digital Magic</h2>
+    <p class="text-2xl mt-10 max-w-4xl mx-auto">React × Tailwind × GSAP × Three.js দিয়ে যা মনে চায় তাই বানাই। রাতে কোড লিখি, দিনে টিকটক বানাই।</p>
   </div>
 </section>
 
-<!-- Portfolio -->
-<section class="section portfolio" id="portfolio">
-  <h2 class="section-title">My <span>Portfolio</span></h2>
-  <div class="grid">
-    <div class="card"><img src="https://via.placeholder.com/400x300" alt="project"><h3>Project 1</h3></div>
-    <div class="card"><img src="https://via.placeholder.com/400x300" alt="project"><h3>Project 2</h3></div>
-    <div class="card"><img src="https://via.placeholder.com/400x300" alt="project"><h3>Project 3</h3></div>
+<section class="min-h-screen grid grid-cols-1 md:grid-cols-3 gap-10 p-20">
+  <div class="bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-lg rounded-3xl p-10 hover:scale-105 transition border border-pink-500/30">
+    <h3 class="text-4xl orbitron text-cyan-400">Web Development</h3>
+    <p class="mt-6">Next.js, React, Node.js, MongoDB</p>
+  </div>
+  <div class="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 backdrop-blur-lg rounded-3xl p-10 hover:scale-105 transition border border-cyan-500/30">
+    <h3 class="text-4xl orbitron text-pink-400">UI/UX & Motion</h3>
+    <p class="mt-6">Figma, Framer, GSAP, Lottie</p>
+  </div>
+  <div class="bg-gradient-to-br from-pink-900/30 to-red-900/30 backdrop-blur-lg rounded-3xl p-10 hover:scale-105 transition border border-red-500/30">
+    <h3 class="text-4xl orbitron text-yellow-400">Content Creator</h3>
+    <p class="mt-6">TikTok, YouTube, Instagram Reels</p>
   </div>
 </section>
 
-<!-- Contact -->
-<section class="section contact" id="contact">
-  <h2 class="section-title">Get In <span>Touch</span></h2>
-  <p>Email: mshabib471@gmail.com | WhatsApp: 01868461577</p>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-  <p>&copy; 2025 Habibur Rahman. All Rights Reserved.</p>
+<footer class="text-center py-20 text-gray-500">
+  <p class="text-2xl">© 2025 Habibur Rahman • Built with blood, sweat & coffee</p>
 </footer>
 
-<!-- Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 <script>
-  // Preloader
-  window.addEventListener('load', () => {
-    document.getElementById('preloader').style.display = 'none';
+  // Custom Cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
   });
 
-  // Sticky Header
-  window.addEventListener('scroll', () => {
-    document.querySelector('.header').classList.toggle('sticky', window.scrollY > 100);
-  });
-
-  // Smooth Scroll
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-    });
-  });
+  // GSAP Animations
+  gsap.from("#avatar", { y: -100, opacity: 0, duration: 1.5, ease: "bounce.out" });
+  gsap.from("h1", { opacity: 0, y: 50, duration: 2, delay: 0.5 });
+  
+  // Typing Effect
+  const text = "Full-Stack Wizard × Content Creator × Cyberpunk Lover";
+  let i = 0;
+  const typing = document.querySelector('.typing');
+  const type = () => {
+    if (i < text.length) {
+      typing.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, 80);
+    } else {
+      setTimeout(() => { typing.innerHTML = ""; i = 0; type(); }, 3000);
+    }
+  };
+  setTimeout(type, 1500);
 </script>
 </body>
 </html>
