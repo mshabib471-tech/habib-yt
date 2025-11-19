@@ -110,17 +110,19 @@
 
 <!-- FIREBASE -->
 <script type="module">
+
+/* IMPORTS */
 import { auth, db } from "./firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 import { addDoc, collection, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-/* FIXED ERROR HERE */
+/* VARIABLES */
 let selectedPackage = null;
 let selectedPayment = "wallet";
 let userUID = null;
 let userBalance = 0;
 
-/* PACKAGES */
+/* PACKAGE LIST */
 const packages = [
   {name:"25 Diamond",price:23},{name:"50 Diamond",price:38},
   {name:"100 Diamond",price:74},{name:"115 Diamond",price:78},
@@ -135,7 +137,7 @@ const packages = [
   {name:"3 Weekly + 1 Monthly",price:1230},{name:"4 Weekly + 1 Monthly",price:1385}
 ];
 
-const grid=document.getElementById("packageGrid");
+const grid = document.getElementById("packageGrid");
 packages.forEach((p,i)=>{
   let div=document.createElement("div");
   div.className="box";
@@ -144,6 +146,7 @@ packages.forEach((p,i)=>{
   grid.appendChild(div);
 });
 
+/* SELECT PACKAGE */
 function selectPackage(i, div){
   document.querySelectorAll(".box").forEach(x => x.classList.remove("selected"));
   div.classList.add("selected");
@@ -151,7 +154,7 @@ function selectPackage(i, div){
   document.getElementById("need").innerText = selectedPackage.price;
 }
 
-/* FIREBASE AUTH */
+/* AUTH CHECK */
 onAuthStateChanged(auth, async (user)=>{
   if(!user){ alert("Login First!"); location.href="login.html"; return; }
 
@@ -165,35 +168,36 @@ onAuthStateChanged(auth, async (user)=>{
   document.getElementById("balance").innerText = userBalance;
 });
 
+/* UID CHECK (100% WORKING API) */
 window.checkUID = async function () {
   let uid = document.getElementById("uid").value.trim();
-  let playerBox = document.getElementById("playerName");
+  let box = document.getElementById("playerName");
 
-  if (!uid) {
-    playerBox.innerHTML = "❌ Please enter UID!";
-    playerBox.style.color = "red";
+  if (!uid){
+    box.innerHTML="❌ Please enter UID!";
+    box.style.color="red";
     return;
   }
 
-  playerBox.innerHTML = "⏳ Checking... Please wait";
-  playerBox.style.color = "#444";
+  box.innerHTML = "⏳ Checking...";
+  box.style.color="#444";
 
   try {
     let url = `https://spapi.pro/freefire?id=${uid}`;
-
     let res = await fetch(url);
     let data = await res.json();
 
-    if (data.status === "success" && data.name) {
-      playerBox.innerHTML = "✔ " + data.name;
-      playerBox.style.color = "#0a7cff";
+    if (data.status === "success" && data.name){
+      box.innerHTML = "✔ " + data.name;
+      box.style.color="#0a7cff";
     } else {
-      playerBox.innerHTML = "❌ Invalid UID!";
-      playerBox.style.color = "red";
+      box.innerHTML="❌ Invalid UID!";
+      box.style.color="red";
     }
-  } catch (err) {
-    playerBox.innerHTML = "⚠️ Server busy, try again!";
-    playerBox.style.color = "red";
+
+  } catch {
+    box.innerHTML="⚠️ Server Busy! Try Again!";
+    box.style.color="red";
   }
 };
 
@@ -204,7 +208,7 @@ window.selectPay=function(type){
   document.getElementById("instantPay").classList.toggle("selected",type==="instant");
 }
 
-/* ORDER */
+/* ORDER PLACE */
 window.placeOrder=async function(){
   if(!selectedPackage) return alert("Select a package!");
   let uid=document.getElementById("uid").value;
@@ -233,6 +237,7 @@ window.placeOrder=async function(){
   alert("✔ Order Successful!");
   location.href="dashboard.html";
 }
+
 </script>
 
 </body>
