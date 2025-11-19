@@ -1,107 +1,202 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
-<title>Admin Control</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Control</title>
 
 <style>
-  body{margin:0;font-family:Poppins,sans-serif;background:#eef2ff;}
-  h2{text-align:center;padding:15px;background:#092c71;color:white;margin:0;}
+  body {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    background: #eef3ff;
+  }
 
-  .section{
-    background:white;padding:20px;margin:15px;border-radius:12px;
-    box-shadow:0 2px 7px rgba(0,0,0,0.15);
+  header {
+    background: #082b7b;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
   }
-  .order-box{
-    padding:12px;border:1px solid #ddd;border-radius:10px;
-    margin-bottom:15px;background:#f8faff;
+
+  .section {
+    margin: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   }
-  .btn{
-    padding:8px 12px;border:none;border-radius:8px;font-weight:600;
-    cursor:pointer;margin-right:8px;
+
+  h2 {
+    margin-top: 0;
+    font-size: 20px;
   }
-  .approve{background:#28a745;color:white;}
-  .reject{background:#dc3545;color:white;}
+
+  .order {
+    background: #f6f6ff;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 12px;
+    line-height: 1.5;
+    border-left: 4px solid #0a7cff;
+  }
+
+  button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    margin-right: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .approve { background: #1dbf73; color: white; }
+  .reject { background: #ff3b30; color: white; }
 </style>
 </head>
 
 <body>
 
-<h2>Admin Control</h2>
+<header>Admin Control</header>
 
 <div class="section">
-  <h3>📦 Pending Orders</h3>
-  <div id="ordersList">Loading...</div>
+  <h2>📦 Pending Orders</h2>
+  <div id="orders"></div>
+</div>
+
+<div class="section">
+  <h2>💰 Wallet Requests</h2>
+  <div id="walletRequests"></div>
 </div>
 
 <script type="module">
 import { db } from "./firebase.js";
 import {
-  collection, query, where, getDocs, updateDoc, doc, getDoc
+  collection, getDocs, updateDoc, doc, deleteDoc
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-/* LOAD PENDING ORDERS */
-async function loadOrders(){
-  const q = query(collection(db,"orders"), where("status","==","pending"));
-  const snap = await getDocs(q);
+/* ------------------------------
+   LOAD PENDING ORDERS
+------------------------------ */
+async function loadOrders() {
+  const container = document.getElementById("orders");
+  container.innerHTML = "Loading...";
 
-  const box = document.getElementById("ordersList");
-  box.innerHTML = "";
+  const snap = await getDocs(collection(db, "orders"));
+  container.innerHTML = "";
 
-  if(snap.empty){
-    box.innerHTML = "<p>No pending orders</p>";
-    return;
-  }
+  snap.forEach(order => {
+    let data = order.data();
+    if (data.status !== "pending") return;
 
-  snap.forEach(docSnap=>{
-    let o = docSnap.data();
+    let div = document.createElement("div");
+    div.className = "order";
 
-    box.innerHTML += `
-      <div class="order-box">
-        <b>Product:</b> ${o.product}<br>
-        <b>UID:</b> ${o.uid}<br>
-        <b>Price:</b> ${o.price} TK<br>
-        <b>User:</b> ${o.user}<br><br>
-
-        <button class="btn approve" onclick="approveOrder('${docSnap.id}', '${o.user}', ${o.price})">
-          Approve ✔
-        </button>
-
-        <button class="btn reject" onclick="rejectOrder('${docSnap.id}', '${o.user}', ${o.price})">
-          Reject ✖
-        </button>
-      </div>
+    div.innerHTML = `
+      <b>Product:</b> ${data.product}<br>
+      <b>UID:</b> ${data.uid}<br>
+      <b>Price:</b> ${data.price} TK<br>
+      <b>User:</b> ${data.user}<br><br>
+      <button class="approve" onclick="approveOrder('${order.id}')">Approve</button>
+      <button class="reject" onclick="rejectOrder('${order.id}', '${data.user}', ${data.price})">Reject</button>
     `;
+
+    container.appendChild(div);
   });
 }
 
-window.approveOrder = async function(orderId, userId, amount){
-  await updateDoc(doc(db,"orders",orderId),{
-    status:"approved"
-  });
-  alert("Order Approved!");
+/* ------------------------------
+   APPROVE ORDER
+------------------------------ */
+window.approveOrder = async function(id) {
+  await updateDoc(doc(db, "orders", id), { status: "completed" });
+  alert("✔ Order Approved!");
   loadOrders();
 }
 
-window.rejectOrder = async function(orderId, userId, amount){
+/* ------------------------------
+   REJECT ORDER + REFUND
+------------------------------ */
+window.rejectOrder = async function(id, userId, amount) {
   // refund wallet
-  const walletRef = doc(db,"wallets",userId);
-  const walletSnap = await getDoc(walletRef);
-  let bal = walletSnap.exists() ? walletSnap.data().balance : 0;
+  const walletRef = doc(db, "wallets", userId);
+  const walletSnap = await getDocs(collection(db, "wallets"));
 
-  await updateDoc(walletRef,{ balance: bal + amount });
-
-  // update order status
-  await updateDoc(doc(db,"orders",orderId),{
-    status:"rejected"
+  let balance = 0;
+  walletSnap.forEach(w => {
+    if (w.id === userId) balance = w.data().balance || 0;
   });
 
-  alert("Order Rejected! 💸 Refund Done!");
+  await updateDoc(walletRef, { balance: balance + amount });
+
+  // delete order
+  await deleteDoc(doc(db, "orders", id));
+
+  alert("❌ Order Rejected & Refunded");
   loadOrders();
 }
+
+/* ------------------------------
+   LOAD WALLET REQUESTS
+------------------------------ */
+async function loadWalletRequests() {
+  const container = document.getElementById("walletRequests");
+  container.innerHTML = "Loading...";
+
+  const snap = await getDocs(collection(db, "wallet_requests"));
+  container.innerHTML = "";
+
+  snap.forEach(req => {
+    let data = req.data();
+
+    let div = document.createElement("div");
+    div.className = "order";
+
+    div.innerHTML = `
+      <b>User:</b> ${data.user}<br>
+      <b>Amount:</b> ${data.amount} TK<br>
+      <b>Txn ID:</b> ${data.trxid}<br><br>
+      <button class="approve" onclick="approveWallet('${req.id}', '${data.user}', ${data.amount})">Approve</button>
+      <button class="reject" onclick="rejectWallet('${req.id}')">Reject</button>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+/* ------------------------------
+   APPROVE WALLET REQUEST
+------------------------------ */
+window.approveWallet = async function(id, userId, amount) {
+  const walletRef = doc(db, "wallets", userId);
+
+  const walletSnap = await getDocs(collection(db, "wallets"));
+  let balance = 0;
+
+  walletSnap.forEach(w => {
+    if (w.id === userId) balance = w.data().balance || 0;
+  });
+
+  await updateDoc(walletRef, { balance: balance + amount });
+  await deleteDoc(doc(db, "wallet_requests", id));
+
+  alert("✔ Wallet Money Added!");
+  loadWalletRequests();
+};
+
+/* ------------------------------
+   REJECT WALLET REQUEST
+------------------------------ */
+window.rejectWallet = async function(id) {
+  await deleteDoc(doc(db, "wallet_requests", id));
+  alert("❌ Wallet Request Removed");
+  loadWalletRequests();
+};
 
 loadOrders();
+loadWalletRequests();
 </script>
 
 </body>
