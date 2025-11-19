@@ -8,103 +8,60 @@
 <style>
   body{
     margin:0;
-    font-family:Poppins, sans-serif;
-    background:#eef2ff;
-    padding-bottom:80px;
+    font-family: Poppins, sans-serif;
+    background:#f0f4ff;
+    padding-bottom:120px;
   }
 
-  /* HEADER */
   header{
     background:#0a7cff;
-    color:white;
     padding:15px;
+    color:white;
     text-align:center;
     font-size:22px;
     font-weight:600;
-    box-shadow:0 3px 10px rgba(0,0,0,0.15);
   }
 
-  /* BALANCE BOX */
-  .wallet-box{
-    margin:15px;
-    padding:18px;
+  .card{
     background:white;
-    border-radius:14px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    margin:15px;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+  }
+
+  .balance{
+    font-size:28px;
+    color:#0a7cff;
+    font-weight:700;
     text-align:center;
   }
-  .wallet-box h2{ margin:0; font-size:30px; color:#0a7cff; }
-  .wallet-box p{ margin:5px 0 0; font-size:14px; color:#555; }
 
-  /* BUTTONS */
-  .top-buttons{
-    margin:15px;
-    display:flex;
-    gap:12px;
-  }
   .btn{
-    flex:1;
+    padding:12px 20px;
     background:#0a7cff;
-    padding:12px;
-    border-radius:12px;
-    text-align:center;
     color:white;
+    border:none;
+    border-radius:10px;
     font-weight:600;
+    font-size:17px;
     cursor:pointer;
-  }
-  .btn:hover{ background:#0068d1; }
-
-  /* ORDER LIST */
-  .section-title{
-    margin:15px;
-    font-weight:600;
-    font-size:18px;
-    color:#222;
+    margin:5px;
   }
 
   .order{
-    background:white;
-    margin:12px 15px;
-    padding:15px;
-    border-radius:12px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    background:#fff;
+    padding:12px;
+    border-radius:10px;
+    margin-top:10px;
+    border-left:5px solid #999;
   }
 
-  .order-top{
-    display:flex;
-    justify-content:space-between;
-    font-weight:600;
-  }
+  .pending{ border-left-color:orange; }
+  .approved{ border-left-color:green; }
+  .rejected{ border-left-color:red; }
 
-  .pending{ color:#ff9800; font-weight:700; }
-  .approved{ color:#28a745; font-weight:700; }
-  .rejected{ color:#e91e63; font-weight:700; }
-
-  .order p{
-    margin:5px 0;
-    font-size:14px;
-    color:#444;
-  }
-
-  /* FOOTER NAV */
-  .bottom-nav{
-    position:fixed;
-    bottom:0;
-    width:100%;
-    background:white;
-    display:flex;
-    justify-content:space-around;
-    padding:10px 0;
-    border-top:1px solid #ccc;
-  }
-  .bottom-nav button{
-    background:none;
-    border:none;
-    font-weight:600;
-    color:#0a7cff;
-    font-size:15px;
-    cursor:pointer;
-  }
+  .order small{ font-size:13px;color:#555; }
 </style>
 </head>
 
@@ -112,83 +69,109 @@
 
 <header>Dashboard</header>
 
-<!-- BALANCE CARD -->
-<div class="wallet-box">
-  <p>Your Wallet Balance</p>
-  <h2 id="balance">0</h2>
+<div class="card">
+  <div style="font-size:17px;text-align:center;">Your Wallet Balance</div>
+  <div class="balance" id="balance">0 TK</div>
+
+  <center>
+    <button class="btn" onclick="location.href='addmoney.html'">Add Money</button>
+    <button class="btn" onclick="location.href='freefire.html'">Buy Diamond</button>
+  </center>
 </div>
 
-<!-- TOP BUTTONS -->
-<div class="top-buttons">
-  <div class="btn" onclick="location.href='add-money.html'">Add Money</div>
-  <div class="btn" onclick="location.href='freefire.html'">Buy Diamond</div>
+<div class="card">
+  <h3>📦 Recent Orders</h3>
+  <div id="orders">Loading...</div>
 </div>
 
-<!-- RECENT ORDERS -->
-<h3 class="section-title">📦 Recent Orders</h3>
-<div id="orderList"></div>
-
-<!-- BOTTOM NAV -->
-<div class="bottom-nav">
-  <button onclick="location.href='index.html'">🏠 Home</button>
-  <button onclick="location.href='dashboard.html'">📊 Dashboard</button>
-  <button onclick="location.href='add-money.html'">💰 Add Money</button>
-  <button onclick="location.href='login.html'">🔐 Login</button>
-</div>
-
-<!-- FIREBASE SCRIPT -->
+<!-- FIREBASE -->
 <script type="module">
-
 import { auth, db } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-import { collection, query, where, orderBy, getDocs, getDoc, doc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { 
+  doc, getDoc, collection, query, where, orderBy, onSnapshot, updateDoc 
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-/* LOGIN CHECK + LOAD DATA */
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    alert("Login required!");
-    location.href = "login.html";
+let userUID = null;
+
+/* LOGIN CHECK */
+onAuthStateChanged(auth, async(user)=>{
+  if(!user){
+    location.href="login.html";
     return;
   }
 
-  /* LOAD BALANCE */
-  const walletSnap = await getDoc(doc(db, "wallets", user.uid));
-  let balance = walletSnap.exists() ? walletSnap.data().balance : 0;
-  document.getElementById("balance").innerText = balance + " TK";
+  userUID = user.uid;
 
-  /* LOAD ORDERS */
+  /* Load Wallet */
+  const walletDoc = await getDoc(doc(db, "wallets", userUID));
+  if(walletDoc.exists()){
+    document.getElementById("balance").innerText = walletDoc.data().balance + " TK";
+  }
+
+  /* Load Orders Live */
+  loadOrders();
+});
+
+/* Load Orders */
+function loadOrders(){
   const q = query(
-    collection(db, "orders"),
-    where("user", "==", user.uid),
-    orderBy("created", "desc")
+    collection(db,"orders"),
+    where("user","==",userUID),
+    orderBy("created","desc")
   );
 
-  const snap = await getDocs(q);
+  onSnapshot(q, async(snapshot)=>{
+    if(snapshot.empty){
+      document.getElementById("orders").innerHTML = "No orders yet.";
+      return;
+    }
 
-  let html = "";
-  let count = 1;
+    let html = "";
+    let sn = 1;
 
-  snap.forEach(d => {
-    const data = d.data();
+    for(let docu of snapshot.docs){
+      let data = docu.data();
 
-    html += `
-      <div class="order">
-        <div class="order-top">
-          <span>Order #${count}</span>
-          <span class="${data.status}">${data.status.toUpperCase()}</span>
+      /* Refund if rejected */
+      if(data.status === "rejected" && !data.refunded){
+        await refundUser(docu.id, data);
+      }
+
+      html += `
+        <div class="order ${data.status}">
+          <b>Order #${sn++}</b><br>
+          Product: ${data.product}<br>
+          UID: ${data.uid}<br>
+          Price: ${data.price} TK<br>
+          Payment: ${data.payment}<br>
+          Status: <b>${data.status.toUpperCase()}</b><br>
+          <small>${new Date(data.created.seconds * 1000).toLocaleString()}</small>
         </div>
+      `;
+    }
 
-        <p><b>Product:</b> ${data.product || data.package}</p>
-        <p><b>UID:</b> ${data.uid}</p>
-        <p><b>Price:</b> ${data.price} TK</p>
-      </div>
-    `;
-
-    count++;
+    document.getElementById("orders").innerHTML = html;
   });
+}
 
-  document.getElementById("orderList").innerHTML = html || "<p style='text-align:center;color:#666'>No orders found</p>";
-});
+/* Wallet Refund System */
+async function refundUser(orderId, data){
+  const walletRef = doc(db,"wallets",data.user);
+  const walletDoc = await getDoc(walletRef);
+
+  if(walletDoc.exists()){
+    let newBal = walletDoc.data().balance + data.price;
+
+    await updateDoc(walletRef,{
+      balance:newBal
+    });
+
+    await updateDoc(doc(db,"orders",orderId),{
+      refunded:true
+    });
+  }
+}
 
 </script>
 </body>
