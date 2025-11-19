@@ -1,33 +1,87 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard | Habib YT</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard</title>
 
 <style>
-  body{margin:0;font-family:Poppins,sans-serif;background:#f3f6ff;}
-  header{
-    background:#0a7cff;color:white;padding:15px;text-align:center;
-    font-size:24px;font-weight:700;
+  body {
+    font-family: Poppins, sans-serif;
+    background: #eef3ff;
+    margin: 0;
+    padding: 0;
   }
 
-  .box{
-    background:white;margin:15px;padding:20px;border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);text-align:center;
-  }
-  .box h2{margin:0;color:#0a7cff;font-size:35px;}
-
-  .btn{
-    width:80%;padding:12px;background:#0a7cff;color:white;border:none;
-    font-size:18px;border-radius:10px;margin-top:10px;cursor:pointer;
-    font-weight:600;
+  header {
+    background: #0a7cff;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
   }
 
-  .order-box{
-    background:white;margin:15px;padding:20px;border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  .card {
+    background: white;
+    margin: 15px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    text-align: center;
   }
+
+  .big-balance {
+    font-size: 35px;
+    font-weight: 700;
+    color: #0066ff;
+  }
+
+  .btn {
+    width: 80%;
+    padding: 12px;
+    margin-top: 12px;
+    background: #0a7cff;
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .btn2 {
+    width: 80%;
+    padding: 12px;
+    margin-top: 12px;
+    background: #4a3bff;
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .orders-box {
+    background: white;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+
+  .order-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+
+  .status {
+    font-weight: 700;
+  }
+
+  .pending { color: orange; }
+  .complete { color: green; }
+  .cancelled { color: red; }
+
 </style>
 </head>
 
@@ -35,59 +89,73 @@
 
 <header>Dashboard</header>
 
-<div class="box">
-  <p>Your Wallet Balance</p>
-  <h2 id="balance">0 TK</h2>
-  <button class="btn" onclick="location.href='pay.html'">Add Money</button>
-  <button class="btn" onclick="location.href='freefire.html'">Buy Diamond</button>
+<div class="card">
+  <div>Your Wallet Balance</div>
+  <div class="big-balance" id="wallet">0 TK</div>
+
+  <!-- FIXED BUTTONS -->
+  <button class="btn" onclick="location.href='add-money.html'">Add Money</button>
+  <button class="btn2" onclick="location.href='index.html'">Go to Home</button>
 </div>
 
-<div class="order-box">
-  <h3>📦 Recent Orders</h3>
+<div class="orders-box">
+  <h2>📦 My Orders</h2>
   <div id="orders">Loading...</div>
 </div>
 
-<!-- FIREBASE -->
 <script type="module">
 import { auth, db } from "./firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-import { collection, query, where, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { collection, query, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-onAuthStateChanged(auth, async (user)=>{
-  if(!user){ location.href="login.html"; return; }
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    location.href = "login.html";
+    return;
+  }
 
   const uid = user.uid;
 
-  /* LOAD WALLET */
-  const walletRef = await getDocs(query(collection(db,"wallets"), where("__name__","==",uid)));
-  walletRef.forEach(doc=>{
-    document.getElementById("balance").innerText = (doc.data().balance || 0) + " TK";
-  });
+  // Load wallet balance
+  const walletRef = await getDoc(doc(db, "wallets", uid));
+  if (walletRef.exists()) {
+    document.getElementById("wallet").innerText = walletRef.data().balance + " TK";
+  }
 
-  /* LOAD RECENT ORDERS */
-  const orderQuery = query(
-    collection(db,"orders"),
-    where("user","==",uid),
-    orderBy("created","desc")
-  );
+  // Load orders
+  const ordersBox = document.getElementById("orders");
+  ordersBox.innerHTML = "Loading...";
 
-  const orderSnap = await getDocs(orderQuery);
-  let html = "";
+  const q = query(collection(db, "orders"), where("user", "==", uid));
+  const snap = await getDocs(q);
 
-  orderSnap.forEach(o=>{
-    html += `
-      <div style="padding:10px;border-bottom:1px solid #ddd;">
-        <b>${o.data().product}</b><br>
-        UID: ${o.data().uid}<br>
-        Price: ${o.data().price} TK<br>
-        Status: <b>${o.data().status}</b>
+  if (snap.empty) {
+    ordersBox.innerHTML = "No orders found!";
+    return;
+  }
+
+  ordersBox.innerHTML = "";
+
+  snap.forEach(order => {
+    let d = order.data();
+
+    let statusColor =
+      d.status === "complete"
+        ? "complete"
+        : d.status === "cancelled"
+        ? "cancelled"
+        : "pending";
+
+    ordersBox.innerHTML += `
+      <div class="order-item">
+        <b>Serial:</b> ${order.id}<br>
+        <b>Package:</b> ${d.product}<br>
+        <b>Player ID:</b> ${d.uid}<br>
+        <b>Price:</b> ${d.price} TK<br>
+        <b>Status:</b> <span class="${statusColor}">${d.status}</span>
       </div>
     `;
   });
-
-  if(html.trim()==="") html = "No Orders Found";
-
-  document.getElementById("orders").innerHTML = html;
 });
 </script>
 
