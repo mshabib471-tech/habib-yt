@@ -3,79 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Habibur Rahman | God Level Dev</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Roboto+Mono&display=swap" rel="stylesheet">
+<title>HABIBUR RAHMAN | GOD LEVEL</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 <style>
-  body { background: #000; color: #fff; font-family: 'Roboto Mono', monospace; overflow-x: hidden; }
-  .orbitron { font-family: 'Orbitron', sans-serif; }
-  .cursor { position: fixed; width: 30px; height: 30px; border: 2px solid #ff00ff; border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: difference; transform: translate(-50%, -50%); transition: all 0.1s; }
-  .glitch { position: relative; }
-  .glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-  .glitch::before { animation: glitch1 0.8s infinite; color: #00ffff; clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); }
-  .glitch::after { animation: glitch2 0.8s infinite; color: #ff00ff; clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%); }
-  @keyframes glitch1 { 0%,100% { transform: translate(0); } 20% { transform: translate(-5px,5px); } 40% { transform: translate(5px,-5px); } }
-  @keyframes glitch2 { 0%,100% { transform: translate(0); } 60% { transform: translate(-5px,-5px); } 80% { transform: translate(5px,5px); } }
-  .grain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: url('https://grainy-gradients.vercel.app/noise.svg'); opacity: 0.08; z-index: 1; }
+  body { margin:0; overflow-x:hidden; background:#000; color:#fff; font-family:'Rajdhani',sans-serif; cursor:none; }
+  .cursor { position:fixed; width:40px; height:40px; border:2px solid #00ffff; border-radius:50%; pointer-events:none; z-index:99999; mix-blend-mode:difference; transform:translate(-50%,-50%); transition:all 0.05s; }
+  .cursor::after { content:''; position:absolute; width:12px; height:12px; background:#ff00ff; border-radius:50%; top:50%; left:50%; transform:translate(-50%,-50%); }
+  .grain { position:fixed; inset:0; pointer-events:none; background:url('https://grainy-gradients.vercel.app/noise.svg'); opacity:0.12; z-index:1; }
+  .glitch { position:relative; font-family:'Orbitron',sans-serif; }
+  .glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;}
+  .glitch::before{animation:glitch1 0.6s infinite; color:#00ffff; clip-path:polygon(0 0,100% 0,100% 40%,0 40%);}
+  .glitch::after{animation:glitch2 0.6s infinite; color:#ff00ff; clip-path:polygon(0 60%,100% 60%,100% 100%,0 100%);}
+  @keyframes glitch1{0%,100%{transform:translate(0)}20%{transform:translate(-8px,8px)}40%{transform:translate(8px,-8px)}}
+  @keyframes glitch2{0%,100%{transform:translate(0)}60%{transform:translate(-8px,-8px)}80%{transform:translate(8px,8px)}}
+  .neon-text { text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 80px #00ffff; }
 </style>
 </head>
 <body class="relative">
 
 <div class="cursor" id="cursor"></div>
 <div class="grain"></div>
+<canvas id="bg"></canvas>
 
 <!-- HERO -->
-<section class="min-h-screen flex items-center justify-center relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-br from-purple-900 via-black to-pink-900 animate-pulse"></div>
-  
-  <div class="text-center relative z-10 px-6">
-    <img src="https://i.ibb.co/4pQZR3k/habib.jpg" class="w-64 h-64 mx-auto rounded-full border-8 border-transparent bg-gradient-to-r from-cyan-500 to-pink-500 p-1 shadow-2xl hover:scale-110 transition" id="avatar">
-    
-    <h1 class="text-6xl md:text-9xl orbitron mt-10 glitch" data-text="HABIBUR RAHMAN">HABIBUR RAHMAN</h1>
-    <p class="text-2xl md:text-4xl mt-6 text-cyan-400 typing">Full-Stack Wizard × Content Creator × Cyberpunk Lover</p>
-    
-    <div class="mt-12 flex justify-center gap-6 flex-wrap">
-      <a href="https://facebook.com" target="_blank" class="w-16 h-16 bg-cyan-600/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-cyan-500 hover:scale-125 transition text-2xl">FB</a>
-      <a href="https://instagram.com/md__habibur_rahman" target="_blank" class="w-16 h-16 bg-pink-600/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-pink-500 hover:scale-125 transition text-2xl">IG</a>
-      <a href="https://tiktok.com/@habibur_._rahman" target="_blank" class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center hover:scale-125 transition text-2xl">TT</a>
-      <a href="https://youtube.com/@h_a_b_i_b-yt" target="_blank" class="w-16 h-16 bg-red-600/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-red-500 hover:scale-125 transition text-2xl">YT</a>
-      <a href="https://wa.me/01868461577" target="_blank" class="w-16 h-16 bg-green-600/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-green-500 hover:scale-125 transition text-2xl">WA</a>
-      <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank" class="w-16 h-16 bg-blue-600/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-blue-500 hover:scale-125 transition text-2xl">TG</a>
+<section class="min-h-screen flex items-center justify-center relative">
+  <div class="text-center z-10 px-6">
+    <div class="relative inline-block">
+      <img src="https://i.ibb.co/4pQZR3k/habib.jpg" class="w-80 h-80 rounded-full object-cover border-8 border-transparent bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 p-2 shadow-2xl hover:rotate-6 transition" id="avatar">
+      <div class="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-pink-500 blur-3xl opacity-50 animate-pulse"></div>
     </div>
+
+    <h1 class="text-8xl md:text-9xl lg:text-[180px] orbitron mt-10 glitch neon-text" data-text="HABIBUR">HABIBUR</h1>
+    <h2 class="text-5xl md:text-7xl orbitron bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">RAHMAN</h2>
     
+    <p class="text-3xl mt-8 tracking-widest">FULL-STACK SORCERER × 3D WIZARD × CYBER GOD</p>
+
+    <!-- Social Icons -->
+    <div class="mt-16 flex justify-center gap-8 flex-wrap">
+      <a href="https://www.facebook.com/share/1A8xKKdbec/" target="_blank" class="w-20 h-20 rounded-full bg-cyan-500/20 backdrop-blur-xl border-2 border-cyan-500 hover:bg-cyan-500 hover:scale-125 hover:rotate-12 transition neon-text text-3xl flex items-center justify-center">FB</a>
+      <a href="https://instagram.com/md__habibur_rahman" target="_blank" class="w-20 h-20 rounded-full bg-pink-500/20 backdrop-blur-xl border-2 border-pink-500 hover:bg-pink-500 hover:scale-125 hover:-rotate-12 transition text-3xl flex items-center justify-center">IG</a>
+      <a href="https://tiktok.com/@habibur_._rahman" target="_blank" class="w-20 h-20 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 backdrop-blur-xl border-2 border-purple-500 hover:scale-125 transition text-3xl flex items-center justify-center">TT</a>
+      <a href="https://youtube.com/@h_a_b_i_b-yt" target="_blank" class="w-20 h-20 rounded-full bg-red-500/20 backdrop-blur-xl border-2 border-red-500 hover:bg-red-500 hover:scale-125 transition text-3xl flex items-center justify-center">YT</a>
+      <a href="https://wa.me/01868461577" target="_blank" class="w-20 h-20 rounded-full bg-green-500/20 backdrop-blur-xl border-2 border-green-500 hover:bg-green-500 hover:scale-125 transition text-3xl flex items-center justify-center">WA</a>
+    </div>
+
     <div class="mt-20">
-      <a href="#about" class="px-12 py-5 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full text-xl font-bold hover:shadow-2xl hover:shadow-pink-500/50 transition animate-bounce">Enter My World</a>
+      <a href="#projects" class="px-16 py-6 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full text-3xl font-bold hover:shadow-2xl hover:shadow-pink-500/80 transition animate-pulse border-4 border-purple-500">
+        ENTER THE MATRIX
+      </a>
     </div>
   </div>
 </section>
 
-<!-- REST OF SECTIONS (simple but crazy) -->
-<section id="about" class="min-h-screen flex items-center justify-center text-center px-10 bg-black/50">
-  <div>
-    <h2 class="text-7xl orbitron text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-600">I Create Digital Magic</h2>
-    <p class="text-2xl mt-10 max-w-4xl mx-auto">React × Tailwind × GSAP × Three.js দিয়ে যা মনে চায় তাই বানাই। রাতে কোড লিখি, দিনে টিকটক বানাই।</p>
+<!-- Rest of the madness -->
+<section id="projects" class="min-h-screen grid grid-cols-1 md:grid-cols-3 gap-10 p-20">
+  <div class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-900/50 to-black border border-purple-500/50 backdrop-blur-xl hover:scale-105 transition">
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+    <img src="https://via.placeholder.com/600x400/220045/00ffff?text=PROJECT+01" class="w-full h-full object-cover group-hover:scale-110 transition">
+    <div class="absolute bottom-8 left-8 text-4xl font-bold">Next.js Magic</div>
+  </div>
+  <div class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-cyan-900/50 to-black border border-cyan-500/50 backdrop-blur-xl hover:scale-105 transition">
+    <img src="https://via.placeholder.com/600x400/004466/ff00ff?text=3D+WORLD" class="w-full h-full object-cover group-hover:scale-110 transition">
+    <div class="absolute bottom-8 left-8 text-4xl font-bold">Three.js God</div>
+  </div>
+  <div class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-pink-900/50 to-black border border-pink-500/50 backdrop-blur-xl hover:scale-105 transition">
+    <img src="https://via.placeholder.com/600x400/660022/ffff00?text=CONTENT+KING" class="w-full h-full object-cover group-hover:scale-110 transition">
+    <div class="absolute bottom-8 left-8 text-4xl font-bold">Viral Creator</div>
   </div>
 </section>
 
-<section class="min-h-screen grid grid-cols-1 md:grid-cols-3 gap-10 p-20">
-  <div class="bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-lg rounded-3xl p-10 hover:scale-105 transition border border-pink-500/30">
-    <h3 class="text-4xl orbitron text-cyan-400">Web Development</h3>
-    <p class="mt-6">Next.js, React, Node.js, MongoDB</p>
-  </div>
-  <div class="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 backdrop-blur-lg rounded-3xl p-10 hover:scale-105 transition border border-cyan-500/30">
-    <h3 class="text-4xl orbitron text-pink-400">UI/UX & Motion</h3>
-    <p class="mt-6">Figma, Framer, GSAP, Lottie</p>
-  </div>
-  <div class="bg-gradient-to-br from-pink-900/30 to-red-900/30 backdrop-blur-lg rounded-3xl p-10 hover:scale-105 transition border border-red-500/30">
-    <h3 class="text-4xl orbitron text-yellow-400">Content Creator</h3>
-    <p class="mt-6">TikTok, YouTube, Instagram Reels</p>
-  </div>
-</section>
-
-<footer class="text-center py-20 text-gray-500">
-  <p class="text-2xl">© 2025 Habibur Rahman • Built with blood, sweat & coffee</p>
+<footer class="text-center py-24 text-3xl bg-black/80">
+  <p class="neon-text">© 2025 HABIBUR RAHMAN • BUILT WITH INSOMNIA & MONSTER</p>
 </footer>
 
 <script>
@@ -86,24 +88,29 @@
     cursor.style.top = e.clientY + 'px';
   });
 
-  // GSAP Animations
-  gsap.from("#avatar", { y: -100, opacity: 0, duration: 1.5, ease: "bounce.out" });
-  gsap.from("h1", { opacity: 0, y: 50, duration: 2, delay: 0.5 });
-  
-  // Typing Effect
-  const text = "Full-Stack Wizard × Content Creator × Cyberpunk Lover";
-  let i = 0;
-  const typing = document.querySelector('.typing');
-  const type = () => {
-    if (i < text.length) {
-      typing.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(type, 80);
-    } else {
-      setTimeout(() => { typing.innerHTML = ""; i = 0; type(); }, 3000);
-    }
-  };
-  setTimeout(type, 1500);
+  // 3D Background
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('bg'), alpha: true});
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.position.z = 5;
+
+  const geometry = new THREE.TorusKnotGeometry(1, 0.3, 128, 16);
+  const material = new THREE.MeshBasicMaterial({color: 0x00ffff, wireframe: true});
+  const torus = new THREE.Mesh(geometry, material);
+  scene.add(torus);
+
+  function animate() {
+    requestAnimationFrame(animate);
+    torus.rotation.x += 0.01;
+    torus.rotation.y += 0.01;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // GSAP Magic
+  gsap.from("#avatar", {y: -300, rotation: 360, duration: 2, ease: "bounce.out"});
+  gsap.from("h1", {opacity: 0, scale: 0.5, duration: 2, delay: 0.8});
 </script>
 </body>
 </html>
