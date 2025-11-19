@@ -67,10 +67,10 @@ header {
 </div>
 
 <script type="module">
+
 import { auth, db } from "./firebase.js";
-import { 
-  onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { onAuthStateChanged } 
+  from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
 import {
   collection,
@@ -90,7 +90,7 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  // ONLY YOU will be admin – replace with your own email
+  // Only you are admin
   if (user.email !== "mshabib471@gmail.com") {
     alert("Admins only!");
     location.href = "index.html";
@@ -121,12 +121,13 @@ async function loadPendingOrders() {
 
     box.innerHTML += `
       <div class="order-box">
+        <b>Order ID:</b> ${order.id}<br>
         <b>Product:</b> ${d.product}<br>
         <b>UID:</b> ${d.uid}<br>
         <b>Price:</b> ${d.price} TK<br>
         <b>User:</b> ${d.user}<br><br>
 
-        <button class="btn approve" onclick="approveOrder('${order.id}','${d.user}',${d.price})">Approve</button>
+        <button class="btn approve" onclick="approveOrder('${order.id}')">Approve</button>
         <button class="btn cancel" onclick="cancelOrder('${order.id}','${d.user}',${d.price})">Cancel</button>
       </div>
     `;
@@ -135,7 +136,8 @@ async function loadPendingOrders() {
 
 
 // ---------- APPROVE ORDER ----------
-window.approveOrder = async function(orderId, userUID, price) {
+window.approveOrder = async function(orderId) {
+
   await updateDoc(doc(db, "orders", orderId), {
     status: "complete",
     completedAt: new Date()
@@ -146,17 +148,15 @@ window.approveOrder = async function(orderId, userUID, price) {
 };
 
 
-// ---------- CANCEL ORDER (REFUND) ----------
+// ---------- CANCEL ORDER + REFUND ----------
 window.cancelOrder = async function(orderId, userUID, price) {
+
   const walletRef = doc(db, "wallets", userUID);
   const walletSnap = await getDoc(walletRef);
-
   let oldBal = walletSnap.exists() ? walletSnap.data().balance : 0;
 
   // Refund
-  await updateDoc(walletRef, {
-    balance: oldBal + price
-  });
+  await updateDoc(walletRef, { balance: oldBal + price });
 
   // Update order status
   await updateDoc(doc(db, "orders", orderId), {
@@ -164,7 +164,7 @@ window.cancelOrder = async function(orderId, userUID, price) {
     cancelledAt: new Date()
   });
 
-  alert("Order Cancelled + Refund Done!");
+  alert("Order Cancelled + Refund Completed!");
   location.reload();
 };
 
@@ -172,8 +172,10 @@ window.cancelOrder = async function(orderId, userUID, price) {
 // ---------- LOAD WALLET REQUESTS ----------
 async function loadWalletRequests() {
   const box = document.getElementById("walletReq");
-  
-  const q = query(collection(db, "paymentReq"), where("status", "==", "pending"));
+  box.innerHTML = "Loading...";
+
+  // YOUR COLLECTION NAME: walletRequests
+  const q = query(collection(db, "walletRequests"), where("status", "==", "pending"));
   const snap = await getDocs(q);
 
   if (snap.empty) {
@@ -193,41 +195,38 @@ async function loadWalletRequests() {
         <b>TrxID:</b> ${d.trxid}<br><br>
 
         <button class="btn approve" onclick="approveWallet('${req.id}','${d.user}',${d.amount})">Approve</button>
-        <button class="btn cancel" onclick="cancelWallet('${req.id}')">Reject</button>
+        <button class="btn cancel" onclick="rejectWallet('${req.id}')">Reject</button>
       </div>
     `;
   });
 }
 
 
-// ---------- APPROVE WALLET ----------
+// ---------- APPROVE WALLET REQUEST ----------
 window.approveWallet = async function(reqId, userUID, amount) {
 
   const walletRef = doc(db, "wallets", userUID);
   const walletSnap = await getDoc(walletRef);
-
   let oldBal = walletSnap.exists() ? walletSnap.data().balance : 0;
 
-  await updateDoc(walletRef, {
-    balance: oldBal + amount
-  });
+  await updateDoc(walletRef, { balance: oldBal + amount });
 
-  await updateDoc(doc(db, "paymentReq", reqId), {
+  await updateDoc(doc(db, "walletRequests", reqId), {
     status: "approved"
   });
 
-  alert("Wallet Added!");
+  alert("Wallet Money Added!");
   location.reload();
 };
 
 
-// ---------- REJECT WALLET ----------
-window.cancelWallet = async function(reqId) {
-  await updateDoc(doc(db, "paymentReq", reqId), {
+// ---------- REJECT WALLET REQUEST ----------
+window.rejectWallet = async function(reqId) {
+  await updateDoc(doc(db, "walletRequests", reqId), {
     status: "cancelled"
   });
 
-  alert("Request Rejected!");
+  alert("Wallet Request Rejected!");
   location.reload();
 };
 
