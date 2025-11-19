@@ -1,317 +1,159 @@
-<!DOCTYPE html>  <html lang="bn" translate="no">  
-<head>  
-  <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>Habib YT — আপনার বিশ্বস্ত সহযোগী</title>    <style>  
-    /* ============================  
-       GLOBAL SETTINGS  
-    ============================ */  
-    body {  
-      margin: 0;  
-      font-family: "Poppins", sans-serif;  
-      background: linear-gradient(180deg, #e9f0ff, #f7f9ff);  
-      overflow-x: hidden;  
-      color: #222;  
-    }  
-  
-    .fade-in { animation: fadeIn .7s ease-in-out forwards; opacity: 0; }  
-    @keyframes fadeIn {  
-      from { opacity:0; transform: translateY(20px); }  
-      to   { opacity:1; transform: translateY(0); }  
-    }  
-  
-    .slide-up { animation: slideUp .7s ease; }  
-    @keyframes slideUp {  
-      from { opacity:0; transform: translateY(40px); }  
-      to   { opacity:1; transform: translateY(0); }  
-    }  
-  
-    /* ============================  
-       HEADER  
-    ============================ */  
-    header {  
-      background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);  
-      padding: 15px 20px;  
-      display: flex;  
-      align-items: center;  
-      justify-content: space-between;  
-      color: white;  
-      border-bottom-left-radius: 20px;  
-      border-bottom-right-radius: 20px;  
-      box-shadow: 0 5px 18px rgba(0,0,0,0.25);  
-    }  
-  
-    header img {  
-      width: 50px;  
-      height: 50px;  
-      border-radius: 50%;  
-    }  
-  
-    header h2 {  
-      margin: 0;  
-      font-size: 22px;  
-      font-weight: bold;  
-    }  
-  
-    header small {  
-      font-size: 13px;  
-      opacity: 0.9;  
-      display: block;  
-      margin-top: -3px;  
-    }  
-  
-    nav button {  
-      background: rgba(255,255,255,0.20);  
-      padding: 8px 14px;  
-      border: 1px solid rgba(255,255,255,0.5);  
-      border-radius: 10px;  
-      color: white;  
-      font-weight: 600;  
-      backdrop-filter: blur(6px);  
-      cursor: pointer;  
-      transition: .25s;  
-    }  
-  
-    nav button:hover {  
-      transform: translateY(-3px);  
-      background: rgba(255,255,255,0.35);  
-    }  
-  
-    /* ============================  
-       HERO SECTION  
-    ============================ */  
-    .hero {  
-      text-align: center;  
-      padding: 40px 20px 20px;  
-    }  
-  
-    .hero h1 {  
-      font-size: 28px;  
-      font-weight: 700;  
-      color: #0057e7;  
-      text-shadow: 0 0 10px rgba(0,102,255,0.3);  
-    }  
-  
-    .hero p {  
-      font-size: 15px;  
-      color: #555;  
-    }  
-  
-    /* ============================  
-       SERVICE CARD GRID  
-    ============================ */  
-    .services {  
-      display: grid;  
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));  
-      gap: 15px;  
-      padding: 20px;  
-    }  
-  
-    .card {  
-      background: rgba(255,255,255,0.55);  
-      border-radius: 16px;  
-      backdrop-filter: blur(8px);  
-      padding: 12px;  
-      border: 1px solid rgba(255,255,255,0.45);  
-      text-align: center;  
-      cursor: pointer;  
-      transition: 0.35s;  
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);  
-    }  
-  
-    .card:hover {  
-      transform: translateY(-8px) scale(1.03);  
-      box-shadow: 0 8px 20px rgba(0,0,0,0.20);  
-    }  
-  
-    .card img {  
-      width: 100%;  
-      height: 105px;  
-      object-fit: cover;  
-      border-radius: 12px;  
-    }  
-  
-    .card h3 {  
-      margin-top: 10px;  
-      font-size: 15px;  
-      font-weight: 600;  
-      color: #0057e7;  
-    }  
-  
-    /* ============================  
-       SUPPORT BOX  
-    ============================ */  
-    .support {  
-      background: rgba(255,255,255,0.65);  
-      padding: 18px;  
-      margin: 25px 15px;  
-      border-radius: 16px;  
-      text-align: center;  
-      box-shadow: 0 4px 12px rgba(0,0,0,0.10);  
-    }  
-  
-    .support h2 {  
-      color: #0057e7;  
-      margin-bottom: 10px;  
-    }  
-  
-    .support a {  
-      padding: 10px 16px;  
-      display: inline-block;  
-      text-decoration: none;  
-      color: white;  
-      border-radius: 10px;  
-      font-weight: 600;  
-      margin: 8px;  
-    }  
-  
-    .telegram { background: #0088cc; }  
-    .whatsapp { background: #25d366; }  
-  
-    /* ============================  
-       LEGAL SECTION  
-    ============================ */  
-    .legal {  
-      background: rgba(255,255,255,0.60);  
-      margin: 25px 15px;  
-      padding: 22px;  
-      border-radius: 16px;  
-      backdrop-filter: blur(10px);  
-      box-shadow: 0 3px 12px rgba(0,0,0,0.12);  
-      font-size: 14px;  
-      line-height: 1.6;  
-    }  
-  
-    .legal h2 {  
-      text-align: center;  
-      color: #0057e7;  
-      margin-bottom: 15px;  
-    }  
-  
-    .legal h3 {  
-      color: #0057e7;  
-      margin-top: 12px;  
-      font-size: 16px;  
-    }  
-  
-    /* ============================  
-       FOOTER  
-    ============================ */  
-    footer {  
-      background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);  
-      color: white;  
-      text-align: center;  
-      padding: 16px;  
-      font-weight: bold;  
-      border-top-left-radius: 20px;  
-      border-top-right-radius: 20px;  
-      margin-top: 30px;  
-      box-shadow: 0 -5px 18px rgba(0,0,0,0.25);  
-    }  
-  
-    footer small {  
-      opacity: 0.85;  
-      font-size: 13px;  
-    }  
-  
-    /* ============================  
-       BOTTOM NAV  
-    ============================ */  
-    .bottom-nav {  
-      position: fixed;  
-      bottom: 0;  
-      width: 100%;  
-      background: rgba(255,255,255,0.25);  
-      backdrop-filter: blur(15px);  
-      display: flex;  
-      justify-content: space-around;  
-      padding: 12px 0;  
-      border-top: 2px solid rgba(255,255,255,0.6);  
-      z-index: 999;  
-    }  
-  
-    .bottom-nav button {  
-      background: transparent;  
-      border: none;  
-      font-size: 14px;  
-      font-weight: 700;  
-      color: #0052d4;  
-      cursor: pointer;  
-      text-shadow: 0 0 8px rgba(0,90,255,0.5);  
-      transition: .2s;  
-    }  
-  
-    .bottom-nav button:hover {  
-      transform: scale(1.1);  
-      color: #003bb8;  
-    }  
-  </style>  </head>  <body>  <!-- HEADER -->  <header class="fade-in">  
-  <div style="display:flex; align-items:center; gap:12px;">  
-    <img src="assets/logo.png">  
-    <div>  
-      <h2>Habib YT</h2>  
-      <small>আপনার বিশ্বস্ত সহযোগী</small>  
-    </div>  
-  </div>    <nav>  
-    <button id="loginBtn">Login</button>  
-    <button onclick="location.href='dashboard.html'">Dashboard</button>  
-  </nav>  
-</header>  <!-- HERO -->  <section class="hero fade-in">  
-  <h1>🔥 দ্রুত ও নিরাপদ গেমিং টপ-আপ</h1>  
-  <p>Free Fire • EFootball • Like/Followers • Mobile Services</p>  
-</section>  <!-- SERVICES -->  <section class="services fade-in">    <div class="card" onclick="location.href='freefire.html'">  
-    <img src="assets/ff.jpg">  
-    <h3>Free Fire Diamond</h3>  
-  </div>    <div class="card" onclick="location.href='efootball.html'">  
-    <img src="assets/efootball.jpg">  
-    <h3>EFootball Coins</h3>  
-  </div>    <div class="card" onclick="location.href='like-follower.html'">  
-    <img src="assets/like.jpg">  
-    <h3>Like & Followers</h3>  
-  </div>    <div class="card" onclick="location.href='mobile-accessories.html'">  
-    <img src="assets/accessories.jpg">  
-    <h3>Mobile Accessories</h3>  
-  </div>    <div class="card" onclick="location.href='mobile-servicing.html'">  
-    <img src="assets/servicing.jpg">  
-    <h3>Mobile Servicing</h3>  
-  </div>    <div class="card" onclick="location.href='coming-soon.html'">  
-    <img src="assets/coming.jpg">  
-    <h3>Coming Soon</h3>  
-  </div>  </section>  <!-- SUPPORT -->  <section class="support fade-in">  
-  <h2>📞 Customer Support</h2>  
-  <p>If you need any help, feel free to contact us:</p>  <a class="telegram" href="https://t.me/H_A_B_I_B_Top_1">💬 Telegram</a>
-<a class="whatsapp" href="https://wa.me/8801868461577">📱 WhatsApp</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Habibur Rahman | Creative Developer</title>
+<meta name="description" content="Habibur Rahman - Creative Developer & Content Creator">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-</section>  <!-- LEGAL SECTION -->  <section class="legal fade-in">  
-  <h2>📜 Terms & Policies</h2>    <h3>✔ Service Terms</h3>  
-  <p>Habib YT provides digital top-up service. Wrong UID/ID is customer responsibility.</p>    <h3>✔ Privacy Policy</h3>  
-  <p>Your data is kept safe in Firebase. We do not share with 3rd parties.</p>    <h3>✔ Refund Policy</h3>  
-  <p>Refund only if order is not delivered. Wrong input is not refundable.</p>    <h3>✔ Copyright</h3>  
-  <p>Design, logo & code are owned by Habib YT. Copying is prohibited.</p>    <h3>✔ Disclaimer</h3>  
-  <p>Delays caused by game servers or maintenance are not in our control.</p>  
-</section>  <!-- FOOTER -->  <footer class="fade-in">  
-  Habib YT — Your Trusted Partner  
-  <br>  
-  <small>© 2025 Habib YT. All Rights Reserved.</small>  
-</footer>  <!-- BOTTOM NAV -->  <div class="bottom-nav slide-up">  
-  <button onclick="location.href='index.html'">🏠 Home</button>  
-  <button onclick="location.href='dashboard.html'">💼 Dashboard</button>  
-  <button onclick="location.href='add-money.html'">💰 Add Money</button>  
-  <button onclick="location.href='login.html'">🔐 Login</button>  
-</div>  <!-- AUTO LOGIN BUTTON CHANGE -->  <script type="module">  
-  import { auth } from "./firebase.js";  
-  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";  
-  
-  const loginBtn = document.getElementById("loginBtn");  
-  
-  onAuthStateChanged(auth, (user) => {  
-    if (user) {  
-      loginBtn.innerText = "My Account";  
-      loginBtn.onclick = () => location.href = "dashboard.html";  
-    } else {  
-      loginBtn.innerText = "Login";  
-      loginBtn.onclick = () => location.href = "login.html";  
-    }  
-  });  
-</script>  </body>  
+<!-- Favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- CSS -->
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Poppins',sans-serif; background:#111; color:#fff; overflow-x:hidden; }
+a { text-decoration:none; }
+ul { list-style:none; }
+
+/* Preloader */
+#preloader { position:fixed; top:0; left:0; width:100%; height:100%; background:#111; z-index:9999; display:flex; align-items:center; justify-content:center; }
+#preloader:after { content:''; width:60px; height:60px; border:6px solid #333; border-top:6px solid #8b5cf6; border-radius:50%; animation:spin 1s linear infinite; }
+@keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+
+/* Header */
+.header { position:fixed; top:0; left:0; width:100%; padding:30px 5%; z-index:1000; display:flex; justify-content:space-between; align-items:center; transition:.3s; }
+.header.sticky { background:rgba(17,17,17,0.95); padding:20px 5%; backdrop-filter:blur(10px); }
+.logo { font-size:28px; font-weight:700; color:#fff; }
+.nav-menu a { color:#fff; margin:0 20px; font-weight:500; position:relative; }
+.nav-menu a:after { content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px; background:#8b5cf6; transition:.3s; }
+.nav-menu a:hover:after { width:100%; }
+
+/* Hero */
+.hero { height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; background:linear-gradient(135deg, #1a1a2e, #16213e); position:relative; }
+.hero::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:url('https://i.ibb.co/KqK9Y3Y/habib-bg.jpg') center/cover no-repeat; opacity:0.2; }
+.hero-content { position:relative; z-index:2; }
+.hero-img { width:220px; height:220px; border-radius:50%; border:8px solid #8b5cf6; box-shadow:0 0 40px rgba(139,92,246,0.6); }
+.hero h1 { font-size:56px; margin:20px 0 10px; }
+.hero h1 span { color:#8b5cf6; }
+.hero p { font-size:20px; margin-bottom:30px; color:#aaa; }
+.social-icons a { display:inline-block; width:50px; height:50px; background:rgba(139,92,246,0.2); color:#fff; line-height:50px; border-radius:50%; margin:0 8px; font-size:20px; transition:.3s; }
+.social-icons a:hover { background:#8b5cf6; transform:translateY(-10px); }
+
+/* Sections */
+.section { padding:100px 5%; }
+.section-title { font-size:42px; text-align:center; margin-bottom:60px; }
+.section-title span { color:#8b5cf6; }
+
+/* About, Services, Portfolio, Contact - simple placeholders */
+.about, .services, .portfolio, .contact { min-height:80vh; display:flex; align-items:center; justify-content:center; flex-direction:column; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:30px; margin-top:40px; }
+.card { background:rgba(255,255,255,0.05); padding:30px; border-radius:15px; text-align:center; transition:.3s; }
+.card:hover { background:rgba(139,92,246,0.1); transform:translateY(-10px); }
+
+/* Footer */
+.footer { text-align:center; padding:40px; background:#0a0a0a; }
+</style>
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader"></div>
+
+<!-- Header -->
+<header class="header" id="header">
+  <div class="logo">Habibur<span style="color:#8b5cf6;">.</span></div>
+  <nav class="nav-menu">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <img src="https://i.ibb.co/4pQZR3k/habib.jpg" alt="Habibur Rahman" class="hero-img">
+    <h1>Hi, I'm <span>Habibur Rahman</span></h1>
+    <p>Creative Developer & Content Creator</p>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/share/1A8xKKdbec/" target="_blank"><i class="fab fa-facebook-f">FB</i></a>
+      <a href="https://www.instagram.com/md__habibur_rahman" target="_blank"><i class="fab fa-instagram">IG</i></a>
+      <a href="https://www.tiktok.com/@habibur_._rahman" target="_blank"><i class="fab fa-tiktok">TT</i></a>
+      <a href="https://youtube.com/@h_a_b_i_b-yt" target="_blank"><i class="fab fa-youtube">YT</i></a>
+      <a href="https://twitter.com/habib1577" target="_blank"><i class="fab fa-twitter">X</i></a>
+      <a href="mailto:mshabib471@gmail.com"><i class="fas fa-envelope">✉</i></a>
+      <a href="https://wa.me/01868461577" target="_blank"><i class="fab fa-whatsapp">WA</i></a>
+      <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank"><i class="fab fa-telegram">TG</i></a>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section about" id="about">
+  <h2 class="section-title">About <span>Me</span></h2>
+  <p style="max-width:800px; margin:0 auto; font-size:18px; line-height:1.8;">
+    আমি Habibur Rahman। ফ্রন্টএন্ড ডেভেলপার, কন্টেন্ট ক্রিয়েটর এবং ক্রিয়েটিভ মাইন্ডেড মানুষ।  
+    HTML, CSS, JavaScript, React দিয়ে কাজ করি। ভালোবাসি নতুন নতুন ডিজাইন এক্সপেরিমেন্ট করতে।
+  </p>
+</section>
+
+<!-- Services -->
+<section class="section services" id="services">
+  <h2 class="section-title">My <span>Services</span></h2>
+  <div class="grid">
+    <div class="card"><h3>Web Development</h3></div>
+    <div class="card"><h3>UI/UX Design</h3></div>
+    <div class="card"><h3>Content Creation</h3></div>
+  </div>
+</section>
+
+<!-- Portfolio -->
+<section class="section portfolio" id="portfolio">
+  <h2 class="section-title">My <span>Portfolio</span></h2>
+  <div class="grid">
+    <div class="card"><img src="https://via.placeholder.com/400x300" alt="project"><h3>Project 1</h3></div>
+    <div class="card"><img src="https://via.placeholder.com/400x300" alt="project"><h3>Project 2</h3></div>
+    <div class="card"><img src="https://via.placeholder.com/400x300" alt="project"><h3>Project 3</h3></div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section contact" id="contact">
+  <h2 class="section-title">Get In <span>Touch</span></h2>
+  <p>Email: mshabib471@gmail.com | WhatsApp: 01868461577</p>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>&copy; 2025 Habibur Rahman. All Rights Reserved.</p>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+<script>
+  // Preloader
+  window.addEventListener('load', () => {
+    document.getElementById('preloader').style.display = 'none';
+  });
+
+  // Sticky Header
+  window.addEventListener('scroll', () => {
+    document.querySelector('.header').classList.toggle('sticky', window.scrollY > 100);
+  });
+
+  // Smooth Scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
 </html>
