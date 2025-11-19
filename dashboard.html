@@ -8,7 +8,7 @@
 <style>
   body{
     margin:0;
-    font-family: Poppins, sans-serif;
+    font-family:Poppins, sans-serif;
     background:#f0f4ff;
     padding-bottom:120px;
   }
@@ -87,14 +87,14 @@
 <!-- FIREBASE -->
 <script type="module">
 import { auth, db } from "./firebase.js";
-import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 import { 
   doc, getDoc, collection, query, where, orderBy, onSnapshot, updateDoc 
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
 let userUID = null;
 
-/* LOGIN CHECK */
+/* Login Check */
 onAuthStateChanged(auth, async(user)=>{
   if(!user){
     location.href="login.html";
@@ -103,17 +103,16 @@ onAuthStateChanged(auth, async(user)=>{
 
   userUID = user.uid;
 
-  /* Load Wallet */
+  /* Wallet Load */
   const walletDoc = await getDoc(doc(db, "wallets", userUID));
   if(walletDoc.exists()){
     document.getElementById("balance").innerText = walletDoc.data().balance + " TK";
   }
 
-  /* Load Orders Live */
   loadOrders();
 });
 
-/* Load Orders */
+/* Load Orders (Live) */
 function loadOrders(){
   const q = query(
     collection(db,"orders"),
@@ -123,7 +122,7 @@ function loadOrders(){
 
   onSnapshot(q, async(snapshot)=>{
     if(snapshot.empty){
-      document.getElementById("orders").innerHTML = "No orders yet.";
+      document.getElementById("orders").innerHTML = "No orders available.";
       return;
     }
 
@@ -133,7 +132,7 @@ function loadOrders(){
     for(let docu of snapshot.docs){
       let data = docu.data();
 
-      /* Refund if rejected */
+      /* Auto Refund If Rejected */
       if(data.status === "rejected" && !data.refunded){
         await refundUser(docu.id, data);
       }
@@ -145,7 +144,7 @@ function loadOrders(){
           UID: ${data.uid}<br>
           Price: ${data.price} TK<br>
           Payment: ${data.payment}<br>
-          Status: <b>${data.status.toUpperCase()}</b><br>
+          Status: <b>${data.status}</b><br>
           <small>${new Date(data.created.seconds * 1000).toLocaleString()}</small>
         </div>
       `;
@@ -155,24 +154,20 @@ function loadOrders(){
   });
 }
 
-/* Wallet Refund System */
+/* Refund System */
 async function refundUser(orderId, data){
   const walletRef = doc(db,"wallets",data.user);
   const walletDoc = await getDoc(walletRef);
 
   if(walletDoc.exists()){
-    let newBal = walletDoc.data().balance + data.price;
+    let newBalance = walletDoc.data().balance + data.price;
 
-    await updateDoc(walletRef,{
-      balance:newBal
-    });
+    await updateDoc(walletRef,{ balance:newBalance });
 
-    await updateDoc(doc(db,"orders",orderId),{
-      refunded:true
-    });
+    await updateDoc(doc(db,"orders",orderId),{ refunded:true });
   }
 }
-
 </script>
+
 </body>
 </html>
