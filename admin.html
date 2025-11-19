@@ -1,126 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Admin Control</title>
+<meta charset="UTF-8">
+<title>Admin Control</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Poppins, sans-serif;
-      background: #eef2ff;
-    }
-    header {
-      background: #0a2a78;
-      padding: 15px;
-      text-align: center;
-      color: #fff;
-      font-size: 26px;
-      font-weight: 600;
-    }
-    .box {
-      background: white;
-      margin: 20px auto;
-      width: 90%;
-      padding: 20px;
-      border-radius: 14px;
-      font-size: 22px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.12);
-      cursor: pointer;
-    }
-    #dataArea {
-      margin: 20px;
-      padding: 15px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    .item {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-      font-size: 18px;
-    }
-  </style>
+<style>
+  body{margin:0;font-family:Poppins,sans-serif;background:#eef2ff;}
+  h2{text-align:center;padding:15px;background:#092c71;color:white;margin:0;}
+
+  .section{
+    background:white;padding:20px;margin:15px;border-radius:12px;
+    box-shadow:0 2px 7px rgba(0,0,0,0.15);
+  }
+  .order-box{
+    padding:12px;border:1px solid #ddd;border-radius:10px;
+    margin-bottom:15px;background:#f8faff;
+  }
+  .btn{
+    padding:8px 12px;border:none;border-radius:8px;font-weight:600;
+    cursor:pointer;margin-right:8px;
+  }
+  .approve{background:#28a745;color:white;}
+  .reject{background:#dc3545;color:white;}
+</style>
 </head>
 
 <body>
 
-<header>Admin Control</header>
+<h2>Admin Control</h2>
 
-<div class="box" onclick="loadOrders()">📦 Pending Orders</div>
-<div class="box" onclick="loadWallet()">💰 Wallet Requests</div>
-
-<div id="dataArea">Select an option...</div>
+<div class="section">
+  <h3>📦 Pending Orders</h3>
+  <div id="ordersList">Loading...</div>
+</div>
 
 <script type="module">
 import { db } from "./firebase.js";
-import { collection, query, where, onSnapshot } 
-from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import {
+  collection, query, where, getDocs, updateDoc, doc, getDoc
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-const dataArea = document.getElementById("dataArea");
+/* LOAD PENDING ORDERS */
+async function loadOrders(){
+  const q = query(collection(db,"orders"), where("status","==","pending"));
+  const snap = await getDocs(q);
 
-/* ------------------ LOAD ORDERS ------------------ */
-window.loadOrders = function () {
-  dataArea.innerHTML = "Loading orders...";
+  const box = document.getElementById("ordersList");
+  box.innerHTML = "";
 
-  const q = query(
-    collection(db, "orders"),
-    where("status", "==", "pending")
-  );
+  if(snap.empty){
+    box.innerHTML = "<p>No pending orders</p>";
+    return;
+  }
 
-  onSnapshot(q, (snap) => {
-    if (snap.empty) {
-      dataArea.innerHTML = "<b>No pending orders</b>";
-      return;
-    }
+  snap.forEach(docSnap=>{
+    let o = docSnap.data();
 
-    let html = "";
-    snap.forEach(doc => {
-      let d = doc.data();
-      html += `
-        <div class="item">
-          <b>Product:</b> ${d.product} <br>
-          <b>UID:</b> ${d.uid} <br>
-          <b>Price:</b> ${d.price} TK <br>
-          <b>User:</b> ${d.user}
-        </div>
-      `;
-    });
+    box.innerHTML += `
+      <div class="order-box">
+        <b>Product:</b> ${o.product}<br>
+        <b>UID:</b> ${o.uid}<br>
+        <b>Price:</b> ${o.price} TK<br>
+        <b>User:</b> ${o.user}<br><br>
 
-    dataArea.innerHTML = html;
+        <button class="btn approve" onclick="approveOrder('${docSnap.id}', '${o.user}', ${o.price})">
+          Approve ✔
+        </button>
+
+        <button class="btn reject" onclick="rejectOrder('${docSnap.id}', '${o.user}', ${o.price})">
+          Reject ✖
+        </button>
+      </div>
+    `;
   });
-};
+}
 
-/* ------------------ LOAD WALLET REQUESTS ------------------ */
-window.loadWallet = function () {
-  dataArea.innerHTML = "Loading wallet requests...";
-
-  const q = query(
-    collection(db, "walletRequests"),
-    where("status", "==", "pending")
-  );
-
-  onSnapshot(q, (snap) => {
-    if (snap.empty) {
-      dataArea.innerHTML = "<b>No wallet requests</b>";
-      return;
-    }
-
-    let html = "";
-    snap.forEach(doc => {
-      let d = doc.data();
-      html += `
-        <div class="item">
-          <b>User:</b> ${d.user} <br>
-          <b>Amount:</b> ${d.amount} TK <br>
-          <b>Method:</b> ${d.method}
-        </div>
-      `;
-    });
-
-    dataArea.innerHTML = html;
+window.approveOrder = async function(orderId, userId, amount){
+  await updateDoc(doc(db,"orders",orderId),{
+    status:"approved"
   });
-};
+  alert("Order Approved!");
+  loadOrders();
+}
+
+window.rejectOrder = async function(orderId, userId, amount){
+  // refund wallet
+  const walletRef = doc(db,"wallets",userId);
+  const walletSnap = await getDoc(walletRef);
+  let bal = walletSnap.exists() ? walletSnap.data().balance : 0;
+
+  await updateDoc(walletRef,{ balance: bal + amount });
+
+  // update order status
+  await updateDoc(doc(db,"orders",orderId),{
+    status:"rejected"
+  });
+
+  alert("Order Rejected! 💸 Refund Done!");
+  loadOrders();
+}
+
+loadOrders();
 </script>
 
 </body>
