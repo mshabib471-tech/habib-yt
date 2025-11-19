@@ -1,116 +1,209 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HABIBUR RAHMAN | GOD LEVEL</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
-<style>
-  body { margin:0; overflow-x:hidden; background:#000; color:#fff; font-family:'Rajdhani',sans-serif; cursor:none; }
-  .cursor { position:fixed; width:40px; height:40px; border:2px solid #00ffff; border-radius:50%; pointer-events:none; z-index:99999; mix-blend-mode:difference; transform:translate(-50%,-50%); transition:all 0.05s; }
-  .cursor::after { content:''; position:absolute; width:12px; height:12px; background:#ff00ff; border-radius:50%; top:50%; left:50%; transform:translate(-50%,-50%); }
-  .grain { position:fixed; inset:0; pointer-events:none; background:url('https://grainy-gradients.vercel.app/noise.svg'); opacity:0.12; z-index:1; }
-  .glitch { position:relative; font-family:'Orbitron',sans-serif; }
-  .glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;}
-  .glitch::before{animation:glitch1 0.6s infinite; color:#00ffff; clip-path:polygon(0 0,100% 0,100% 40%,0 40%);}
-  .glitch::after{animation:glitch2 0.6s infinite; color:#ff00ff; clip-path:polygon(0 60%,100% 60%,100% 100%,0 100%);}
-  @keyframes glitch1{0%,100%{transform:translate(0)}20%{transform:translate(-8px,8px)}40%{transform:translate(8px,-8px)}}
-  @keyframes glitch2{0%,100%{transform:translate(0)}60%{transform:translate(-8px,-8px)}80%{transform:translate(8px,8px)}}
-  .neon-text { text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 80px #00ffff; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habibur Rahman | Creative Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
+    .orbitron { font-family: 'Orbitron', sans-serif; }
+    .gradient-text { background: linear-gradient(135deg, #8b5cf6, #06b6d4, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .neon-glow { text-shadow: 0 0 10px #8b5cf6, 0 0 20px #8b5cf6, 0 0 30px #8b5cf6; }
+    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
+    .card-hover { transition: all 0.4s; }
+    .card-hover:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3); }
+    .tilt { transition: transform 0.1s; }
+    .tilt:hover { transform: rotateY(10deg) rotateX(10deg); }
+    .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
+    .particle { position: absolute; width: 2px; height: 2px; background: #8b5cf6; border-radius: 50%; animation: float 6s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
+  </style>
 </head>
 <body class="relative">
 
-<div class="cursor" id="cursor"></div>
-<div class="grain"></div>
-<canvas id="bg"></canvas>
+  <!-- Particles Background -->
+  <div class="particles" id="particles"></div>
 
-<!-- HERO -->
-<section class="min-h-screen flex items-center justify-center relative">
-  <div class="text-center z-10 px-6">
-    <div class="relative inline-block">
-      <img src="https://i.ibb.co/4pQZR3k/habib.jpg" class="w-80 h-80 rounded-full object-cover border-8 border-transparent bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 p-2 shadow-2xl hover:rotate-6 transition" id="avatar">
-      <div class="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-pink-500 blur-3xl opacity-50 animate-pulse"></div>
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 glass py-4 px-8 flex justify-between items-center">
+    <div class="text-2xl orbitron gradient-text">Habibur.</div>
+    <ul class="flex space-x-8">
+      <li><a href="#home" class="hover:text-purple-400 transition">Home</a></li>
+      <li><a href="#about" class="hover:text-purple-400 transition">About</a></li>
+      <li><a href="#services" class="hover:text-purple-400 transition">Services</a></li>
+      <li><a href="#portfolio" class="hover:text-purple-400 transition">Portfolio</a></li>
+      <li><a href="#blog" class="hover:text-purple-400 transition">Blog</a></li>
+      <li><a href="#contact" class="hover:text-purple-400 transition">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex items-center justify-center text-center px-8 relative">
+    <div class="max-w-4xl mx-auto">
+      <img src="https://i.ibb.co/4pQZR3k/habib.jpg" alt="Habibur Rahman" class="w-64 h-64 rounded-full mx-auto mb-8 border-4 border-purple-500 shadow-2xl tilt">
+      <h1 class="text-6xl md:text-8xl orbitron mb-4 gradient-text neon-glow">Habibur Rahman</h1>
+      <p class="text-xl md:text-2xl mb-8 text-gray-300">Creative Full-Stack Developer & Viral Content Creator</p>
+      <div class="flex justify-center space-x-6 mb-12">
+        <a href="https://www.facebook.com/share/1A8xKKdbec/" target="_blank" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-purple-500 transition"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/md__habibur_rahman" target="_blank" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-pink-500 transition"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@habibur_._rahman" target="_blank" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-black transition"><i class="fab fa-tiktok"></i></a>
+        <a href="https://youtube.com/@h_a_b_i_b-yt" target="_blank" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-red-500 transition"><i class="fab fa-youtube"></i></a>
+        <a href="https://twitter.com/habib1577" target="_blank" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-blue-500 transition"><i class="fab fa-twitter"></i></a>
+        <a href="mailto:mshabib471@gmail.com" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-gray-500 transition"><i class="fas fa-envelope"></i></a>
+        <a href="https://wa.me/01868461577" target="_blank" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-green-500 transition"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-blue-400 transition"><i class="fab fa-telegram"></i></a>
+      </div>
+      <a href="#about" class="px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full text-lg font-bold hover:shadow-lg transition">Explore My Universe</a>
     </div>
+  </section>
 
-    <h1 class="text-8xl md:text-9xl lg:text-[180px] orbitron mt-10 glitch neon-text" data-text="HABIBUR">HABIBUR</h1>
-    <h2 class="text-5xl md:text-7xl orbitron bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">RAHMAN</h2>
-    
-    <p class="text-3xl mt-8 tracking-widest">FULL-STACK SORCERER × 3D WIZARD × CYBER GOD</p>
-
-    <!-- Social Icons -->
-    <div class="mt-16 flex justify-center gap-8 flex-wrap">
-      <a href="https://www.facebook.com/share/1A8xKKdbec/" target="_blank" class="w-20 h-20 rounded-full bg-cyan-500/20 backdrop-blur-xl border-2 border-cyan-500 hover:bg-cyan-500 hover:scale-125 hover:rotate-12 transition neon-text text-3xl flex items-center justify-center">FB</a>
-      <a href="https://instagram.com/md__habibur_rahman" target="_blank" class="w-20 h-20 rounded-full bg-pink-500/20 backdrop-blur-xl border-2 border-pink-500 hover:bg-pink-500 hover:scale-125 hover:-rotate-12 transition text-3xl flex items-center justify-center">IG</a>
-      <a href="https://tiktok.com/@habibur_._rahman" target="_blank" class="w-20 h-20 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 backdrop-blur-xl border-2 border-purple-500 hover:scale-125 transition text-3xl flex items-center justify-center">TT</a>
-      <a href="https://youtube.com/@h_a_b_i_b-yt" target="_blank" class="w-20 h-20 rounded-full bg-red-500/20 backdrop-blur-xl border-2 border-red-500 hover:bg-red-500 hover:scale-125 transition text-3xl flex items-center justify-center">YT</a>
-      <a href="https://wa.me/01868461577" target="_blank" class="w-20 h-20 rounded-full bg-green-500/20 backdrop-blur-xl border-2 border-green-500 hover:bg-green-500 hover:scale-125 transition text-3xl flex items-center justify-center">WA</a>
+  <!-- About Section -->
+  <section id="about" class="py-20 px-8 bg-gradient-to-b from-black to-gray-900">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-5xl md:text-6xl orbitron mb-12 gradient-text">About Me</h2>
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-lg mb-6 text-gray-300">আমি Habibur Rahman, একজন প্যাশনেট ফুল-স্ট্যাক ডেভেলপার এবং কন্টেন্ট ক্রিয়েটর। React, Next.js, Tailwind দিয়ে ওয়েবসাইট বানাই যা লোকের চোখ আটকে রাখে। TikTok-এ ভাইরাল ভিডিও বানাই, YouTube-এ টিউটোরিয়াল দেই। ২০২৫-এর ট্রেন্ড ফলো করি, কিন্তু আনকমন আইডিয়া দিয়ে সবাইকে সারপ্রাইজ দেই।</p>
+          <div class="flex justify-center space-x-4">
+            <span class="text-2xl">Projects: 50+</span>
+            <span class="text-2xl">Clients: 20+</span>
+            <span class="text-2xl">Viral Videos: 1M+ Views</span>
+          </div>
+        </div>
+        <img src="https://i.ibb.co/4pQZR3k/habib.jpg" alt="About" class="w-full max-w-md mx-auto rounded-2xl shadow-2xl tilt">
+      </div>
     </div>
+  </section>
 
-    <div class="mt-20">
-      <a href="#projects" class="px-16 py-6 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full text-3xl font-bold hover:shadow-2xl hover:shadow-pink-500/80 transition animate-pulse border-4 border-purple-500">
-        ENTER THE MATRIX
-      </a>
+  <!-- Services Section -->
+  <section id="services" class="py-20 px-8">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-5xl md:text-6xl orbitron mb-12 gradient-text">Services</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass p-8 rounded-2xl card-hover">
+          <i class="fas fa-code text-4xl text-purple-500 mb-4"></i>
+          <h3 class="text-2xl font-bold mb-4">Web Development</h3>
+          <p class="text-gray-300">React, Next.js, Node.js দিয়ে কাস্টম ওয়েব অ্যাপ বানাই।</p>
+        </div>
+        <div class="glass p-8 rounded-2xl card-hover">
+          <i class="fas fa-paint-brush text-4xl text-cyan-500 mb-4"></i>
+          <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
+          <p class="text-gray-300">Figma দিয়ে মডার্ন, ইউজার-ফ্রেন্ডলি ডিজাইন।</p>
+        </div>
+        <div class="glass p-8 rounded-2xl card-hover">
+          <i class="fas fa-video text-4xl text-pink-500 mb-4"></i>
+          <h3 class="text-2xl font-bold mb-4">Content Creation</h3>
+          <p class="text-gray-300">TikTok, YouTube-এর জন্য ভাইরাল কন্টেন্ট তৈরি।</p>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Rest of the madness -->
-<section id="projects" class="min-h-screen grid grid-cols-1 md:grid-cols-3 gap-10 p-20">
-  <div class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-900/50 to-black border border-purple-500/50 backdrop-blur-xl hover:scale-105 transition">
-    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
-    <img src="https://via.placeholder.com/600x400/220045/00ffff?text=PROJECT+01" class="w-full h-full object-cover group-hover:scale-110 transition">
-    <div class="absolute bottom-8 left-8 text-4xl font-bold">Next.js Magic</div>
-  </div>
-  <div class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-cyan-900/50 to-black border border-cyan-500/50 backdrop-blur-xl hover:scale-105 transition">
-    <img src="https://via.placeholder.com/600x400/004466/ff00ff?text=3D+WORLD" class="w-full h-full object-cover group-hover:scale-110 transition">
-    <div class="absolute bottom-8 left-8 text-4xl font-bold">Three.js God</div>
-  </div>
-  <div class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-pink-900/50 to-black border border-pink-500/50 backdrop-blur-xl hover:scale-105 transition">
-    <img src="https://via.placeholder.com/600x400/660022/ffff00?text=CONTENT+KING" class="w-full h-full object-cover group-hover:scale-110 transition">
-    <div class="absolute bottom-8 left-8 text-4xl font-bold">Viral Creator</div>
-  </div>
-</section>
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="py-20 px-8 bg-gradient-to-b from-gray-900 to-black">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-5xl md:text-6xl orbitron mb-12 gradient-text">Portfolio</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass rounded-2xl overflow-hidden card-hover">
+          <img src="https://via.placeholder.com/400x300/1a1a1a/8b5cf6?text=Project+1" alt="Project 1" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2">E-Commerce Site</h3>
+            <p class="text-gray-300">Next.js + Stripe দিয়ে বানানো।</p>
+          </div>
+        </div>
+        <div class="glass rounded-2xl overflow-hidden card-hover">
+          <img src="https://via.placeholder.com/400x300/1a1a1a/06b6d4?text=Project+2" alt="Project 2" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2">3D Portfolio</h3>
+            <p class="text-gray-300">Three.js দিয়ে ইন্টারেক্টিভ ড্যাশবোর্ড।</p>
+          </div>
+        </div>
+        <div class="glass rounded-2xl overflow-hidden card-hover">
+          <img src="https://via.placeholder.com/400x300/1a1a1a/ec4899?text=Project+3" alt="Project 3" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2">Viral App</h3>
+            <p class="text-gray-300">React Native দিয়ে মোবাইল অ্যাপ।</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<footer class="text-center py-24 text-3xl bg-black/80">
-  <p class="neon-text">© 2025 HABIBUR RAHMAN • BUILT WITH INSOMNIA & MONSTER</p>
-</footer>
+  <!-- Blog Section -->
+  <section id="blog" class="py-20 px-8">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-5xl md:text-6xl orbitron mb-12 gradient-text">Latest Blog</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass p-6 rounded-2xl card-hover">
+          <h3 class="text-xl font-bold mb-2">Next.js 15 Tips</h3>
+          <p class="text-gray-300 mb-4">২০২৫-এর নতুন ফিচারস...</p>
+          <a href="#" class="text-purple-400 hover:underline">Read More</a>
+        </div>
+        <div class="glass p-6 rounded-2xl card-hover">
+          <h3 class="text-xl font-bold mb-2">AI in Web Dev</h3>
+          <p class="text-gray-300 mb-4">Grok দিয়ে কোড জেনারেট...</p>
+          <a href="#" class="text-purple-400 hover:underline">Read More</a>
+        </div>
+        <div class="glass p-6 rounded-2xl card-hover">
+          <h3 class="text-xl font-bold mb-2">Viral TikTok Hacks</h3>
+          <p class="text-gray-300 mb-4">১০০ক ভিউ পাওয়ার সিক্রেট...</p>
+          <a href="#" class="text-purple-400 hover:underline">Read More</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script>
-  // Custom Cursor
-  const cursor = document.getElementById('cursor');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-  });
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-8 bg-gradient-to-b from-black to-gray-900">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-5xl md:text-6xl orbitron mb-12 gradient-text">Get In Touch</h2>
+      <p class="text-xl mb-8 text-gray-300">চাইলে প্রজেক্টের জন্য কন্ট্যাক্ট কর – mshabib471@gmail.com বা WhatsApp: 01868461577</p>
+      <form class="max-w-md mx-auto space-y-4">
+        <input type="text" placeholder="Your Name" class="w-full glass p-4 rounded-lg">
+        <input type="email" placeholder="Your Email" class="w-full glass p-4 rounded-lg">
+        <textarea placeholder="Your Message" rows="4" class="w-full glass p-4 rounded-lg"></textarea>
+        <button type="submit" class="w-full py-4 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg font-bold hover:shadow-lg transition">Send Message</button>
+      </form>
+    </div>
+  </section>
 
-  // 3D Background
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('bg'), alpha: true});
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  camera.position.z = 5;
+  <!-- Footer -->
+  <footer class="py-8 text-center text-gray-500 glass">
+    <p>&copy; 2025 Habibur Rahman. Built with ❤️ and Code.</p>
+  </footer>
 
-  const geometry = new THREE.TorusKnotGeometry(1, 0.3, 128, 16);
-  const material = new THREE.MeshBasicMaterial({color: 0x00ffff, wireframe: true});
-  const torus = new THREE.Mesh(geometry, material);
-  scene.add(torus);
+  <script>
+    // GSAP ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from(".card-hover", { y: 50, opacity: 0, duration: 1, stagger: 0.2, scrollTrigger: { trigger: ".grid", start: "top 80%" } });
+    gsap.from("#avatar", { rotation: 360, duration: 2, ease: "back.out(1.7)" });
 
-  function animate() {
-    requestAnimationFrame(animate);
-    torus.rotation.x += 0.01;
-    torus.rotation.y += 0.01;
-    renderer.render(scene, camera);
-  }
-  animate();
+    // Particles
+    function createParticles() {
+      const particles = document.getElementById('particles');
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particles.appendChild(particle);
+      }
+    }
+    createParticles();
 
-  // GSAP Magic
-  gsap.from("#avatar", {y: -300, rotation: 360, duration: 2, ease: "bounce.out"});
-  gsap.from("h1", {opacity: 0, scale: 0.5, duration: 2, delay: 0.8});
-</script>
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
