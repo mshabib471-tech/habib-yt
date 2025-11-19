@@ -165,27 +165,37 @@ onAuthStateChanged(auth, async (user)=>{
   document.getElementById("balance").innerText = userBalance;
 });
 
-/* UID CHECK (WORKING API) */
-window.checkUID = async function(){
-  let uid = document.getElementById("uid").value;
-  if(!uid) return alert("UID দিন!");
+window.checkUID = async function () {
+  let uid = document.getElementById("uid").value.trim();
+  let playerBox = document.getElementById("playerName");
 
-  let url = `https://garena-api-uid.vercel.app/api?uid=${uid}`;
+  if (!uid) {
+    playerBox.innerHTML = "❌ Please enter UID!";
+    playerBox.style.color = "red";
+    return;
+  }
 
-  try{
+  playerBox.innerHTML = "⏳ Checking... Please wait";
+  playerBox.style.color = "#444";
+
+  try {
+    let url = `https://spapi.pro/freefire?id=${uid}`;
+
     let res = await fetch(url);
     let data = await res.json();
 
-    if(data.nickname){
-      document.getElementById("playerName").innerHTML = "✔ " + data.nickname;
+    if (data.status === "success" && data.name) {
+      playerBox.innerHTML = "✔ " + data.name;
+      playerBox.style.color = "#0a7cff";
     } else {
-      document.getElementById("playerName").innerHTML = "❌ Invalid UID";
+      playerBox.innerHTML = "❌ Invalid UID!";
+      playerBox.style.color = "red";
     }
-
-  }catch(e){
-    document.getElementById("playerName").innerHTML = "✔ Server Connected";
+  } catch (err) {
+    playerBox.innerHTML = "⚠️ Server busy, try again!";
+    playerBox.style.color = "red";
   }
-}
+};
 
 /* PAYMENT SELECT */
 window.selectPay=function(type){
