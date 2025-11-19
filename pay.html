@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instant Payment | Habib YT</title>
+
+<style>
+  body{
+    font-family: Poppins, sans-serif;
+    margin:0;
+    background:#f4f7ff;
+    padding-bottom:50px;
+  }
+
+  header{
+    background:#0a7cff;
+    padding:15px;
+    color:white;
+    text-align:center;
+    font-size:22px;
+    font-weight:600;
+  }
+
+  .box{
+    background:white;
+    margin:15px;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+  }
+
+  input{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+  }
+
+  .btn{
+    width:100%;
+    background:#ff4b2b;
+    color:white;
+    font-weight:600;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    margin-top:15px;
+    font-size:18px;
+  }
+
+  .info-line{
+    font-size:16px;
+    margin:8px 0;
+  }
+</style>
+</head>
+
+<body>
+
+<header>Instant Payment</header>
+
+<div class="box">
+  <h3>🔰 Payment Details</h3>
+
+  <p class="info-line">Product: <b id="product"></b></p>
+  <p class="info-line">Amount: <b id="amount"></b> TK</p>
+  <p class="info-line">UID: <b id="uid"></b></p>
+
+  <hr>
+
+  <h3>📲 Pay Using bKash</h3>
+  <p class="info-line">Send Money To:</p>
+  <h2 style="color:#0a7cff;">01868461577</h2>
+
+  <p>Payment Complete হলে নিচে আপনার Transaction ID লিখুন:</p>
+  <input type="text" id="trxid" placeholder="Enter Transaction ID">
+
+  <button class="btn" onclick="submitPayment()">Confirm Payment</button>
+</div>
+
+<!-- Firebase -->
+<script type="module">
+import { auth, db } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { addDoc, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+let userUID = null;
+
+/* GET URL PARAMS */
+const url = new URLSearchParams(window.location.search);
+const uid = url.get("uid");
+const product = url.get("product");
+const amount = url.get("amount");
+
+/* SHOW DATA */
+document.getElementById("uid").innerText = uid;
+document.getElementById("product").innerText = product;
+document.getElementById("amount").innerText = amount;
+
+/* USER CHECK */
+onAuthStateChanged(auth, async (user)=>{
+  if(!user){
+    alert("Please login first!");
+    location.href="login.html";
+    return;
+  }
+  userUID = user.uid;
+});
+
+/* SUBMIT PAYMENT */
+window.submitPayment = async function() {
+  const trxid = document.getElementById("trxid").value.trim();
+  if(!trxid) return alert("Please enter Transaction ID!");
+
+  await addDoc(collection(db,"paymentRequests"),{
+    uid: uid,
+    product: product,
+    amount: Number(amount),
+    trxid: trxid,
+    user: userUID,
+    status: "pending",
+    created: new Date()
+  });
+
+  alert("✔ Payment Submitted! আমরা ২-৫ মিনিটের মধ্যে যাচাই করবো।");
+  location.href = "dashboard.html";
+}
+</script>
+
+</body>
+</html>
