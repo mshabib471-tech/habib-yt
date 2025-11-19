@@ -1,59 +1,54 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Control</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Panel</title>
 
 <style>
-  body {
-    margin: 0;
-    font-family: Poppins, sans-serif;
-    background: #eef3ff;
-  }
+body {
+  background: #eef3ff;
+  font-family: Poppins, sans-serif;
+  margin: 0;
+}
 
-  header {
-    background: #082b7b;
-    padding: 15px;
-    text-align: center;
-    color: white;
-    font-size: 22px;
-    font-weight: 700;
-  }
+header {
+  background: #062e63;
+  padding: 15px;
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+}
 
-  .section {
-    margin: 15px;
-    padding: 15px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  }
+.section {
+  background: white;
+  margin: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
 
-  h2 {
-    margin-top: 0;
-    font-size: 20px;
-  }
+.order-box {
+  margin-top: 10px;
+  padding: 12px;
+  background: #f6f6ff;
+  border-radius: 10px;
+  border-left: 4px solid #0a7cff;
+}
 
-  .order {
-    background: #f6f6ff;
-    padding: 12px;
-    border-radius: 10px;
-    margin-top: 12px;
-    line-height: 1.5;
-    border-left: 4px solid #0a7cff;
-  }
+.btn {
+  border: none;
+  padding: 8px 14px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 6px;
+  margin-top: 6px;
+}
 
-  button {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 8px;
-    margin-right: 8px;
-    cursor: pointer;
-    font-weight: 600;
-  }
-
-  .approve { background: #1dbf73; color: white; }
-  .reject { background: #ff3b30; color: white; }
+.approve { background:#0bbf4f; color:white; }
+.cancel { background:#ff3b3b; color:white; }
 </style>
 </head>
 
@@ -63,140 +58,179 @@
 
 <div class="section">
   <h2>📦 Pending Orders</h2>
-  <div id="orders"></div>
+  <div id="pending">Loading...</div>
 </div>
 
 <div class="section">
   <h2>💰 Wallet Requests</h2>
-  <div id="walletRequests"></div>
+  <div id="walletReq">Loading...</div>
 </div>
 
 <script type="module">
-import { db } from "./firebase.js";
+import { auth, db } from "./firebase.js";
+import { 
+  onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
 import {
-  collection, getDocs, updateDoc, doc, deleteDoc
+  collection,
+  query,
+  where,
+  getDocs,
+  updateDoc,
+  doc,
+  getDoc
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-/* ------------------------------
-   LOAD PENDING ORDERS
------------------------------- */
-async function loadOrders() {
-  const container = document.getElementById("orders");
-  container.innerHTML = "Loading...";
 
-  const snap = await getDocs(collection(db, "orders"));
-  container.innerHTML = "";
+// ---------- CHECK ADMIN ----------
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    location.href = "login.html";
+    return;
+  }
 
+  // ONLY YOU will be admin – replace with your own email
+  if (user.email !== "mshabib471@gmail.com") {
+    alert("Admins only!");
+    location.href = "index.html";
+    return;
+  }
+
+  loadPendingOrders();
+  loadWalletRequests();
+});
+
+
+// ---------- LOAD PENDING ORDERS ----------
+async function loadPendingOrders() {
+  const box = document.getElementById("pending");
+  box.innerHTML = "Loading...";
+
+  const q = query(collection(db, "orders"), where("status", "==", "pending"));
+  const snap = await getDocs(q);
+
+  if (snap.empty) {
+    box.innerHTML = "No pending orders.";
+    return;
+  }
+
+  box.innerHTML = "";
   snap.forEach(order => {
-    let data = order.data();
-    if (data.status !== "pending") return;
+    let d = order.data();
 
-    let div = document.createElement("div");
-    div.className = "order";
+    box.innerHTML += `
+      <div class="order-box">
+        <b>Product:</b> ${d.product}<br>
+        <b>UID:</b> ${d.uid}<br>
+        <b>Price:</b> ${d.price} TK<br>
+        <b>User:</b> ${d.user}<br><br>
 
-    div.innerHTML = `
-      <b>Product:</b> ${data.product}<br>
-      <b>UID:</b> ${data.uid}<br>
-      <b>Price:</b> ${data.price} TK<br>
-      <b>User:</b> ${data.user}<br><br>
-      <button class="approve" onclick="approveOrder('${order.id}')">Approve</button>
-      <button class="reject" onclick="rejectOrder('${order.id}', '${data.user}', ${data.price})">Reject</button>
+        <button class="btn approve" onclick="approveOrder('${order.id}','${d.user}',${d.price})">Approve</button>
+        <button class="btn cancel" onclick="cancelOrder('${order.id}','${d.user}',${d.price})">Cancel</button>
+      </div>
     `;
-
-    container.appendChild(div);
   });
 }
 
-/* ------------------------------
-   APPROVE ORDER
------------------------------- */
-window.approveOrder = async function(id) {
-  await updateDoc(doc(db, "orders", id), { status: "completed" });
-  alert("✔ Order Approved!");
-  loadOrders();
-}
 
-/* ------------------------------
-   REJECT ORDER + REFUND
------------------------------- */
-window.rejectOrder = async function(id, userId, amount) {
-  // refund wallet
-  const walletRef = doc(db, "wallets", userId);
-  const walletSnap = await getDocs(collection(db, "wallets"));
-
-  let balance = 0;
-  walletSnap.forEach(w => {
-    if (w.id === userId) balance = w.data().balance || 0;
+// ---------- APPROVE ORDER ----------
+window.approveOrder = async function(orderId, userUID, price) {
+  await updateDoc(doc(db, "orders", orderId), {
+    status: "complete",
+    completedAt: new Date()
   });
 
-  await updateDoc(walletRef, { balance: balance + amount });
+  alert("Order Approved!");
+  location.reload();
+};
 
-  // delete order
-  await deleteDoc(doc(db, "orders", id));
 
-  alert("❌ Order Rejected & Refunded");
-  loadOrders();
-}
+// ---------- CANCEL ORDER (REFUND) ----------
+window.cancelOrder = async function(orderId, userUID, price) {
+  const walletRef = doc(db, "wallets", userUID);
+  const walletSnap = await getDoc(walletRef);
 
-/* ------------------------------
-   LOAD WALLET REQUESTS
------------------------------- */
+  let oldBal = walletSnap.exists() ? walletSnap.data().balance : 0;
+
+  // Refund
+  await updateDoc(walletRef, {
+    balance: oldBal + price
+  });
+
+  // Update order status
+  await updateDoc(doc(db, "orders", orderId), {
+    status: "cancelled",
+    cancelledAt: new Date()
+  });
+
+  alert("Order Cancelled + Refund Done!");
+  location.reload();
+};
+
+
+// ---------- LOAD WALLET REQUESTS ----------
 async function loadWalletRequests() {
-  const container = document.getElementById("walletRequests");
-  container.innerHTML = "Loading...";
+  const box = document.getElementById("walletReq");
+  
+  const q = query(collection(db, "paymentReq"), where("status", "==", "pending"));
+  const snap = await getDocs(q);
 
-  const snap = await getDocs(collection(db, "wallet_requests"));
-  container.innerHTML = "";
+  if (snap.empty) {
+    box.innerHTML = "No wallet requests.";
+    return;
+  }
 
+  box.innerHTML = "";
   snap.forEach(req => {
-    let data = req.data();
+    let d = req.data();
 
-    let div = document.createElement("div");
-    div.className = "order";
+    box.innerHTML += `
+      <div class="order-box">
+        <b>User:</b> ${d.user}<br>
+        <b>Method:</b> ${d.method}<br>
+        <b>Amount:</b> ${d.amount} TK<br>
+        <b>TrxID:</b> ${d.trxid}<br><br>
 
-    div.innerHTML = `
-      <b>User:</b> ${data.user}<br>
-      <b>Amount:</b> ${data.amount} TK<br>
-      <b>Txn ID:</b> ${data.trxid}<br><br>
-      <button class="approve" onclick="approveWallet('${req.id}', '${data.user}', ${data.amount})">Approve</button>
-      <button class="reject" onclick="rejectWallet('${req.id}')">Reject</button>
+        <button class="btn approve" onclick="approveWallet('${req.id}','${d.user}',${d.amount})">Approve</button>
+        <button class="btn cancel" onclick="cancelWallet('${req.id}')">Reject</button>
+      </div>
     `;
-
-    container.appendChild(div);
   });
 }
 
-/* ------------------------------
-   APPROVE WALLET REQUEST
------------------------------- */
-window.approveWallet = async function(id, userId, amount) {
-  const walletRef = doc(db, "wallets", userId);
 
-  const walletSnap = await getDocs(collection(db, "wallets"));
-  let balance = 0;
+// ---------- APPROVE WALLET ----------
+window.approveWallet = async function(reqId, userUID, amount) {
 
-  walletSnap.forEach(w => {
-    if (w.id === userId) balance = w.data().balance || 0;
+  const walletRef = doc(db, "wallets", userUID);
+  const walletSnap = await getDoc(walletRef);
+
+  let oldBal = walletSnap.exists() ? walletSnap.data().balance : 0;
+
+  await updateDoc(walletRef, {
+    balance: oldBal + amount
   });
 
-  await updateDoc(walletRef, { balance: balance + amount });
-  await deleteDoc(doc(db, "wallet_requests", id));
+  await updateDoc(doc(db, "paymentReq", reqId), {
+    status: "approved"
+  });
 
-  alert("✔ Wallet Money Added!");
-  loadWalletRequests();
+  alert("Wallet Added!");
+  location.reload();
 };
 
-/* ------------------------------
-   REJECT WALLET REQUEST
------------------------------- */
-window.rejectWallet = async function(id) {
-  await deleteDoc(doc(db, "wallet_requests", id));
-  alert("❌ Wallet Request Removed");
-  loadWalletRequests();
+
+// ---------- REJECT WALLET ----------
+window.cancelWallet = async function(reqId) {
+  await updateDoc(doc(db, "paymentReq", reqId), {
+    status: "cancelled"
+  });
+
+  alert("Request Rejected!");
+  location.reload();
 };
 
-loadOrders();
-loadWalletRequests();
 </script>
 
 </body>
