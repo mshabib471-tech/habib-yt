@@ -110,19 +110,16 @@
 
 <!-- FIREBASE -->
 <script type="module">
-
-/* IMPORTS */
 import { auth, db } from "./firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 import { addDoc, collection, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-/* VARIABLES */
 let selectedPackage = null;
 let selectedPayment = "wallet";
 let userUID = null;
 let userBalance = 0;
 
-/* PACKAGE LIST */
+/* PACKAGES */
 const packages = [
   {name:"25 Diamond",price:23},{name:"50 Diamond",price:38},
   {name:"100 Diamond",price:74},{name:"115 Diamond",price:78},
@@ -137,7 +134,8 @@ const packages = [
   {name:"3 Weekly + 1 Monthly",price:1230},{name:"4 Weekly + 1 Monthly",price:1385}
 ];
 
-const grid = document.getElementById("packageGrid");
+/* Show packages */
+const grid=document.getElementById("packageGrid");
 packages.forEach((p,i)=>{
   let div=document.createElement("div");
   div.className="box";
@@ -146,7 +144,7 @@ packages.forEach((p,i)=>{
   grid.appendChild(div);
 });
 
-/* SELECT PACKAGE */
+/* Select Package */
 function selectPackage(i, div){
   document.querySelectorAll(".box").forEach(x => x.classList.remove("selected"));
   div.classList.add("selected");
@@ -154,90 +152,101 @@ function selectPackage(i, div){
   document.getElementById("need").innerText = selectedPackage.price;
 }
 
-/* AUTH CHECK */
+/* Login + Wallet Load */
 onAuthStateChanged(auth, async (user)=>{
   if(!user){ alert("Login First!"); location.href="login.html"; return; }
 
   userUID = user.uid;
-
   const walletDoc = await getDoc(doc(db,"wallets",userUID));
   if(walletDoc.exists()){
     userBalance = walletDoc.data().balance || 0;
   }
-
   document.getElementById("balance").innerText = userBalance;
 });
 
-/* UID CHECK (100% WORKING API) */
+/* UID CHECK using RapidAPI */
 window.checkUID = async function () {
   let uid = document.getElementById("uid").value.trim();
-  let box = document.getElementById("playerName");
+  let playerBox = document.getElementById("playerName");
 
-  if (!uid){
-    box.innerHTML="❌ Please enter UID!";
-    box.style.color="red";
+  if (!uid) {
+    playerBox.innerHTML = "❌ Please enter UID!";
+    playerBox.style.color = "red";
     return;
   }
 
-  box.innerHTML = "⏳ Checking...";
-  box.style.color="#444";
+  playerBox.innerHTML = "⏳ Checking...";
+  playerBox.style.color = "#444";
 
   try {
-    let url = `https://spapi.pro/freefire?id=${uid}`;
-    let res = await fetch(url);
-    let data = await res.json();
+    const url = `https://check-uid-free-fire1.p.rapidapi.com/info?uid=${uid}`;
+    const options = {
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": "a453b1c686msh60b389328733982p12b203jsncda5ed635119",
+        "x-rapidapi-host": "check-uid-free-fire1.p.rapidapi.com"
+      }
+    };
 
-    if (data.status === "success" && data.name){
-      box.innerHTML = "✔ " + data.name;
-      box.style.color="#0a7cff";
+    const res = await fetch(url, options);
+    const data = await res.json();
+
+    if (data.nickname) {
+      playerBox.innerHTML = "✔ " + data.nickname;
+      playerBox.style.color = "#0a7cff";
     } else {
-      box.innerHTML="❌ Invalid UID!";
-      box.style.color="red";
+      playerBox.innerHTML = "❌ Invalid UID!";
+      playerBox.style.color = "red";
     }
 
-  } catch {
-    box.innerHTML="⚠️ Server Busy! Try Again!";
-    box.style.color="red";
+  } catch (err) {
+    playerBox.innerHTML = "⚠️ Server busy!";
+    playerBox.style.color = "red";
   }
 };
 
-/* PAYMENT SELECT */
+/* Payment select */
 window.selectPay=function(type){
   selectedPayment=type;
   document.getElementById("walletPay").classList.toggle("selected",type==="wallet");
   document.getElementById("instantPay").classList.toggle("selected",type==="instant");
-}
+};
 
-/* ORDER PLACE */
+/* Order Processing */
 window.placeOrder=async function(){
   if(!selectedPackage) return alert("Select a package!");
   let uid=document.getElementById("uid").value;
   if(!uid) return alert("Enter UID!");
 
-  if(selectedPayment==="wallet" && userBalance < selectedPackage.price){
+  /* Instant Pay → redirect to pay.html */
+  if(selectedPayment==="instant"){
+    let url = `pay.html?uid=${uid}&product=${encodeURIComponent(selectedPackage.name)}&amount=${selectedPackage.price}`;
+    location.href = url;
+    return;
+  }
+
+  /* Wallet pay deduct */
+  if(userBalance < selectedPackage.price){
     return alert("Insufficient balance!");
   }
 
-  if(selectedPayment==="wallet"){
-    await updateDoc(doc(db,"wallets",userUID),{
-      balance:userBalance-selectedPackage.price
-    });
-  }
+  await updateDoc(doc(db,"wallets",userUID),{
+    balance:userBalance-selectedPackage.price
+  });
 
   await addDoc(collection(db,"orders"),{
     user:userUID,
     product:selectedPackage.name,
     uid:uid,
     price:selectedPackage.price,
-    payment:selectedPayment,
+    payment:"wallet",
     status:"pending",
     created:new Date()
   });
 
   alert("✔ Order Successful!");
   location.href="dashboard.html";
-}
-
+};
 </script>
 
 </body>
