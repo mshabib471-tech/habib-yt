@@ -74,14 +74,9 @@
     padding: 10px 0;
   }
 
-  .status {
-    font-weight: 700;
-  }
-
-  .pending { color: orange; }
-  .complete { color: green; }
-  .cancelled { color: red; }
-
+  .pending { color: orange; font-weight:700; }
+  .approved { color: green; font-weight:700; }
+  .cancelled { color: red; font-weight:700; }
 </style>
 </head>
 
@@ -93,7 +88,6 @@
   <div>Your Wallet Balance</div>
   <div class="big-balance" id="wallet">0 TK</div>
 
-  <!-- FIXED BUTTONS -->
   <button class="btn" onclick="location.href='add-money.html'">Add Money</button>
   <button class="btn2" onclick="location.href='index.html'">Go to Home</button>
 </div>
@@ -104,11 +98,13 @@
 </div>
 
 <script type="module">
+
 import { auth, db } from "./firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 import { collection, query, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
 onAuthStateChanged(auth, async (user) => {
+
   if (!user) {
     location.href = "login.html";
     return;
@@ -116,7 +112,7 @@ onAuthStateChanged(auth, async (user) => {
 
   const uid = user.uid;
 
-  // Load wallet balance
+  // Load wallet
   const walletRef = await getDoc(doc(db, "wallets", uid));
   if (walletRef.exists()) {
     document.getElementById("wallet").innerText = walletRef.data().balance + " TK";
@@ -139,12 +135,7 @@ onAuthStateChanged(auth, async (user) => {
   snap.forEach(order => {
     let d = order.data();
 
-    let statusColor =
-      d.status === "complete"
-        ? "complete"
-        : d.status === "cancelled"
-        ? "cancelled"
-        : "pending";
+    let statusClass = d.status; // pending / approved / cancelled
 
     ordersBox.innerHTML += `
       <div class="order-item">
@@ -152,7 +143,7 @@ onAuthStateChanged(auth, async (user) => {
         <b>Package:</b> ${d.product}<br>
         <b>Player ID:</b> ${d.uid}<br>
         <b>Price:</b> ${d.price} TK<br>
-        <b>Status:</b> <span class="${statusColor}">${d.status}</span>
+        <b>Status:</b> <span class="${statusClass}">${d.status}</span>
       </div>
     `;
   });
