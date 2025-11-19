@@ -1,184 +1,125 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel | Habib YT</title>
+  <meta charset="UTF-8" />
+  <title>Admin Control</title>
 
-<style>
-  body{
-    margin:0;
-    font-family:Poppins,sans-serif;
-    background:#eef3ff;
-    padding-bottom:80px;
-  }
-
-  header{
-    background:#061a44;
-    padding:15px;
-    color:white;
-    text-align:center;
-    font-size:22px;
-    font-weight:600;
-  }
-
-  .card{
-    background:white;
-    margin:15px;
-    padding:15px;
-    border-radius:12px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.1);
-  }
-
-  .order{
-    background:#fff;
-    padding:12px;
-    border-radius:10px;
-    margin-top:10px;
-    border-left:5px solid orange;
-  }
-
-  button{
-    padding:10px 15px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    margin:5px;
-    font-weight:600;
-  }
-
-  .ok{ background:#0a7cff; color:white; }
-  .no{ background:#ff3b3b; color:white; }
-</style>
+  <style>
+    body {
+      margin: 0;
+      font-family: Poppins, sans-serif;
+      background: #eef2ff;
+    }
+    header {
+      background: #0a2a78;
+      padding: 15px;
+      text-align: center;
+      color: #fff;
+      font-size: 26px;
+      font-weight: 600;
+    }
+    .box {
+      background: white;
+      margin: 20px auto;
+      width: 90%;
+      padding: 20px;
+      border-radius: 14px;
+      font-size: 22px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+      cursor: pointer;
+    }
+    #dataArea {
+      margin: 20px;
+      padding: 15px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .item {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      font-size: 18px;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>Admin Control</header>
 
-<div class="card">
-  <h2>Pending Orders</h2>
-  <div id="orderList"></div>
-</div>
+<div class="box" onclick="loadOrders()">📦 Pending Orders</div>
+<div class="box" onclick="loadWallet()">💰 Wallet Requests</div>
 
-<div class="card">
-  <h2>Wallet Requests</h2>
-  <div id="walletList"></div>
-</div>
+<div id="dataArea">Select an option...</div>
 
 <script type="module">
-import { auth, db } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-import {
-  collection, query, where, orderBy, onSnapshot, doc, updateDoc, getDoc
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { db } from "./firebase.js";
+import { collection, query, where, onSnapshot } 
+from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-onAuthStateChanged(auth, async(user)=>{
-  if(!user){
-    location.href="login.html";
-    return;
-  }
+const dataArea = document.getElementById("dataArea");
 
-  if(user.email !== "mshabib471@gmail.com"){
-    alert("Access Denied!");
-    location.href="index.html";
-    return;
-  }
+/* ------------------ LOAD ORDERS ------------------ */
+window.loadOrders = function () {
+  dataArea.innerHTML = "Loading orders...";
 
-  loadOrders();
-  loadRequests();
-});
-
-function loadOrders(){
   const q = query(
-    collection(db,"orders"),
-    where("status","==","pending"),
-    orderBy("created","desc")
+    collection(db, "orders"),
+    where("status", "==", "pending")
   );
 
-  onSnapshot(q,(snap)=>{
+  onSnapshot(q, (snap) => {
+    if (snap.empty) {
+      dataArea.innerHTML = "<b>No pending orders</b>";
+      return;
+    }
+
     let html = "";
-    let sn = 1;
-
-    snap.forEach(docu=>{
-      let d = docu.data();
+    snap.forEach(doc => {
+      let d = doc.data();
       html += `
-        <div class="order">
-          <b>Order #${sn++}</b><br>
-          User: ${d.user}<br>
-          Product: ${d.product}<br>
-          Price: ${d.price} TK<br>
-          UID: ${d.uid}<br><br>
-
-          <button class="ok" onclick="approve('${docu.id}','${d.user}',${d.price})">Approve</button>
-          <button class="no" onclick="reject('${docu.id}','${d.user}',${d.price})">Reject</button>
+        <div class="item">
+          <b>Product:</b> ${d.product} <br>
+          <b>UID:</b> ${d.uid} <br>
+          <b>Price:</b> ${d.price} TK <br>
+          <b>User:</b> ${d.user}
         </div>
       `;
     });
 
-    document.getElementById("orderList").innerHTML = html || "No pending orders";
+    dataArea.innerHTML = html;
   });
-}
+};
 
-function loadRequests(){
+/* ------------------ LOAD WALLET REQUESTS ------------------ */
+window.loadWallet = function () {
+  dataArea.innerHTML = "Loading wallet requests...";
+
   const q = query(
-    collection(db,"walletRequests"),
-    where("status","==","pending"),
-    orderBy("created","desc")
+    collection(db, "walletRequests"),
+    where("status", "==", "pending")
   );
 
-  onSnapshot(q,(snap)=>{
+  onSnapshot(q, (snap) => {
+    if (snap.empty) {
+      dataArea.innerHTML = "<b>No wallet requests</b>";
+      return;
+    }
+
     let html = "";
-    let sn = 1;
-
-    snap.forEach(docu=>{
-      let d = docu.data();
+    snap.forEach(doc => {
+      let d = doc.data();
       html += `
-        <div class="order">
-          <b>Request #${sn++}</b><br>
-          User: ${d.user}<br>
-          Amount: ${d.amount} TK<br>
-          Method: ${d.method}<br><br>
-
-          <button class="ok" onclick="approveReq('${docu.id}','${d.user}',${d.amount})">Approve</button>
+        <div class="item">
+          <b>User:</b> ${d.user} <br>
+          <b>Amount:</b> ${d.amount} TK <br>
+          <b>Method:</b> ${d.method}
         </div>
       `;
     });
 
-    document.getElementById("walletList").innerHTML = html || "No requests";
+    dataArea.innerHTML = html;
   });
-}
-
-/* ORDER APPROVE */
-window.approve = async function(id, uid){
-  await updateDoc(doc(db,"orders",id),{ status:"approved" });
-  alert("Order Approved!");
-};
-
-/* ORDER REJECT → Refund */
-window.reject = async function(id, uid, price){
-  const walletRef = doc(db,"wallets",uid);
-  const walletDoc = await getDoc(walletRef);
-
-  let newBal = walletDoc.data().balance + price;
-
-  await updateDoc(walletRef,{ balance:newBal });
-  await updateDoc(doc(db,"orders",id),{ status:"rejected", refunded:true });
-
-  alert("Order Rejected + Refunded!");
-};
-
-/* WALLET REQUEST APPROVE */
-window.approveReq = async function(id, uid, amount){
-  const walletRef = doc(db,"wallets",uid);
-  const walletDoc = await getDoc(walletRef);
-
-  let newBal = walletDoc.data().balance + amount;
-
-  await updateDoc(walletRef,{ balance:newBal });
-  await updateDoc(doc(db,"walletRequests",id),{ status:"approved" });
-
-  alert("Wallet Updated!");
 };
 </script>
 
