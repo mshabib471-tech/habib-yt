@@ -1,101 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Habibur Rahman - Creative Developer</title>
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#000; color:#fff; font-family:Arial,Helvetica,sans-serif; text-align:center; padding:20px 15px; }
-  .container { max-width:480px; margin:0 auto; }
-  .profile-img { width:180px; height:180px; border-radius:50%; border:6px solid #333; margin:20px auto; object-fit:cover; }
-  h1 { font-size:36px; margin:15px 0; color:#ff9800; }
-  h2 { font-size:28px; color:#fff; }
-  .desc { font-size:18px; line-height:1.6; margin:20px 0; color:#ccc; }
-  .btn { display:inline-block; background:#ff9800; color:#000; padding:15px 30px; border-radius:50px; font-weight:bold; text-decoration:none; margin:30px 0; font-size:18px; }
-  .stats { display:flex; justify-content:space-around; flex-wrap:wrap; margin:40px 0; }
-  .stat { margin:15px; }
-  .stat-num { font-size:32px; font-weight:bold; color:#ff9800; }
-  .stat-label { font-size:14px; color:#aaa; }
-  .skills { margin:40px 0; }
-  .skill { margin:25px 0; }
-  .skill-name { display:flex; justify-content:space-between; margin-bottom:8px; font-size:16px; }
-  .bar { height:8px; background:#333; border-radius:4px; overflow:hidden; }
-  .fill { height:100%; background:#ff9800; border-radius:4px; }
-  .socials { margin:40px 0; }
-  .socials a { color:#ff9800; font-size:28px; margin:0 15px; }
-  footer { margin-top:60px; color:#555; font-size:14px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habibur Rahman | Full-Stack Developer & Content Creator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #0f0f0f; color: #fff; }
+    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+    .gradient-text { background: linear-gradient(135deg, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .neon { box-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
+    .hero-bg { background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%); }
+    .typing { overflow: hidden; border-right: .15em solid #8b5cf6; white-space: nowrap; margin: 0 auto; letter-spacing: .15em; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
+    @keyframes typing { from { width: 0 } to { width: 100% } }
+    @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #8b5cf6; } }
+  </style>
 </head>
-<body>
-<div class="container">
+<body class="overflow-x-hidden">
 
-  <img src="https://i.ibb.co/4pQZR3k/habib.jpg" alt="Habibur Rahman" class="profile-img">
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 glass py-4 px-6 flex justify-between items-center">
+    <div class="text-xl font-bold gradient-text">Habibur.</div>
+    <ul class="flex space-x-6">
+      <li><a href="#home" class="hover:text-purple-400">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-  <h1>I'M HABIBUR RAHMAN.</h1>
-  <h2>FULL-STACK DEVELOPER & CONTENT CREATOR</h2>
+  <!-- Hero -->
+  <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-center px-4">
+    <div class="max-w-4xl mx-auto" data-aos="fade-up">
+      <img src="https://i.ibb.co/4pQZR3k/habib.jpg" alt="Habibur Rahman" class="w-48 h-48 rounded-full mx-auto mb-6 neon border-4 border-purple-500">
+      <h1 class="text-5xl md:text-7xl font-bold mb-4 gradient-text">Habibur Rahman</h1>
+      <p class="typing text-xl md:text-2xl mb-8 text-gray-300" style="width: 0;">Full-Stack Developer | Content Creator | Cyberpunk Enthusiast</p>
+      <div class="flex justify-center space-x-4 mb-8">
+        <a href="https://www.facebook.com/share/1A8xKKdbec/" class="text-2xl hover:text-purple-400"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/md__habibur_rahman" class="text-2xl hover:text-pink-400"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@habibur_._rahman" class="text-2xl hover:text-black"><i class="fab fa-tiktok"></i></a>
+        <a href="https://youtube.com/@h_a_b_i_b-yt" class="text-2xl hover:text-red-400"><i class="fab fa-youtube"></i></a>
+        <a href="https://twitter.com/habib1577" class="text-2xl hover:text-blue-400"><i class="fab fa-twitter"></i></a>
+        <a href="mailto:mshabib471@gmail.com" class="text-2xl hover:text-gray-400"><i class="fas fa-envelope"></i></a>
+        <a href="https://wa.me/01868461577" class="text-2xl hover:text-green-400"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://t.me/H_A_B_I_B_Top_1" class="text-2xl hover:text-blue-400"><i class="fab fa-telegram"></i></a>
+      </div>
+      <a href="#about" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full font-bold neon">Discover More</a>
+    </div>
+  </section>
 
-  <p class="desc">
-    আমি Habibur Rahman। React, Next.js, Node.js নিয়ে কাজ করি। TikTok, YouTube-এ ভাইরাল কন্টেন্ট বানাই। কোড + ক্রিয়েটিভিটি মিক্স করে যা মনে চায় তাই বানিয়ে ফেলি।
-  </p>
+  <!-- About -->
+  <section id="about" class="py-20 px-6" data-aos="fade-up">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-12 gradient-text">About Me</h2>
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-lg mb-6 text-gray-300">আমি Habibur Rahman, বাংলাদেশের একজন ফুল-স্ট্যাক ডেভেলপার এবং কন্টেন্ট ক্রিয়েটর। React, Next.js, Node.js দিয়ে ওয়েব অ্যাপ বানাই। TikTok-এ 1M+ ভিউয়ের ভিডিও তৈরি করি। কোডিং + ক্রিয়েটিভিটি মিশিয়ে আনকমন প্রজেক্ট করি।</p>
+          <div class="flex justify-center space-x-8 text-sm text-gray-400">
+            <div>Projects: 50+</div>
+            <div>Clients: 20+</div>
+            <div>Views: 1M+</div>
+          </div>
+        </div>
+        <img src="https://i.ibb.co/4pQZR3k/habib.jpg" alt="About" class="w-64 h-64 rounded-full mx-auto neon">
+      </div>
+    </div>
+  </section>
 
-  <a href="#about" class="btn">MORE ABOUT ME →</a>
+  <!-- Services -->
+  <section id="services" class="py-20 px-6 bg-gray-900/50">
+    <div class="max-w-6xl mx-auto text-center" data-aos="fade-up">
+      <h2 class="text-4xl md:text-5xl font-bold mb-12 gradient-text">Services</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass p-8 rounded-2xl neon hover:scale-105 transition">
+          <i class="fas fa-code text-4xl text-purple-500 mb-4"></i>
+          <h3 class="text-2xl font-bold mb-4">Web Development</h3>
+          <p class="text-gray-300">React, Next.js, Node.js দিয়ে কাস্টম সাইট।</p>
+        </div>
+        <div class="glass p-8 rounded-2xl neon hover:scale-105 transition">
+          <i class="fas fa-paint-brush text-4xl text-cyan-500 mb-4"></i>
+          <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
+          <p class="text-gray-300">Figma দিয়ে মডার্ন ডিজাইন।</p>
+        </div>
+        <div class="glass p-8 rounded-2xl neon hover:scale-105 transition">
+          <i class="fas fa-video text-4xl text-pink-500 mb-4"></i>
+          <h3 class="text-2xl font-bold mb-4">Content Creation</h3>
+          <p class="text-gray-300">ভাইরাল TikTok/YouTube কন্টেন্ট।</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-num">50+</div>
-      <div class="stat-label">PROJECTS</div>
+  <!-- Portfolio -->
+  <section id="portfolio" class="py-20 px-6">
+    <div class="max-w-6xl mx-auto text-center" data-aos="fade-up">
+      <h2 class="text-4xl md:text-5xl font-bold mb-12 gradient-text">Portfolio</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass rounded-2xl overflow-hidden hover:scale-105 transition">
+          <img src="https://via.placeholder.com/400x250/1a1a1a/8b5cf6?text=E-Commerce" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">E-Commerce App</h3>
+            <p class="text-gray-300">Next.js + Stripe</p>
+          </div>
+        </div>
+        <div class="glass rounded-2xl overflow-hidden hover:scale-105 transition">
+          <img src="https://via.placeholder.com/400x250/1a1a1a/06b6d4?text=3D+Portfolio" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">3D Portfolio</h3>
+            <p class="text-gray-300">Three.js + React</p>
+          </div>
+        </div>
+        <div class="glass rounded-2xl overflow-hidden hover:scale-105 transition">
+          <img src="https://via.placeholder.com/400x250/1a1a1a/ec4899?text=Viral+App" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Viral Content App</h3>
+            <p class="text-gray-300">React Native</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="stat">
-      <div class="stat-num">1M+</div>
-      <div class="stat-label">VIDEO VIEWS</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">20+</div>
-      <div class="stat-label">HAPPY CLIENTS</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">5★</div>
-      <div class="stat-label">RATINGS</div>
-    </div>
-  </div>
+  </section>
 
-  <div class="skills">
-    <div class="skill">
-      <div class="skill-name">React / Next.js <span>95%</span></div>
-      <div class="bar"><div class="fill" style="width:95%"></div></div>
+  <!-- Blog -->
+  <section id="blog" class="py-20 px-6 bg-gray-900/50">
+    <div class="max-w-6xl mx-auto text-center" data-aos="fade-up">
+      <h2 class="text-4xl md:text-5xl font-bold mb-12 gradient-text">Latest Blog</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass p-6 rounded-2xl">
+          <h3 class="text-xl font-bold mb-2">Next.js Tips 2025</h3>
+          <p class="text-gray-300 mb-4">নতুন ফিচারস...</p>
+          <a href="#" class="text-purple-400">Read More</a>
+        </div>
+        <div class="glass p-6 rounded-2xl">
+          <h3 class="text-xl font-bold mb-2">AI in Dev</h3>
+          <p class="text-gray-300 mb-4">Grok দিয়ে কোড...</p>
+          <a href="#" class="text-purple-400">Read More</a>
+        </div>
+        <div class="glass p-6 rounded-2xl">
+          <h3 class="text-xl font-bold mb-2">TikTok Hacks</h3>
+          <p class="text-gray-300 mb-4">ভাইরাল সিক্রেট...</p>
+          <a href="#" class="text-purple-400">Read More</a>
+        </div>
+      </div>
     </div>
-    <div class="skill">
-      <div class="skill-name">JavaScript / TypeScript <span>90%</span></div>
-      <div class="bar"><div class="fill" style="width:90%"></div></div>
-    </div>
-    <div class="skill">
-      <div class="skill-name">Node.js / Express <span>85%</span></div>
-      <div class="bar"><div class="fill" style="width:85%"></div></div>
-    </div>
-    <div class="skill">
-      <div class="skill-name">UI/UX & Motion Design <span>88%</span></div>
-      <div class="bar"><div class="fill" style="width:88%"></div></div>
-    </div>
-    <div class="skill">
-      <div class="skill-name">Content Creation <span>97%</span></div>
-      <div class="bar"><div class="fill" style="width:97%"></div></div>
-    </div>
-  </div>
+  </section>
 
-  <div class="socials">
-    <a href="https://www.facebook.com/share/1A8xKKdbec/" target="_blank">FB</a>
-    <a href="https://www.instagram.com/md__habibur_rahman" target="_blank">IG</a>
-    <a href="https://www.tiktok.com/@habibur_._rahman" target="_blank">TT</a>
-    <a href="https://youtube.com/@h_a_b_i_b-yt" target="_blank">YT</a>
-    <a href="https://wa.me/01868461577" target="_blank">WA</a>
-    <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank">TG</a>
-  </div>
+  <!-- Contact -->
+  <section id="contact" class="py-20 px-6">
+    <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+      <h2 class="text-4xl md:text-5xl font-bold mb-12 gradient-text">Contact Me</h2>
+      <p class="text-xl mb-8 text-gray-300">প্রজেক্টের জন্য কল কর: mshabib471@gmail.com | WA: 01868461577</p>
+      <form class="max-w-md mx-auto space-y-4">
+        <input type="text" placeholder="Name" class="w-full glass p-4 rounded-lg">
+        <input type="email" placeholder="Email" class="w-full glass p-4 rounded-lg">
+        <textarea placeholder="Message" rows="4" class="w-full glass p-4 rounded-lg"></textarea>
+        <button type="submit" class="w-full py-4 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg font-bold">Send</button>
+      </form>
+    </div>
+  </section>
 
-  <footer>
-    © 2025 Habibur Rahman • Built with love & code
+  <!-- Footer -->
+  <footer class="py-8 text-center text-gray-500 glass">
+    <p>&copy; 2025 Habibur Rahman. All Rights Reserved.</p>
   </footer>
 
-</div>
+  <script>
+    AOS.init({ duration: 1200 });
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
