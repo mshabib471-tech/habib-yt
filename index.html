@@ -1,104 +1,248 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RioTopup - FreeFire Diamond Topup Shop BD</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-        header { background-color: #ff4444; color: white; padding: 10px; text-align: center; }
-        nav { background-color: #333; padding: 10px; }
-        nav ul { list-style: none; padding: 0; }
-        nav ul li { display: inline; margin: 0 15px; }
-        nav ul li a { color: white; text-decoration: none; }
-        .hero { background-color: #ff6666; text-align: center; padding: 50px; color: white; }
-        .section { padding: 20px; margin: 10px; background: white; border-radius: 5px; }
-        .products { display: flex; justify-content: space-around; flex-wrap: wrap; }
-        .product { border: 1px solid #ddd; margin: 10px; padding: 10px; width: 200px; text-align: center; }
-        footer { background-color: #333; color: white; text-align: center; padding: 10px; position: fixed; bottom: 0; width: 100%; }
+        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #f0f0f0; direction: ltr; }
+        .container { max-width: 100%; margin: 0 auto; padding: 10px; }
+        header { background-color: #ff4444; color: white; text-align: center; padding: 10px; }
+        .nav-top { display: flex; justify-content: space-between; background: #333; color: white; padding: 5px; }
+        .nav-top a { color: white; text-decoration: none; margin: 0 10px; }
+        .hero { background: #ff6666; text-align: center; padding: 20px; color: white; }
+        .hero img { width: 100%; max-height: 200px; object-fit: cover; }
+        .section { margin: 10px 0; padding: 10px; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 10px; text-align: center; }
+        .item { border: 1px solid #ddd; padding: 5px; border-radius: 5px; }
+        .item img { width: 60px; height: 60px; object-fit: cover; }
+        .social-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .social-item { text-align: center; }
+        .social-item img { width: 40px; height: 40px; }
+        .orders { display: flex; flex-direction: column; gap: 10px; }
+        .order-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f9f9f9; border-radius: 5px; }
+        .status { color: green; } /* Completed */
+        .status.processing { color: orange; }
+        footer { background: #003366; color: white; text-align: center; padding: 10px; }
+        button { background: #ff4444; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; }
+        .bottom-nav { display: flex; justify-content: space-around; background: #333; padding: 10px; position: fixed; bottom: 0; width: 100%; }
+        .bottom-nav a { color: white; text-decoration: none; }
+        @media (min-width: 768px) { .bottom-nav { position: relative; } }
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>リオTopup</h1>
+            <p>FreeFire Diamond Topup Shop BD</p>
+        </header>
 
-    <header>
-        <h1>RioTopup - FreeFire Diamond Topup Shop BD</h1>
-        <p>Fast & Secure Topup Services in Bangladesh</p>
-    </header>
+        <div class="nav-top">
+            <a href="login.html">লগ ইন</a>
+            <a href="register.html">রেজিস্টার</a>
+        </div>
 
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#about">About</a></li>
-        </ul>
+        <section class="hero">
+            <img src="https://via.placeholder.com/360x200/ff6666/white?text=Free+Fire+Topup+Banner" alt="Hero Banner">
+            <h2>উপহার পান Free Fire এবং PUBG এর জন্য</h2>
+            <p>আমাদের অফার গুলো চেক করুন এবং টপআপ করুন সহজে!</p>
+            <button onclick="alert('টপআপ শুরু করুন!')">টপআপ করুন</button>
+        </section>
+
+        <section class="section">
+            <h3>ফ্রি ফায়ার টপআপ</h3>
+            <div class="grid">
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=প্রিম" alt="Prime">
+                    <p>প্রিম</p>
+                    <a href="freefire.html"><button>কিনুন</button></a>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ভিআইপি" alt="VIP">
+                    <p>ভিআইপি</p>
+                    <a href="freefire.html"><button>কিনুন</button></a>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ইভেন্ট" alt="Event">
+                    <p>ইভেন্ট</p>
+                    <a href="freefire.html"><button>কিনুন</button></a>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=প্যাক" alt="Pack">
+                    <p>প্যাক</p>
+                    <a href="freefire.html"><button>কিনুন</button></a>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ইউজ" alt="Use">
+                    <p>ইউজার</p>
+                    <a href="freefire.html"><button>কিনুন</button></a>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ড্যাফ" alt="DAF">
+                    <p>ড্যাফ্রি</p>
+                    <a href="freefire.html"><button>কিনুন</button></a>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ওয়েক" alt="Weekly">
+                    <p>ওয়েকলি লাইক</p>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=মান্থ" alt="Monthly">
+                    <p>মান্থলি ইউজিডি</p>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ইভেন্ট" alt="Event UC">
+                    <p>ইভেন্ট ইউসি</p>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=লেভেল" alt="Level">
+                    <p>লেভেল আপ কার্ড</p>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ইয়ার" alt="Year">
+                    <p>ইয়ারলি মেম্বারশিপ</p>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ড্যাফ" alt="DAF SP">
+                    <p>ড্যাফ্রি এসপি পাস</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3>লাইক ফলো সাবস্ক্রাইবার</h3>
+            <div class="social-grid">
+                <div class="social-item">
+                    <img src="https://via.placeholder.com/40x40/333/white?text=FB" alt="Facebook Like">
+                    <p>ফেসবুক লাইক</p>
+                </div>
+                <div class="social-item">
+                    <img src="https://via.placeholder.com/40x40/333/white?text=FB" alt="Facebook Follower">
+                    <p>ফেসবুক ফলোয়ার</p>
+                </div>
+                <div class="social-item">
+                    <img src="https://via.placeholder.com/40x40/333/white?text=FB" alt="Facebook Page">
+                    <p>ফেসবুক পেজ</p>
+                </div>
+                <div class="social-item">
+                    <img src="https://via.placeholder.com/40x40/333/white?text=IG" alt="Instagram">
+                    <p>ইনস্টাগ্রাম</p>
+                </div>
+                <div class="social-item">
+                    <img src="https://via.placeholder.com/40x40/333/white?text=YT" alt="YouTube">
+                    <p>ইউটিউব</p>
+                </div>
+                <div class="social-item">
+                    <img src="https://via.placeholder.com/40x40/333/white?text=TT" alt="TikTok">
+                    <p>টিকটক</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3>অন্যান্য গেমস</h3>
+            <div class="grid">
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/4CAF50/white?text=ML" alt="Mobile Legends">
+                    <p>মোবাইল লেজেন্ডস</p>
+                    <a href="mobilelegends.html"><button>টপআপ</button></a>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/4CAF50/white?text=CoC" alt="Clash of Clans">
+                    <p>ক্ল্যাশ অফ ক্ল্যান্স</p>
+                    <a href="clashofclans.html"><button>টপআপ</button></a>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/4CAF50/white?text=PUBG" alt="Pubg Mobile">
+                    <p>পাবজি মোবাইল</p>
+                    <a href="pubg.html"><button>টপআপ</button></a>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/4CAF50/white?text=BK" alt="Bkash">
+                    <p>বিকাশ</p>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/4CAF50/white?text=NL" alt="Nagad">
+                    <p>নগদ</p>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/60x60/4CAF50/white?text=Rocket" alt="Rocket">
+                    <p>রকেট</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3>সর্বশেষ অর্ডারগুলি</h3>
+            <p>আপনার অর্ডারের স্ট্যাটাস দেখুন এবং কোনো সমস্যার জন্য আমাদের সাথে যোগাযোগ করুন।</p>
+            <div class="orders">
+                <div class="order-item">
+                    <span>এম ডি ইমন | সপ্তাহিক ইমন | প্রসেসিং</span>
+                    <span class="status processing">১৫০ টাকা</span>
+                </div>
+                <div class="order-item">
+                    <span>এম ডি রহান | সপ্তাহিক লাইক | সম্পন্ন</span>
+                    <span class="status">৩০ টাকা</span>
+                </div>
+                <div class="order-item">
+                    <span>জে ফ্রি ফায়ার | ২৫ ডায়মন্ড | ১৮:০০ ঘণ্টা</span>
+                    <span class="status">সম্পন্ন</span>
+                </div>
+                <div class="order-item">
+                    <span>এ জে এফ টি | এয়ারড্রপ ৯৫০ বিটিআর | সম্পন্ন</span>
+                    <span class="status">৯৫ টাকা</span>
+                </div>
+                <div class="order-item">
+                    <span>আ আলম | এয়ারড্রপ ১২০০ বিটিআর | সম্পন্ন</span>
+                    <span class="status">১২০ টাকা</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3>স্টে কানেক্টেড</h3>
+            <p>৩য় তলা, ৩৭/এ নারায়ণগঞ্জ-৫, ঢাকা</p>
+            <button onclick="alert('WhatsApp খুলছে...')">WhatsApp</button>
+        </section>
+
+        <section class="section">
+            <h3>আমাদের মোবাইল অ্যাপ</h3>
+            <img src="https://via.placeholder.com/200x60/00BCD4/white?text=Get+it+on+Google+Play" alt="Google Play" style="width:100%;">
+            <button onclick="alert('Google Play এ redirect...')">গেট ইট অন গুগল প্লে</button>
+        </section>
+
+        <section class="section">
+            <h3>সাপোর্ট সেন্টার</h3>
+            <p>কোয়েরি: ০১৭-১২৩৪৫৬৭৮</p>
+            <button onclick="alert('WhatsApp Live Support...')">WhatsApp লাইভ সাপোর্ট</button>
+            <button onclick="alert('Facebook Live Support...')">Facebook লাইভ সাপোর্ট</button>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 RioTopup. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html">হোম</a>
+        <a href="tutorial.html">টিউটোরিয়াল</a>
+        <a href="topup.html">টপআপ</a>
+        <a href="account.html">অ্যাকাউন্ট</a>
     </nav>
 
-    <section id="home" class="hero">
-        <h2>Welcome to RioTopup!</h2>
-        <p>Top up your Free Fire diamonds instantly at the best prices in BD.</p>
-        <button style="padding: 10px 20px; background: #ff4444; color: white; border: none; cursor: pointer;">Get Started</button>
-    </section>
-
-    <section id="services" class="section">
-        <h2>Our Services</h2>
-        <ul>
-            <li>Free Fire Diamond Topup</li>
-            <li>Mobile Legends Topup</li>
-            <li>Pubg UC Topup</li>
-            <li>And More!</li>
-        </ul>
-    </section>
-
-    <section id="products" class="section">
-        <h2>Popular Products</h2>
-        <div class="products">
-            <div class="product">
-                <h3>100 Diamonds</h3>
-                <p>Price: ৳150</p>
-                <button>Buy Now</button>
-            </div>
-            <div class="product">
-                <h3>530 Diamonds</h3>
-                <p>Price: ৳750</p>
-                <button>Buy Now</button>
-            </div>
-            <div class="product">
-                <h3>1060 Diamonds</h3>
-                <p>Price: ৳1400</p>
-                <button>Buy Now</button>
-            </div>
-            <div class="product">
-                <h3>2180 Diamonds</h3>
-                <p>Price: ৳2800</p>
-                <button>Buy Now</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="section">
-        <h2>Contact Us</h2>
-        <p>Email: support@riotopup.com</p>
-        <p>Phone: +880 1234 567890</p>
-        <p>Address: Dhaka, Bangladesh</p>
-    </section>
-
-    <section id="about" class="section">
-        <h2>About Us</h2>
-        <p>RioTopup is the leading topup shop in Bangladesh for Free Fire and other games. We provide secure and instant services since 2020.</p>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 RioTopup. All rights reserved.</p>
-    </footer>
-
     <script>
-        // Basic JS for buttons
         document.querySelectorAll('button').forEach(btn => {
-            btn.addEventListener('click', () => alert('Redirecting to payment...'));
+            btn.addEventListener('click', () => {
+                // Simulate action
+                alert('পেমেন্ট পেজে redirect হচ্ছে...');
+            });
         });
     </script>
-
 </body>
 </html>
