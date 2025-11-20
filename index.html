@@ -3,129 +3,123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Habib YT — দ্রুত ও নিরাপদ টপ-আপ</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;800;900&display=swap" rel="stylesheet">
+<title>Habib YT - দ্রুত, নিরাপদ, বিশ্বস্ত টপ-আপ</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#e0eafc,#cfdef3);
-  color:#222;min-height:100vh;overflow-x:hidden
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  color:#fff;min-height:100vh
 }
 .container{
-  max-width:480px;margin:0 auto;background:#fff;
-  box-shadow:0 0 40px rgba(0,80,200,0.15);min-height:100vh;position:relative;
-  padding-bottom:160px
+  max-width:480px;margin:0 auto;background:rgba(255,255,255,0.98);
+  min-height:100vh;border-radius:30px 30px 0 0;
+  overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);
+  padding-bottom:100px
 }
 
 /* Header */
 header{
-  background:linear-gradient(135deg,rgba(0,82,212,0.95),rgba(67,100,247,0.95));
-  padding:20px;color:#fff;border-radius:0 0 30px 30px;
-  backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(0,82,212,0.3);
-  display:flex;align-items:center;justify-content:space-between
+  background:linear-gradient(135deg,#5b21b6,#7c3aed);
+  padding:35px 20px 50px;text-align:center;
+  clip-path:ellipse(120% 80% at 50% 20%)
 }
-.logo-area{display:flex;align-items:center;gap:15px}
-.logo-area img{width:58px;height:58px;border-radius:50%;border:4px solid rgba(255,255,255,0.4)}
-.logo-area h2{font-size:26px;font-weight:900}
-.logo-area small{font-size:14px;opacity:0.9}
-
-.auth-btn{
-  padding:10px 20px;background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4);
-  border-radius:14px;font-weight:700;backdrop-filter:blur(8px);transition:0.3s;cursor:pointer
+.logo{
+  width:100px;height:100px;background:#fff;border-radius:50%;
+  margin:0 auto 15px;display:flex;align-items:center;justify-content:center;
+  font-size:48px;font-weight:900;color:#5b21b6;
+  box-shadow:0 15px 40px rgba(0,0,0,0.3)
 }
-.auth-btn:hover{background:rgba(255,255,255,0.4);transform:translateY(-3px)}
+header h1{font-size:36px;font-weight:900;margin:15px 0}
+header p{font-size:20px;font-weight:600;opacity:0.95}
 
-/* Hero */
+/* Hero Section */
 .hero{
-  text-align:center;padding:50px 20px 35px;background:linear-gradient(135deg,#667eea,#764ba2);
-  margin:20px 20px 35px;border-radius:30px;color:#fff;box-shadow:0 15px 40px rgba(102,126,234,0.3)
+  text-align:center;margin:-40px 25px 40px;
+  background:rgba(255,255,255,0.15);padding:35px 20px;
+  border-radius:30px;backdrop-filter:blur(15px);
+  border:3px solid rgba(255,255,255,0.2)
 }
-.hero h1{font-size:34px;font-weight:900;margin-bottom:10px}
-.hero p{font-size:19px;opacity:0.95}
+.hero h2{font-size:28px;margin-bottom:12px}
 
-/* Services Grid – শুধু ৪টা */
+/* Services Grid */
 .services{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:22px;padding:0 25px 40px
+  display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:0 25px
 }
 .card{
-  background:rgba(255,255,255,0.75);border-radius:25px;overflow:hidden;
-  box-shadow:0 12px 35px rgba(0,0,0,0.12);transition:0.4s;backdrop-filter:blur(12px);
-  border:2px solid rgba(255,255,255,0.6);cursor:pointer;color:#333
+  background:#fff;border-radius:28px;overflow:hidden;
+  box-shadow:0 15px 45px rgba(0,0,0,0.2);transition:0.4s;cursor:pointer
 }
-.card:hover{transform:translateY(-14px) scale(1.05);box-shadow:0 25px 60px rgba(102,126,234,0.4)}
-.card img{width:100%;height:140px;object-fit:cover}
+.card:hover{transform:translateY(-18px) scale(1.06)}
+.card img{width:100%;height:150px;object-fit:cover}
 .card h3{
-  padding:16px 10px;text-align:center;font-size:17px;font-weight:800;
-  background:linear-gradient(135deg,#667eea,#764ba2);color:#fff
+  padding:18px;text-align:center;font-size:19px;font-weight:800;
+  background:linear-gradient(135deg,#5b21b6,#7c3aed);color:#fff
 }
 
-/* About Me Box */
-.about-box{
-  margin:40px 25px;padding:35px;
-  background:linear-gradient(135deg,#ff6b6b,#ffa726);
-  border-radius:30px;text-align:center;color:#fff;
-  box-shadow:0 25px 60px rgba(255,107,107,0.5);
-  border:3px solid rgba(255,255,255,0.3);animation:pulse 3s infinite
+/* Latest Orders */
+.orders{
+  margin:50px 25px;padding:30px;
+  background:rgba(255,255,255,0.12);border-radius:30px;
+  backdrop-filter:blur(15px);border:2px solid rgba(255,255,255,0.2)
 }
-@keyframes pulse{0%,100%{box-shadow:0 25px 60px rgba(255,107,107,0.5)}50%{box-shadow:0 35px 80px rgba(255,107,107,0.8)}}
-.about-box h3{font-size:30px;font-weight:900;margin-bottom:12px}
-.about-box p{font-size:18px;margin-bottom:25px}
-.about-btn{
-  display:inline-block;padding:18px 60px;background:#fff;color:#e63946;
-  font-size:22px;font-weight:900;border-radius:50px;text-decoration:none;
-  box-shadow:0 15px 40px rgba(0,0,0,0.3);transition:0.4s
+.orders h2{margin-bottom:25px;text-align:center;font-size:26px}
+.order-item{
+  background:rgba(255,255,255,0.2);padding:18px;margin:15px 0;
+  border-radius:20px;display:flex;justify-content:space-between;
+  align-items:center;font-size:16px
 }
-.about-btn:hover{transform:scale(1.12);background:#e63946;color:#fff}
+.order-item .game{font-weight:900;color:#fff}
 
 /* Support */
 .support{
-  margin:20px 25px 80px;padding:30px;background:rgba(255,255,255,0.15);
-  border-radius:28px;text-align:center;backdrop-filter:blur(15px);
-  border:2px solid rgba(255,255,255,0.2)
+  margin:40px 25px;padding:35px;
+  background:linear-gradient(135deg,#10b981,#34d399);
+  border-radius:35px;text-align:center;
+  box-shadow:0 25px 60px rgba(16,185,129,0.5)
 }
 .support a{
-  display:inline-block;padding:16px 45px;margin:10px;border-radius:50px;
-  font-weight:900;font-size:18px;color:#fff;transition:0.3s
+  display:inline-block;padding:18px 50px;margin:12px;
+  border-radius:50px;font-size:19px;font-weight:900;
+  color:#fff;transition:0.4s
 }
-.telegram{background:#0088cc;box-shadow:0 12px 35px rgba(0,136,204,0.5)}
-.whatsapp{background:#25d366;box-shadow:0 12px 35px rgba(37,211,102,0.5)}
+.telegram{background:#0088cc;box-shadow:0 15px 40px rgba(0,136,204,0.5)}
+.whatsapp{background:#25d366;box-shadow:0 15px 40px rgba(37,211,102,0.5)}
 .support a:hover{transform:scale(1.15)}
+
+/* Legal */
+.legal{
+  margin:40px 25px;padding:30px;
+  background:rgba(255,255,255,0.15);border-radius:30px;
+  backdrop-filter:blur(15px);font-size:15px;line-height:1.8
+}
+.legal h3{margin:20px 0 10px;color:#fff;font-weight:700}
 
 /* Footer */
 footer{
-  text-align:center;padding:25px;color:#ccc;font-weight:700;background:#1a1a2e
+  text-align:center;padding:30px;background:#1a1a2e;color:#aaa;font-weight:700
 }
 
-/* নিচের নেভিগেশন – রাজকীয় লুক */
+/* Navigation Bar - আগুন লাগানো */
 .nav{
-  position:fixed;bottom:15px;left:50%;transform:translateX(-50%);
-  background:rgba(255,255,255,0.22);backdrop-filter:blur(25px);
-  border-radius:60px;padding:16px 20px;
-  display:flex;gap:25px;z-index:999;
-  box-shadow:0 15px 40px rgba(0,0,0,0.3);
-  border:3px solid rgba(255,255,255,0.3)
+  position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
+  background:rgba(255,255,255,0.25);backdrop-filter:blur(30px);
+  border-radius:70px;padding:18px 28px;display:flex;gap:30px;
+  z-index:999;box-shadow:0 20px 50px rgba(0,0,0,0.4);
+  border:4px solid rgba(255,255,255,0.3)
 }
 .nav a{
-  width:68px;height:68px;background:rgba(255,255,255,0.25);
-  border-radius:50%;display:flex;align-items:center;justify-content:center;
-  color:#fff;font-size:30px;transition:all 0.4s;
-  box-shadow:0 10px 30px rgba(0,0,0,0.3);position:relative;overflow:hidden
+  width:78px;height:78px;background:rgba(255,255,255,0.3);
+  border-radius:50%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;color:#fff;
+  font-size:30px;transition:all 0.4s;box-shadow:0 12px 35px rgba(0,0,0,0.4)
 }
-.nav a::before{
-  content:'';position:absolute;top:0;left:0;width:100%;height:100%;
-  background:linear-gradient(135deg,rgba(255,255,255,0.3),rgba(255,255,255,0));
-  border-radius:50%;transition:0.5s;transform:scale(0)
-}
-.nav a:hover::before{transform:scale(1.8)}
-.nav a:hover{
-  background:#4f46e5;transform:scale(1.22) translateY(-12px);
-  box-shadow:0 25px 60px rgba(79,70,229,0.8)
-}
-.nav a.active{
-  background:#4f46e5;box-shadow:0 0 40px #6366f1, 0 25px 60px rgba(79,70,229,0.8);
-  transform:scale(1.18)
+.nav a span{font-size:14px;margin-top:6px;font-weight:900}
+.nav a:hover{transform:scale(1.25) translateY(-15px);background:#7c3aed}
+.nav a.active{background:#7c3aed;transform:scale(1.2);
+  box-shadow:0 0 40px #a78bfa, 0 25px 60px rgba(124,58,237,0.8)
 }
 </style>
 </head>
@@ -135,20 +129,15 @@ footer{
 
   <!-- Header -->
   <header>
-    <div class="logo-area">
-      <img src="assets/logo.png" alt="Habib YT">
-      <div>
-        <h2>Habib YT</h2>
-        <small>দ্রুত • নিরাপদ • বিশ্বস্ত</small>
-      </div>
-    </div>
-    <button class="auth-btn" id="loginBtn">Login</button>
+    <div class="logo">HY</div>
+    <h1>Habib YT</h1>
+    <p>দ্রুত • নিরাপদ • বিশ্বস্ত</p>
   </header>
 
   <!-- Hero -->
   <div class="hero">
-    <h1>দ্রুত ও নিরাপদ টপ-আপ</h1>
-    <p>Free Fire • eFootball • Like/Followers • Accessories</p>
+    <h2>গেমিং টপ-আপ & ডিজিটাল সার্ভিস</h2>
+    <p>সবচেয়ে কম দামে, সবচেয়ে দ্রুত ডেলিভারি</p>
   </div>
 
   <!-- Services -->
@@ -171,61 +160,42 @@ footer{
     </div>
   </div>
 
-  <!-- About Me Box -->
-  <div class="about-box">
-    <h3>About Me</h3>
-    <p>আমি হাবিবুর রহমান — তোমাদের ভাই</p>
-    <a href="https://habib-web.vercel.app" target="_blank" class="about-btn">Visit Portfolio</a>
+  <!-- Latest Orders -->
+  <div class="orders">
+    <h2>সর্বশেষ অর্ডার</h2>
+    <div class="order-item"><span class="game">Free Fire</span> <span>৫৬০ ডায়মন্ড • ২ মিনিট আগে</span></div>
+    <div class="order-item"><span class="game">eFootball</span> <span>১০৫০ কয়েন • ৫ মিনিট আগে</span></div>
+    <div class="order-item"><span class="game">Like/Followers</span> <span>৫০০০ লাইক • ৮ মিনিট আগে</span></div>
   </div>
 
   <!-- Support -->
   <div class="support">
-    <h2>24/7 Support</h2>
+    <h2>24/7 কাস্টমার সাপোর্ট</h2>
     <a href="https://t.me/H_A_B_I_B_Top_1" class="telegram">Telegram</a>
     <a href="https://wa.me/8801868461577" class="whatsapp">WhatsApp</a>
   </div>
 
+  <!-- Legal -->
+  <div class="legal">
+    <h3>সার্ভিস টার্মস</h3><p>ভুল UID দিলে দায়িত্ব গ্রাহকের।</p>
+    <h3>প্রাইভেসি পলিসি</h3><p>আপনার তথ্য ১০০% সুরক্ষিত।</p>
+    <h3>রিফান্ড পলিসি</h3><p>ডেলিভারি না হলে ফুল রিফান্ড।</p>
+  </div>
+
+  <!-- Footer -->
   <footer>
-    © Habibur Rahman<br><small>All Rights Reserved 2025</small>
+    © Habibur Rahman • All Rights Reserved 2025
   </footer>
 
 </div>
 
-<!-- নিচের নেভিগেশন – রাজকীয়! -->
+<!-- Navigation Bar -->
 <div class="nav">
-  <a href="index.html" class="active">
-    <i class="fas fa-home"></i>
-    <span>Home</span>
-  </a>
-  <a href="dashboard.html">
-    <i class="fas fa-th-large"></i>
-    <span>Dashboard</span>
-  </a>
-  <a href="add-money.html">
-    <i class="fas fa-wallet"></i>
-    <span>Wallet</span>
-  </a>
-  <a href="login.html">
-    <i class="fas fa-user-circle"></i>
-    <span>Login</span>
-  </a>
+  <a href="index.html" class="active"><i class="fas fa-home"></i><span>Home</span></a>
+  <a href="dashboard.html"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+  <a href="add-money.html"><i class="fas fa-wallet"></i><span>Wallet</span></a>
+  <a href="login.html"><i class="fas fa-user-circle"></i><span>Account</span></a>
 </div>
-
-<!-- Firebase Auto Login -->
-<script type="module">
-  import { auth } from "./firebase.js";
-  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-  const loginBtn = document.getElementById("loginBtn");
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      loginBtn.innerText = "My Account";
-      loginBtn.onclick = () => location.href = "dashboard.html";
-    } else {
-      loginBtn.innerText = "Login";
-      loginBtn.onclick = () => location.href = "login.html";
-    }
-  });
-</script>
 
 </body>
 </html>
