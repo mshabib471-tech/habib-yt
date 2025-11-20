@@ -3,91 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Habib YT - দ্রুত ও নিরাপদ টপ-আপ</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800;900&display=swap" rel="stylesheet">
+<title>Habib YT — দ্রুত ও নিরাপদ টপ-আপ</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#6366f1,#8b5cf6,#a78bfa);
-  min-height:100vh;color:#fff
+  background:linear-gradient(135deg,#e0eafc,#cfdef3);
+  color:#222;min-height:100vh;overflow-x:hidden
 }
 .container{
-  max-width:480px;margin:0 auto;min-height:100vh;
-  background:#fff;border-radius:0;overflow:hidden;
-  box-shadow:0 0 50px rgba(99,102,241,0.4)
+  max-width:480px;margin:0 auto;background:#fff;
+  box-shadow:0 0 40px rgba(0,80,200,0.15);min-height:100vh;position:relative;
+  padding-bottom:160px
 }
 
-/* Header – তোর লোগো স্টাইল */
+/* Header */
 header{
-  background:linear-gradient(135deg,#4f46e5,#7c3aed);
-  padding:40px 20px 50px;text-align:center;
-  clip-path:ellipse(100% 75% at 50% 25%)
+  background:linear-gradient(135deg,rgba(0,82,212,0.95),rgba(67,100,247,0.95));
+  padding:20px;color:#fff;border-radius:0 0 30px 30px;
+  backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(0,82,212,0.3);
+  display:flex;align-items:center;justify-content:space-between
 }
-.logo-circle{
-  width:110px;height:110px;background:#fff;border-radius:50%;
-  margin:0 auto 15px;display:flex;align-items:center;justify-content:center;
-  font-size:52px;font-weight:900;color:#4f46e5;box-shadow:0 10px 30px rgba(0,0,0,0.3)
-}
-header h1{font-size:38px;font-weight:900;margin:10px 0}
-header p{font-size:19px;opacity:0.95}
+.logo-area{display:flex;align-items:center;gap:15px}
+.logo-area img{width:58px;height:58px;border-radius:50%;border:4px solid rgba(255,255,255,0.4)}
+.logo-area h2{font-size:26px;font-weight:900}
+.logo-area small{font-size:14px;opacity:0.9}
 
-/* Services Grid */
+.auth-btn{
+  padding:10px 20px;background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4);
+  border-radius:14px;font-weight:700;backdrop-filter:blur(8px);transition:0.3s;cursor:pointer
+}
+.auth-btn:hover{background:rgba(255,255,255,0.4);transform:translateY(-3px)}
+
+/* Hero */
+.hero{
+  text-align:center;padding:50px 20px 35px;background:linear-gradient(135deg,#667eea,#764ba2);
+  margin:20px 20px 35px;border-radius:30px;color:#fff;box-shadow:0 15px 40px rgba(102,126,234,0.3)
+}
+.hero h1{font-size:34px;font-weight:900;margin-bottom:10px}
+.hero p{font-size:19px;opacity:0.95}
+
+/* Services Grid – শুধু ৪টা */
 .services{
-  display:grid;grid-template-columns:1fr 1fr;gap:20px;
-  padding:0 20px;margin-top:-40px;position:relative;z-index:2
+  display:grid;grid-template-columns:repeat(2,1fr);gap:22px;padding:0 25px 40px
 }
 .card{
-  background:#fff;border-radius:28px;overflow:hidden;
-  box-shadow:0 15px 40px rgba(0,0,0,0.18);transition:all 0.4s;
-  text-align:center;cursor:pointer
+  background:rgba(255,255,255,0.75);border-radius:25px;overflow:hidden;
+  box-shadow:0 12px 35px rgba(0,0,0,0.12);transition:0.4s;backdrop-filter:blur(12px);
+  border:2px solid rgba(255,255,255,0.6);cursor:pointer;color:#333
 }
-.card:hover{
-  transform:translateY(-18px) scale(1.06);
-  box-shadow:0 30px 70px rgba(99,102,241,0.5)
-}
-.card img{width:100%;height:150px;object-fit:cover}
+.card:hover{transform:translateY(-14px) scale(1.05);box-shadow:0 25px 60px rgba(102,126,234,0.4)}
+.card img{width:100%;height:140px;object-fit:cover}
 .card h3{
-  padding:18px 10px;font-size:18px;font-weight:800;
-  background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff
+  padding:16px 10px;text-align:center;font-size:17px;font-weight:800;
+  background:linear-gradient(135deg,#667eea,#764ba2);color:#fff
 }
 
 /* About Me Box */
 .about-box{
-  margin:50px 25px 30px;padding:35px;
+  margin:40px 25px;padding:35px;
   background:linear-gradient(135deg,#ff6b6b,#ffa726);
-  border-radius:35px;text-align:center;
+  border-radius:30px;text-align:center;color:#fff;
   box-shadow:0 25px 60px rgba(255,107,107,0.5);
-  border:5px solid rgba(255,255,255,0.3)
+  border:3px solid rgba(255,255,255,0.3);animation:pulse 3s infinite
 }
-.about-box h3{font-size:32px;font-weight:900;margin-bottom:12px}
-.about-box p{font-size:19px;margin-bottom:25px}
-.visit-btn{
+@keyframes pulse{0%,100%{box-shadow:0 25px 60px rgba(255,107,107,0.5)}50%{box-shadow:0 35px 80px rgba(255,107,107,0.8)}}
+.about-box h3{font-size:30px;font-weight:900;margin-bottom:12px}
+.about-box p{font-size:18px;margin-bottom:25px}
+.about-btn{
   display:inline-block;padding:18px 60px;background:#fff;color:#e63946;
   font-size:22px;font-weight:900;border-radius:50px;text-decoration:none;
   box-shadow:0 15px 40px rgba(0,0,0,0.3);transition:0.4s
 }
-.visit-btn:hover{
-  transform:scale(1.12);background:#e63946;color:#fff
-}
+.about-btn:hover{transform:scale(1.12);background:#e63946;color:#fff}
 
 /* Support */
 .support{
-  margin:20px 25px 80px;padding:30px;
-  background:rgba(255,255,255,0.18);border-radius:30px;
-  text-align:center;backdrop-filter:blur(15px)
+  margin:20px 25px 80px;padding:30px;background:rgba(255,255,255,0.15);
+  border-radius:28px;text-align:center;backdrop-filter:blur(15px);
+  border:2px solid rgba(255,255,255,0.2)
 }
 .support a{
-  display:inline-block;padding:16px 45px;margin:10px;
-  border-radius:50px;font-weight:900;font-size:18px;
-  color:#fff;transition:0.3s
+  display:inline-block;padding:16px 45px;margin:10px;border-radius:50px;
+  font-weight:900;font-size:18px;color:#fff;transition:0.3s
 }
 .telegram{background:#0088cc;box-shadow:0 12px 35px rgba(0,136,204,0.5)}
 .whatsapp{background:#25d366;box-shadow:0 12px 35px rgba(37,211,102,0.5)}
 .support a:hover{transform:scale(1.15)}
 
-/* নিচের নেভিগেশন — এবার পুরাই প্রিমিয়াম! */
+/* Footer */
+footer{
+  text-align:center;padding:25px;color:#ccc;font-weight:700;background:#1a1a2e
+}
+
+/* নিচের নেভিগেশন – রাজকীয় লুক */
 .nav{
   position:fixed;bottom:15px;left:50%;transform:translateX(-50%);
   background:rgba(255,255,255,0.22);backdrop-filter:blur(25px);
@@ -99,16 +110,22 @@ header p{font-size:19px;opacity:0.95}
 .nav a{
   width:68px;height:68px;background:rgba(255,255,255,0.25);
   border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:30px;color:#fff;transition:all 0.4s;
-  box-shadow:0 10px 30px rgba(0,0,0,0.3)
+  color:#fff;font-size:30px;transition:all 0.4s;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);position:relative;overflow:hidden
 }
+.nav a::before{
+  content:'';position:absolute;top:0;left:0;width:100%;height:100%;
+  background:linear-gradient(135deg,rgba(255,255,255,0.3),rgba(255,255,255,0));
+  border-radius:50%;transition:0.5s;transform:scale(0)
+}
+.nav a:hover::before{transform:scale(1.8)}
 .nav a:hover{
-  background:#4f46e5;transform:scale(1.2) translateY(-10px);
-  box-shadow:0 20px 50px rgba(79,70,229,0.7)
+  background:#4f46e5;transform:scale(1.22) translateY(-12px);
+  box-shadow:0 25px 60px rgba(79,70,229,0.8)
 }
 .nav a.active{
-  background:#4f46e5;box-shadow:0 0 35px #4f46e5;
-  transform:scale(1.15)
+  background:#4f46e5;box-shadow:0 0 40px #6366f1, 0 25px 60px rgba(79,70,229,0.8);
+  transform:scale(1.18)
 }
 </style>
 </head>
@@ -118,10 +135,21 @@ header p{font-size:19px;opacity:0.95}
 
   <!-- Header -->
   <header>
-    <div class="logo-circle">HY</div>
-    <h1>Habib YT</h1>
-    <p>দ্রুত • নিরাপদ • বিশ্বস্ত</p>
+    <div class="logo-area">
+      <img src="assets/logo.png" alt="Habib YT">
+      <div>
+        <h2>Habib YT</h2>
+        <small>দ্রুত • নিরাপদ • বিশ্বস্ত</small>
+      </div>
+    </div>
+    <button class="auth-btn" id="loginBtn">Login</button>
   </header>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>দ্রুত ও নিরাপদ টপ-আপ</h1>
+    <p>Free Fire • eFootball • Like/Followers • Accessories</p>
+  </div>
 
   <!-- Services -->
   <div class="services">
@@ -147,7 +175,7 @@ header p{font-size:19px;opacity:0.95}
   <div class="about-box">
     <h3>About Me</h3>
     <p>আমি হাবিবুর রহমান — তোমাদের ভাই</p>
-    <a href="https://habib-web.vercel.app" target="_blank" class="visit-btn">Visit Portfolio</a>
+    <a href="https://habib-web.vercel.app" target="_blank" class="about-btn">Visit Portfolio</a>
   </div>
 
   <!-- Support -->
@@ -157,11 +185,13 @@ header p{font-size:19px;opacity:0.95}
     <a href="https://wa.me/8801868461577" class="whatsapp">WhatsApp</a>
   </div>
 
+  <footer>
+    © Habibur Rahman<br><small>All Rights Reserved 2025</small>
+  </footer>
+
 </div>
 
-<!-- শুধু এই অংশটা ওভাররাইট কর (বাকি কোড আগের মতোই থাকবে) -->
-
-<!-- নিচের নেভিগেশন — রাজকীয় ভার্সন 2025 🔥 -->
+<!-- নিচের নেভিগেশন – রাজকীয়! -->
 <div class="nav">
   <a href="index.html" class="active">
     <i class="fas fa-home"></i>
@@ -177,43 +207,25 @@ header p{font-size:19px;opacity:0.95}
   </a>
   <a href="login.html">
     <i class="fas fa-user-circle"></i>
-    <span>Account</span>
+    <span>Login</span>
   </a>
 </div>
 
-<style>
-.nav{
-  position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
-  background:rgba(255,255,255,0.25);backdrop-filter:blur(30px);
-  border-radius:70px;padding:18px 25px;
-  display:flex;gap:28px;z-index:999;
-  box-shadow:0 20px 50px rgba(0,0,0,0.35);
-  border:4px solid rgba(255,255,255,0.3)
-}
-.nav a{
-  width:82px;height:82px;background:rgba(255,255,255,0.3);
-  border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  color:#fff;font-weight:900;font-size:32px;transition:all 0.4s;
-  box-shadow:0 12px 35px rgba(0,0,0,0.4);position:relative;overflow:hidden
-}
-.nav a::before{
-  content:'';position:absolute;top:0;left:0;width:100%;height:100%;
-  background:linear-gradient(135deg,rgba(255,255,255,0.3),rgba(255,255,255,0));
-  border-radius:50%;transition:0.5s;transform:scale(0)
-}
-.nav a:hover::before{transform:scale(1.8)}
-.nav a span{
-  font-size:15px;margin-top:6px;font-weight:900;letter-spacing:0.5px
-}
-.nav a:hover{
-  background:#4f46e5;transform:scale(1.22) translateY(-12px);
-  box-shadow:0 25px 60px rgba(79,70,229,0.8)
-}
-.nav a.active{
-  background:#4f46e5;transform:scale(1.18);
-  box-shadow:0 0 40px #6366f1, 0 25px 60px rgba(79,70,229,0.8)
-}
-</style>
+<!-- Firebase Auto Login -->
+<script type="module">
+  import { auth } from "./firebase.js";
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+  const loginBtn = document.getElementById("loginBtn");
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      loginBtn.innerText = "My Account";
+      loginBtn.onclick = () => location.href = "dashboard.html";
+    } else {
+      loginBtn.innerText = "Login";
+      loginBtn.onclick = () => location.href = "login.html";
+    }
+  });
+</script>
 
 </body>
 </html>
