@@ -3,144 +3,163 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Habib YT — দ্রুত ও নিরাপদ টপ-আপ</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
+<title>Habib YT - দ্রুত ও নিরাপদ টপ-আপ</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#667eea,#764ba2);
-  color:#fff;min-height:100vh
+  background:linear-gradient(135deg,#6366f1,#8b5cf6,#a78bfa);
+  min-height:100vh;color:#fff
 }
 .container{
-  max-width:480px;margin:0 auto;background:#fff;
-  min-height:100vh;border-radius:25px 25px 0 0;
-  overflow:hidden;box-shadow:0 0 60px rgba(102,126,234,0.5);
-  padding-bottom:100px
+  max-width:480px;margin:0 auto;min-height:100vh;
+  background:#fff;border-radius:0;overflow:hidden;
+  box-shadow:0 0 50px rgba(99,102,241,0.4)
 }
 
-/* Header – প্রিমিয়াম */
+/* Header – তোর লোগো স্টাইল */
 header{
-  background:linear-gradient(135deg,#5a67d8,#4c51bf);
-  padding:22px 20px;color:#fff;text-align:center;
-  box-shadow:0 10px 30px rgba(90,103,216,0.4)
+  background:linear-gradient(135deg,#4f46e5,#7c3aed);
+  padding:40px 20px 50px;text-align:center;
+  clip-path:ellipse(100% 75% at 50% 25%)
 }
-.logo img{width:70px;height:70px;border-radius:50%;border:5px solid rgba(255,255,255,0.3)}
-header h1{font-size:32px;font-weight:900;margin:10px 0 5px}
-header p{font-size:17px;opacity:0.9}
+.logo-circle{
+  width:110px;height:110px;background:#fff;border-radius:50%;
+  margin:0 auto 15px;display:flex;align-items:center;justify-content:center;
+  font-size:52px;font-weight:900;color:#4f46e5;box-shadow:0 10px 30px rgba(0,0,0,0.3)
+}
+header h1{font-size:38px;font-weight:900;margin:10px 0}
+header p{font-size:19px;opacity:0.95}
 
-/* Hero Cards */
+/* Services Grid */
 .services{
-  display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:30px 20px
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  padding:0 20px;margin-top:-40px;position:relative;z-index:2
 }
 .card{
-  background:#fff;border-radius:25px;overflow:hidden;
-  box-shadow:0 15px 40px rgba(0,0,0,0.15);transition:0.4s;
-  cursor:pointer;color:#333
+  background:#fff;border-radius:28px;overflow:hidden;
+  box-shadow:0 15px 40px rgba(0,0,0,0.18);transition:all 0.4s;
+  text-align:center;cursor:pointer
 }
-.card:hover{transform:translateY(-15px) scale(1.05);box-shadow:0 30px 70px rgba(102,126,234,0.4)}
-.card img{width:100%;height:140px;object-fit:cover}
+.card:hover{
+  transform:translateY(-18px) scale(1.06);
+  box-shadow:0 30px 70px rgba(99,102,241,0.5)
+}
+.card img{width:100%;height:150px;object-fit:cover}
 .card h3{
-  padding:16px 8px;text-align:center;font-size:17px;font-weight:800;
-  background:linear-gradient(135deg,#667eea,#764ba2);color:#fff
+  padding:18px 10px;font-size:18px;font-weight:800;
+  background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff
 }
 
-/* About Me Box – আগুন লাগানো */
+/* About Me Box */
 .about-box{
-  margin:40px 25px;padding:35px;
-  background:linear-gradient(135deg,#ff6b6b,#ffa500);
-  border-radius:30px;text-align:center;color:#fff;
+  margin:50px 25px 30px;padding:35px;
+  background:linear-gradient(135deg,#ff6b6b,#ffa726);
+  border-radius:35px;text-align:center;
   box-shadow:0 25px 60px rgba(255,107,107,0.5);
-  border:4px solid rgba(255,255,255,0.3)
+  border:5px solid rgba(255,255,255,0.3)
 }
-.about-box h3{font-size:30px;font-weight:900;margin-bottom:12px}
-.about-box p{font-size:18px;margin-bottom:22px}
-.about-btn{
-  display:inline-block;padding:18px 55px;background:#fff;color:#e63946;
-  font-size:21px;font-weight:900;border-radius:50px;
-  text-decoration:none;box-shadow:0 12px 35px rgba(0,0,0,0.3);
-  transition:0.4s
+.about-box h3{font-size:32px;font-weight:900;margin-bottom:12px}
+.about-box p{font-size:19px;margin-bottom:25px}
+.visit-btn{
+  display:inline-block;padding:18px 60px;background:#fff;color:#e63946;
+  font-size:22px;font-weight:900;border-radius:50px;text-decoration:none;
+  box-shadow:0 15px 40px rgba(0,0,0,0.3);transition:0.4s
 }
-.about-btn:hover{transform:scale(1.1);background:#e63946;color:#fff}
+.visit-btn:hover{
+  transform:scale(1.12);background:#e63946;color:#fff
+}
 
 /* Support */
 .support{
-  margin:40px 25px;padding:28px;background:rgba(255,255,255,0.15);
-  border-radius:28px;text-align:center;backdrop-filter:blur(15px);
-  border:2px solid rgba(255,255,255,0.2)
+  margin:20px 25px 80px;padding:30px;
+  background:rgba(255,255,255,0.18);border-radius:30px;
+  text-align:center;backdrop-filter:blur(15px)
 }
 .support a{
-  display:inline-block;padding:16px 40px;margin:10px;border-radius:50px;
-  font-weight:900;font-size:17px;color:#fff;transition:0.3s
+  display:inline-block;padding:16px 45px;margin:10px;
+  border-radius:50px;font-weight:900;font-size:18px;
+  color:#fff;transition:0.3s
 }
-.telegram{background:#0088cc;box-shadow:0 10px 30px rgba(0,136,204,0.5)}
-.whatsapp{background:#25d366;box-shadow:0 10px 30px rgba(37,211,102,0.5)}
-.support a:hover{transform:scale(1.1)}
+.telegram{background:#0088cc;box-shadow:0 12px 35px rgba(0,136,204,0.5)}
+.whatsapp{background:#25d366;box-shadow:0 12px 35px rgba(37,211,102,0.5)}
+.support a:hover{transform:scale(1.15)}
 
-/* Footer */
-footer{
-  text-align:center;padding:25px;color:#ccc;font-weight:700;background:#1a1a2e
-}
-
-/* নিচের নেভিগেশন — এবার পুরাই আগুন! */
+/* নিচের নেভিগেশন — এবার পুরাই প্রিমিয়াম! */
 .nav{
-  position:fixed;bottom:0;left:0;width:100%;
-  background:rgba(255,255,255,0.12);backdrop-filter:blur(20px);
-  border-top:4px solid #667eea;padding:14px 0;
-  display:flex;justify-content:space-around;z-index:999;
-  box-shadow:0 -10px 40px rgba(102,126,234,0.4)
+  position:fixed;bottom:15px;left:50%;transform:translateX(-50%);
+  background:rgba(255,255,255,0.22);backdrop-filter:blur(25px);
+  border-radius:60px;padding:16px 20px;
+  display:flex;gap:25px;z-index:999;
+  box-shadow:0 15px 40px rgba(0,0,0,0.3);
+  border:3px solid rgba(255,255,255,0.3)
 }
 .nav a{
-  color:#fff;font-size:28px;padding:12px 20px;border-radius:50%;
-  background:rgba(255,255,255,0.15);width:65px;height:65px;
-  display:flex;align-items:center;justify-content:center;
-  transition:0.4s;box-shadow:0 8px 25px rgba(0,0,0,0.3)
+  width:68px;height:68px;background:rgba(255,255,255,0.25);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:30px;color:#fff;transition:all 0.4s;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3)
 }
 .nav a:hover{
-  background:#667eea;transform:scale(1.25);
-  box-shadow:0 15px 40px rgba(102,126,234,0.6)
+  background:#4f46e5;transform:scale(1.2) translateY(-10px);
+  box-shadow:0 20px 50px rgba(79,70,229,0.7)
 }
-.nav a.active{background:#667eea;box-shadow:0 0 30px #667eea}
+.nav a.active{
+  background:#4f46e5;box-shadow:0 0 35px #4f46e5;
+  transform:scale(1.15)
+}
 </style>
 </head>
 <body>
 
 <div class="container">
 
+  <!-- Header -->
   <header>
-    <div class="logo"><img src="assets/logo.png" alt="Habib YT"></div>
+    <div class="logo-circle">HY</div>
     <h1>Habib YT</h1>
     <p>দ্রুত • নিরাপদ • বিশ্বস্ত</p>
   </header>
 
+  <!-- Services -->
   <div class="services">
-    <div class="card" onclick="location.href='freefire.html'"><img src="assets/ff.jpg"><h3>Free Fire</h3></div>
-    <div class="card" onclick="location.href='efootball.html'"><img src="assets/efootball.jpg"><h3>eFootball</h3></div>
-    <div class="card" onclick="location.href='like-follower.html'"><img src="assets/like.jpg"><h3>Like & Followers</h3></div>
-    <div class="card" onclick="location.href='mobile-accessories.html'"><img src="assets/accessories.jpg"><h3>Accessories</h3></div>
+    <div class="card" onclick="location.href='freefire.html'">
+      <img src="assets/ff.jpg" alt="Free Fire">
+      <h3>Free Fire</h3>
+    </div>
+    <div class="card" onclick="location.href='efootball.html'">
+      <img src="assets/efootball.jpg" alt="eFootball">
+      <h3>eFootball</h3>
+    </div>
+    <div class="card" onclick="location.href='like-follower.html'">
+      <img src="assets/like.jpg" alt="Like Follower">
+      <h3>Like & Followers</h3>
+    </div>
+    <div class="card" onclick="location.href='mobile-accessories.html'">
+      <img src="assets/accessories.jpg" alt="Accessories">
+      <h3>Accessories</h3>
+    </div>
   </div>
 
   <!-- About Me Box -->
   <div class="about-box">
     <h3>About Me</h3>
     <p>আমি হাবিবুর রহমান — তোমাদের ভাই</p>
-    <a href="https://habib-web.vercel.app" target="_blank" class="about-btn">Visit Portfolio</a>
+    <a href="https://habib-web.vercel.app" target="_blank" class="visit-btn">Visit Portfolio</a>
   </div>
 
+  <!-- Support -->
   <div class="support">
     <h2>24/7 Support</h2>
     <a href="https://t.me/H_A_B_I_B_Top_1" class="telegram">Telegram</a>
     <a href="https://wa.me/8801868461577" class="whatsapp">WhatsApp</a>
   </div>
 
-  <footer>
-    © Habibur Rahman<br><small>All Rights Reserved 2025</small>
-  </footer>
-
 </div>
 
-<!-- নিচের নেভিগেশন — পুরাই প্রিমিয়াম! -->
+<!-- নিচের নেভিগেশন — সুপার প্রিমিয়াম! -->
 <div class="nav">
   <a href="index.html" class="active">Home</a>
   <a href="dashboard.html">Dashboard</a>
