@@ -1,317 +1,183 @@
-<!DOCTYPE html>  <html lang="bn" translate="no">  
-<head>  
-  <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>Habib YT — আপনার বিশ্বস্ত সহযোগী</title>    <style>  
-    /* ============================  
-       GLOBAL SETTINGS  
-    ============================ */  
-    body {  
-      margin: 0;  
-      font-family: "Poppins", sans-serif;  
-      background: linear-gradient(180deg, #e9f0ff, #f7f9ff);  
-      overflow-x: hidden;  
-      color: #222;  
-    }  
-  
-    .fade-in { animation: fadeIn .7s ease-in-out forwards; opacity: 0; }  
-    @keyframes fadeIn {  
-      from { opacity:0; transform: translateY(20px); }  
-      to   { opacity:1; transform: translateY(0); }  
-    }  
-  
-    .slide-up { animation: slideUp .7s ease; }  
-    @keyframes slideUp {  
-      from { opacity:0; transform: translateY(40px); }  
-      to   { opacity:1; transform: translateY(0); }  
-    }  
-  
-    /* ============================  
-       HEADER  
-    ============================ */  
-    header {  
-      background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);  
-      padding: 15px 20px;  
-      display: flex;  
-      align-items: center;  
-      justify-content: space-between;  
-      color: white;  
-      border-bottom-left-radius: 20px;  
-      border-bottom-right-radius: 20px;  
-      box-shadow: 0 5px 18px rgba(0,0,0,0.25);  
-    }  
-  
-    header img {  
-      width: 50px;  
-      height: 50px;  
-      border-radius: 50%;  
-    }  
-  
-    header h2 {  
-      margin: 0;  
-      font-size: 22px;  
-      font-weight: bold;  
-    }  
-  
-    header small {  
-      font-size: 13px;  
-      opacity: 0.9;  
-      display: block;  
-      margin-top: -3px;  
-    }  
-  
-    nav button {  
-      background: rgba(255,255,255,0.20);  
-      padding: 8px 14px;  
-      border: 1px solid rgba(255,255,255,0.5);  
-      border-radius: 10px;  
-      color: white;  
-      font-weight: 600;  
-      backdrop-filter: blur(6px);  
-      cursor: pointer;  
-      transition: .25s;  
-    }  
-  
-    nav button:hover {  
-      transform: translateY(-3px);  
-      background: rgba(255,255,255,0.35);  
-    }  
-  
-    /* ============================  
-       HERO SECTION  
-    ============================ */  
-    .hero {  
-      text-align: center;  
-      padding: 40px 20px 20px;  
-    }  
-  
-    .hero h1 {  
-      font-size: 28px;  
-      font-weight: 700;  
-      color: #0057e7;  
-      text-shadow: 0 0 10px rgba(0,102,255,0.3);  
-    }  
-  
-    .hero p {  
-      font-size: 15px;  
-      color: #555;  
-    }  
-  
-    /* ============================  
-       SERVICE CARD GRID  
-    ============================ */  
-    .services {  
-      display: grid;  
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));  
-      gap: 15px;  
-      padding: 20px;  
-    }  
-  
-    .card {  
-      background: rgba(255,255,255,0.55);  
-      border-radius: 16px;  
-      backdrop-filter: blur(8px);  
-      padding: 12px;  
-      border: 1px solid rgba(255,255,255,0.45);  
-      text-align: center;  
-      cursor: pointer;  
-      transition: 0.35s;  
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);  
-    }  
-  
-    .card:hover {  
-      transform: translateY(-8px) scale(1.03);  
-      box-shadow: 0 8px 20px rgba(0,0,0,0.20);  
-    }  
-  
-    .card img {  
-      width: 100%;  
-      height: 105px;  
-      object-fit: cover;  
-      border-radius: 12px;  
-    }  
-  
-    .card h3 {  
-      margin-top: 10px;  
-      font-size: 15px;  
-      font-weight: 600;  
-      color: #0057e7;  
-    }  
-  
-    /* ============================  
-       SUPPORT BOX  
-    ============================ */  
-    .support {  
-      background: rgba(255,255,255,0.65);  
-      padding: 18px;  
-      margin: 25px 15px;  
-      border-radius: 16px;  
-      text-align: center;  
-      box-shadow: 0 4px 12px rgba(0,0,0,0.10);  
-    }  
-  
-    .support h2 {  
-      color: #0057e7;  
-      margin-bottom: 10px;  
-    }  
-  
-    .support a {  
-      padding: 10px 16px;  
-      display: inline-block;  
-      text-decoration: none;  
-      color: white;  
-      border-radius: 10px;  
-      font-weight: 600;  
-      margin: 8px;  
-    }  
-  
-    .telegram { background: #0088cc; }  
-    .whatsapp { background: #25d366; }  
-  
-    /* ============================  
-       LEGAL SECTION  
-    ============================ */  
-    .legal {  
-      background: rgba(255,255,255,0.60);  
-      margin: 25px 15px;  
-      padding: 22px;  
-      border-radius: 16px;  
-      backdrop-filter: blur(10px);  
-      box-shadow: 0 3px 12px rgba(0,0,0,0.12);  
-      font-size: 14px;  
-      line-height: 1.6;  
-    }  
-  
-    .legal h2 {  
-      text-align: center;  
-      color: #0057e7;  
-      margin-bottom: 15px;  
-    }  
-  
-    .legal h3 {  
-      color: #0057e7;  
-      margin-top: 12px;  
-      font-size: 16px;  
-    }  
-  
-    /* ============================  
-       FOOTER  
-    ============================ */  
-    footer {  
-      background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);  
-      color: white;  
-      text-align: center;  
-      padding: 16px;  
-      font-weight: bold;  
-      border-top-left-radius: 20px;  
-      border-top-right-radius: 20px;  
-      margin-top: 30px;  
-      box-shadow: 0 -5px 18px rgba(0,0,0,0.25);  
-    }  
-  
-    footer small {  
-      opacity: 0.85;  
-      font-size: 13px;  
-    }  
-  
-    /* ============================  
-       BOTTOM NAV  
-    ============================ */  
-    .bottom-nav {  
-      position: fixed;  
-      bottom: 0;  
-      width: 100%;  
-      background: rgba(255,255,255,0.25);  
-      backdrop-filter: blur(15px);  
-      display: flex;  
-      justify-content: space-around;  
-      padding: 12px 0;  
-      border-top: 2px solid rgba(255,255,255,0.6);  
-      z-index: 999;  
-    }  
-  
-    .bottom-nav button {  
-      background: transparent;  
-      border: none;  
-      font-size: 14px;  
-      font-weight: 700;  
-      color: #0052d4;  
-      cursor: pointer;  
-      text-shadow: 0 0 8px rgba(0,90,255,0.5);  
-      transition: .2s;  
-    }  
-  
-    .bottom-nav button:hover {  
-      transform: scale(1.1);  
-      color: #003bb8;  
-    }  
-  </style>  </head>  <body>  <!-- HEADER -->  <header class="fade-in">  
-  <div style="display:flex; align-items:center; gap:12px;">  
-    <img src="assets/logo.png">  
-    <div>  
-      <h2>Habib YT</h2>  
-      <small>আপনার বিশ্বস্ত সহযোগী</small>  
-    </div>  
-  </div>    <nav>  
-    <button id="loginBtn">Login</button>  
-    <button onclick="location.href='dashboard.html'">Dashboard</button>  
-  </nav>  
-</header>  <!-- HERO -->  <section class="hero fade-in">  
-  <h1>🔥 দ্রুত ও নিরাপদ গেমিং টপ-আপ</h1>  
-  <p>Free Fire • EFootball • Like/Followers • Mobile Services</p>  
-</section>  <!-- SERVICES -->  <section class="services fade-in">    <div class="card" onclick="location.href='freefire.html'">  
-    <img src="assets/ff.jpg">  
-    <h3>Free Fire Diamond</h3>  
-  </div>    <div class="card" onclick="location.href='efootball.html'">  
-    <img src="assets/efootball.jpg">  
-    <h3>EFootball Coins</h3>  
-  </div>    <div class="card" onclick="location.href='like-follower.html'">  
-    <img src="assets/like.jpg">  
-    <h3>Like & Followers</h3>  
-  </div>    <div class="card" onclick="location.href='mobile-accessories.html'">  
-    <img src="assets/accessories.jpg">  
-    <h3>Mobile Accessories</h3>  
-  </div>    <div class="card" onclick="location.href='mobile-servicing.html'">  
-    <img src="assets/servicing.jpg">  
-    <h3>Mobile Servicing</h3>  
-  </div>    <div class="card" onclick="location.href='coming-soon.html'">  
-    <img src="assets/coming.jpg">  
-    <h3>Coming Soon</h3>  
-  </div>  </section>  <!-- SUPPORT -->  <section class="support fade-in">  
-  <h2>📞 Customer Support</h2>  
-  <p>If you need any help, feel free to contact us:</p>  <a class="telegram" href="https://t.me/H_A_B_I_B_Top_1">💬 Telegram</a>
-<a class="whatsapp" href="https://wa.me/8801868461577">📱 WhatsApp</a>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habib YT — দ্রুত ও নিরাপদ টপ-আপ</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#e0eafc,#cfdef3);
+  color:#222;min-height:100vh;overflow-x:hidden
+}
+.container{
+  max-width:480px;margin:0 auto;background:#fff;
+  box-shadow:0 0 40px rgba(0,80,200,0.15);min-height:100vh;position:relative;
+  padding-bottom:160px
+}
 
-</section>  <!-- LEGAL SECTION -->  <section class="legal fade-in">  
-  <h2>📜 Terms & Policies</h2>    <h3>✔ Service Terms</h3>  
-  <p>Habib YT provides digital top-up service. Wrong UID/ID is customer responsibility.</p>    <h3>✔ Privacy Policy</h3>  
-  <p>Your data is kept safe in Firebase. We do not share with 3rd parties.</p>    <h3>✔ Refund Policy</h3>  
-  <p>Refund only if order is not delivered. Wrong input is not refundable.</p>    <h3>✔ Copyright</h3>  
-  <p>Design, logo & code are owned by Habib YT. Copying is prohibited.</p>    <h3>✔ Disclaimer</h3>  
-  <p>Delays caused by game servers or maintenance are not in our control.</p>  
-</section>  <!-- FOOTER -->  <footer class="fade-in">  
-  Habib YT — Your Trusted Partner  
-  <br>  
-  <small>© 2025 Habib YT. All Rights Reserved.</small>  
-</footer>  <!-- BOTTOM NAV -->  <div class="bottom-nav slide-up">  
-  <button onclick="location.href='index.html'">🏠 Home</button>  
-  <button onclick="location.href='dashboard.html'">💼 Dashboard</button>  
-  <button onclick="location.href='add-money.html'">💰 Add Money</button>  
-  <button onclick="location.href='login.html'">🔐 Login</button>  
-</div>  <!-- AUTO LOGIN BUTTON CHANGE -->  <script type="module">  
-  import { auth } from "./firebase.js";  
-  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";  
-  
-  const loginBtn = document.getElementById("loginBtn");  
-  
-  onAuthStateChanged(auth, (user) => {  
-    if (user) {  
-      loginBtn.innerText = "My Account";  
-      loginBtn.onclick = () => location.href = "dashboard.html";  
-    } else {  
-      loginBtn.innerText = "Login";  
-      loginBtn.onclick = () => location.href = "login.html";  
-    }  
-  });  
-</script>  </body>  
+/* Header */
+header{
+  background:linear-gradient(135deg,rgba(0,82,212,0.95),rgba(67,100,247,0.95));
+  padding:20px;color:#fff;border-radius:0 0 30px 30px;
+  backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(0,82,212,0.3);
+  display:flex;align-items:center;justify-content:space-between
+}
+.logo-area{display:flex;align-items:center;gap:15px}
+.logo-area img{width:58px;height:58px;border-radius:50%;border:4px solid rgba(255,255,255,0.4)}
+.logo-area h2{font-size:26px;font-weight:900}
+.logo-area small{font-size:14px;opacity:0.9}
+
+.auth-btn{
+  padding:10px 20px;background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4);
+  border-radius:14px;font-weight:700;backdrop-filter:blur(8px);transition:0.3s;cursor:pointer
+}
+.auth-btn:hover{background:rgba(255,255,255,0.4);transform:translateY(-3px)}
+
+/* Hero */
+.hero{
+  text-align:center;padding:50px 20px 35px;background:linear-gradient(135deg,#667eea,#764ba2);
+  margin:20px 20px 35px;border-radius:30px;color:#fff;box-shadow:0 15px 40px rgba(102,126,234,0.3)
+}
+.hero h1{font-size:34px;font-weight:900;margin-bottom:10px}
+.hero p{font-size:19px;opacity:0.95}
+
+/* Services Grid – শুধু ৪টা কার্ড */
+.services{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:22px;padding:0 25px 40px
+}
+.card{
+  background:rgba(255,255,255,0.75);border-radius:25px;overflow:hidden;
+  box-shadow:0 12px 35px rgba(0,0,0,0.12);transition:0.4s;backdrop-filter:blur(12px);
+  border:2px solid rgba(255,255,255,0.6);cursor:pointer
+}
+.card:hover{transform:translateY(-14px) scale(1.05);box-shadow:0 25px 60px rgba(102,126,234,0.4)}
+.card img{width:100%;height:140px;object-fit:cover}
+.card h3{
+  padding:16px 10px 12px;text-align:center;font-size:17px;font-weight:800;
+  color:#0057e7;background:rgba(255,255,255,0.9)
+}
+
+/* About Me Box – সুন্দর প্রিমিয়াম লুক */
+.about-box{
+  margin:40px 25px;padding:30px;background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  border-radius:30px;text-align:center;box-shadow:0 20px 50px rgba(255,154,158,0.4);
+  border:3px solid #ffb4b4;animation:pulse 3s infinite
+}
+@keyframes pulse{0%,100%{box-shadow:0 20px 50px rgba(255,154,158,0.4)}50%{box-shadow:0 30px 70px rgba(255,154,158,0.7)}}
+.about-box h3{font-size:28px;font-weight:900;color:#d6336c;margin-bottom:10px}
+.about-box p{font-size:18px;color:#333;margin-bottom:20px}
+.about-btn{
+  display:inline-block;padding:18px 50px;background:#d6336c;color:#fff;
+  font-size:20px;font-weight:900;border-radius:50px;text-decoration:none;
+  box-shadow:0 10px 30px rgba(214,51,108,0.5);transition:0.4s
+}
+.about-btn:hover{background:#c2255c;transform:scale(1.08)}
+
+/* Support + Legal + Footer */
+.support,.legal{
+  margin:35px 25px;padding:28px;background:rgba(255,255,255,0.78);border-radius:28px;
+  backdrop-filter:blur(12px);box-shadow:0 15px 40px rgba(0,0,0,0.12);text-align:center
+}
+.support a,.legal a{padding:14px 35px;border-radius:50px;margin:8px;display:inline-block;color:#fff;font-weight:700}
+.telegram{background:#0088cc}.whatsapp{background:#25d366}
+
+footer{
+  background:linear-gradient(135deg,#0052d4,#6fb1fc);color:#fff;text-align:center;
+  padding:25px;border-radius:30px 30px 0 0;margin-top:50px;font-weight:700;font-size:16px
+}
+
+/* Bottom Navigation – সুপার প্রিমিয়াম */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;width:100%;background:rgba(255,255,255,0.35);
+  backdrop-filter:blur(20px);border-top:4px solid #667eea;padding:16px 0;
+  display:flex;justify-content:space-around;z-index:999;box-shadow:0 -15px 40px rgba(0,0,0,0.2)
+}
+.bottom-nav button{
+  background:transparent;border:none;color:#0057e7;font-size:16px;font-weight:900;
+  cursor:pointer;transition:0.4s;padding:10px 20px;border-radius:50px
+}
+.bottom-nav button:hover{background:rgba(102,126,234,0.2);transform:scale(1.2);color:#003bb8}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <div class="logo-area">
+      <img src="assets/logo.png" alt="Habib YT">
+      <div>
+        <h2>Habib YT</h2>
+        <small>আপনার বিশ্বস্ত সহযোগী</small>
+      </div>
+    </div>
+    <button class="auth-btn" id="loginBtn">Login</button>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>দ্রুত ও নিরাপদ টপ-আপ</h1>
+    <p>Free Fire • eFootball • Like/Followers</p>
+  </div>
+
+  <!-- Services – শুধু ৪টা -->
+  <div class="services">
+    <div class="card" onclick="location.href='freefire.html'"><img src="assets/ff.jpg"><h3>Free Fire Diamond</h3></div>
+    <div class="card" onclick="location.href='efootball.html'"><img src="assets/efootball.jpg"><h3>eFootball Coins</h3></div>
+    <div class="card" onclick="location.href='like-follower.html'"><img src="assets/like.jpg"><h3>Like & Followers</h3></div>
+    <div class="card" onclick="location.href='mobile-accessories.html'"><img src="assets/accessories.jpg"><h3>Mobile Accessories</h3></div>
+  </div>
+
+  <!-- About Me Box -->
+  <div class="about-box">
+    <h3>About Me</h3>
+    <p>আমি হাবিবুর রহমান — তোমাদের ভাই</p>
+    <a href="https://habib-web.vercel.app" target="_blank" class="about-btn">Visit Portfolio</a>
+  </div>
+
+  <!-- Support -->
+  <div class="support">
+    <h2>Customer Support 24/7</h2>
+    <a href="https://t.me/H_A_B_I_B_Top_1" class="telegram">Telegram</a>
+    <a href="https://wa.me/8801868461577" class="whatsapp">WhatsApp</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © Habibur Rahman<br>
+    <small>All Rights Reserved 2025</small>
+  </footer>
+
+</div>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <button onclick="location.href='index.html'">Home</button>
+  <button onclick="location.href='dashboard.html'">Dashboard</button>
+  <button onclick="location.href='add-money.html'">Add Money</button>
+  <button onclick="location.href='login.html'">Login</button>
+</div>
+
+<!-- Firebase Auto Login Change -->
+<script type="module">
+  import { auth } from "./firebase.js";
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+  const loginBtn = document.getElementById("loginBtn");
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      loginBtn.innerText = "My Account";
+      loginBtn.onclick = () => location.href = "dashboard.html";
+    } else {
+      loginBtn.innerText = "Login";
+      loginBtn.onclick = () => location.href = "login.html";
+    }
+  });
+</script>
+
+</body>
 </html>
