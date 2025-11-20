@@ -3,246 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RioTopup - FreeFire Diamond Topup Shop BD</title>
+    <title>RioTopup - FreeFire Diamond Topup BD</title>
+    
+    <!-- Google Fonts (Bangla + English) -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #f0f0f0; direction: ltr; }
-        .container { max-width: 100%; margin: 0 auto; padding: 10px; }
-        header { background-color: #ff4444; color: white; text-align: center; padding: 10px; }
-        .nav-top { display: flex; justify-content: space-between; background: #333; color: white; padding: 5px; }
-        .nav-top a { color: white; text-decoration: none; margin: 0 10px; }
-        .hero { background: #ff6666; text-align: center; padding: 20px; color: white; }
-        .hero img { width: 100%; max-height: 200px; object-fit: cover; }
-        .section { margin: 10px 0; padding: 10px; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 10px; text-align: center; }
-        .item { border: 1px solid #ddd; padding: 5px; border-radius: 5px; }
-        .item img { width: 60px; height: 60px; object-fit: cover; }
-        .social-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-        .social-item { text-align: center; }
-        .social-item img { width: 40px; height: 40px; }
-        .orders { display: flex; flex-direction: column; gap: 10px; }
-        .order-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f9f9f9; border-radius: 5px; }
-        .status { color: green; } /* Completed */
-        .status.processing { color: orange; }
-        footer { background: #003366; color: white; text-align: center; padding: 10px; }
-        button { background: #ff4444; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; }
-        .bottom-nav { display: flex; justify-content: space-around; background: #333; padding: 10px; position: fixed; bottom: 0; width: 100%; }
-        .bottom-nav a { color: white; text-decoration: none; }
-        @media (min-width: 768px) { .bottom-nav { position: relative; } }
+        body {
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding-bottom: 70px;
+            color: #333;
+        }
+        .header-top {
+            background: linear-gradient(45deg, #ff0000, #ff4444);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .game-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+        .game-item:hover {
+            background: #ff4444;
+            color: white;
+            transform: scale(1.05);
+        }
+        .game-item img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+        }
+        .btn-danger {
+            background: linear-gradient(45deg, #ff0000, #ff4444);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 600;
+        }
+        .order-item {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .status-completed { color: #28a745; font-weight: bold; }
+        .status-processing { color: #ffc107; font-weight: bold; }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #111;
+            padding: 10px 0;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+        .bottom-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .bottom-nav i {
+            font-size: 20px;
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>リオTopup</h1>
-            <p>FreeFire Diamond Topup Shop BD</p>
-        </header>
 
-        <div class="nav-top">
-            <a href="login.html">লগ ইন</a>
-            <a href="register.html">রেজিস্টার</a>
+    <!-- Top Header -->
+    <div class="header-top">
+        <div class="container">
+            <div class="logo">RioTopup</div>
+            <small>সবচেয়ে সস্তা ও দ্রুত টপআপ সার্ভিস বাংলাদেশে</small>
+            <div class="mt-2">
+                <a href="#" class="btn btn-light btn-sm me-2">লগইন</a>
+                <a href="#" class="btn btn-outline-light btn-sm">রেজিস্টার</a>
+            </div>
         </div>
-
-        <section class="hero">
-            <img src="https://via.placeholder.com/360x200/ff6666/white?text=Free+Fire+Topup+Banner" alt="Hero Banner">
-            <h2>উপহার পান Free Fire এবং PUBG এর জন্য</h2>
-            <p>আমাদের অফার গুলো চেক করুন এবং টপআপ করুন সহজে!</p>
-            <button onclick="alert('টপআপ শুরু করুন!')">টপআপ করুন</button>
-        </section>
-
-        <section class="section">
-            <h3>ফ্রি ফায়ার টপআপ</h3>
-            <div class="grid">
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=প্রিম" alt="Prime">
-                    <p>প্রিম</p>
-                    <a href="freefire.html"><button>কিনুন</button></a>
-                </div>
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ভিআইপি" alt="VIP">
-                    <p>ভিআইপি</p>
-                    <a href="freefire.html"><button>কিনুন</button></a>
-                </div>
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ইভেন্ট" alt="Event">
-                    <p>ইভেন্ট</p>
-                    <a href="freefire.html"><button>কিনুন</button></a>
-                </div>
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=প্যাক" alt="Pack">
-                    <p>প্যাক</p>
-                    <a href="freefire.html"><button>কিনুন</button></a>
-                </div>
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ইউজ" alt="Use">
-                    <p>ইউজার</p>
-                    <a href="freefire.html"><button>কিনুন</button></a>
-                </div>
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ড্যাফ" alt="DAF">
-                    <p>ড্যাফ্রি</p>
-                    <a href="freefire.html"><button>কিনুন</button></a>
-                </div>
-            </div>
-            <div class="grid">
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ওয়েক" alt="Weekly">
-                    <p>ওয়েকলি লাইক</p>
-                </div>
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=মান্থ" alt="Monthly">
-                    <p>মান্থলি ইউজিডি</p>
-                </div>
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ইভেন্ট" alt="Event UC">
-                    <p>ইভেন্ট ইউসি</p>
-                </div>
-            </div>
-            <div class="grid">
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=লেভেল" alt="Level">
-                    <p>লেভেল আপ কার্ড</p>
-                </div>
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ইয়ার" alt="Year">
-                    <p>ইয়ারলি মেম্বারশিপ</p>
-                </div>
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/ff4444/white?text=ড্যাফ" alt="DAF SP">
-                    <p>ড্যাফ্রি এসপি পাস</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <h3>লাইক ফলো সাবস্ক্রাইবার</h3>
-            <div class="social-grid">
-                <div class="social-item">
-                    <img src="https://via.placeholder.com/40x40/333/white?text=FB" alt="Facebook Like">
-                    <p>ফেসবুক লাইক</p>
-                </div>
-                <div class="social-item">
-                    <img src="https://via.placeholder.com/40x40/333/white?text=FB" alt="Facebook Follower">
-                    <p>ফেসবুক ফলোয়ার</p>
-                </div>
-                <div class="social-item">
-                    <img src="https://via.placeholder.com/40x40/333/white?text=FB" alt="Facebook Page">
-                    <p>ফেসবুক পেজ</p>
-                </div>
-                <div class="social-item">
-                    <img src="https://via.placeholder.com/40x40/333/white?text=IG" alt="Instagram">
-                    <p>ইনস্টাগ্রাম</p>
-                </div>
-                <div class="social-item">
-                    <img src="https://via.placeholder.com/40x40/333/white?text=YT" alt="YouTube">
-                    <p>ইউটিউব</p>
-                </div>
-                <div class="social-item">
-                    <img src="https://via.placeholder.com/40x40/333/white?text=TT" alt="TikTok">
-                    <p>টিকটক</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <h3>অন্যান্য গেমস</h3>
-            <div class="grid">
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/4CAF50/white?text=ML" alt="Mobile Legends">
-                    <p>মোবাইল লেজেন্ডস</p>
-                    <a href="mobilelegends.html"><button>টপআপ</button></a>
-                </div>
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/4CAF50/white?text=CoC" alt="Clash of Clans">
-                    <p>ক্ল্যাশ অফ ক্ল্যান্স</p>
-                    <a href="clashofclans.html"><button>টপআপ</button></a>
-                </div>
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/4CAF50/white?text=PUBG" alt="Pubg Mobile">
-                    <p>পাবজি মোবাইল</p>
-                    <a href="pubg.html"><button>টপআপ</button></a>
-                </div>
-            </div>
-            <div class="grid">
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/4CAF50/white?text=BK" alt="Bkash">
-                    <p>বিকাশ</p>
-                </div>
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/4CAF50/white?text=NL" alt="Nagad">
-                    <p>নগদ</p>
-                </div>
-                <div class="item">
-                    <img src="https://via.placeholder.com/60x60/4CAF50/white?text=Rocket" alt="Rocket">
-                    <p>রকেট</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <h3>সর্বশেষ অর্ডারগুলি</h3>
-            <p>আপনার অর্ডারের স্ট্যাটাস দেখুন এবং কোনো সমস্যার জন্য আমাদের সাথে যোগাযোগ করুন।</p>
-            <div class="orders">
-                <div class="order-item">
-                    <span>এম ডি ইমন | সপ্তাহিক ইমন | প্রসেসিং</span>
-                    <span class="status processing">১৫০ টাকা</span>
-                </div>
-                <div class="order-item">
-                    <span>এম ডি রহান | সপ্তাহিক লাইক | সম্পন্ন</span>
-                    <span class="status">৩০ টাকা</span>
-                </div>
-                <div class="order-item">
-                    <span>জে ফ্রি ফায়ার | ২৫ ডায়মন্ড | ১৮:০০ ঘণ্টা</span>
-                    <span class="status">সম্পন্ন</span>
-                </div>
-                <div class="order-item">
-                    <span>এ জে এফ টি | এয়ারড্রপ ৯৫০ বিটিআর | সম্পন্ন</span>
-                    <span class="status">৯৫ টাকা</span>
-                </div>
-                <div class="order-item">
-                    <span>আ আলম | এয়ারড্রপ ১২০০ বিটিআর | সম্পন্ন</span>
-                    <span class="status">১২০ টাকা</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <h3>স্টে কানেক্টেড</h3>
-            <p>৩য় তলা, ৩৭/এ নারায়ণগঞ্জ-৫, ঢাকা</p>
-            <button onclick="alert('WhatsApp খুলছে...')">WhatsApp</button>
-        </section>
-
-        <section class="section">
-            <h3>আমাদের মোবাইল অ্যাপ</h3>
-            <img src="https://via.placeholder.com/200x60/00BCD4/white?text=Get+it+on+Google+Play" alt="Google Play" style="width:100%;">
-            <button onclick="alert('Google Play এ redirect...')">গেট ইট অন গুগল প্লে</button>
-        </section>
-
-        <section class="section">
-            <h3>সাপোর্ট সেন্টার</h3>
-            <p>কোয়েরি: ০১৭-১২৩৪৫৬৭৮</p>
-            <button onclick="alert('WhatsApp Live Support...')">WhatsApp লাইভ সাপোর্ট</button>
-            <button onclick="alert('Facebook Live Support...')">Facebook লাইভ সাপোর্ট</button>
-        </section>
-
-        <footer>
-            <p>&copy; 2025 RioTopup. All Rights Reserved.</p>
-        </footer>
     </div>
 
-    <nav class="bottom-nav">
-        <a href="index.html">হোম</a>
-        <a href="tutorial.html">টিউটোরিয়াল</a>
-        <a href="topup.html">টপআপ</a>
-        <a href="account.html">অ্যাকাউন্ট</a>
-    </nav>
+    <div class="container mt-3">
 
-    <script>
-        document.querySelectorAll('button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Simulate action
-                alert('পেমেন্ট পেজে redirect হচ্ছে...');
-            });
-        });
-    </script>
+        <!-- Hero Banner -->
+        <div class="card mb-3">
+            <img src="https://via.placeholder.com/800x250/ff4444/white?text=Free+Fire+Topup+Offer+2025" class="w-100" alt="Offer">
+            <div class="card-body text-center">
+                <h4>ফ্রি ফায়ার ডায়মন্ড টপআপ</h4>
+                <p class="text-danger fw-bold">১০০ ডায়মন্ড = মাত্র ১৩০ টাকা!</p>
+                <a href="freefire.html" class="btn btn-danger btn-lg">এখনই টপআপ করুন</a>
+            </div>
+        </div>
+
+        <!-- Free Fire Services -->
+        <div class="card mb-4">
+            <div class="card-header bg-danger text-white text-center">
+                <h5 class="mb-0"><i class="fas fa-fire"></i> ফ্রি ফায়ার টপআপ</h5>
+            </div>
+            <div class="card-body p-3">
+                <div class="row g-3">
+                    <div class="col-4"><a href="freefire.html" class="text-decoration-none"><div class="game-item"><img src="https://via.placeholder.com/70?text=Weekly" alt=""><p class="mt-2 mb-0">Weekly</p></div></a></div>
+                    <div class="col-4"><a href="freefire.html" class="text-decoration-none"><div class="game-item"><img src="https://via.placeholder.com/70?text=Monthly" alt=""><p class="mt-2 mb-0">Monthly</p></div></a></div>
+                    <div class="col-4"><a href="freefire.html" class="text-decoration-none"><div class="game-item"><img src="https://via.placeholder.com/70?text=Level+Up" alt=""><p class="mt-2 mb-0">Level Up</p></div></a></div>
+                    <div class="col-4"><a href="freefire.html" class="text-decoration-none"><div class="game-item"><img src="https://via.placeholder.com/70?text=Airdrop" alt=""><p class="mt-2 mb-0">Airdrop</p></div></a></div>
+                    <div class="col-4"><a href="freefire.html" class="text-decoration-none"><div class="game-item"><img src="https://via.placeholder.com/70?text=VIP" alt=""><p class="mt-2 mb-0">VIP Pass</p></div></a></div>
+                    <div class="col-4"><a href="freefire.html" class="text-decoration-none"><div class="game-item"><img src="https://via.placeholder.com/70?text=Event" alt=""><p class="mt-2 mb-0">Event</p></div></a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Boost -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white text-center">
+                <h5 class="mb-0">লাইক ফলো সাবস্ক্রাইবার</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3 text-center">
+                    <div class="col-3"><a href="social.html"><img src="https://via.placeholder.com/60/1877F2/white?text=FB" class="rounded-circle" alt="FB"><p>Facebook</p></a></div>
+                    <div class="col-3"><a href="social.html"><img src="https://via.placeholder.com/60/E4405F/white?text=IG" class="rounded-circle" alt="IG"><p>Instagram</p></a></div>
+                    <div class="col-3"><a href="social.html"><img src="https://via.placeholder.com/60/FF0000/white?text=YT" class="rounded-circle" alt="YT"><p>YouTube</p></a></div>
+                    <div class="col-3"><a href="social.html"><img src="https://via.placeholder.com/60/000000/white?text=TT" class="rounded-circle" alt="TT"><p>TikTok</p></a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other Games -->
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white text-center">
+                <h5 class="mb-0">অন্যান্য গেমস</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-4"><a href="pubg.html" class="text-decoration-none"><div class="game-item"><img src="https://via.placeholder.com/70?text=PUBG" alt=""><p>PUBG UC</p></div></a></div>
+                    <div class="col-4"><a href="mobilelegends.html" class="text-decoration-none"><div class="game-item"><img src="https://via.placeholder.com/70?text=ML" alt=""><p>Mobile Legends</p></div></a></div>
+                    <div class="col-4"><a href="clashofclans.html" class="text-decoration-none"><div class="game-item"><img src="https://via.placeholder.com/70?text=CoC" alt=""><p>Clash of Clans</p></div></a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">সর্বশেষ অর্ডারসমূহ</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="order-item">
+                    <div>এম ডি ইমন</div>
+                    <div><span class="status-processing">Processing</span> ৳১৫০</div>
+                </div>
+                <div class="order-item">
+                    <div>রহিম করিম</div>
+                    <div><span class="status-completed">Completed</span> ৳৭৫০</div>
+                </div>
+                <div class="order-item">
+                    <div>জাহিদ হাসান</div>
+                    <div><span class="status-completed">Completed</span> ৳৩০০</div>
+                </div>
+                <div class="order-item">
+                    <div>আল আমিন</div>
+                    <div><span class="status-completed">Completed</span> ৳১২০০</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Support & App -->
+        <div class="text-center mb-5">
+            <a href="https://play.google.com/store/apps" target="_blank">
+                <img src="https://via.placeholder.com/300x90/000000/white?text=Get+it+on+Google+Play" class="img-fluid" alt="Play Store">
+            </a>
+            <div class="mt-3">
+                <a href="https://wa.me/88017xxxxxxxx" class="btn btn-success btn-lg"><i class="fab fa-whatsapp"></i> WhatsApp Support</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col"><a href="index.html"><i class="fas fa-home"></i><br>হোম</a></div>
+                <div class="col"><a href="topup.html"><i class="fas fa-gem"></i><br>টপআপ</a></div>
+                <div class="col"><a href="orders.html"><i class="fas fa-list"></i><br>অর্ডার</a></div>
+                <div class="col"><a href="profile.html"><i class="fas fa-user"></i><br>আমি</a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
