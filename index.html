@@ -1,169 +1,110 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>BDTopupPro - Free Fire Diamond & Game Topup BD</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="BDTopupPro - সবচেয়ে সস্তায় Free Fire Diamond, PUBG UC, Like-Follow, Weekly/Monthly পাস টপআপ করুন। ২৪ ঘণ্টা অটো ডেলিভারি।"/>
-    <meta name="keywords" content="Free Fire Diamond BD, PUBG UC BD, Free Fire Topup, Weekly Membership, Airdrop BD, Like Follow BD, Facebook Like, YouTube Subscribe"/>
-
-    <link rel="shortcut icon" href="https://i.ibb.co.com/0jY7Y7K/favicon.png" type="image/x-icon">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#0b1361">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="BDTopupPro - Free Fire Diamond & Game Topup BD">
-    <meta property="og:description" content="সবচেয়ে সস্তায় এবং দ্রুত গেম টপআপ। ২৪ ঘণ্টা অটো ডেলিভারি।">
-    <meta property="og:image" content="https://i.ibb.co.com/0jY7Y7K/logo.png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="BDTopupPro - Free Fire Diamond & Game Topup BD">
-    <meta property="twitter:description" content="সবচেয়ে সস্তায় এবং দ্রুত গেম টপআপ। ২৪ ঘণ্টা অটো ডেলিভারি।">
-    <meta property="twitter:image" content="https://i.ibb.co.com/0jY7Y7K/logo.png">
-
-    <!-- Bootstrap + FontAwesome + Toastr -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-
-    <style>
-        :root {
-            --theme-color: #0b1361;
-            --background-image: linear-gradient(350deg, rgb(244, 249, 255), rgba(237, 244, 255, 0.79)),
-                    url(data:image/png;base64,UklGRtQEAABXRUJQVlA4TMgEAAAvj8FjAAVFA4Bqa9f7P14MQ4yIiBgSsRgW316rZvat/3ZOEf135LaNJGVOc3Nplk5c8QfO8avRaXkRWzSJMwnO2STKiUVTMWJoE02L4ldsGHwygXeHpUKw1OFMGJK3gS8r5EeuWk4KaKnosum7bvrOZhcthXAYqjpaIL8GxVvYZiz66o7BwCiFkAxsgV03/LowWxj5Am15/DrU00fDYaTpjyo+n9GrATIcB7BecDyzXnCHJoaPLPqzQl8cvwrlcaKgO47Eh1gG5XEaxodgr/wzyA/BHbLyL8s/2EVUfjEL8ENwVGIID8EZ6sL4NSaoN1KxzkgcLQHJlRSWNjtQZ7pRzS7WPjtmS0gXKZ0wzQXX6PKNFPFccMErVSFIbYqhxhvVCsRtUfzIB5a7vkSTr18DSoPjcfRuIhipDAQXwsn31lFsA/WRJoIzUrlzkUJIE8E+8oBzImhjwUBpIJiDp0Xxa9MO3zREOJvgWU0Fm4aIRibB1EyC/wnmx+SmBbENnsY4Lz944nJQCA4DwRnnhfm4nzrAtFzgwdPYzwvjQHBUCCZeDb+OxDKfnTIkuTWdiimp3lrZ7pHnM8JRbq1sgVgVguO1lRXCohDM6Put6VQI7rdWVhLkOQZhwr4UflVrpAldZivtUFaBDUOZxItgrfvQIP4owyiGUY+hake9y4xISsHF8UL4HcAGG9XqPQBbvAeD/SRQTB4KSAODh5Isxi7DsQ5+lG3e3GHy5sI7eozB5DEeRo+R1sFvHR78Ovit445qHfyyDYNYit/1Dre87g73l5Ufr5/fu/6/8Ae+WQc/EMtJjc9f957PX2d8/hbTd30d/F7Yn8b37E/Ty/rTTOvg16Fa/nrS6+a3Ypjf0DS/8Uvnt3XwO9mxUm8w+RvN6G/Aj9aISg4d42MqMPobzeRvBJ3gC7qF8DsbUpW53AxXqQmS0f9TCC5IcntYdJWNZ/D/xOj/JUjXDxWyQnAlbOdS+J1SvMkfj6Dwx7MYjHU38seTxh9PI3/cWfzxrPDHweaP+yLnMvit4z7vX2B+PvCoFyI07K/VSE6/+Caa/bXUBuqTZn9N9GtojmI17K8hjXoiDn5R/I5WPNbrlbKLtU03MdOtW+2IZbZtKW243xm4yUT from the original;
-            --footer-color: #0b1361;
-        }
-        body { background: var(--background-image) fixed; font-family: 'Hind Siliguri','SolaimanLipi',Arial,sans-serif; }
-        .notice-style { background:#0b1361; color:#fff; }
-        .btn-pro { padding:10px 20px; font-weight:bold; }
-        .btn-pro-login { background:transparent; color:#0b1361; }
-        .btn-register { background:#0b1361; color:#fff; }
-        .single-game-product a { text-decoration:none; }
-        .single-game-product img { transition:all .3s; }
-        .single-game-product:hover img { transform:scale(0.9); }
-        .footer-bg { background:var(--footer-color); color:#fff; }
-        .sticky-footer-container { position:fixed; bottom:0; left:0; right:0; background:#fff; box-shadow:0 -2px 10px rgba(0,0,0,0.1); display:flex; z-index:999; }
-        .sticky-footer-item { flex:1; text-align:center; padding:10px 0; color:#666; }
-        .sticky-footer-item svg { width:25px; height:25px; }
-        .rotating { animation:spin 1s linear infinite; }
-        @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Habib Topup - 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 40px 30px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+    .logo {
+      font-size: 42px;
+      font-weight: 700;
+      background: linear-gradient(45deg, #00ff88, #00d0ff, #6600ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+    .tagline {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-bottom: 40px;
+    }
+    .btn {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn-login {
+      background: linear-gradient(45deg, #00ff88, #00d0ff);
+      color: #000;
+    }
+    .btn-register {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 255, 255, 0.4);
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 12px;
+      opacity: 0.6;
+    }
+    .glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0, 255, 136, 0.3), transparent);
+      border-radius: 50%;
+      top: -100px;
+      left: -100px;
+      z-index: -1;
+      animation: pulse 8s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+  </style>
 </head>
-<body class="body-bg">
+<body>
 
-<div class="header bg-white shadow-sm">
-    <div class="container py-3">
-        <nav class="d-flex justify-content-between align-items-center">
-            <a href="/"><img src="https://i.ibb.co.com/0jY7Y7K/logo.png" alt="BDTopupPro" class="w-75 w-md-50"></a>
-            <div class="d-flex gap-2">
-                <a href="#topup" class="d-none d-md-block btn btn-outline-primary">টপআপ</a>
-                <a href="contact.html" class="d-none d-md-block btn btn-outline-primary">যোগাযোগ</a>
-                <a href="login.html" class="btn btn-pro btn-pro-login">লগিন</a>
-                <a href="register.html" class="btn btn-pro btn-register">রেজিস্টার</a>
-            </div>
-        </nav>
+  <div class="glow"></div>
+
+  <div class="container">
+    <h1 class="logo">Habib Topup</h1>
+    <p class="tagline">Fast • Secure • 24/7 Diamond & UC Topup Service</p>
+
+    <button class="btn btn-login">Login</button>
+    <button class="btn btn-register">Register</button>
+
+    <div class="footer">
+      © 2025 Habib Topup • All Rights Reserved
     </div>
-</div>
+  </div>
 
-<div class="container my-4">
-    <!-- Notice -->
-    <div class="alert notice-style alert-dismissible fade show">
-        <button type="button" class="btn-close text-white" data-bs-dismiss="alert"></button>
-        <strong>নোটিশঃ</strong> আমাদের সাইটে UID টপ আপ 24 ঘন্টাই AI দিয়ে অটো ডেলিভারি চালু থাকে। বিঃদ্রঃ কারও মোবাইল একাউন্ট থেকে টাকা চুরি করে কেউ অর্ডার করবেন না দয়া করে..
-    </div>
-
-    <!-- Slider (Simple Bootstrap Carousel) -->
-    <div id="gameSlider" class="carousel slide mb-4" data-bs-ride="carousel">
-        <div class="carousel-inner rounded">
-            <div class="carousel-item active"><a href="#"><img src="https://i.ibb.co.com/banner1.png" class="d-block w-100" alt="Free Fire"></a></div>
-            <div class="carousel-item"><a href="#"><img src="https://i.ibb.co.com/banner2.png" class="d-block w-100" alt="PUBG"></a></div>
-            <div class="carousel-item"><a href="#"><img src="https://i.ibb.co.com/banner3.png" class="d-block w-100" alt="UniPin"></a></div>
-        </div>
-        <button class="carousel-control-prev" data-bs-target="#gameSlider" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
-        <button class="carousel-control-next" data-bs-target="#gameSlider" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
-    </div>
-
-    <!-- Products -->
-    <span id="topup"></span>
-    <h3 class="text-center my-5 text-dark fw-bold">FREE FIRE TOPUP</h3>
-    <div class="row row-cols-3 row-cols-md-6 g-4">
-        <div class="col"><a href="#" class="text-center text-decoration-none"><img src="https://i.ibb.co.com/ff-bd.png" class="img-fluid rounded"><p class="mt-2 small text-muted">Free Fire [BD]</p></a></div>
-        <div class="col"><a href="#" class="text-center text-decoration-none"><img src="https://i.ibb.co.com/unipin.png" class="img-fluid rounded"><p class="mt-2 small text-muted">UniPin Voucher</p></a></div>
-        <div class="col"><a href="#" class="text-center text-decoration-none"><img src="https://i.ibb.co.com/like.png" class="img-fluid rounded"><p class="mt-2 small text-muted">Free Fire Like</p></a></div>
-        <div class="col"><a href="#" class="text-center text-decoration-none"><img src="https://i.ibb.co.com/weekly.png" class="img-fluid rounded"><p class="mt-2 small text-muted">Weekly Lite</p></a></div>
-        <div class="col"><a href="#" class="text-center text-decoration-none"><img src="https://i.ibb.co.com/combo.png" class="img-fluid rounded"><p class="mt-2 small text-muted">Weekly+Monthly</p></a></div>
-        <div class="col"><a href="#" class="text-center text-decoration-none"><img src="https://i.ibb.co.com/evo.png" class="img-fluid rounded"><p class="mt-2 small text-muted">Evo Access</p></a></div>
-        <!-- আরো অনেকগুলো যোগ করতে পারো -->
-    </div>
-
-    <h3 class="text-center my-5 text-dark fw-bold">Like-Follow-Subscriber</h3>
-    <div class="row row-cols-3 row-cols-md-6 g-4">
-        <div class="col"><a href="#" class="text-center text-decoration-none"><img src="https://i.ibb.co.com/like100.png" class="img-fluid rounded"><p class="mt-2 small text-muted">100 Like Daily</p></a></div>
-        <div class="col"><a href="#" class="text-center text-decoration-none"><img src="https://i.ibb.co.com/fb-react.png" class="img-fluid rounded"><p class="mt-2 small text-muted">Facebook React</p></a></div>
-        <!-- আরো যোগ করো -->
-    </div>
-
-    <h3 class="text-center my-5 text-dark fw-bold">Others Games</h3>
-    <div class="row row-cols-3 row-cols-md-6 g-4 mb-5">
-        <div class="col"><a href="#" class="text-center text-decoration-none"><img src="https://i.ibb.co.com/pubg.png" class="img-fluid rounded"><p class="mt-2 small text-muted">PUBG Mobile</p></a></div>
-        <div class="col"><a href="#" class="text-center text-decoration-none"><img src="https://i.ibb.co.com/coc.png" class="img-fluid rounded"><p class="mt-2 small text-muted">Clash of Clans</p></a></div>
-        <!-- আরো যোগ করো -->
-    </div>
-
-    <!-- Recent Orders -->
-    <div class="text-center my-5">
-        <h3>সর্বশেষ অর্ডারগুলি <button id="refresh_recent_order" class="btn btn-sm"><i id="refresh_icon" class="fa fa-sync"></i></button></h3>
-        <div id="recent_order" class="bg-white p-3 rounded shadow-sm">লোড হচ্ছে...</div>
-    </div>
-</div>
-
-<!-- Footer -->
-<footer class="footer-bg text-white py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <h5>STAY CONNECTED</h5>
-                <p>BDTopupPro - সবচেয়ে বিশ্বস্ত গেম টপআপ সাইট</p>
-            </div>
-            <div class="col-md-4 text-center">
-                <h5>OUR MOBILE APP</h5>
-                <p>Coming Soon...</p>
-            </div>
-            <div class="col-md-4">
-                <h5>SUPPORT CENTER</h5>
-                <p><a href="https://wa.me/88017XXXXXXX" class="text-white"><i class="fab fa-whatsapp"></i> WhatsApp</a> [10AM-10PM]</p>
-                <p><a href="https://t.me/+88XXXXXXXXX" class="text-white"><i class="fab fa-telegram"></i> Telegram</a> [10AM-10PM]</p>
-            </div>
-        </div>
-        <hr>
-        <p class="text-center">© 2025 BDTopupPro. All Rights Reserved.</p>
-    </div>
-</footer>
-
-<!-- Sticky Bottom Menu (Mobile) -->
-<div class="sticky-footer-container d-block d-md-none">
-    <div class="sticky-footer-item"><a href="/"><i class="fas fa-home"></i><br>হোম</a></div>
-    <div class="sticky-footer-item"><a href="#"><i class="fas fa-play-circle"></i><br>টিউটোরিয়াল</a></div>
-    <div class="sticky-footer-item"><a href="#topup"><i class="fas fa-gem"></i><br>টপআপ</a></div>
-    <div class="sticky-footer-item"><a href="login.html"><i class="fas fa-user"></i><br>অ্যাকাউন্ট</a></div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script>
-    // Recent Order (ডেমো)
-    const orders = ["12345678 - 520 Diamond - Success","87654321 - Weekly Pass - Success","11223344 - 100 Like - Success"];
-    let html = "<ul class='list-group'>";
-    orders.forEach(o => html += `<li class='list-group-item'>${o}</li>`);
-    html += "</ul>";
-    document.getElementById("recent_order").innerHTML = html;
-
-    document.getElementById("refresh_recent_order").addEventListener("click",() => {
-        document.getElementById("refresh_icon").classList.add("rotating");
-        setTimeout(() => document.getElementById("refresh_icon").classList.remove("rotating"), 1000);
-    });
-</script>
 </body>
 </html>
