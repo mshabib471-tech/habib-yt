@@ -2,163 +2,204 @@
 <html lang="bn">
 <head>
     <meta charset="utf-8">
-    <title>Habib Topup - Free Fire Diamond & Game Topup BD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Habib Topup - সবচেয়ে সস্তায় Free Fire Diamond, PUBG UC, Weekly/Monthly পাস টপআপ। ২৪ ঘণ্টা অটো ডেলিভারি।"/>
-    
-    <link rel="shortcut icon" href="https://i.ibb.co.com/0jY7Y7K/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
+    <title>Habib Topup - Free Fire Diamond BD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: white;
-            min-height: 100vh;
-            padding-bottom: 100px; /* বটম নেভের জন্য জায়গা */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            font-family:'Poppins',sans-serif;
+            background:linear-gradient(135deg,#0f0c29,#302b63,#0f0c29);
+            color:#fff;
+            min-height:100vh;
+            padding-bottom:100px;
         }
+        .header{
+            padding:20px 15px;
+            text-align:center;
+            background:rgba(0,0,0,0.3);
+        }
+        .logo{
+            font-size:48px;
+            font-weight:900;
+            background:linear-gradient(45deg,#00ff88,#00d0ff);
+            -webkit-background-clip:text;
+            background-clip:text;
+            -webkit-text-fill-color:transparent;
+            display:inline-block;
+        }
+        .btns{
+            margin-top:15px;
+            display:flex;
+            gap:15px;
+            justify-content:center;
+        }
+        .btn-login{
+            background:linear-gradient(45deg,#00ff88,#00ffc4);
+            color:#000;
+            padding:12px 32px;
+            border-radius:50px;
+            font-weight:800;
+            font-size:18px;
+            border:none;
+        }
+        .btn-reg{
+            background:transparent;
+            color:#fff;
+            border:2px solid #fff;
+            padding:10px 30px;
+            border-radius:50px;
+            font-weight:700;
+            font-size:18px;
+        }
+        .notice{
+            margin:20px 15px;
+            background:linear-gradient(45deg,#ff006e,#8b00ff);
+            padding:18px;
+            border-radius:20px;
+            font-weight:600;
+            text-align:center;
+            box-shadow:0 10px 30px rgba(255,0,110,0.4);
+        }
+        .banner{
+            margin:30px 15px 10px;
+            background:linear-gradient(45deg,#1a0033,#330066);
+            padding:20px;
+            border-radius:20px;
+            text-align:center;
+            font-size:32px;
+            font-weight:900;
+            color:#00ff88;
+        }
+        .games{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:20px;
+            padding:0 15px;
+            margin-top:20px;
+        }
+        .game-card{
+            background:rgba(255,255,255,0.1);
+            backdrop-filter:blur(10px);
+            border-radius:20px;
+            padding:15px;
+            text-align:center;
+            border:1px solid rgba(255,255,255,0.2);
+            transition:0.4s;
+        }
+        .game-card:hover{
+            transform:translateY(-10px);
+            box-shadow:0 20px 40px rgba(0,255,136,0.3);
+        }
+        .game-card img{
+            width:70px;
+            transition:0.4s;
+        }
+        .game-card:hover img{transform:scale(0.9)}
 
-        /* Header */
-        .header {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(15px);
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.15);
+        /* বটম নেভিগেশন – একদম তোর স্ক্রিনশটের মতো + সুন্দর */
+        .bottom-nav{
+            position:fixed;
+            bottom:0;
+            left:0;
+            right:0;
+            background:linear-gradient(to top,#000,#1a0033);
+            border-top:4px solid #ffd700;
+            padding:15px 0;
+            display:flex;
+            justify-content:space-around;
+            z-index:9999;
+            box-shadow:0 -10px 30px rgba(255,215,0,0.4);
         }
-        .logo { font-size: 34px; font-weight: 800; background: linear-gradient(45deg,#00ff88,#00d0ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-
-        /* Notice */
-        .notice {
-            background: linear-gradient(45deg, #ff006e, #8338ec);
-            border-radius: 18px;
-            margin-top: 90px;
+        .nav-item{
+            text-align:center;
+            color:#fff;
+            text-decoration:none;
+            flex:1;
         }
-
-        /* Product Card */
-        .product-card {
-            background: rgba(255,255,255,0.08);
-            border-radius: 18px;
-            overflow: hidden;
-            transition: 0.4s;
-            border: 1px solid rgba(255,255,255,0.1);
+        .nav-item i{
+            font-size:28px;
+            display:block;
+            margin-bottom:5px;
         }
-        .product-card:hover img { transform: scale(0.9); }
-
-        /* Bottom Navigation – এখন আর উপরে উঠবে না */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, #000, #1a0033);
-            border-top: 4px solid #ffd700;
-            padding: 12px 0;
-            display: flex;
-            justify-content: space-around;
-            z-index: 9999;
-            box-shadow: 0 -10px 30px rgba(255,215,0,0.5);
+        .nav-item span{
+            font-size:12px;
+            font-weight:600;
         }
-        .bottom-nav a {
-            color: #fff;
-            text-decoration: none;
-            text-align: center;
-            flex: 1;
-            font-size: 26px;
+        .nav-item.active, .nav-item:hover{
+            color:#00ff88;
         }
-        .bottom-nav span {
-            display: block;
-            font-size: 11px;
-            margin-top: 4px;
-            font-weight: 600;
+        .nav-item.active i{
+            color:#00ff88;
+            text-shadow:0 0 15px #00ff88;
         }
-        .bottom-nav a.active { color: #00ff88; transform: scale(1.15); }
     </style>
 </head>
 <body>
 
-<!-- Header -->
-<div class="header shadow-lg">
-    <div class="container py-3">
-        <div class="d-flex justify-content-between align-items-center">
-            <h1 class="logo m-0">Habib Topup</h1>
-            <div class="d-flex gap-2">
-                <a href="login.html" class="btn btn-success rounded-pill px-4">Login</a>
-                <a href="register.html" class="btn btn-outline-light rounded-pill px-4">Register</a>
-            </div>
-        </div>
+<div class="header">
+    <div class="logo">Habib<br>Topup</div>
+    <div class="btns">
+        <button class="btn-login">Login</button>
+        <button class="btn-reg">Register</button>
     </div>
 </div>
 
-<div class="container">
-
-    <!-- Notice -->
-    <div class="alert notice alert-dismissible fade show mt-5">
-        <button type="button" class="btn-close text-white" data-bs-dismiss="alert"></button>
-        <strong>নোটিশঃ</strong> আমাদের সাইটে UID টপ আপ 24 ঘন্টাই AI দিয়ে অটো ডেলিভারি চালু। কারও মোবাইল একাউন্ট থেকে চুরি করে অর্ডার করবেন না।
-    </div>
-
-    <!-- Slider -->
-    <div id="gameSlider" class="carousel slide rounded-4 shadow-lg mb-4" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active"><img src="https://i.ibb.co.com/banner1.png" class="d-block w-100 rounded-4" alt="banner"></div>
-            <div class="carousel-item"><img src="https://i.ibb.co.com/banner2.png" class="d-block w-100 rounded-4" alt="banner"></div>
-            <div class="carousel-item"><img src="https://i.ibb.co.com/banner3.png" class="d-block w-100 rounded-4" alt="banner"></div>
-        </div>
-        <button class="carousel-control-prev" data-bs-target="#gameSlider" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
-        <button class="carousel-control-next" data-bs-target="#gameSlider" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
-    </div>
-
-    <!-- Products -->
-    <h3 class="text-center my-5 fw-bold" id="topup">FREE FIRE TOPUP</h3>
-    <div class="row row-cols-3 row-cols-md-6 g-4 mb-5">
-        <div class="col"><a href="freefire.html" class="text-decoration-none"><div class="product-card text-center p-3"><img src="https://i.ibb.co.com/ff-bd.png" class="img-fluid rounded"><p class="mt-2 small">Free Fire [BD]</p></div></a></div>
-        <div class="col"><a href="unipin.html" class="text-decoration-none"><div class="product-card text-center p-3"><img src="https://i.ibb.co.com/unipin.png" class="img-fluid rounded"><p class="mt-2 small">UniPin Voucher</p></div></a></div>
-        <div class="col"><a href="like.html" class="text-decoration-none"><div class="product-card text-center p-3"><img src="https://i.ibb.co.com/like.png" class="img-fluid rounded"><p class="mt-2 small">Free Fire Like</p></div></a></div>
-        <div class="col"><a href="weekly.html" class="text-decoration-none"><div class="product-card text-center p-3"><img src="https://i.ibb.co.com/weekly.png" class="img-fluid rounded"><p class="mt-2 small">Weekly Lite</p></div></a></div>
-        <div class="col"><a href="combo.html" class="text-decoration-none"><div class="product-card text-center p-3"><img src="https://i.ibb.co.com/combo.png" class="img-fluid rounded"><p class="mt-2 small">Combo Pass</p></div></a></div>
-        <div class="col"><a href="evo.html" class="text-decoration-none"><div class="product-card text-center p-3"><img src="https://i.ibb.co.com/evo.png" class="img-fluid rounded"><p class="mt-2 small">Evo Access</p></div></a></div>
-    </div>
-
-    <h3 class="text-center my-5 fw-bold">Like-Follow-Subscriber</h3>
-    <div class="row row-cols-3 row-cols-md-6 g-4 mb-5">
-        <div class="col"><a href="like100.html" class="text-decoration-none"><div class="product-card text-center p-3"><img src="https://i.ibb.co.com/like100.png" class="img-fluid rounded"><p class="mt-2 small">100 Like Daily</p></div></a></div>
-        <div class="col"><a href="fbreact.html" class="text-decoration-none"><div class="product-card text-center p-3"><img src="https://i.ibb.co.com/fb-react.png" class="img-fluid rounded"><p class="mt-2 small">Facebook React</p></div></a></div>
-    </div>
-
-    <h3 class="text-center my-5 fw-bold">Other Games</h3>
-    <div class="row row-cols-3 row-cols-md-6 g-4 mb-5">
-        <div class="col"><a href="pubg.html" class="text-decoration-none"><div class="product-card text-center p-3"><img src="https://i.ibb.co.com/pubg.png" class="img-fluid rounded"><p class="mt-2 small">PUBG Mobile</p></div></a></div>
-        <div class="col"><a href="coc.html" class="text-decoration-none"><div class="product-card text-center p-3"><img src="https://i.ibb.co.com/coc.png" class="img-fluid rounded"><p class="mt-2 small">Clash of Clans</p></div></a></div>
-    </div>
-
-    <!-- Recent Orders -->
-    <div class="text-center my-5">
-        <h3>সর্বশেষ অর্ডার <button class="btn btn-sm btn-outline-light"><i class="fa fa-sync"></i></button></h3>
-        <div class="p-4 rounded-4" style="background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);">
-            <small>1234*** → 520 Diamond → Success<br>5678*** → Weekly Pass → Success<br>9012*** → 1000 Like → Success</small>
-        </div>
-    </div>
-
+<div class="notice">
+    কারও মোবাইল একাউন্ট থেকে চুরি করে অর্ডার করবেন না।
 </div>
 
-<!-- Footer -->
-<footer class="text-center py-5" style="background:#000;">
-    <p class="mb-0">© 2025 Habib Topup • All Rights Reserved</p>
-</footer>
-
-<!-- সুন্দর বটম নেভিগেশন – কোনো সমস্যা হবে না -->
-<div class="bottom-nav d-block d-md-none">
-    <a href="/" class="active">Home<br><span>হোম</span></a>
-    <a href="#topup">Topup<br><span>টপআপ</span></a>
-    <a href="login.html">Account<br><span>অ্যাকাউন্ট</span></a>
-    <a href="contact.html">Support<br><span>সাপোর্ট</span></a>
+<div class="banner">
+    FREE FIRE TOPUP
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<div class="games">
+    <a href="freefire.html" class="game-card">
+        <img src="https://i.ibb.co.com/ff-bd.png" alt="Free Fire BD">
+        <p>Free Fire BD</p>
+    </a>
+    <a href="weekly.html" class="game-card">
+        <img src="https://i.ibb.co.com/weekly.png" alt="Weekly">
+        <p>Weekly Pass</p>
+    </a>
+    <a href="monthly.html" class="game-card">
+        <img src="https://i.ibb.co.com/combo.png" alt="Monthly">
+        <p>Monthly</p>
+    </a>
+    <a href="like.html" class="game-card">
+        <img src="https://i.ibb.co.com/like.png" alt="Like">
+        <p>Like/Follow</p>
+    </a>
+    <a href="pubg.html" class="game-card">
+        <img src="https://i.ibb.co.com/pubg.png" alt="PUBG">
+        <p>PUBG UC</p>
+    </a>
+    <a href="unipin.html" class="game-card">
+        <img src="https://i.ibb.co.com/unipin.png" alt="UniPin">
+        <p>UniPin</p>
+    </a>
+</div>
+
+<!-- বটম নেভিগেশন – একদম তোর স্ক্রিনশটের মতো -->
+<div class="bottom-nav">
+    <a href="/" class="nav-item active">
+        <i class="fas fa-home"></i>
+        <span>হোম</span>
+    </a>
+    <a href="#topup" class="nav-item">
+        <i class="fas fa-gem"></i>
+        <span>টপআপ</span>
+    </a>
+    <a href="account.html" class="nav-item">
+        <i class="fas fa-user"></i>
+        <span>অ্যাকাউন্ট</span>
+    </a>
+    <a href="support.html" class="nav-item">
+        <i class="fas fa-headset"></i>
+        <span>সাপোর্ট</span>
+    </a>
+</div>
+
 </body>
 </html>
