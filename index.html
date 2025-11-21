@@ -4,225 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Habib Topup - Free Fire Diamond BD</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{
-            font-family:'Poppins',sans-serif;
-            background:#0d0b2b;
-            color:#fff;
-            min-height:100vh;
-            padding-bottom:90px;
+        body{font-family:'Hind Siliguri',sans-serif;background:#0d0b2b;color:#fff; padding-bottom:100px;}
+        .container{max-width:480px;margin:0 auto;padding:10px;background:#0d0b2b;}
+        .header{background:#1a1a3d;padding:15px 10px;text-align:center;border-bottom:3px solid #00ff88;}
+        .header img{width:180px;}
+        .banner img{width:100%;border-radius:15px;margin:10px 0;}
+        .section-title{
+            background:linear-gradient(90deg,#00ff88,#00d4ff);
+            -webkit-background-clip:text;background-clip:text;
+            color:transparent;
+            font-size:26px;font-weight:700;text-align:center;margin:25px 0 15px;
         }
-        .container{max-width:480px;margin:0 auto;padding:0 15px}
-
-        /* হেডার – এখন আর বড় হবে না */
-        .header{
-            padding:18px 0;
-            text-align:center;
-            background:linear-gradient(135deg,#1a0033,#0f0c29);
+        .products{
+            display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:30px;
         }
-        .logo{
-            font-size:42px;
-            font-weight:900;
-            background:linear-gradient(45deg,#00ffea,#00ff6e);
-            -webkit-background-clip:text;
-            background-clip:text;
-            -webkit-text-fill-color:transparent;
-        }
-        .auth-btns{
-            margin-top:12px;
-            display:flex;
-            gap:12px;
-            justify-content:center;
-        }
-        .btn-login{
-            background:linear-gradient(45deg,#00ff88,#00ffc4);
-            color:#000;
-            padding:10px 30px;
-            border-radius:50px;
-            font-weight:800;
-            font-size:17px;
-            border:none;
-        }
-        .btn-reg{
-            background:transparent;
-            color:#fff;
-            border:2px solid #fff;
-            padding:8px 28px;
-            border-radius:50px;
-            font-weight:700;
-            font-size:17px;
-        }
-
-        /* নোটিশ */
-        .notice{
-            margin:20px 15px;
-            background:linear-gradient(90deg,#ff006e,#8b00ff);
-            padding:16px;
-            border-radius:20px;
-            text-align:center;
-            font-weight:600;
-            box-shadow:0 8px 25px rgba(255,0,110,0.4);
-        }
-
-        /* ব্যানার */
-        .banner{
-            margin:25px 15px;
-            background:linear-gradient(135deg,#1a0033,#330066);
-            padding:20px;
-            border-radius:20px;
-            text-align:center;
-            font-size:36px;
-            font-weight:900;
-            color:#00ffea;
-            border-radius:20px;
-            box-shadow:0 10px 30px rgba(0,255,234,0.3);
-        }
-
-        /* সার্ভিস গ্রিড – সবগুলো আছে এখন */
-        .services{
-            display:grid;
-            grid-template-columns:repeat(3,1fr);
-            gap:16px;
-            padding:0 15px;
-            margin:30px 0;
-        }
-        .service{
-            background:rgba(255,255,255,0.1);
-            backdrop-filter:blur(12px);
-            border-radius:18px;
-            text-align:center;
-            padding:16px 8px;
-            border:1px solid rgba(255,255,255,0.15);
+        .product{
+            background:rgba(255,255,255,0.08);border-radius:15px;overflow:hidden;
+            text-align:center;border:1px solid rgba(0,255,136,0.3);
             transition:0.3s;
         }
-        .service:hover{
-            transform:translateY(-8px);
-            box-shadow:0 15px 30px rgba(0,255,234,0.3);
-        }
-        .service img{
-            width:65px;
-            margin-bottom:8px;
-        }
-        .service p{
-            font-size:13px;
-            font-weight:600;
+        .product:hover{transform:translateY(-8px);box-shadow:0 10px 25px rgba(0,255,136,0.3);}
+        .product img{width:100%;height:90px;object-fit:cover;}
+        .product p{
+            background:#000;padding:8px;font-size:12px;font-weight:600;
             color:#00ffea;
         }
-
-        /* বটম নেভিগেশন – একদম তোর স্ক্রিনশটের মতো */
+        .recent-orders{
+            background:rgba(0,0,0,0.5);border-radius:15px;padding:15px;margin:20px 0;
+        }
+        .order-item{
+            background:rgba(0,255,136,0.15);padding:10px;margin:8px 0;
+            border-radius:10px;font-size:14px;display:flex;justify-content:space-between;
+        }
+        .footer{
+            background:#000;padding:20px 10px;text-align:center;font-size:14px;
+        }
         .nav{
-            position:fixed;
-            bottom:0;left:0;right:0;
-            background:linear-gradient(to top,#000,#1a0033);
-            border-top:3px solid #ffd700;
-            padding:12px 0;
-            display:flex;
-            z-index:9999;
-            box-shadow:0 -8px 25px rgba(255,215,0,0.4);
+            position:fixed;bottom:0;left:0;right:0;
+            background:#000;border-top:3px solid #00ff88;
+            display:flex;justify-content:space-around;padding:12px 0;
+            z-index:999;
         }
-        .nav a{
-            flex:1;
-            text-align:center;
-            color:#fff;
-            text-decoration:none;
-            padding:8px 0;
-        }
-        .nav i{
-            font-size:26px;
-            display:block;
-            margin-bottom:4px;
-        }
-        .nav span{
-            font-size:12px;
-            font-weight:600;
-        }
-        .nav a.active i,
-        .nav a:hover i{
-            color:#00ffea;
-            text-shadow:0 0 15px #00ffea;
-        }
-        .nav a.active{
-            color:#00ffea;
-        }
+        .nav a{color:#fff;text-decoration:none;text-align:center;font-size:12px;}
+        .nav i{font-size:24px;display:block;margin-bottom:5px;color:#00ff88;}
+        .nav a.active i{color:#fff;text-shadow:0 0 15px #00ff88;}
     </style>
 </head>
 <body>
 
 <div class="container">
 
-    <!-- হেডার -->
+    <!-- Header -->
     <div class="header">
-        <div class="logo">Habib<br>Topup</div>
-        <div class="auth-btns">
-            <button class="btn-login">Login</button>
-            <button class="btn-reg">Register</button>
-        </div>
+        <img src="https://i.ibb.co.com/0jY7Y7K/logo.png" alt="Habib Topup">
     </div>
 
-    <!-- নোটিশ -->
-    <div class="notice">
-        কারও মোবাইল একাউন্ট থেকে চুরি করে অর্ডার করবেন না।
-    </div>
-
-    <!-- ব্যানার -->
+    <!-- Banner -->
     <div class="banner">
-        FREE FIRE TOPUP
+        <img src="https://i.ibb.co.com/banner1.png" alt="Offer Banner">
     </div>
 
-    <!-- সব সার্ভিস এখন আছে -->
-    <div class="services">
-        <a href="freefire.html" class="service">
-            <img src="https://i.ibb.co.com/ff-bd.png" alt=""><p>Free Fire BD</p>
-        </a>
-        <a href="weekly.html" class="service">
-            <img src="https://i.ibb.co.com/weekly.png" alt=""><p>Weekly Pass</p>
-        </a>
-        <a href="monthly.html" class="service">
-            <img src="https://i.ibb.co.com/combo.png" alt=""><p>Monthly Pass</p>
-        </a>
-        <a href="like.html" class="service">
-            <img src="https://i.ibb.co.com/like.png" alt=""><p>Like/Follow</p>
-        </a>
-        <a href="pubg.html" class="service">
-            <img src="https://i.ibb.co.com/pubg.png" alt=""><p>PUBG UC</p>
-        </a>
-        <a href="unipin.html" class="service">
-            <img src="https://i.ibb.co.com/unipin.png" alt=""><p>UniPin</p>
-        </a>
-        <a href="evo.html" class="service">
-            <img src="https://i.ibb.co.com/evo.png" alt=""><p>Evo Access</p>
-        </a>
-        <a href="cod.html" class="service">
-            <img src="https://i.ibb.co.com/cod.png" alt=""><p>COD Mobile</p>
-        </a>
-        <a href="mlbb.html" class="service">
-            <img src="https://i.ibb.co.com/mlbb.png" alt=""><p>MLBB</p>
-        </a>
+    <!-- Free Fire Topup -->
+    <h2 class="section-title">FREE FIRE TOPUP</h2>
+    <div class="products">
+        <a href="freefire-bd.html"><div class="product"><img src="https://i.ibb.co.com/ff-bd.png"><p>Free Fire [BD]</p></div></a>
+        <a href="free-unipin.html"><div class="product"><img src="https://i.ibb.co.com/unipin.png"><p>UniPin Voucher</p></div></a>
+        <a href="freefire-like.html"><div class="product"><img src="https://i.ibb.co.com/like.png"><p>Free Fire Like</p></div></a>
+        <a href="weekly-lite.html"><div class="product"><img src="https://i.ibb.co.com/weekly.png"><p>Weekly Lite</p></div></a>
+        <a href="weekly-monthly.html"><div class="product"><img src="https://i.ibb.co.com/combo.png"><p>Weekly+Monthly</p></div></a>
+        <a href="level-up.html"><div class="product"><img src="https://i.ibb.co.com/levelup.png"><p>Level Up Pass</p></div></a>
+        <a href="evo-access.html"><div class="product"><img src="https://i.ibb.co.com/evo.png"><p>Evo Access</p></div></a>
+        <a href="incubator.html"><div class="product"><img src="https://i.ibb.co.com/incubator.png"><p>Incubator</p></div></a>
+        <a href="airdrop.html"><div class="product"><img src="https://i.ibb.co.com/airdrop.png"><p>Airdrop Special</p></div></a>
     </div>
 
+    <!-- Like-Follow-Subscriber -->
+    <h2 class="section-title">Like-Follow-Subscriber</h2>
+    <div class="products">
+        <a href="fb-like.html"><div class="product"><img src="https://i.ibb.co.com/fb-like.png"><p>Facebook Like</p></div></a>
+        <a href="fb-follow.html"><div class="product"><img src="https://i.ibb.co.com/fb-follow.png"><p>Facebook Follow</p></div></a>
+        <a href="yt-sub.html"><div class="product"><img src="https://i.ibb.co.com/yt-sub.png"><p>YouTube Sub</p></div></a>
+        <a href="yt-like.html"><div class="product"><img src="https://i.ibb.co.com/yt-like.png"><p>YouTube Like</p></div></a>
+        <a href="tiktok.html"><div class="product"><img src="https://i.ibb.co.com/tiktok.png"><p>TikTok Live/Follow</p></div></a>
+        <a href="insta.html"><div class="product"><img src="https://i.ibb.co.com/insta.png"><p>Instagram</p></div></a>
+    </div>
+
+    <!-- Others Games -->
+    <h2 class="section-title">Others Games</h2>
+    <div class="products">
+        <a href="pubg.html"><div class="product"><img src="https://i.ibb.co.com/pubg.png"><p>PUBG Mobile</p></div></a>
+        <a href="coc.html"><div class="product"><img src="https://i.ibb.co.com/coc.png"><p>Clash of Clans</p></div></a>
+        <a href="cod.html"><div class="product"><img src="https://i.ibb.co.com/codm.png"><p>COD Mobile</p></div></a>
+        <a href="mlbb.html"><div class="product"><img src="https://i.ibb.co.com/mlbb.png"><p>MLBB</p></div></a>
+        <a href="freefire-global.html"><div class="product"><img src="https://i.ibb.co.com/ff-global.png"><p>Free Fire Global</p></div></a>
+        <a href="brawl.html"><div class="product"><img src="https://i.ibb.co.com/brawl.png"><p>Brawl Stars</p></div></a>
+    </div>
+
+    <!-- Recent Orders -->
+    <h2 class="section-title">সর্বশেষ অর্ডার</h2>
+    <div class="recent-orders">
+        <div class="order-item"><span>Its CR7</span> <span class="text-success">Processing</span></div>
+        <div class="order-item"><span>Emil SOBUJ</span> <span class="text-success">Carry</span></div>
+        <div class="order-item"><span>Shah Muhammad</span> <span class="text-success">Processing</span></div>
+        <div class="order-item"><span>Rakib Saiful</span> <span class="text-success">Processing</span></div>
+        <div class="order-item"><span>Fahim</span> <span class="text-success">Completed</span></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 Habib Topup. All Rights Reserved.</p>
+    </div>
 </div>
 
-<!-- বটম নেভিগেশন -->
+<!-- Bottom Navigation -->
 <div class="nav">
-    <a href="/" class="active">
-        <i class="fas fa-home"></i>
-        <span>হোম</span>
-    </a>
-    <a href="#topup">
-        <i class="fas fa-gem"></i>
-        <span>টপআপ</span>
-    </a>
-    <a href="account.html">
-        <i class="fas fa-user"></i>
-        <span>অ্যাকাউন্ট</span>
-    </a>
-    <a href="support.html">
-        <i class="fas fa-headset"></i>
-        <span>সাপোর্ট</span>
-    </a>
+    <a href="/" class="active"><i class="fas fa-home"></i> হোম</a>
+    <a href="#topup"><i class="fas fa-gem"></i> টপআপ</a>
+    <a href="login.html"><i class="fas fa-user"></i> অ্যাকাউন্ট</a>
+    <a href="support.html"><i class="fas fa-headset"></i> সাপোর্ট</a>
 </div>
 
 </body>
