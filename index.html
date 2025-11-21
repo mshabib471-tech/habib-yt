@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Habib Topup - Free Fire Diamond BD</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -10,192 +10,216 @@
         *{margin:0;padding:0;box-sizing:border-box}
         body{
             font-family:'Poppins',sans-serif;
-            background:linear-gradient(135deg,#0f0c29,#302b63,#0f0c29);
+            background:#0d0b2b;
             color:#fff;
             min-height:100vh;
-            padding-bottom:100px;
+            padding-bottom:90px;
         }
+        .container{max-width:480px;margin:0 auto;padding:0 15px}
+
+        /* হেডার – এখন আর বড় হবে না */
         .header{
-            padding:20px 15px;
+            padding:18px 0;
             text-align:center;
-            background:rgba(0,0,0,0.3);
+            background:linear-gradient(135deg,#1a0033,#0f0c29);
         }
         .logo{
-            font-size:48px;
+            font-size:42px;
             font-weight:900;
-            background:linear-gradient(45deg,#00ff88,#00d0ff);
+            background:linear-gradient(45deg,#00ffea,#00ff6e);
             -webkit-background-clip:text;
             background-clip:text;
             -webkit-text-fill-color:transparent;
-            display:inline-block;
         }
-        .btns{
-            margin-top:15px;
+        .auth-btns{
+            margin-top:12px;
             display:flex;
-            gap:15px;
+            gap:12px;
             justify-content:center;
         }
         .btn-login{
             background:linear-gradient(45deg,#00ff88,#00ffc4);
             color:#000;
-            padding:12px 32px;
+            padding:10px 30px;
             border-radius:50px;
             font-weight:800;
-            font-size:18px;
+            font-size:17px;
             border:none;
         }
         .btn-reg{
             background:transparent;
             color:#fff;
             border:2px solid #fff;
-            padding:10px 30px;
+            padding:8px 28px;
             border-radius:50px;
             font-weight:700;
-            font-size:18px;
+            font-size:17px;
         }
+
+        /* নোটিশ */
         .notice{
             margin:20px 15px;
-            background:linear-gradient(45deg,#ff006e,#8b00ff);
-            padding:18px;
+            background:linear-gradient(90deg,#ff006e,#8b00ff);
+            padding:16px;
             border-radius:20px;
-            font-weight:600;
             text-align:center;
-            box-shadow:0 10px 30px rgba(255,0,110,0.4);
+            font-weight:600;
+            box-shadow:0 8px 25px rgba(255,0,110,0.4);
         }
+
+        /* ব্যানার */
         .banner{
-            margin:30px 15px 10px;
-            background:linear-gradient(45deg,#1a0033,#330066);
+            margin:25px 15px;
+            background:linear-gradient(135deg,#1a0033,#330066);
             padding:20px;
             border-radius:20px;
             text-align:center;
-            font-size:32px;
+            font-size:36px;
             font-weight:900;
-            color:#00ff88;
+            color:#00ffea;
+            border-radius:20px;
+            box-shadow:0 10px 30px rgba(0,255,234,0.3);
         }
-        .games{
+
+        /* সার্ভিস গ্রিড – সবগুলো আছে এখন */
+        .services{
             display:grid;
             grid-template-columns:repeat(3,1fr);
-            gap:20px;
+            gap:16px;
             padding:0 15px;
-            margin-top:20px;
+            margin:30px 0;
         }
-        .game-card{
+        .service{
             background:rgba(255,255,255,0.1);
-            backdrop-filter:blur(10px);
-            border-radius:20px;
-            padding:15px;
+            backdrop-filter:blur(12px);
+            border-radius:18px;
             text-align:center;
-            border:1px solid rgba(255,255,255,0.2);
-            transition:0.4s;
+            padding:16px 8px;
+            border:1px solid rgba(255,255,255,0.15);
+            transition:0.3s;
         }
-        .game-card:hover{
-            transform:translateY(-10px);
-            box-shadow:0 20px 40px rgba(0,255,136,0.3);
+        .service:hover{
+            transform:translateY(-8px);
+            box-shadow:0 15px 30px rgba(0,255,234,0.3);
         }
-        .game-card img{
-            width:70px;
-            transition:0.4s;
+        .service img{
+            width:65px;
+            margin-bottom:8px;
         }
-        .game-card:hover img{transform:scale(0.9)}
+        .service p{
+            font-size:13px;
+            font-weight:600;
+            color:#00ffea;
+        }
 
-        /* বটম নেভিগেশন – একদম তোর স্ক্রিনশটের মতো + সুন্দর */
-        .bottom-nav{
+        /* বটম নেভিগেশন – একদম তোর স্ক্রিনশটের মতো */
+        .nav{
             position:fixed;
-            bottom:0;
-            left:0;
-            right:0;
+            bottom:0;left:0;right:0;
             background:linear-gradient(to top,#000,#1a0033);
-            border-top:4px solid #ffd700;
-            padding:15px 0;
+            border-top:3px solid #ffd700;
+            padding:12px 0;
             display:flex;
-            justify-content:space-around;
             z-index:9999;
-            box-shadow:0 -10px 30px rgba(255,215,0,0.4);
+            box-shadow:0 -8px 25px rgba(255,215,0,0.4);
         }
-        .nav-item{
+        .nav a{
+            flex:1;
             text-align:center;
             color:#fff;
             text-decoration:none;
-            flex:1;
+            padding:8px 0;
         }
-        .nav-item i{
-            font-size:28px;
+        .nav i{
+            font-size:26px;
             display:block;
-            margin-bottom:5px;
+            margin-bottom:4px;
         }
-        .nav-item span{
+        .nav span{
             font-size:12px;
             font-weight:600;
         }
-        .nav-item.active, .nav-item:hover{
-            color:#00ff88;
+        .nav a.active i,
+        .nav a:hover i{
+            color:#00ffea;
+            text-shadow:0 0 15px #00ffea;
         }
-        .nav-item.active i{
-            color:#00ff88;
-            text-shadow:0 0 15px #00ff88;
+        .nav a.active{
+            color:#00ffea;
         }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <div class="logo">Habib<br>Topup</div>
-    <div class="btns">
-        <button class="btn-login">Login</button>
-        <button class="btn-reg">Register</button>
+<div class="container">
+
+    <!-- হেডার -->
+    <div class="header">
+        <div class="logo">Habib<br>Topup</div>
+        <div class="auth-btns">
+            <button class="btn-login">Login</button>
+            <button class="btn-reg">Register</button>
+        </div>
     </div>
+
+    <!-- নোটিশ -->
+    <div class="notice">
+        কারও মোবাইল একাউন্ট থেকে চুরি করে অর্ডার করবেন না।
+    </div>
+
+    <!-- ব্যানার -->
+    <div class="banner">
+        FREE FIRE TOPUP
+    </div>
+
+    <!-- সব সার্ভিস এখন আছে -->
+    <div class="services">
+        <a href="freefire.html" class="service">
+            <img src="https://i.ibb.co.com/ff-bd.png" alt=""><p>Free Fire BD</p>
+        </a>
+        <a href="weekly.html" class="service">
+            <img src="https://i.ibb.co.com/weekly.png" alt=""><p>Weekly Pass</p>
+        </a>
+        <a href="monthly.html" class="service">
+            <img src="https://i.ibb.co.com/combo.png" alt=""><p>Monthly Pass</p>
+        </a>
+        <a href="like.html" class="service">
+            <img src="https://i.ibb.co.com/like.png" alt=""><p>Like/Follow</p>
+        </a>
+        <a href="pubg.html" class="service">
+            <img src="https://i.ibb.co.com/pubg.png" alt=""><p>PUBG UC</p>
+        </a>
+        <a href="unipin.html" class="service">
+            <img src="https://i.ibb.co.com/unipin.png" alt=""><p>UniPin</p>
+        </a>
+        <a href="evo.html" class="service">
+            <img src="https://i.ibb.co.com/evo.png" alt=""><p>Evo Access</p>
+        </a>
+        <a href="cod.html" class="service">
+            <img src="https://i.ibb.co.com/cod.png" alt=""><p>COD Mobile</p>
+        </a>
+        <a href="mlbb.html" class="service">
+            <img src="https://i.ibb.co.com/mlbb.png" alt=""><p>MLBB</p>
+        </a>
+    </div>
+
 </div>
 
-<div class="notice">
-    কারও মোবাইল একাউন্ট থেকে চুরি করে অর্ডার করবেন না।
-</div>
-
-<div class="banner">
-    FREE FIRE TOPUP
-</div>
-
-<div class="games">
-    <a href="freefire.html" class="game-card">
-        <img src="https://i.ibb.co.com/ff-bd.png" alt="Free Fire BD">
-        <p>Free Fire BD</p>
-    </a>
-    <a href="weekly.html" class="game-card">
-        <img src="https://i.ibb.co.com/weekly.png" alt="Weekly">
-        <p>Weekly Pass</p>
-    </a>
-    <a href="monthly.html" class="game-card">
-        <img src="https://i.ibb.co.com/combo.png" alt="Monthly">
-        <p>Monthly</p>
-    </a>
-    <a href="like.html" class="game-card">
-        <img src="https://i.ibb.co.com/like.png" alt="Like">
-        <p>Like/Follow</p>
-    </a>
-    <a href="pubg.html" class="game-card">
-        <img src="https://i.ibb.co.com/pubg.png" alt="PUBG">
-        <p>PUBG UC</p>
-    </a>
-    <a href="unipin.html" class="game-card">
-        <img src="https://i.ibb.co.com/unipin.png" alt="UniPin">
-        <p>UniPin</p>
-    </a>
-</div>
-
-<!-- বটম নেভিগেশন – একদম তোর স্ক্রিনশটের মতো -->
-<div class="bottom-nav">
-    <a href="/" class="nav-item active">
+<!-- বটম নেভিগেশন -->
+<div class="nav">
+    <a href="/" class="active">
         <i class="fas fa-home"></i>
         <span>হোম</span>
     </a>
-    <a href="#topup" class="nav-item">
+    <a href="#topup">
         <i class="fas fa-gem"></i>
         <span>টপআপ</span>
     </a>
-    <a href="account.html" class="nav-item">
+    <a href="account.html">
         <i class="fas fa-user"></i>
         <span>অ্যাকাউন্ট</span>
     </a>
-    <a href="support.html" class="nav-item">
+    <a href="support.html">
         <i class="fas fa-headset"></i>
         <span>সাপোর্ট</span>
     </a>
