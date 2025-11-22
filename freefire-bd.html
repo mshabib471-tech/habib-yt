@@ -3,180 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Fire Diamond [BD] - Habib Topup</title>
+    <title>Free Fire TopUp (BD) - Habib Topup</title>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Hind Siliguri',sans-serif;background:#0d0b2b;color:#fff;padding-bottom:100px;}
-        .container{max-width:480px;margin:0 auto;padding:10px;}
-
+        body{font-family:'Hind Siliguri',sans-serif;background:#f5f7ff;color:#333;padding-bottom:120px;}
+        .container{max-width:480px;margin:0 auto;background:#fff;}
+        
         /* হেডার */
-        .header{background:#1a1a3d;padding:15px 10px;text-align:center;border-bottom:4px solid #00ff88;}
-        .header img{width:190px;}
-
-        /* পেজ টাইটেল */
-        .page-title{
-            font-size:28px;font-weight:700;text-align:center;margin:20px 0;
-            background:linear-gradient(90deg,#00ffea,#00ff6e);
-            -webkit-background-clip:text;background-clip:text;color:transparent;
+        header{
+            background:#6a0dad;padding:12px;display:flex;justify-content:space-between;align-items:center;
+            color:#fff;position:sticky;top:0;z-index:99;
         }
+        header img{width:40px;border-radius:50%;}
+        .logo{font-size:20px;font-weight:700;}
+        .coins{background:#ff6b35;padding:5px 12px;border-radius:20px;font-size:14px;}
+
+        /* ব্যানার */
+        .banner{
+            background:linear-gradient(135deg,#4a00e0,#8e2de2);color:#fff;padding:20px;text-align:center;
+        }
+        .banner h1{font-size:22px;margin:10px 0;}
+        .banner img{width:120px;margin:10px 0;}
+
+        /* সেকশন */
+        .section{
+            padding:20px;background:#fff;margin-bottom:10px;
+        }
+        .section h3{
+            font-size:18px;color:#4a00e0;margin-bottom:15px;display:flex;align-items:center;
+        }
+        .section h3::before{
+            content:"1️⃣";margin-right:10px;font-size:22px;
+        }
+        .section:nth-child(4) h3::before{content:"2️⃣"}
+        .section:nth-child(5) h3::before{content:"3️⃣"}
 
         /* প্যাকেজ গ্রিড */
-        .packages{
-            display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 12px;margin:25px 0;
+        .grid{
+            display:grid;grid-template-columns:1fr 1fr;gap:12px;
         }
         .pkg{
-            background:linear-gradient(135deg,rgba(0,255,136,0.1),rgba(0,0,0,0.3));
-            border:2px solid #00ff88;border-radius:16px;padding:16px;text-align:center;
-            cursor:pointer;transition:0.3s;box-shadow:0 5px 15px rgba(0,255,136,0.2);
+            background:#fff;border:2px solid #eee;border-radius:12px;padding:15px;text-align:center;
+            transition:0.3s;cursor:pointer;
         }
-        .pkg:hover{transform:scale(1.05);box-shadow:0 12px 30px rgba(0,255,136,0.4);}
-        .pkg h3{font-size:18px;color:#00ffea;margin-bottom:6px;}
-        .pkg .price{font-size:26px;font-weight:800;color:#fff;}
-        .pkg del{font-size:14px;color:#666;}
+        .pkg:hover,.pkg.active{
+            border-color:#6a0dad;transform:scale(1.05);box-shadow:0 8px 20px rgba(106,13,173,0.2);
+        }
+        .pkg h4{font-size:15px;margin:8px 0 5px;color:#333;}
+        .pkg p{font-size:18px;font-weight:700;color:#6a0dad;}
 
-        /* UID সেকশন */
-        .uid-box{
-            background:rgba(255,255,255,0.08);border:1px solid #00ff88;border-radius:16px;
-            margin:20px 12px;padding:20px;
-        }
-        input[type="text"]{
-            width:100%;padding:14px;border-radius:12px;border:none;background:rgba(255,255,255,0.15);
-            color:#fff;font-size:17px;margin:10px 0;
+        /* ইনপুট */
+        input{
+            width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;font-size:16px;
+            margin:10px 0;
         }
         .check-btn{
-            background:#00ff88;color:#000;padding:14px;border-radius:12px;border:none;
-            font-size:18px;font-weight:700;width:100%;margin-top:8px 0;
-        }
-        #playerName{font-size:18px;color:#00ffea;margin-top:10px;font-weight:600;}
-
-        /* পেমেন্ট অপশন */
-        .payment-box{
-            background:rgba(255,255,255,0.08);border:1px solid #00ff88;border-radius:16px;
-            margin:20px 12px;padding:20px;
-        }
-        .pay-methods{display:flex;gap:15px;margin:15px 0;}
-        .method{
-            flex:1;background:rgba(255,255,255,0.1);padding:15px;border-radius:14px;
-            text-align:center;border:2px solid transparent;transition:0.3s;
-        }
-        .method.active{border-color:#00ff88;background:rgba(0,255,136,0.25);}
-        .method img{width:55px;margin-bottom:8px;}
-
-        .buy-now{
-            background:linear-gradient(45deg,#00ff88,#00ffc4);color:#000;
-            padding:18px;font-size:22px;font-weight:900;border:none;border-radius:16px;
-            width:100%;margin-top:20px;
+            background:#6a0dad;color:#fff;padding:14px;border:none;border-radius:10px;
+            font-size:16px;font-weight:600;width:100%;
         }
 
-        /* নিচের নেভ */
-        .nav{position:fixed;bottom:0;left:0;right:0;background:#000;
-            border-top:4px solid #00ff88;display:flex;justify-content:space-around;
-            padding:14px 0;z-index:999;box-shadow:0 -5px 20px rgba(0,255,136,0.3);}
-        .nav a{color:#fff;text-decoration:none;text-align:center;font-size:13px;}
-        .nav i{font-size:26px;display:block;margin-bottom:5px;color:#00ff88;}
-        .nav a.active i{color:#fff;text-shadow:0 0 20px #00ff88;}
+        /* পেমেন্ট */
+        .pay-opt{
+            display:flex;gap:15px;margin:15px 0;
+        }
+        .pay{
+            flex:1;background:#f8f4ff;border:2px solid #eee;border-radius:12px;padding:15px;
+            text-align:center;cursor:pointer;transition:0.3s;
+        }
+        .pay.active,.pay:hover{
+            border-color:#6a0dad;background:#f0e5ff;
+        }
+        .pay img{width:60px;margin-bottom:8px;}
+
+        .buy-btn{
+            background:#ff6b35;color:#fff;padding:16px;font-size:20px;font-weight:700;
+            border:none;border-radius:12px;width:100%;margin-top:20px;
+        }
+
+        /* রুলস */
+        .rules{
+            background:#f0e5ff;padding:15px;border-radius:12px;margin:20px 0;font-size:14px;line-height:1.6;
+        }
+
+        /* ফুটার */
+        footer{
+            background:#1a0033;color:#fff;padding:20px 15px;text-align:center;position:fixed;bottom:0;width:100%;
+        }
+        .social a{color:#fff;margin:0 10px;font-size:20px;}
     </style>
 </head>
 <body>
 
+<header>
+    <img src="https://i.ibb.co.com/offer-logo.png" alt="Logo">
+    <div class="logo">OFFER<br>TOPUP</div>
+    <div class="coins">130৳</div>
+</header>
+
+<div class="banner">
+    <img src="https://i.ibb.co.com/ramadan-offer.png" alt="Ramadan Offer">
+    <h1>Free Fire TopUp (BD)</h1>
+    <p>Game / Top up</p>
+</div>
+
 <div class="container">
 
-    <!-- হেডার -->
-    <div class="header">
-        <img src="https://i.ibb.co.com/0jY7Y7K/logo.png" alt="Habib Topup">
+    <!-- ১. প্যাকেজ সিলেক্ট -->
+    <div class="section">
+        <h3>Select Recharge</h3>
+        <div class="grid" id="pkgGrid"></div>
     </div>
 
-    <h2 class="page-title">Free Fire Diamond [BD]</h2>
-
-    <!-- প্যাকেজ লিস্ট -->
-    <div class="packages" id="pkgGrid"></div>
-
-    <!-- UID ইনপুট -->
-    <div class="uid-box">
-        <h3 style="color:#00ffea;margin-bottom:10px;">Player UID দিন</h3>
-        <input type="text" id="uid" placeholder="যেমন: 1234567890">
-        <button class="check-btn" onclick="checkUID()">চেক করুন & নাম দেখুন</button>
-        <div id="playerName">নাম দেখাবে এখানে</div>
+    <!-- ২. একাউন্ট ইনফো -->
+    <div class="section">
+        <h3>Account Info</h3>
+        <p>একাউন্টে লগইন করে UID দিন</p>
+        <input type="text" id="uid" placeholder="আপনার ফ্রি ফায়ার UID দিন">
+        <button class="check-btn" onclick="check()">আপনার প্লেয়ার নাম চেক করুন</button>
+        <p id="playerName" style="margin-top:10px;color:#6a0dad;font-weight:600;"></p>
     </div>
 
-    <!-- পেমেন্ট মেথড -->
-    <div class="payment-box">
-        <h3 style="color:#00ffea;margin-bottom:15px;">পেমেন্ট মেথড</h3>
-        <div class="pay-methods">
-            <div class="method active" onclick="selectMethod(this)">
-                <img src="https://i.ibb.co.com/bkash.png" alt="bKash"><br>bKash
+    <!-- ৩. পেমেন্ট -->
+    <div class="section">
+        <h3>Select one option</h3>
+        <div class="pay-opt">
+            <div class="pay active" onclick="sel(this)">
+                <img src="https://i.ibb.co.com/wallet-pay.png" alt="Wallet">
+                <p>Wallet Pay</p>
             </div>
-            <div class="method" onclick="selectMethod(this)">
-                <img src="https://i.ibb.co.com/nagad.png" alt="Nagad"><br>Nagad
-            </div>
-            <div class="method" onclick="selectMethod(this)">
-                <img src="https://i.ibb.co.com/rocket.png" alt="Rocket"><br>Rocket
+            <div class="pay" onclick="sel(this)">
+                <img src="https://i.ibb.co.com/bkash-nagad.png" alt="Auto">
+                <p>Auto Payment</p>
             </div>
         </div>
-        <button class="buy-now" onclick="buyNow()">অর্ডার করুন</button>
+        <button class="buy-btn">Buy Now</button>
+    </div>
+
+    <!-- রুলস -->
+    <div class="section">
+        <div class="rules">
+            <b>Rules & Conditions</b><br><br>
+            • অবশ্যই Bangladesh সার্ভারের ID দিয়ে টপআপ করুন<br>
+            • Player ID ভুল দিলে Diamond না পেলে Offer TopUP কর্তৃপক্ষ দায়ী নয়<br>
+            • Order ক্যানসেল করলে চার্জ কাটা হবে<br>
+            • আরও বিস্তারিত জানতে আমাদের সাথে যোগাযোগ করুন
+        </div>
     </div>
 
 </div>
 
-<!-- নিচের নেভিগেশন -->
-<div class="nav">
-    <a href="index.html"><i class="fas fa-home"></i> হোম</a>
-    <a href="#" class="active"><i class="fas fa-gem"></i> টপআপ</a>
-    <a href="login.html"><i class="fas fa-user"></i> অ্যাকাউন্ট</a>
-    <a href="support.html"><i class="fas fa-headset"></i> সাপোর্ট</a>
-</div>
+<footer>
+    <p>STAY CONNECTED</p>
+    <div class="social">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+    </div>
+    <p>SUPPORT CENTER<br>Help line (9AM-12PM)<br>017xxxxxxx</p>
+    <p>© Offer TopUp 2025 | All Rights Reserved<br>Developed by আলমগীর হোসেন</p>
+</footer>
 
 <script>
-// সব প্যাকেজ
+// সব প্যাকেজ (অফারটপআপের একদম একই)
 const packages = [
-    {name:"110 Diamond",price:95,old:120},
-    {name:"220 Diamond",price:185,old:240},
-    {name:"560 Diamond",price:460,old:600},
-    {name:"720 Diamond",price:580,old:750},
-    {name:"1160 Diamond",price:920,old:1200},
-    {name:"2400 Diamond",price:1840,old:2400},
-    {name:"Weekly Membership",price:160,old:200},
-    {name:"Monthly Membership",price:750,old:950},
-    {name:"Weekly + Monthly",price:850,old:1100}
+    {name:"WEEKLY",price:"BDT 52"},
+    {name:"MONTHLY",price:"BDT 765"},
+    {name:"25 Diamond",price:"BDT 23"},
+    {name:"50 Diamond",price:"BDT 40"},
+    {name:"115 Diamond",price:"BDT 89"},
+    {name:"240 Diamond",price:"BDT 185"},
+    {name:"355 Diamond",price:"BDT 238"},
+    {name:"480 Diamond",price:"BDT 315"},
+    {name:"610 Diamond",price:"BDT 510"},
+    {name:"850 Diamond",price:"BDT 551"},
+    {name:"1240 Diamond",price:"BDT 799"},
+    {name:"2530 Diamonds",price:"BDT 1595"},
+    {name:"5060 Diamond",price:"BDT 3190"},
+    {name:"10120 Diamond",price:"BDT 6465"}
 ];
 
-let selectedPkg = null;
-
-// প্যাকেজ দেখাও
-const grid = document.getElementById("pkgGrid");
+let grid = document.getElementById("pkgGrid");
 packages.forEach(p => {
     let div = document.createElement("div");
     div.className = "pkg";
-    div.innerHTML = `<h3>${p.name}</h3><div class="price">৳${p.price}</div><del>৳${p.old}</del>`;
+    div.innerHTML = `<h4>${p.name}</h4><p>${p.price}</p>`;
     div.onclick = () => {
-        document.querySelectorAll(".pkg").forEach(x=>x.style.borderColor="transparent");
-        div.style.borderColor="#00ff88";
-        selectedPkg = p;
+        document.querySelectorAll(".pkg").forEach(x => x.classList.remove("active"));
+        div.classList.add("active");
     };
     grid.appendChild(div);
 });
 
-// UID চেক (ডেমো)
-function checkUID(){
+function check(){
     let uid = document.getElementById("uid").value;
-    if(uid.length < 8) return alert("সঠিক UID দিন");
-    document.getElementById("playerName").innerHTML = `প্লেয়ার: <b style="color:#00ffea">HABIB YT</b>`;
+    if(uid.length > 5){
+        document.getElementById("playerName").innerText = "প্লেয়ার নাম: HABIB YT ✓";
+    } else {
+        document.getElementById("playerName").innerText = "ভুল UID!";
+    }
 }
 
-// পেমেন্ট সিলেক্ট
-function selectMethod(el){
-    document.querySelectorAll(".method").forEach(x=>x.classList.remove("active"));
+function sel(el){
+    document.querySelectorAll(".pay").forEach(x => x.classList.remove("active"));
     el.classList.add("active");
-}
-
-// অর্ডার
-function buyNow(){
-    if(!selectedPkg) return alert("প্যাকেজ সিলেক্ট করুন!");
-    if(!document.getElementById("uid").value) return alert("UID দিন!");
-    alert(`অর্ডার সফল!\n${selectedPkg.name} - ৳${selectedPkg.price}\nUID: ${document.getElementById("uid").value}\nপেমেন্ট করুন bKash/Nagad-এ`);
-    // এখানে তুই পেমেন্ট লিংক দিবি
 }
 </script>
 
