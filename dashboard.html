@@ -1,8 +1,11 @@
-<!DOCTYPE html><html lang="bn">
+<!DOCTYPE html>
+<html lang="bn">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Dashboard</title><style>
+<title>Dashboard</title>
+
+<style>
   body {
     font-family: Poppins, sans-serif;
     background: linear-gradient(135deg,#0a0d2b,#1b1f3b);
@@ -11,6 +14,7 @@
     color: #fff;
   }
 
+  /* Header */
   header {
     background: linear-gradient(90deg,#4a00e0,#8e2de2);
     padding: 18px;
@@ -20,8 +24,26 @@
     font-weight: 700;
     letter-spacing: 1px;
     box-shadow: 0 3px 15px rgba(0,0,0,0.4);
+    position: relative;
   }
 
+  /* Logout Button */
+  .logout-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 6px 13px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  /* Balance Card */
   .balance-card {
     background: rgba(255,255,255,0.07);
     margin: 20px;
@@ -33,10 +55,7 @@
     border: 1px solid rgba(255,255,255,0.15);
   }
 
-  .balance-title {
-    font-size: 18px;
-    opacity: 0.9;
-  }
+  .balance-title { font-size: 18px; opacity: 0.9; }
 
   .big-balance {
     font-size: 42px;
@@ -47,34 +66,28 @@
     color: transparent;
   }
 
-  .btn {
+  .btn, .btn2 {
     width: 90%;
     padding: 14px;
     margin-top: 14px;
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  .btn {
     background: linear-gradient(90deg,#00ff88,#00d4ff);
     color: #000;
-    border: none;
-    font-size: 18px;
-    font-weight: 700;
-    border-radius: 12px;
-    cursor: pointer;
     box-shadow: 0 4px 15px rgba(0,255,200,0.3);
   }
-
   .btn2 {
-    width: 90%;
-    padding: 14px;
-    margin-top: 14px;
     background: linear-gradient(90deg,#ff6b35,#ff9935);
     color: white;
-    border: none;
-    font-size: 18px;
-    font-weight: 700;
-    border-radius: 12px;
-    cursor: pointer;
     box-shadow: 0 4px 15px rgba(255,120,50,0.35);
   }
 
+  /* Orders Box */
   .orders-box {
     background: rgba(255,255,255,0.07);
     margin: 15px;
@@ -93,6 +106,7 @@
     font-size: 22px;
   }
 
+  /* Order Item */
   .order-item {
     background: rgba(255,255,255,0.05);
     padding: 14px;
@@ -105,22 +119,54 @@
   .pending { color: #ffcc00; font-weight:700; }
   .approved { color: #00ff88; font-weight:700; }
   .cancelled { color: #ff4d4d; font-weight:700; }
+</style>
 
-</style></head><body><header>📊 User Dashboard</header><div class="balance-card">
+</head>
+<body>
+
+<header>
+  📊 User Dashboard
+  <button class="logout-btn" onclick="logoutUser()">Logout</button>
+</header>
+
+<div class="balance-card">
   <div class="balance-title">Your Wallet Balance</div>
-  <div class="big-balance" id="wallet">0 TK</div><button class="btn" onclick="location.href='add-money.html'">💰 Add Money</button> <button class="btn2" onclick="location.href='index.html'">🏠 Go to Home</button>
+  <div class="big-balance" id="wallet">0 TK</div>
 
-</div><div class="orders-box">
+  <button class="btn" onclick="location.href='add-money.html'">💰 Add Money</button>
+  <button class="btn2" onclick="location.href='index.html'">🏠 Go to Home</button>
+</div>
+
+<div class="orders-box">
   <h2>📦 My Orders</h2>
   <div id="orders">Loading...</div>
-</div><script type="module">
+</div>
 
+<script type="module">
 import { auth, db } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-import { collection, query, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import {
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+/* Logout Function */
+window.logoutUser = function() {
+  signOut(auth).then(() => {
+    alert("Logged out successfully!");
+    location.href = "login.html";
+  });
+};
 
 onAuthStateChanged(auth, async (user) => {
-
   if (!user) {
     location.href = "login.html";
     return;
@@ -128,34 +174,33 @@ onAuthStateChanged(auth, async (user) => {
 
   const uid = user.uid;
 
-  // Load wallet
+  // Load balance
   const walletRef = await getDoc(doc(db, "wallets", uid));
   if (walletRef.exists()) {
-    document.getElementById("wallet").innerText = walletRef.data().balance + " TK";
+    document.getElementById("wallet").innerText =
+      walletRef.data().balance + " TK";
   }
 
   // Load orders
-  const ordersBox = document.getElementById("orders");
-  ordersBox.innerHTML = "Loading...";
+  const box = document.getElementById("orders");
+  box.innerHTML = "Loading...";
 
   const q = query(collection(db, "orders"), where("user", "==", uid));
   const snap = await getDocs(q);
 
   if (snap.empty) {
-    ordersBox.innerHTML = "🚫 No orders found!";
+    box.innerHTML = "🚫 No orders found!";
     return;
   }
 
-  ordersBox.innerHTML = "";
-
+  box.innerHTML = "";
   snap.forEach(order => {
     let d = order.data();
+    let statusClass = d.status;
 
-    let statusClass = d.status; // pending / approved / cancelled
-
-    ordersBox.innerHTML += `
+    box.innerHTML += `
       <div class="order-item">
-        <b>Serial:</b> ${order.id}<br>
+        <b>Order ID:</b> ${order.id}<br>
         <b>Package:</b> ${d.product}<br>
         <b>Player ID:</b> ${d.uid}<br>
         <b>Price:</b> ${d.price} TK<br>
@@ -164,5 +209,7 @@ onAuthStateChanged(auth, async (user) => {
     `;
   });
 });
-</script></body>
+</script>
+
+</body>
 </html>
