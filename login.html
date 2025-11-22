@@ -1,222 +1,47 @@
-<!DOCTYPE html><html lang="bn">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login — Habib YT</title>  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg,#0a0d2b,#1b1f3b);
-      font-family: "Poppins", sans-serif;
-      color: #fff;
-    }
-
-    .container {
-      max-width: 420px;
-      margin: 70px auto;
-      background: rgba(255,255,255,0.07);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.35);
-      text-align: center;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.18);
-      animation: fadeIn .4s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    h2 {
-      background: linear-gradient(90deg,#00eaff,#00ff88);
-      -webkit-background-clip: text;
-      color: transparent;
-      font-size: 30px;
-      font-weight: 800;
-      margin-bottom: 15px;
-    }
-
-    label {
-      display: block;
-      text-align: left;
-      margin-top: 18px;
-      color: #cfeaff;
-      font-weight: 600;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      margin-top: 6px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.1);
-      border-radius: 10px;
-      font-size: 15px;
-      color: #fff;
-    }
-
-    input::placeholder { color:#cfd3ff; }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 18px;
-      background: linear-gradient(90deg,#00eaff,#00ff88);
-      border: none;
-      color: #000;
-      font-weight: bold;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 17px;
-      box-shadow: 0 4px 12px rgba(0,255,200,0.3);
-      transition: .2s;
-    }
-
-    button:hover {
-      transform: scale(1.03);
-    }
-
-    .google {
-      background: #db4437 !important;
-      color:white;
-      box-shadow: 0 4px 12px rgba(255,80,80,0.3);
-    }
-
-    .home-btn {
-      background: #4a3bff !important;
-      color: #fff !important;
-      box-shadow: 0 4px 12px rgba(80,80,255,0.3);
-    }
-
-    .signup-link {
-      margin-top: 15px;
-      display: block;
-      font-size: 15px;
-      color: #00eaff;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    /* SIGNUP POPUP */
-    #signupBox {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.65);
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-
-    #signupForm {
-      background: rgba(255,255,255,0.09);
-      width: 90%;
-      max-width: 420px;
-      padding: 28px;
-      border-radius: 20px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-      backdrop-filter: blur(10px);
-      border:1px solid rgba(255,255,255,0.18);
-      animation: fadeIn .3s ease-in-out;
-      color: #fff;
-    }
-
-    .closeBtn {
-      background: #ff4d4d !important;
-      color:white !important;
-      margin-top: 12px;
-    }
-
-  </style></head>
-<body>  <div class="container">
-    <h2>🔐 Login</h2><label>Email</label>
-<input type="email" id="loginEmail" placeholder="Email লিখুন">
-
-<label>Password</label>
-<input type="password" id="loginPassword" placeholder="Password লিখুন">
-
-<button onclick="loginUser()">Login</button>
-<button onclick="googleLogin()" class="google">Login with Google</button>
-<button onclick="window.location.href='index.html'" class="home-btn">🏠 Go to Home</button>
-
-<span class="signup-link" onclick="openSignup()">আপনার একাউন্ট নেই? Sign Up করুন</span>
-
-  </div>  <!-- SIGNUP POPUP -->  <div id="signupBox">
-    <div id="signupForm">
-      <h2 style="background:linear-gradient(90deg,#00eaff,#00ff88);-webkit-background-clip:text;color:transparent;text-align:center;">📝 Create Account</h2><label>First Name</label>
-  <input type="text" id="firstName" placeholder="আপনার প্রথম নাম লিখুন">
-
-  <label>Last Name</label>
-  <input type="text" id="lastName" placeholder="আপনার শেষ নাম লিখুন">
-
-  <label>Email</label>
-  <input type="email" id="signupEmail" placeholder="নতুন Email দিন">
-
-  <label>Password</label>
-  <input type="password" id="signupPassword" placeholder="নতুন Password দিন">
-
-  <label>Confirm Password</label>
-  <input type="password" id="confirmPassword" placeholder="Password নিশ্চিত করুন">
-
-  <button onclick="registerUser()">Create Account</button>
-  <button class="closeBtn" onclick="closeSignup()">Close</button>
-</div>
-
-  </div>  <!-- Firebase -->  <script type="module" src="firebase.js"></script>  <script type="module" src="app.js"></script>  <script>
-    function openSignup() {
-      document.getElementById("signupBox").style.display = "flex";
-    }
-
-    function closeSignup() {
-      document.getElementById("signupBox").style.display = "none";
-    }
-  </script>  <!-- Auto Redirect If Logged In -->  <script type="module">
-    import { auth } from "./firebase.js";
-    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        window.location.href = "dashboard.html";
-      }
-    });
-  </script></body>
-</html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login — Habib YT</title>  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=0.86" />
+  <title>Login — Habib YT</title>
+
+  <style>
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg,#0a0d2b,#1b1f3b);
+      background: linear-gradient(135deg, #0a0d2b, #1b1f3b);
       font-family: "Poppins", sans-serif;
       color: #fff;
     }
 
     .container {
       max-width: 420px;
-      margin: 70px auto;
-      background: rgba(255,255,255,0.07);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+      margin: 60px auto;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 32px;
+      border-radius: 22px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
       text-align: center;
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.18);
-      animation: fadeIn .4s ease-in-out;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      animation: fadeIn 0.4s ease-in-out;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     h2 {
-      background: linear-gradient(90deg,#00eaff,#00ff88);
+      background: linear-gradient(90deg, #00eaff, #00ff88);
       -webkit-background-clip: text;
       color: transparent;
       font-size: 30px;
@@ -230,54 +55,57 @@
       margin-top: 18px;
       color: #cfeaff;
       font-weight: 600;
+      font-size: 15px;
     }
 
     input {
       width: 100%;
-      padding: 14px;
+      padding: 15px;
       margin-top: 6px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.1);
-      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
       font-size: 15px;
       color: #fff;
     }
 
-    input::placeholder { color:#cfd3ff; }
+    input::placeholder {
+      color: #cfd3ff;
+    }
 
     button {
       width: 100%;
-      padding: 14px;
-      margin-top: 18px;
-      background: linear-gradient(90deg,#00eaff,#00ff88);
+      padding: 16px;
+      margin-top: 20px;
+      background: linear-gradient(90deg, #00eaff, #00ff88);
       border: none;
       color: #000;
       font-weight: bold;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       font-size: 17px;
-      box-shadow: 0 4px 12px rgba(0,255,200,0.3);
-      transition: .2s;
+      box-shadow: 0 4px 12px rgba(0, 255, 200, 0.3);
+      transition: 0.2s;
     }
 
     button:hover {
-      transform: scale(1.03);
+      transform: scale(1.05);
     }
 
     .google {
       background: #db4437 !important;
-      color:white;
-      box-shadow: 0 4px 12px rgba(255,80,80,0.3);
+      color: white !important;
+      box-shadow: 0 4px 12px rgba(255, 80, 80, 0.3);
     }
 
     .home-btn {
       background: #4a3bff !important;
       color: #fff !important;
-      box-shadow: 0 4px 12px rgba(80,80,255,0.3);
+      box-shadow: 0 4px 12px rgba(80, 80, 255, 0.3);
     }
 
     .signup-link {
-      margin-top: 15px;
+      margin-top: 18px;
       display: block;
       font-size: 15px;
       color: #00eaff;
@@ -289,69 +117,87 @@
     #signupBox {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.65);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.65);
       justify-content: center;
       align-items: center;
       z-index: 999;
     }
 
     #signupForm {
-      background: rgba(255,255,255,0.09);
+      background: rgba(255, 255, 255, 0.09);
       width: 90%;
       max-width: 420px;
       padding: 28px;
       border-radius: 20px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(10px);
-      border:1px solid rgba(255,255,255,0.18);
-      animation: fadeIn .3s ease-in-out;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      animation: fadeIn 0.3s ease-in-out;
       color: #fff;
     }
 
     .closeBtn {
       background: #ff4d4d !important;
-      color:white !important;
+      color: white !important;
       margin-top: 12px;
     }
+  </style>
+</head>
 
-  </style></head>
-<body>  <div class="container">
-    <h2>🔐 Login</h2><label>Email</label>
-<input type="email" id="loginEmail" placeholder="Email লিখুন">
+<body>
 
-<label>Password</label>
-<input type="password" id="loginPassword" placeholder="Password লিখুন">
+  <div class="container">
+    <h2>🔐 Login</h2>
 
-<button onclick="loginUser()">Login</button>
-<button onclick="googleLogin()" class="google">Login with Google</button>
-<button onclick="window.location.href='index.html'" class="home-btn">🏠 Go to Home</button>
+    <label>Email</label>
+    <input type="email" id="loginEmail" placeholder="Email লিখুন">
 
-<span class="signup-link" onclick="openSignup()">আপনার একাউন্ট নেই? Sign Up করুন</span>
+    <label>Password</label>
+    <input type="password" id="loginPassword" placeholder="Password লিখুন">
 
-  </div>  <!-- SIGNUP POPUP -->  <div id="signupBox">
+    <button onclick="loginUser()">Login</button>
+    <button onclick="googleLogin()" class="google">Login with Google</button>
+    <button onclick="window.location.href='index.html'" class="home-btn">🏠 Go to Home</button>
+
+    <span class="signup-link" onclick="openSignup()">আপনার একাউন্ট নেই? Sign Up করুন</span>
+  </div>
+
+  <!-- SIGNUP POPUP -->
+  <div id="signupBox">
     <div id="signupForm">
-      <h2 style="background:linear-gradient(90deg,#00eaff,#00ff88);-webkit-background-clip:text;color:transparent;text-align:center;">📝 Create Account</h2><label>First Name</label>
-  <input type="text" id="firstName" placeholder="আপনার প্রথম নাম লিখুন">
+      <h2 style="background:linear-gradient(90deg,#00eaff,#00ff88);-webkit-background-clip:text;color:transparent;text-align:center;">
+        📝 Create Account
+      </h2>
 
-  <label>Last Name</label>
-  <input type="text" id="lastName" placeholder="আপনার শেষ নাম লিখুন">
+      <label>First Name</label>
+      <input type="text" id="firstName" placeholder="আপনার প্রথম নাম লিখুন">
 
-  <label>Email</label>
-  <input type="email" id="signupEmail" placeholder="নতুন Email দিন">
+      <label>Last Name</label>
+      <input type="text" id="lastName" placeholder="আপনার শেষ নাম লিখুন">
 
-  <label>Password</label>
-  <input type="password" id="signupPassword" placeholder="নতুন Password দিন">
+      <label>Email</label>
+      <input type="email" id="signupEmail" placeholder="নতুন Email দিন">
 
-  <label>Confirm Password</label>
-  <input type="password" id="confirmPassword" placeholder="Password নিশ্চিত করুন">
+      <label>Password</label>
+      <input type="password" id="signupPassword" placeholder="নতুন Password দিন">
 
-  <button onclick="registerUser()">Create Account</button>
-  <button class="closeBtn" onclick="closeSignup()">Close</button>
-</div>
+      <label>Confirm Password</label>
+      <input type="password" id="confirmPassword" placeholder="Password নিশ্চিত করুন">
 
-  </div>  <!-- Firebase -->  <script type="module" src="firebase.js"></script>  <script type="module" src="app.js"></script>  <script>
+      <button onclick="registerUser()">Create Account</button>
+      <button class="closeBtn" onclick="closeSignup()">Close</button>
+    </div>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="app.js"></script>
+
+  <script>
     function openSignup() {
       document.getElementById("signupBox").style.display = "flex";
     }
@@ -359,7 +205,10 @@
     function closeSignup() {
       document.getElementById("signupBox").style.display = "none";
     }
-  </script>  <!-- Auto Redirect If Logged In -->  <script type="module">
+  </script>
+
+  <!-- Auto Redirect If Logged In -->
+  <script type="module">
     import { auth } from "./firebase.js";
     import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
@@ -371,4 +220,5 @@
   </script>
 
 </body>
+
 </html>
