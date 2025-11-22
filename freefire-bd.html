@@ -16,7 +16,7 @@
 body{
     font-family:'Hind Siliguri',sans-serif;
     background:#f5f6ff;
-    padding-bottom:100px;
+    padding-bottom:80px;
 }
 
 /* HEADER */
@@ -31,320 +31,338 @@ header{
     z-index:999;
     box-shadow:0 3px 10px rgba(0,0,0,0.15);
 }
-header img{width:48px;height:48px;border-radius:50%;object-fit:cover;}
-.logo{font-size:21px;font-weight:700;line-height:19px;}
+header img{width:45px;height:45px;border-radius:50%;}
+.logo{font-size:20px;font-weight:700;line-height:18px;}
 #balanceBox{
     background:#ff6b35;
-    padding:9px 18px;
-    border-radius:30px;
+    padding:8px 16px;
+    border-radius:25px;
     font-weight:700;
-    font-size:15px;
 }
 .login-btn{
     background:white;
-    padding:9px 18px;
-    border-radius:30px;
+    padding:8px 16px;
+    border-radius:25px;
     font-weight:700;
     color:#6a0dad;
-    border:none;cursor:pointer;
 }
 
 /* BANNER */
 .banner{
     background:linear-gradient(135deg,#4a00e0,#8e2de2);
     color:white;
-    padding:30px 20px;
+    padding:25px 20px;
     text-align:center;
 }
-.banner h1{font-size:26px;margin:15px 0 8px;font-weight:700;}
-.banner p{font-size:16px;opacity:0.9;}
+.banner h1{font-size:24px;margin-top:12px;}
 
 /* SECTION */
-.section{padding:20px;background:white;margin-top:12px;border-radius:0;}
-.section h3{
-    font-size:19px;font-weight:700;color:#6a0dad;margin-bottom:15px;
-    display:flex;align-items:center;
-}
-.section h3::before{
-    margin-right:10px;font-size:24px;
-}
-.section:nth-child(3) h3::before{content:"1️⃣"}
-.section:nth-child(4) h3::before{content:"2️⃣"}
-.section:nth-child(5) h3::before{content:"3️⃣"}
+.section{padding:18px;background:white;margin-top:12px;}
+.section h3{font-size:18px;font-weight:700;color:#6a0dad;margin-bottom:10px;}
 
 /* PACKAGES */
 .grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:14px;
+    gap:12px;
 }
 .pkg{
     background:#fff;
-    padding:18px;
-    border-radius:16px;
-    border:2px solid #eee;
+    padding:15px;
+    border-radius:15px;
+    border:2px solid #ddd;
     text-align:center;
     cursor:pointer;
-    transition:.25s;
-    box-shadow:0 3px 10px rgba(0,0,0,0.05);
+    transition:.2s;
 }
-.pkg:hover{transform:translateY(-4px);}
 .pkg.active{
     border-color:#6a0dad;
-    background:#f8f0ff;
-    box-shadow:0 10px 25px rgba(106,13,173,0.25);
+    box-shadow:0 7px 22px rgba(106,13,173,0.25);
 }
-.pkg h4{margin-bottom:8px;font-size:16px;}
-.pkg p{font-size:19px;font-weight:700;color:#6a0dad;}
+.pkg h4{margin-bottom:6px;font-size:15px;}
+.pkg p{font-size:17px;font-weight:700;color:#6a0dad;}
 
-/* INPUT */
+/* UID AREA */
 input{
     width:100%;
-    padding:15px;
-    border:1px solid #ddd;
-    border-radius:14px;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:12px;
     font-size:16px;
-    margin:10px 0;
 }
 .uid-btn{
-    background:#6a0dad;color:white;padding:16px;border:none;width:100%;
-    border-radius:14px;font-size:18px;font-weight:700;margin-top:8px;cursor:pointer;
+    background:#6a0dad;color:white;padding:15px;border:none;width:100%;
+    border-radius:12px;font-size:17px;font-weight:700;margin-top:10px;
 }
 
 /* PAYMENT */
 .pay-opt{
-    display:flex;gap:16px;margin:18px 0;
+    display:flex;gap:15px;margin:15px 0;
 }
 .pay{
-    flex:1;background:#f8f4ff;border:2px solid transparent;
-    padding:18px;border-radius:14px;text-align:center;
-    cursor:pointer;transition:.25s;
+    flex:1;background:#f5eaff;border:2px solid transparent;
+    padding:15px;border-radius:12px;text-align:center;
+    cursor:pointer;
 }
 .pay.active{
     border-color:#6a0dad;background:#eddcff;
-    transform:scale(1.03);
 }
-.pay img{width:65px;margin-bottom:10px;}
+.pay img{width:60px;margin-bottom:8px;}
 
 .buy-btn{
-    background:#ff6b35;color:white;padding:18px;border:none;border-radius:14px;
-    width:100%;font-size:21px;font-weight:700;margin-top:20px;cursor:pointer;
+    background:#ff6b35;color:white;padding:17px;border:none;border-radius:12px;
+    width:100%;font-size:20px;font-weight:700;margin-top:15px;
 }
 
 /* RULES */
 .rules-box{
-    background:#efe6ff;padding:18px;border-radius:14px;font-size:14.5px;line-height:1.8;
-    border-left:4px solid #6a0dad;
+    background:#efe6ff;padding:15px;border-radius:12px;font-size:14px;line-height:1.6;
 }
 
 /* SUPPORT */
 .support{
-    background:#1a0033;color:white;padding:22px;text-align:center;margin:25px 0 80px;
-    border-radius:16px;
+    background:#1a0033;color:white;padding:18px;text-align:center;margin-top:20px;
+    border-radius:14px;
 }
-.social a{color:white;font-size:28px;margin:0 14px;}
+.social a{color:white;font-size:25px;margin:0 10px;}
 
 /* BOTTOM NAV */
 .nav{
-    position:fixed;bottom:0;left:0;right:0;
+    position:fixed;bottom:0;left:0;width:100%;
     background:white;
     display:flex;justify-content:space-around;
-    padding:12px 0;
-    border-top:3px solid #6a0dad;
-    box-shadow:0 -3px 15px rgba(0,0,0,0.1);
+    padding:10px 0;
+    border-top:2px solid #ddd;
 }
 .nav a{
     text-align:center;
     font-weight:700;
-    color:#666;
+    color:#555;
     font-size:14px;
-    text-decoration:none;
 }
-.nav a i{font-size:24px;display:block;margin-bottom:4px;}
+.nav a i{font-size:20px;display:block;margin-bottom:3px;}
 .nav .active{color:#6a0dad;}
-.nav .active i{color:#6a0dad;}
 </style>
 </head>
 
 <body>
 
 <header>
-    <img src="https://i.ibb.co.com/0jY7Y7K/logo.png" alt="Habib Topup">
-    <div class="logo">HABIB<br><span style="font-size:14px;">TOPUP</span></div>
+    <img src="https://i.ibb.co.com/0jY7Y7K/logo.png">
+    <div class="logo">HABIB<br>TOPUP</div>
     <div id="userArea">
         <button class="login-btn" onclick="location.href='login.html'">লগইন</button>
     </div>
 </header>
 
 <div class="banner">
-    <h1>Free Fire TopUp (BD)</h1>
-    <p>Bangladesh Server • Fast & 100% Trusted</p>
+    <h1>Free Fire TopUp</h1>
+    <p>Bangladesh Server | Fast Delivery</p>
 </div>
 
-<!-- ১. প্যাকেজ -->
+<!-- SECTION 1 -->
 <div class="section">
-    <h3>Select Recharge</h3>
+    <h3>১) Select Recharge</h3>
     <div class="grid" id="pkgGrid"></div>
 </div>
 
-<!-- ২. UID -->
+<!-- SECTION 2 -->
 <div class="section">
-    <h3>Account Info</h3>
+    <h3>২) Account Info</h3>
     <input type="text" id="uid" placeholder="আপনার Free Fire UID লিখুন">
     <button class="uid-btn" onclick="checkUID()">UID চেক করুন</button>
-    <p id="playerName" style="margin-top:12px;color:#6a0dad;font-weight:700;font-size:17px;"></p>
+    <p id="playerName" style="margin-top:10px;color:#6a0dad;font-weight:700;"></p>
 </div>
 
-<!-- ৩. পেমেন্ট -->
+<!-- SECTION 3 -->
 <div class="section">
-    <h3>Payment Method</h3>
+    <h3>৩) Payment Method</h3>
 
-    <div style="background:#f0e5ff;padding:15px;border-radius:14px;margin-bottom:15px;text-align:center;">
-        <b>আপনার ওয়ালেট ব্যালেন্স:</b> 
-        <span id="myBalance" style="color:#6a0dad;font-size:20px;font-weight:700;">0</span> টাকা<br>
-        <b>প্রয়োজন:</b> 
-        <span id="needAmount" style="color:#ff6b35;font-size:20px;font-weight:700;">0</span> টাকা
+    <div style="background:#fff;padding:12px;border-radius:12px;margin-bottom:10px;">
+        <b>আপনার ওয়ালেট:</b>
+        <span id="myBalance" style="color:#6a0dad;font-weight:700;">0</span> টাকা <br>
+        <b>প্রয়োজন:</b>
+        <span id="needAmount" style="color:#ff6b35;font-weight:700;">0</span> টাকা
     </div>
 
     <div class="pay-opt">
         <div class="pay active" id="walletPay" onclick="selectPay('wallet')">
-            <img src="https://i.ibb.co.com/wallet-pay.png" alt="Wallet">
+            <img src="https://i.ibb.co.com/wallet-pay.png">
             <br>Wallet Pay
         </div>
+
         <div class="pay" id="autoPay" onclick="selectPay('auto')">
-            <img src="https://i.ibb.co.com/bkash-nagad.png" alt="Auto Pay">
-            <br>Auto Pay (bKash/Nagad)
+            <img src="https://i.ibb.co.com/bkash-nagad.png">
+            <br>Auto Pay
         </div>
     </div>
 
     <button class="buy-btn" onclick="placeOrder()">Buy Now</button>
 </div>
 
-<!-- রুলস -->
+<!-- RULES -->
 <div class="section">
     <div class="rules-box">
         <b>Rules & Conditions</b><br><br>
         • ভুল UID দিলে Diamond না পেলে Habib Topup দায়ী নয়<br>
-        • Auto Pay করলে ১-৫ মিনিটে ডায়মন্ড চলে আসবে<br>
+        • Auto Pay করলে অর্ডার instant verify হয়<br>
         • Wallet Pay এ পর্যাপ্ত টাকা না থাকলে অর্ডার হবে না<br>
-        • ২৪/৭ সাপোর্ট পাবেন WhatsApp & Telegram এ
+        • Order Cancel হলে Wallet Refund পাওয়া যাবে
     </div>
 </div>
 
-<!-- সাপোর্ট -->
+<!-- SUPPORT -->
 <div class="support">
-    <h3 style="font-size:20px;margin-bottom:15px;">STAY CONNECTED</h3>
+    <h3>STAY CONNECTED</h3>
     <div class="social">
         <a href="https://www.facebook.com/share/1A8xKKdbec/"><i class="fab fa-facebook"></i></a>
-        <a href="https://youtube.com/@h_a_b_i_b-yt"><i class="fab fa-youtube"></i></a>
-        <a href="https://www.tiktok.com/@habibur_._rahman"><i class="fab fa-tiktok"></i></a>
+        <a href="https://youtube.com/@h_a_b_i_b-yt?si=vB8pNAjU0hs85qcr"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@habibur_._rahman?_r=1&_t=ZS-91XGP2aYtOh"><i class="fab fa-tiktok"></i></a>
     </div>
     <br>
-    <p style="font-size:16px;"><b>Support 24/7:</b><br>
-    WhatsApp: <a href="https://wa.me/8801868461577" style="color:#25d366;">01868461577</a><br>
-    Telegram: <a href="https://t.me/H_A_B_I_B_Top_1" style="color:#0088cc;">@H_A_B_I_B_Top_1</a></p>
-    <p style="margin-top:20px;">© 2025 Habib Topup • All Rights Reserved</p>
+    <p><b>Support:</b> WhatsApp: 01868461577 | Telegram @H_A_B_I_B_Top_1</p>
+    <p>© 2025 Habib Topup | All Rights Reserved</p>
 </div>
 
-<!-- নিচের নেভ -->
+<!-- NAVIGATION -->
 <div class="nav">
     <a href="index.html"><i class="fas fa-home"></i> হোম</a>
-    <a href="freefire-bd.html" class="active"><i class="fas fa-gem"></i> টপআপ</a>
-    <a href="orders.html"><i class="fas fa-list"></i> অর্ডার</a>
+    <a href="add-money.html"><i class="fas fa-gem"></i> টপআপ</a>
+    <a href="login.html"><i class="fas fa-user"></i> অ্যাকাউন্ট</a>
     <a href="support.html"><i class="fas fa-headset"></i> সাপোর্ট</a>
 </div>
 
-<!-- JavaScript (Firebase + Full Function) -->
+<!-- FIREBASE SCRIPT -->
 <script type="module">
 import { auth, db } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, getDoc, updateDoc, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { doc, getDoc, updateDoc, addDoc, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
 let selectedPackage = null;
 let payMethod = "wallet";
 let userUID = null;
 let userBalance = 0;
 
-// লগইন চেক + ব্যালেন্স দেখানো
+/* ---------------------------------------
+   SHOW USER BALANCE WHEN LOGGED IN
+---------------------------------------- */
 onAuthStateChanged(auth, async (user) => {
     if(user){
         userUID = user.uid;
-        const snap = await getDoc(doc(db,"wallets",userUID));
-        userBalance = snap.exists() ? snap.data().balance || 0 : 0;
+        const w = await getDoc(doc(db,"wallets",userUID));
 
-        document.getElementById("userArea").innerHTML = `<div id="balanceBox">${userBalance}৳</div>`;
+        userBalance = w.exists() ? w.data().balance : 0;
+
+        document.getElementById("userArea").innerHTML =
+            `<div id="balanceBox">${userBalance}৳</div>`;
         document.getElementById("myBalance").innerText = userBalance;
     }
 });
 
-// প্যাকেজ লিস্ট
+/* PACKAGE DATA */
 const packages = [
-    {name:"25 Diamond",price:23},{name:"50 Diamond",price:40},{name:"115 Diamond",price:89},
-    {name:"240 Diamond",price:185},{name:"355 Diamond",price:238},{name:"480 Diamond",price:315},
-    {name:"610 Diamond",price:510},{name:"850 Diamond",price:551},{name:"1240 Diamond",price:799},
-    {name:"2530 Diamond",price:1595},{name:"Weekly",price:55},{name:"Monthly",price:775}
+    {name:"Weekly",price:55},
+    {name:"Monthly",price:775},
+    {name:"25 Diamond",price:23},
+    {name:"50 Diamond",price:40},
+    {name:"115 Diamond",price:89},
+    {name:"240 Diamond",price:185},
+    {name:"355 Diamond",price:238},
+    {name:"480 Diamond",price:315},
+    {name:"610 Diamond",price:510},
+    {name:"850 Diamond",price:551},
+    {name:"1240 Diamond",price:799},
+    {name:"2530 Diamond",price:1595},
+    {name:"5060 Diamond",price:3190},
 ];
 
-const grid = document.getElementById("pkgGrid");
-packages.forEach(p => {
-    let div = document.createElement("div");
-    div.className = "pkg";
-    div.innerHTML = `<h4>${p.name}</h4><p>${p.price}৳</p>`;
-    div.onclick = () => {
+/* RENDER PACKAGES */
+const grid=document.getElementById("pkgGrid");
+packages.forEach((p)=>{
+    let div=document.createElement("div");
+    div.className="pkg";
+    div.innerHTML=`<h4>${p.name}</h4><p>${p.price}৳</p>`;
+    div.onclick=()=>{
         document.querySelectorAll(".pkg").forEach(x=>x.classList.remove("active"));
         div.classList.add("active");
-        selectedPackage = p;
-        document.getElementById("needAmount").innerText = p.price;
+        selectedPackage=p;
+        document.getElementById("needAmount").innerText=p.price;
     };
     grid.appendChild(div);
 });
 
-// UID চেক
-window.checkUID = async () => {
-    let uid = document.getElementById("uid").value.trim();
-    let box = document.getElementById("playerName");
-    if(uid.length < 8){ box.innerHTML="ভুল UID!"; box.style.color="red"; return; }
-    box.innerHTML="চেক করা হচ্ছে...";
-    try{
-        let res = await fetch(`https://spapi.pro/freefire?id=${uid}`);
-        let data = await res.json();
-        box.innerHTML = data.name ? `✔ ${data.name}` : "❌ UID পাওয়া যায়নি";
-        box.style.color = data.name ? "#6a0dad" : "red";
-    }catch{ box.innerHTML="✔ UID সঠিক"; box.style.color="#6a0dad"; }
-}
+/* UID CHECK API */
+window.checkUID=async ()=>{
+    let uid=document.getElementById("uid").value.trim();
+    let box=document.getElementById("playerName");
 
-// পেমেন্ট সিলেক্ট
-window.selectPay = (type) => {
-    payMethod = type;
-    document.getElementById("walletPay").classList.toggle("active", type==="wallet");
-    document.getElementById("autoPay").classList.toggle("active", type==="auto");
-}
-
-// অর্ডার
-window.placeOrder = async () => {
-    if(!selectedPackage) return alert("প্যাকেজ সিলেক্ট করুন!");
-    if(!document.getElementById("uid").value) return alert("UID দিন!");
-
-    if(payMethod==="wallet" && userBalance < selectedPackage.price){
-        return alert("ওয়ালেটে টাকা নেই!");
+    if(uid.length < 6){
+        box.innerHTML="❌ ভুল UID!";
+        box.style.color="red";
+        return;
     }
+
+    box.innerHTML="⏳ Checking...";
+    try{
+        let res=await fetch(`https://spapi.pro/freefire?id=${uid}`);
+        let data=await res.json();
+
+        if(data.name){
+            box.innerHTML="✔ "+data.name;
+            box.style.color="#6a0dad";
+        } else {
+            box.innerHTML="❌ Invalid UID!";
+            box.style.color="red";
+        }
+    } catch {
+        box.innerHTML="✔ UID Valid";
+        box.style.color="#6a0dad";
+    }
+}
+
+/* SELECT PAYMENT */
+window.selectPay=(type)=>{
+    payMethod=type;
+    document.getElementById("walletPay").classList.toggle("active",type==="wallet");
+    document.getElementById("autoPay").classList.toggle("active",type==="auto");
+}
+
+/* PLACE ORDER */
+window.placeOrder=async ()=>{
+    if(!selectedPackage) return alert("❌ প্রথমে একটি প্যাকেজ সিলেক্ট করুন!");
+    let uid=document.getElementById("uid").value;
+    if(uid.length<6) return alert("❌ সঠিক UID দিন!");
+
+    let price = selectedPackage.price;
 
     if(payMethod==="wallet"){
-        await updateDoc(doc(db,"wallets",userUID),{ balance: userBalance - selectedPackage.price });
+        if(userBalance < price){
+            alert("❌ আপনার ওয়ালেটে পর্যাপ্ত টাকা নেই!");
+            return;
+        }
+
+        await updateDoc(doc(db,"wallets",userUID),{
+            balance:userBalance - price
+        });
     }
 
+    // SAVE ORDER
     await addDoc(collection(db,"orders"),{
-        user: userUID || "guest",
-        product: selectedPackage.name,
-        uid: document.getElementById("uid").value,
-        price: selectedPackage.price,
-        payment: payMethod,
-        status: "pending",
-        time: new Date()
+        user:userUID,
+        product:selectedPackage.name,
+        uid:uid,
+        price:price,
+        payment:payMethod,
+        status:"pending",
+        created:new Date()
     });
 
-    alert("অর্ডার সফল!");
-    location.href = payMethod==="auto" ? "add-money.html" : "index.html";
+    if(payMethod==="auto"){
+        location.href="add-money.html";
+    } else {
+        alert("✔ অর্ডার সম্পন্ন হয়েছে!");
+        location.href="dashboard.html";
+    }
 }
 </script>
 
