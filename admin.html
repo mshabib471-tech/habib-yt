@@ -90,7 +90,7 @@
 
 <header>
     Admin Control — Habib YT
-    <button class="logout" onclick="logoutUser()">Logout</button>
+    <button class="logout" onclick="logoutUser()">Go Home</button>
 </header>
 
 <!-- PENDING ORDERS -->
@@ -323,7 +323,7 @@ async function loadRecentActions() {
 -------------------------------- */
 window.logoutUser = function() {
   signOut(auth).then(() => {
-    location.href = "login.html";
+    location.href = "index.html";
   });
 };
 
