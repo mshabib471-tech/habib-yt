@@ -1,235 +1,445 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Admin Panel</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — Habib YT</title>
 
-<style>
-body {
-  background: #eef3ff;
-  font-family: Poppins, sans-serif;
-  margin: 0;
-}
+  <style>
+    :root{
+      --bg:#eef3ff;
+      --card:#ffffff;
+      --primary:#0a7cff;
+      --success:#0bbf4f;
+      --danger:#ff3b3b;
+      --muted:#6b7280;
+    }
+    body {
+      background: var(--bg);
+      font-family: Poppins, sans-serif;
+      margin: 0;
+      color: #0b1220;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
 
-header {
-  background: #062e63;
-  padding: 15px;
-  color: white;
-  text-align: center;
-  font-size: 24px;
-  font-weight: 600;
-}
+    header {
+      background: linear-gradient(90deg,#062e63,#0a7cff);
+      padding: 18px;
+      color: white;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      box-shadow: 0 6px 20px rgba(6,46,99,0.15);
+    }
 
-.section {
-  background: white;
-  margin: 15px;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
+    .wrap{
+      max-width: 980px;
+      margin: 18px auto;
+      padding: 0 12px;
+    }
 
-.order-box {
-  margin-top: 10px;
-  padding: 12px;
-  background: #f6f6ff;
-  border-radius: 10px;
-  border-left: 4px solid #0a7cff;
-}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2,1fr);
+      gap:16px;
+    }
 
-.btn {
-  border: none;
-  padding: 8px 14px;
-  font-size: 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-right: 6px;
-  margin-top: 6px;
-}
+    .section {
+      background: var(--card);
+      padding: 14px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(16,24,40,0.06);
+      border: 1px solid rgba(10,124,204,0.06);
+    }
 
-.approve { background:#0bbf4f; color:white; }
-.cancel { background:#ff3b3b; color:white; }
-</style>
+    h2{
+      margin:0 0 8px 0;
+      font-size:18px;
+      color:#07103a;
+    }
+
+    .order-box {
+      margin-top: 10px;
+      padding: 12px;
+      background: #f6f8ff;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      font-size:14px;
+    }
+
+    .order-meta{ display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap; }
+    .small{ color:var(--muted); font-size:13px; }
+
+    .btn {
+      border: none;
+      padding: 8px 12px;
+      font-size: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .row-actions{ display:flex; gap:8px; flex-wrap:wrap; }
+
+    .approve { background: var(--success); color: #fff; }
+    .cancel  { background: var(--danger); color: #fff; }
+    .view    { background: #0a7cff; color:#fff; }
+
+    .empty {
+      padding: 18px;
+      background: linear-gradient(90deg,#ffffff,#f6f9ff);
+      border-radius:10px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    footer.note{
+      max-width:980px;margin:14px auto;text-align:center;color:var(--muted);font-size:13px;
+    }
+
+    @media (max-width:820px){
+      .grid{grid-template-columns:1fr;}
+    }
+
+  </style>
 </head>
 
 <body>
 
-<header>Admin Control</header>
+<header>Admin Control — Habib YT</header>
 
-<div class="section">
-  <h2>📦 Pending Orders</h2>
-  <div id="pending">Loading...</div>
+<div class="wrap">
+  <div class="grid">
+    <div class="section">
+      <h2>📦 Pending Orders</h2>
+      <div id="pending">লোড হচ্ছে...</div>
+    </div>
+
+    <div class="section">
+      <h2>💰 Wallet Requests</h2>
+      <div id="walletReq">লোড হচ্ছে...</div>
+    </div>
+  </div>
+
+  <div style="height:12px;"></div>
+
+  <div class="section" id="recentActions">
+    <h2>📝 Recent Admin Actions</h2>
+    <div id="actionsList" class="empty">কোনো অ্যাকশন দেখা যাচ্ছে না।</div>
+  </div>
 </div>
 
-<div class="section">
-  <h2>💰 Wallet Requests</h2>
-  <div id="walletReq">Loading...</div>
-</div>
+<footer class="note">Only for admin (mshabib471@gmail.com). Be careful — actions are final.</footer>
 
 <script type="module">
-import { auth, db } from "./firebase.js";
+  // Firebase imports (use your firebase.js which already exports app, auth, db)
+  import { auth, db } from "./firebase.js";
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+  import {
+    collection,
+    query,
+    where,
+    getDocs,
+    updateDoc,
+    doc,
+    getDoc,
+    setDoc,
+    serverTimestamp,
+    orderBy,
+    limit
+  } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-import { 
-  onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+  // ---------- ADMIN CHECK ----------
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      // not logged in
+      location.href = "login.html";
+      return;
+    }
 
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  updateDoc,
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+    // restrict to admin email
+    const adminEmail = "mshabib471@gmail.com";
+    if (user.email !== adminEmail) {
+      alert("এই পেজটি শুধুমাত্র এডমিনের জন্য।");
+      location.href = "index.html";
+      return;
+    }
 
+    // load data
+    await loadPendingOrders();
+    await loadWalletRequests();
+    await loadRecentActions();
+  });
 
-// ---------- CHECK ADMIN ----------
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    location.href = "login.html";
-    return;
+  // ---------- LOAD PENDING ORDERS ----------
+  async function loadPendingOrders(){
+    const box = document.getElementById("pending");
+    box.innerHTML = "লোড হচ্ছে...";
+
+    try {
+      const q = query(collection(db, "orders"), where("status", "==", "pending"), orderBy("createdAt", "desc"), limit(50));
+      const snap = await getDocs(q);
+
+      if (snap.empty) {
+        box.innerHTML = `<div class="empty">কোনো pending অর্ডার নেই।</div>`;
+        return;
+      }
+
+      box.innerHTML = "";
+      snap.forEach(order => {
+        const d = order.data();
+        const price = d.price ?? 0;
+        const userId = d.user ?? d.uid ?? "unknown";
+
+        const node = document.createElement("div");
+        node.className = "order-box";
+
+        node.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+            <div>
+              <div style="font-weight:700">${d.product ?? "Unknown Product"}</div>
+              <div class="small">Order ID: ${order.id} • User: ${userId}</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-weight:800">${price} TK</div>
+              <div class="small">${d.createdAt ? new Date(d.createdAt.seconds * 1000).toLocaleString() : ""}</div>
+            </div>
+          </div>
+
+          <div class="order-meta">
+            <div>
+              <div class="small"><b>Player UID:</b> ${d.uid ?? "-"}</div>
+              <div class="small"><b>Note:</b> ${d.note ?? "-"}</div>
+            </div>
+
+            <div class="row-actions" style="align-items:center;">
+              <button class="btn view" onclick="viewOrder('${order.id}')">View</button>
+              <button class="btn approve" onclick="approveOrderPrompt('${order.id}','${userId}',${price})">Approve</button>
+              <button class="btn cancel" onclick="cancelOrderPrompt('${order.id}','${userId}',${price})">Cancel & Refund</button>
+            </div>
+          </div>
+        `;
+
+        box.appendChild(node);
+      });
+
+    } catch (err) {
+      console.error(err);
+      box.innerHTML = `<div class="empty">লোডে সমস্যা হয়েছে — কনসোলে চেক করুন।</div>`;
+    }
   }
 
-  // YOUR ADMIN EMAIL
-  if (user.email !== "mshabib471@gmail.com") {
-    alert("Admins only!");
-    location.href = "index.html";
-    return;
+  // ---------- APPROVE ORDER (prompt wrapper) ----------
+  window.approveOrderPrompt = function(orderId, userUID, price){
+    const ok = confirm(`অর্ডার ${orderId} অনুমোদন করবেন? (User: ${userUID}, Price: ${price} TK)`);
+    if(!ok) return;
+    approveOrder(orderId, userUID, price);
+  };
+
+  window.approveOrder = async function(orderId, userUID, price){
+    try {
+      await updateDoc(doc(db, "orders", orderId), {
+        status: "approved",
+        approvedAt: serverTimestamp()
+      });
+
+      logAction(`Approved order ${orderId} by admin`);
+      alert("অর্ডার অ্যাপ্রুভ করা হলো।");
+      await loadPendingOrders();
+      await loadRecentActions();
+    } catch (err) {
+      console.error(err);
+      alert("অ্যাপ্রুভ করার সময় ত্রুটি ঘটেছে। কনসোল চেক করুন।");
+    }
+  };
+
+  // ---------- CANCEL ORDER + REFUND (prompt wrapper) ----------
+  window.cancelOrderPrompt = function(orderId, userUID, price){
+    const ok = confirm(`অর্ডার ${orderId} বাতিল ও রিফান্ড করবেন? (User: ${userUID}, Refund: ${price} TK)`);
+    if(!ok) return;
+    cancelOrder(orderId, userUID, price);
+  };
+
+  window.cancelOrder = async function(orderId, userUID, price){
+    try {
+      // ensure wallet doc exists; get current balance
+      const walletRef = doc(db, "wallets", userUID);
+      const walletSnap = await getDoc(walletRef);
+      let oldBal = 0;
+      if (walletSnap.exists()) {
+        oldBal = Number(walletSnap.data().balance ?? 0);
+        await updateDoc(walletRef, { balance: oldBal + Number(price) });
+      } else {
+        // create doc with initial balance = price
+        await setDoc(walletRef, { balance: Number(price), updatedAt: serverTimestamp() });
+      }
+
+      await updateDoc(doc(db, "orders", orderId), {
+        status: "cancelled",
+        cancelledAt: serverTimestamp()
+      });
+
+      logAction(`Cancelled order ${orderId} and refunded ${price} to ${userUID}`);
+      alert("অর্ডার বাতিল ও রিফান্ড সম্পন্ন।");
+      await loadPendingOrders();
+      await loadRecentActions();
+    } catch (err) {
+      console.error(err);
+      alert("ক্যানসেল/রিফান্ডে সমস্যা হয়েছে। কনসোল চেক করুন।");
+    }
+  };
+
+  // ---------- LOAD WALLET REQUESTS ----------
+  async function loadWalletRequests(){
+    const box = document.getElementById("walletReq");
+    box.innerHTML = "লোড হচ্ছে...";
+
+    try {
+      // collection name used in your project earlier: "walletsRequest"
+      const q = query(collection(db, "walletsRequest"), where("status", "==", "pending"), orderBy("createdAt", "desc"), limit(50));
+      const snap = await getDocs(q);
+
+      if (snap.empty) {
+        box.innerHTML = `<div class="empty">কোনো wallet request নেই।</div>`;
+        return;
+      }
+
+      box.innerHTML = "";
+      snap.forEach(req => {
+        const d = req.data();
+        const node = document.createElement("div");
+        node.className = "order-box";
+        node.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+            <div>
+              <div style="font-weight:700">${d.user ?? "Unknown User"}</div>
+              <div class="small">Method: ${d.method ?? "-"} • Trx: ${d.trxid ?? "-"}</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-weight:800">${d.amount ?? 0} TK</div>
+              <div class="small">${d.createdAt ? new Date(d.createdAt.seconds * 1000).toLocaleString() : ""}</div>
+            </div>
+          </div>
+
+          <div class="row-actions">
+            <button class="btn approve" onclick="approveWalletPrompt('${req.id}','${d.user}',${d.amount})">Approve</button>
+            <button class="btn cancel" onclick="rejectWalletPrompt('${req.id}')">Reject</button>
+          </div>
+        `;
+        box.appendChild(node);
+      });
+
+    } catch (err) {
+      console.error(err);
+      box.innerHTML = `<div class="empty">লোডে সমস্যা — কনসোল চেক করুন।</div>`;
+    }
   }
 
-  loadPendingOrders();
-  loadWalletRequests();
-});
+  // ---------- APPROVE WALLET ----------
+  window.approveWalletPrompt = function(reqId, userUID, amount){
+    const ok = confirm(`Wallet request approve করবেন? (User: ${userUID}, Amount: ${amount} TK)`);
+    if(!ok) return;
+    approveWallet(reqId, userUID, amount);
+  };
 
+  window.approveWallet = async function(reqId, userUID, amount){
+    try {
+      const walletRef = doc(db, "wallets", userUID);
+      const walletSnap = await getDoc(walletRef);
+      if (walletSnap.exists()) {
+        const oldBal = Number(walletSnap.data().balance ?? 0);
+        await updateDoc(walletRef, { balance: oldBal + Number(amount) });
+      } else {
+        await setDoc(walletRef, { balance: Number(amount), updatedAt: serverTimestamp() });
+      }
 
-// ---------- LOAD PENDING ORDERS ----------
-async function loadPendingOrders() {
-  const box = document.getElementById("pending");
-  box.innerHTML = "Loading...";
+      await updateDoc(doc(db, "walletsRequest", reqId), { status: "approved", processedAt: serverTimestamp() });
 
-  const q = query(collection(db, "orders"), where("status", "==", "pending"));
-  const snap = await getDocs(q);
+      logAction(`Approved wallet request ${reqId} for ${userUID} (${amount} TK)`);
+      alert("Wallet request approved এবং ব্যালান্স যুক্ত করা হয়েছে।");
+      await loadWalletRequests();
+      await loadRecentActions();
+    } catch (err) {
+      console.error(err);
+      alert("Approve করতে সমস্যা হয়েছে।");
+    }
+  };
 
-  if (snap.empty) {
-    box.innerHTML = "No pending orders.";
-    return;
+  // ---------- REJECT WALLET ----------
+  window.rejectWalletPrompt = function(reqId){
+    const ok = confirm("Request reject করবেন?");
+    if(!ok) return;
+    rejectWallet(reqId);
+  };
+
+  window.rejectWallet = async function(reqId){
+    try {
+      await updateDoc(doc(db, "walletsRequest", reqId), { status: "rejected", processedAt: serverTimestamp() });
+      logAction(`Rejected wallet request ${reqId}`);
+      alert("Request rejected।");
+      await loadWalletRequests();
+      await loadRecentActions();
+    } catch (err) {
+      console.error(err);
+      alert("Reject করতে সমস্যা হয়েছে।");
+    }
+  };
+
+  // ---------- VIEW ORDER (simple open) ----------
+  window.viewOrder = function(orderId){
+    // open order detail page if exists
+    const url = `order.html?id=${orderId}`;
+    window.open(url, "_blank");
+  };
+
+  // ---------- RECENT ACTIONS (simple log viewer) ----------
+  async function loadRecentActions(){
+    const box = document.getElementById("actionsList");
+    // we don't have a dedicated actions collection — show last 10 orders changed as a simple indicator
+    try {
+      const q = query(collection(db, "orders"), orderBy("approvedAt", "desc"), limit(10));
+      const snap = await getDocs(q);
+      if (snap.empty) {
+        box.innerHTML = "কোনো সাম্প্রতিক অ্যাকশন দেখা যায় না।";
+        return;
+      }
+      box.innerHTML = "";
+      snap.forEach(docSnap => {
+        const d = docSnap.data();
+        const when = d.approvedAt ? new Date(d.approvedAt.seconds * 1000).toLocaleString() : (d.cancelledAt ? new Date(d.cancelledAt.seconds * 1000).toLocaleString() : "");
+        const el = document.createElement("div");
+        el.className = "order-box";
+        el.style.padding = "10px";
+        el.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center">
+          <div><b>${d.product ?? "Product"}</b><div class="small">Order: ${docSnap.id} • User: ${d.user ?? d.uid ?? "-"}</div></div>
+          <div style="text-align:right"><div class="small">${d.status ?? "-"}</div><div class="small">${when}</div></div>
+        </div>`;
+        box.appendChild(el);
+      });
+    } catch (err) {
+      console.error(err);
+      box.innerHTML = "রিসেন্ট অ্যাকশন লোডে সমস্যা হয়েছে।";
+    }
   }
 
-  box.innerHTML = "";
-  snap.forEach(order => {
-    let d = order.data();
-
-    box.innerHTML += `
-      <div class="order-box">
-        <b>Product:</b> ${d.product}<br>
-        <b>UID:</b> ${d.uid}<br>
-        <b>Price:</b> ${d.price} TK<br>
-        <b>User:</b> ${d.user}<br><br>
-
-        <button class="btn approve" onclick="approveOrder('${order.id}','${d.user}',${d.price})">Approve</button>
-        <button class="btn cancel" onclick="cancelOrder('${order.id}','${d.user}',${d.price})">Cancel</button>
-      </div>
-    `;
-  });
-}
-
-
-// ---------- APPROVE ORDER ----------
-window.approveOrder = async function(orderId, userUID, price) {
-  await updateDoc(doc(db, "orders", orderId), {
-    status: "complete",
-    completedAt: new Date()
-  });
-
-  alert("Order Approved!");
-  location.reload();
-};
-
-
-// ---------- CANCEL ORDER + REFUND ----------
-window.cancelOrder = async function(orderId, userUID, price) {
-  const walletRef = doc(db, "wallets", userUID);
-  const walletSnap = await getDoc(walletRef);
-
-  let oldBal = walletSnap.exists() ? walletSnap.data().balance : 0;
-
-  await updateDoc(walletRef, { balance: oldBal + price });
-
-  await updateDoc(doc(db, "orders", orderId), {
-    status: "cancelled",
-    cancelledAt: new Date()
-  });
-
-  alert("Order Cancelled + Refund Done!");
-  location.reload();
-};
-
-
-// ---------- LOAD WALLET REQUESTS ----------
-async function loadWalletRequests() {
-  const box = document.getElementById("walletReq");
-
-  // FIXED: Correct collection name = walletRequests
-  const q = query(collection(db, "walletRequests"), where("status", "==", "pending"));
-  const snap = await getDocs(q);
-
-  if (snap.empty) {
-    box.innerHTML = "No wallet requests.";
-    return;
+  // ---------- SIMPLE ADMIN ACTION LOG (client-side for this UI) ----------
+  async function logAction(text){
+    // optional: you can push these logs to a Firestore collection like "adminLogs"
+    try {
+      const logRef = doc(collection(db, "adminLogs"));
+      await setDoc(logRef, {
+        text,
+        createdAt: serverTimestamp()
+      });
+    } catch (err){
+      // ignore logging errors
+      console.warn("logAction failed:", err);
+    }
   }
-
-  box.innerHTML = "";
-  snap.forEach(req => {
-    let d = req.data();
-
-    box.innerHTML += `
-      <div class="order-box">
-        <b>User:</b> ${d.user}<br>
-        <b>Amount:</b> ${d.amount} TK<br>
-        <b>Method:</b> ${d.method}<br>
-        <b>TrxID:</b> ${d.trxid}<br><br>
-
-        <button class="btn approve" onclick="approveWallet('${req.id}', '${d.user}', ${d.amount})">Approve</button>
-        <button class="btn cancel" onclick="rejectWallet('${req.id}')">Reject</button>
-      </div>
-    `;
-  });
-}
-
-
-// ---------- APPROVE WALLET ----------
-window.approveWallet = async function(reqId, userUID, amount) {
-
-  const walletRef = doc(db, "wallets", userUID);
-  const walletSnap = await getDoc(walletRef);
-
-  let oldBal = walletSnap.exists() ? walletSnap.data().balance : 0;
-
-  await updateDoc(walletRef, {
-    balance: oldBal + amount
-  });
-
-  await updateDoc(doc(db, "walletRequests", reqId), {
-    status: "approved"
-  });
-
-  alert("Wallet Request Approved!");
-  location.reload();
-};
-
-
-// ---------- REJECT WALLET ----------
-window.rejectWallet = async function(reqId) {
-  await updateDoc(doc(db, "walletRequests", reqId), {
-    status: "rejected"
-  });
-
-  alert("Request Rejected");
-  location.reload();
-};
 
 </script>
-
 </body>
 </html>
