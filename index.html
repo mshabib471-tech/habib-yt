@@ -1,262 +1,138 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Fire TopUp (BD) - Habib Topup</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-<style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Hind Siliguri',sans-serif;background:#f5f7ff;color:#333;padding-bottom:20px;}
-    .container{max-width:480px;margin:0 auto;background:#fff;}
-
-    /* HEADER */
-    header{
-        background:#6a0dad;padding:14px;display:flex;justify-content:space-between;align-items:center;
-        color:#fff;position:sticky;top:0;z-index:999;box-shadow:0 3px 10px rgba(0,0,0,0.1);
-    }
-    header img{width:45px;border-radius:50%;}
-    .logo{font-size:21px;font-weight:800;line-height:1.2;}
-    .balance-btn{
-        background:#ff6b35;padding:8px 16px;border-radius:25px;font-size:14px;font-weight:600;
-    }
-    .login-btn{
-        background:#fff;color:#6a0dad;padding:8px 18px;border-radius:25px;font-weight:600;
-    }
-
-    /* BANNER */
-    .banner{
-        background:linear-gradient(135deg,#4a00e0,#8e2de2);color:#fff;padding:25px 20px;text-align:center;
-    }
-    .banner h1{font-size:24px;margin:12px 0;font-weight:700;}
-    .banner p{font-size:16px;opacity:0.9;}
-
-    /* SECTION */
-    .section{padding:20px;background:#fff;}
-    .section h3{
-        font-size:19px;color:#6a0dad;margin-bottom:15px;display:flex;align-items:center;
-        font-weight:600;
-    }
-
-    /* PACKAGES */
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-    .pkg{
-        background:#fff;border:2px solid #eee;border-radius:14px;padding:16px;text-align:center;
-        transition:0.3s;cursor:pointer;
-    }
-    .pkg:hover, .pkg.active{
-        border-color:#6a0dad;transform:scale(1.06);box-shadow:0 10px 25px rgba(106,13,173,0.25);
-    }
-    .pkg h4{font-size:16px;margin:10px 0 6px;}
-    .pkg p{font-size:19px;font-weight:700;color:#6a0dad;}
-
-    /* INPUT */
-    input{
-        width:100%;padding:15px;border:1px solid #ddd;border-radius:12px;font-size:16px;margin:12px 0;
-    }
-    .uid-btn{
-        background:#6a0dad;color:#fff;padding:15px;border:none;border-radius:12px;
-        font-size:17px;font-weight:600;width:100%;
-    }
-
-    /* PAYMENT */
-    .pay-opt{display:flex;gap:16px;margin:20px 0;}
-    .pay{
-        flex:1;background:#f8f4ff;border:2px solid #eee;border-radius:14px;padding:18px;
-        text-align:center;cursor:pointer;transition:0.3s;
-    }
-    .pay.active{border-color:#6a0dad;background:#f0e5ff;}
-    .pay img{width:65px;margin-bottom:10px;}
-
-    .buy-btn{
-        background:#ff6b35;color:#fff;padding:18px;font-size:21px;font-weight:700;
-        border:none;border-radius:14px;width:100%;margin-top:10px;
-    }
-
-    /* RULES */
-    .rules-box{
-        background:#f0e5ff;padding:18px;border-radius:14px;margin:20px 0;font-size:14.5px;line-height:1.7;
-    }
-
-    /* SUPPORT */
-    .support{
-        background:#1a0033;color:#fff;padding:20px;border-radius:14px;margin:20px 0;text-align:center;
-    }
-    .social a{color:#fff;margin:0 15px;font-size:24px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habib Topup - Free Fire Diamond BD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Hind Siliguri',sans-serif;background:#0d0b2b;color:#fff;padding-bottom:100px;}
+        .container{max-width:480px;margin:0 auto;padding:10px;background:#0d0b2b;}
+        .header{
+            background:#1a1a3d;padding:15px 10px;text-align:center;border-bottom:4px solid #00ff88;
+        }
+        .header img{width:190px;}
+        .banner img{width:100%;border-radius:15px;margin:15px 0;}
+        .section-title{
+            background:linear-gradient(90deg,#00ff88,#00d4ff);
+            -webkit-background-clip:text;background-clip:text;
+            color:transparent;
+            font-size:27px;font-weight:700;text-align:center;margin:30px 0 20px;
+        }
+        .products{
+            display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:35px;
+        }
+        .product{
+            background:rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;
+            text-align:center;border:1px solid rgba(0,255,136,0.3);
+            transition:0.4s;box-shadow:0 5px 15px rgba(0,0,0,0.3);
+        }
+        .product:hover{
+            transform:translateY(-10px);box-shadow:0 15px 30px rgba(0,255,136,0.4);
+        }
+        .product img{width:100%;height:95px;object-fit:cover;}
+        .product p{
+            background:#000;padding:10px 5px;font-size:13px;font-weight:700;
+            color:#00ffea;
+        }
+        .recent-orders{
+            background:rgba(0,0,0,0.6);border-radius:16px;padding:18px;margin:25px 0;
+            border:1px solid rgba(0,255,136,0.3);
+        }
+        .order-item{
+            background:rgba(0,255,136,0.15);padding:12px;margin:10px 0;
+            border-radius:12px;font-size:15px;display:flex;justify-content:space-between;
+            align-items:center;
+        }
+        .order-item span:last-child{color:#00ff88;font-weight:600;}
+        .footer{
+            background:#000;padding:25px 15px;text-align:center;font-size:14px;color:#666;
+        }
+        .nav{
+            position:fixed;bottom:0;left:0;right:0;background:#000;
+            border-top:4px solid #00ff88;display:flex;justify-content:space-around;
+            padding:14px 0;z-index:999;box-shadow:0 -5px 20px rgba(0,255,136,0.3);
+        }
+        .nav a{color:#fff;text-decoration:none;text-align:center;font-size:13px;}
+        .nav i{font-size:26px;display:block;margin-bottom:6px;color:#00ff88;}
+        .nav a.active i{color:#fff;text-shadow:0 0 20px #00ff88;}
+    </style>
 </head>
-
 <body>
-
-<header>
-    <img src="https://i.ibb.co.com/0jY7Y7K/logo.png">
-    <div class="logo">HABIB<br>TOPUP</div>
-    <div id="userArea">
-        <button class="login-btn" onclick="location.href='login.html'">লগইন</button>
-    </div>
-</header>
-
-<div class="banner">
-    <img src="https://i.ibb.co.com/ramadan-offer.png" width="100">
-    <h1>Free Fire TopUp (BD)</h1>
-    <p>Game / Top up</p>
-</div>
 
 <div class="container">
 
-    <!-- SELECT PACKAGE -->
-    <div class="section">
-        <h3>Select Recharge</h3>
-        <div class="grid" id="pkgGrid"></div>
+    <!-- Header -->
+    <div class="header">
+        <img src="https://i.ibb.co.com/0jY7Y7K/logo.png" alt="Habib Topup">
     </div>
 
-    <!-- UID -->
-    <div class="section">
-        <h3>Account Info</h3>
-        <input type="text" id="uid" placeholder="যেমন: 1234567890">
-        <button class="uid-btn" onclick="checkUID()">UID চেক করুন</button>
-        <p id="playerName" style="margin-top:12px;color:#6a0dad;font-weight:600;"></p>
+    <!-- Banner -->
+    <div class="banner">
+        <img src="https://i.ibb.co.com/banner1.png" alt="Ramadan Offer Banner">
     </div>
 
-    <!-- PAYMENT -->
-    <div class="section">
-        <h3>Select Payment Method</h3>
-        <div class="pay-opt">
-            <div class="pay active" id="walletPay" onclick="selectPay('wallet',this)">
-                <img src="https://i.ibb.co.com/wallet-pay.png"><br>Wallet Pay
-            </div>
-            <div class="pay" id="autoPay" onclick="selectPay('auto',this)">
-                <img src="https://i.ibb.co.com/bkash-nagad.png"><br>Auto Pay
-            </div>
-        </div>
-        <button class="buy-btn" onclick="placeOrder()">Buy Now</button>
+    <!-- Free Fire Topup -->
+    <h2 class="section-title">FREE FIRE TOPUP</h2>
+    <div class="products">
+        <a href="freefire-bd.html"><div class="product"><img src="https://i.ibb.co.com/ff-bd.png" alt=""><p>Free Fire [BD]</p></div></a>
+        <a href="free-unipin.html"><div class="product"><img src="https://i.ibb.co.com/unipin.png" alt=""><p>UniPin Voucher</p></div></a>
+        <a href="freefire-like.html"><div class="product"><img src="https://i.ibb.co.com/like.png" alt=""><p>Free Fire Like</p></div></a>
+        <a href="weekly-lite.html"><div class="product"><img src="https://i.ibb.co.com/weekly.png" alt=""><p>Weekly Lite</p></div></a>
+        <a href="weekly-monthly.html"><div class="product"><img src="https://i.ibb.co.com/combo.png" alt=""><p>Weekly+Monthly</p></div></a>
+        <a href="level-up.html"><div class="product"><img src="https://i.ibb.co.com/levelup.png" alt=""><p>Level Up Pass</p></div></a>
+        <a href="evo-access.html"><div class="product"><img src="https://i.ibb.co.com/evo.png" alt=""><p>Evo Access</p></div></a>
+        <a href="incubator.html"><div class="product"><img src="https://i.ibb.co.com/incubator.png" alt=""><p>Incubator</p></div></a>
+        <a href="airdrop.html"><div class="product"><img src="https://i.ibb.co.com/airdrop.png" alt=""><p>Airdrop Special</p></div></a>
     </div>
 
-    <!-- RULES -->
-    <div class="rules-box">
-        <b>Rules & Conditions</b><br><br>
-        • অবশ্যই Bangladesh সার্ভারের ID দিয়ে টপআপ করুন <br>
-        • ভুল UID দিলে Diamond গেলে দায় নেবো না <br>
-        • Order ক্যানসেল করলে চার্জ কাটা হবে <br>
-        • Support 24/7 Available  
+    <!-- Like-Follow-Subscriber -->
+    <h2 class="section-title">Like-Follow-Subscriber</h2>
+    <div class="products">
+        <a href="fb-like.html"><div class="product"><img src="https://i.ibb.co.com/fb-like.png" alt=""><p>Facebook Like</p></div></a>
+        <a href="fb-follow.html"><div class="product"><img src="https://i.ibb.co.com/fb-follow.png" alt=""><p>Facebook Follow</p></div></a>
+        <a href="yt-sub.html"><div class="product"><img src="https://i.ibb.co.com/yt-sub.png" alt=""><p>YouTube Sub</p></div></a>
+        <a href="yt-like.html"><div class="product"><img src="https://i.ibb.co.com/yt-like.png" alt=""><p>YouTube Like</p></div></a>
+        <a href="tiktok.html"><div class="product"><img src="https://i.ibb.co.com/tiktok.png" alt=""><p>TikTok Live/Follow</p></div></a>
+        <a href="insta.html"><div class="product"><img src="https://i.ibb.co.com/insta.png" alt=""><p>Instagram</p></div></a>
     </div>
 
-    <!-- SUPPORT + SOCIAL -->
-    <div class="support">
-        <p><b>STAY CONNECTED</b></p>
-        <div class="social">
-            <a href="https://www.facebook.com/share/1A8xKKdbec/"><i class="fab fa-facebook"></i></a>
-            <a href="https://youtube.com/@h_a_b_i_b-yt?si=vB8pNAjU0hs85qcr"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.tiktok.com/@habibur_._rahman?_r=1&_t=ZS-91XGP2aYtOh"><i class="fab fa-tiktok"></i></a>
-            <a href="mailto:mshabib471@gmail.com"><i class="fa fa-envelope"></i></a>
-        </div>
-
-        <p><b>SUPPORT CENTER</b><br>WhatsApp: 01868461577<br>Telegram: @H_A_B_I_B_Top_1</p>
-
-        <p>© Habib Topup 2025 | All Rights Reserved<br>Developed by Habib YT</p>
+    <!-- Others Games -->
+    <h2 class="section-title">Others Games</h2>
+    <div class="products">
+        <a href="pubg.html"><div class="product"><img src="https://i.ibb.co.com/pubg.png" alt=""><p>PUBG Mobile</p></div></a>
+        <a href="coc.html"><div class="product"><img src="https://i.ibb.co.com/coc.png" alt=""><p>Clash of Clans</p></div></a>
+        <a href="cod.html"><div class="product"><img src="https://i.ibb.co.com/codm.png" alt=""><p>COD Mobile</p></div></a>
+        <a href="mlbb.html"><div class="product"><img src="https://i.ibb.co.com/mlbb.png" alt=""><p>MLBB</p></div></a>
+        <a href="freefire-global.html"><div class="product"><img src="https://i.ibb.co.com/ff-global.png" alt=""><p>Free Fire Global</p></div></a>
+        <a href="brawl.html"><div class="product"><img src="https://i.ibb.co.com/brawl.png" alt=""><p>Brawl Stars</p></div></a>
     </div>
 
+    <!-- Recent Orders -->
+    <h2 class="section-title">সর্বশেষ অর্ডার</h2>
+    <div class="recent-orders">
+        <div class="order-item"><span>Its CR7</span> <span>Processing</span></div>
+        <div class="order-item"><span>Emil SOBUJ</span> <span>Carry</span></div>
+        <div class="order-item"><span>Shah Muhammad</span> <span>Processing</span></div>
+        <div class="order-item"><span>Rakib Saiful</span> <span>Processing</span></div>
+        <div class="order-item"><span>Fahim</span> <span>Completed</span></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 Habib Topup. All Rights Reserved.</p>
+    </div>
 </div>
 
-<script type="module">
-import { auth, db } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-import { addDoc, collection, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-
-/* USER LOGIN + WALLET SHOW */
-onAuthStateChanged(auth, async (user)=>{
-    if(user){
-        const walletRef = await getDoc(doc(db,"wallets",user.uid));
-        let bal = walletRef.exists() ? walletRef.data().balance : 0;
-
-        document.getElementById("userArea").innerHTML =
-            `<div class="balance-btn">${bal}৳</div>`;
-    }
-});
-
-/* PACKAGES */
-const packages = [
-    {name:"WEEKLY",price:52},{name:"MONTHLY",price:765},
-    {name:"25 Diamond",price:23},{name:"50 Diamond",price:40},
-    {name:"115 Diamond",price:89},{name:"240 Diamond",price:185},
-    {name:"355 Diamond",price:238},{name:"480 Diamond",price:315},
-    {name:"610 Diamond",price:510},{name:"850 Diamond",price:551},
-    {name:"1240 Diamond",price:799},{name:"2530 Diamond",price:1595},
-    {name:"5060 Diamond",price:3190},{name:"10120 Diamond",price:6465},
-];
-
-let selectedPackage = null;
-let selectedPay = "wallet";
-
-let grid = document.getElementById("pkgGrid");
-packages.forEach((p,i)=>{
-    let div=document.createElement("div");
-    div.className="pkg";
-    div.innerHTML=`<h4>${p.name}</h4><p>${p.price}৳</p>`;
-    div.onclick=()=>{
-        document.querySelectorAll(".pkg").forEach(x=>x.classList.remove("active"));
-        div.classList.add("active");
-        selectedPackage = p;
-    };
-    grid.appendChild(div);
-});
-
-/* UID CHECK */
-window.checkUID = async function(){
-    let uid = document.getElementById("uid").value.trim();
-    let text = document.getElementById("playerName");
-
-    if(!uid) return text.innerHTML = "❌ UID দিন!";
-
-    text.innerHTML = "⏳ Checking...";
-
-    try{
-        let res = await fetch(`https://spapi.pro/freefire?id=${uid}`);
-        let data = await res.json();
-
-        if(data.status === "success"){
-            text.innerHTML = "✔ " + data.name;
-        } else {
-            text.innerHTML = "❌ Invalid UID";
-        }
-    }catch{
-        text.innerHTML = "⚠️ Server Busy!";
-    }
-}
-
-/* PAYMENT */
-window.selectPay = function(type,el){
-    selectedPay = type;
-    document.querySelectorAll(".pay").forEach(x=>x.classList.remove("active"));
-    el.classList.add("active");
-}
-
-/* ORDER */
-window.placeOrder = async function(){
-    if(!selectedPackage) return alert("❗ একটি প্যাকেজ সিলেক্ট করুন!");
-    let uid = document.getElementById("uid").value;
-    if(!uid) return alert("❗ UID লিখুন!");
-
-    const user = auth.currentUser;
-    if(!user) return location.href="login.html";
-
-    await addDoc(collection(db,"orders"),{
-        user: user.uid,
-        product: selectedPackage.name,
-        price: selectedPackage.price,
-        uid: uid,
-        payment: selectedPay,
-        status: "pending",
-        created: new Date()
-    });
-
-    alert("✔ অর্ডার সফলভাবে জমা হয়েছে!");
-    location.href="dashboard.html";
-}
-</script>
+<!-- Bottom Navigation -->
+<div class="nav">
+    <a href="/" class="active"><i class="fas fa-home"></i> হোম</a>
+    <a href="freefire-bd.html"><i class="fas fa-gem"></i> টপআপ</a>
+    <a href="login.html"><i class="fas fa-user"></i> অ্যাকাউন্ট</a>
+    <a href="support.html"><i class="fas fa-headset"></i> সাপোর্ট</a>
+</div>
 
 </body>
 </html>
