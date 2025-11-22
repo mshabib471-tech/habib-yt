@@ -10,151 +10,174 @@
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Hind Siliguri',sans-serif;background:#0d0b2b;color:#fff;padding-bottom:100px;}
         .container{max-width:480px;margin:0 auto;padding:10px;}
-        .header{background:#1a1a3d;padding:15px 10px;text-align:center;border-bottom:3px solid #00ff88;}
-        .header img{width:180px;}
+
+        /* হেডার */
+        .header{background:#1a1a3d;padding:15px 10px;text-align:center;border-bottom:4px solid #00ff88;}
+        .header img{width:190px;}
+
+        /* পেজ টাইটেল */
         .page-title{
-            background:linear-gradient(90deg,#00ff88,#00d4ff);
-            -webkit-background-clip:text;background-clip:text;
-            color:transparent;
             font-size:28px;font-weight:700;text-align:center;margin:20px 0;
+            background:linear-gradient(90deg,#00ffea,#00ff6e);
+            -webkit-background-clip:text;background-clip:text;color:transparent;
         }
+
+        /* প্যাকেজ গ্রিড */
         .packages{
-            display:grid;grid-template-columns:repeat(2,1fr);gap:15px;padding:0 10px;margin-bottom:30px;
+            display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 12px;margin:25px 0;
         }
         .pkg{
-            background:rgba(255,255,255,0.08);border-radius:15px;padding:15px;text-align:center;
-            border:2px solid transparent;transition:0.3s;cursor:pointer;
+            background:linear-gradient(135deg,rgba(0,255,136,0.1),rgba(0,0,0,0.3));
+            border:2px solid #00ff88;border-radius:16px;padding:16px;text-align:center;
+            cursor:pointer;transition:0.3s;box-shadow:0 5px 15px rgba(0,255,136,0.2);
         }
-        .pkg:hover,.pkg.selected{
-            border-color:#00ff88;background:rgba(0,255,136,0.15);box-shadow:0 8px 25px rgba(0,255,136,0.3);
+        .pkg:hover{transform:scale(1.05);box-shadow:0 12px 30px rgba(0,255,136,0.4);}
+        .pkg h3{font-size:18px;color:#00ffea;margin-bottom:6px;}
+        .pkg .price{font-size:26px;font-weight:800;color:#fff;}
+        .pkg del{font-size:14px;color:#666;}
+
+        /* UID সেকশন */
+        .uid-box{
+            background:rgba(255,255,255,0.08);border:1px solid #00ff88;border-radius:16px;
+            margin:20px 12px;padding:20px;
         }
-        .pkg h3{font-size:18px;color:#00ffea;margin-bottom:8px;}
-        .pkg .price{font-size:24px;font-weight:700;color:#fff;}
-        .input-area{
-            background:rgba(255,255,255,0.08);margin:20px 10px;padding:20px;border-radius:15px;
-            border:1px solid rgba(0,255,136,0.3);
+        input[type="text"]{
+            width:100%;padding:14px;border-radius:12px;border:none;background:rgba(255,255,255,0.15);
+            color:#fff;font-size:17px;margin:10px 0;
         }
-        input,button{
-            width:100%;padding:12px;margin:10px 0;border-radius:12px;border:none;font-size:16px;
+        .check-btn{
+            background:#00ff88;color:#000;padding:14px;border-radius:12px;border:none;
+            font-size:18px;font-weight:700;width:100%;margin-top:8px 0;
         }
-        input{background:rgba(255,255,255,0.1);color:#fff;}
-        .check-btn{background:#00ff88;color:#000;font-weight:bold;}
-        #playerName{margin-top:10px;font-weight:600;color:#00ffea;}
+        #playerName{font-size:18px;color:#00ffea;margin-top:10px;font-weight:600;}
+
+        /* পেমেন্ট অপশন */
         .payment-box{
-            background:rgba(255,255,255,0.08);margin:20px 10px;padding:20px;border-radius:15px;
-            border:1px solid rgba(0,255,136,0.3);
+            background:rgba(255,255,255,0.08);border:1px solid #00ff88;border-radius:16px;
+            margin:20px 12px;padding:20px;
         }
-        .pay-option{display:flex;gap:12px;margin:15px 0;}
-        .pay{
-            flex:1;background:rgba(255,255,255,0.1);padding:15px;border-radius:15px;text-align:center;
-            border:2px solid transparent;cursor:pointer;transition:0.3s;
+        .pay-methods{display:flex;gap:15px;margin:15px 0;}
+        .method{
+            flex:1;background:rgba(255,255,255,0.1);padding:15px;border-radius:14px;
+            text-align:center;border:2px solid transparent;transition:0.3s;
         }
-        .pay.selected{border-color:#00ff88;background:rgba(0,255,136,0.2);}
-        .pay img{width:60px;margin-bottom:8px;}
-        .buy-btn{
-            background:linear-gradient(45deg,#00ff88,#00ffc4);color:#000;padding:15px;
-            border:none;border-radius:15px;font-size:20px;font-weight:900;margin-top:15px;
+        .method.active{border-color:#00ff88;background:rgba(0,255,136,0.25);}
+        .method img{width:55px;margin-bottom:8px;}
+
+        .buy-now{
+            background:linear-gradient(45deg,#00ff88,#00ffc4);color:#000;
+            padding:18px;font-size:22px;font-weight:900;border:none;border-radius:16px;
+            width:100%;margin-top:20px;
         }
-        .nav{
-            position:fixed;bottom:0;left:0;right:0;background:#000;border-top:3px solid #00ff88;
-            display:flex;justify-content:space-around;padding:12px 0;z-index:999;
-        }
-        .nav a{color:#fff;text-decoration:none;text-align:center;font-size:12px;}
-        .nav i{font-size:24px;display:block;margin-bottom:5px;color:#00ff88;}
-        .nav a.active i{color:#fff;text-shadow:0 0 15px #00ff88;}
+
+        /* নিচের নেভ */
+        .nav{position:fixed;bottom:0;left:0;right:0;background:#000;
+            border-top:4px solid #00ff88;display:flex;justify-content:space-around;
+            padding:14px 0;z-index:999;box-shadow:0 -5px 20px rgba(0,255,136,0.3);}
+        .nav a{color:#fff;text-decoration:none;text-align:center;font-size:13px;}
+        .nav i{font-size:26px;display:block;margin-bottom:5px;color:#00ff88;}
+        .nav a.active i{color:#fff;text-shadow:0 0 20px #00ff88;}
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Header -->
+
+    <!-- হেডার -->
     <div class="header">
         <img src="https://i.ibb.co.com/0jY7Y7K/logo.png" alt="Habib Topup">
     </div>
 
     <h2 class="page-title">Free Fire Diamond [BD]</h2>
 
-    <!-- ১. প্যাকেজ সিলেক্ট -->
-    <div class="packages" id="packageGrid"></div>
+    <!-- প্যাকেজ লিস্ট -->
+    <div class="packages" id="pkgGrid"></div>
 
-    <!-- ২. ইউজার ইনফো -->
-    <div class="input-area">
-        <b style="color:#00ffea">Player UID দিন</b>
-        <input type="number" id="uid" placeholder="উদাহরণ: 123456789">
-        <button class="check-btn" onclick="checkUID()">চেক করুন</button>
-        <div id="playerName"></div>
+    <!-- UID ইনপুট -->
+    <div class="uid-box">
+        <h3 style="color:#00ffea;margin-bottom:10px;">Player UID দিন</h3>
+        <input type="text" id="uid" placeholder="যেমন: 1234567890">
+        <button class="check-btn" onclick="checkUID()">চেক করুন & নাম দেখুন</button>
+        <div id="playerName">নাম দেখাবে এখানে</div>
     </div>
 
-    <!-- ৩. পেমেন্ট মেথড -->
+    <!-- পেমেন্ট মেথড -->
     <div class="payment-box">
-        <div class="pay-option">
-            <div class="pay selected" onclick="selectPay('bkash')">
-                <img src="https://i.ibb.co.com/bkash.png" alt="bKash">
-                <h4>bKash / Nagad / Rocket</h4>
+        <h3 style="color:#00ffea;margin-bottom:15px;">পেমেন্ট মেথড</h3>
+        <div class="pay-methods">
+            <div class="method active" onclick="selectMethod(this)">
+                <img src="https://i.ibb.co.com/bkash.png" alt="bKash"><br>bKash
             </div>
-            <div class="pay" onclick="selectPay('manual')">
-                <img src="https://i.ibb.co.com/manual.png" alt="Manual">
-                <h4>Manual Pay</h4>
+            <div class="method" onclick="selectMethod(this)">
+                <img src="https://i.ibb.co.com/nagad.png" alt="Nagad"><br>Nagad
+            </div>
+            <div class="method" onclick="selectMethod(this)">
+                <img src="https://i.ibb.co.com/rocket.png" alt="Rocket"><br>Rocket
             </div>
         </div>
-        <button class="buy-btn" onclick="placeOrder()">অর্ডার করুন</button>
+        <button class="buy-now" onclick="buyNow()">অর্ডার করুন</button>
     </div>
+
 </div>
 
-<!-- Bottom Nav -->
+<!-- নিচের নেভিগেশন -->
 <div class="nav">
-    <a href="/"><i class="fas fa-home"></i> হোম</a>
+    <a href="index.html"><i class="fas fa-home"></i> হোম</a>
     <a href="#" class="active"><i class="fas fa-gem"></i> টপআপ</a>
     <a href="login.html"><i class="fas fa-user"></i> অ্যাকাউন্ট</a>
     <a href="support.html"><i class="fas fa-headset"></i> সাপোর্ট</a>
 </div>
 
 <script>
-// সব ডায়মন্ড প্যাকেজ
+// সব প্যাকেজ
 const packages = [
-    {name:"110 Diamond",price:95},{name:"220 Diamond",price:185},{name:"560 Diamond",price:460},
-    {name:"720 Diamond",price:580},{name:"1160 Diamond",price:920},{name:"2400 Diamond",price:1840},
-    {name:"Weekly Pass",price:160},{name:"Monthly Pass",price:750},{name:"Weekly + Monthly",price:850}
+    {name:"110 Diamond",price:95,old:120},
+    {name:"220 Diamond",price:185,old:240},
+    {name:"560 Diamond",price:460,old:600},
+    {name:"720 Diamond",price:580,old:750},
+    {name:"1160 Diamond",price:920,old:1200},
+    {name:"2400 Diamond",price:1840,old:2400},
+    {name:"Weekly Membership",price:160,old:200},
+    {name:"Monthly Membership",price:750,old:950},
+    {name:"Weekly + Monthly",price:850,old:1100}
 ];
 
 let selectedPkg = null;
 
 // প্যাকেজ দেখাও
-const grid = document.getElementById("packageGrid");
-packages.forEach((p,i) => {
+const grid = document.getElementById("pkgGrid");
+packages.forEach(p => {
     let div = document.createElement("div");
     div.className = "pkg";
-    div.innerHTML = `<h3>${p.name}</h3><div class="price">৳${p.price}</div>`;
+    div.innerHTML = `<h3>${p.name}</h3><div class="price">৳${p.price}</div><del>৳${p.old}</del>`;
     div.onclick = () => {
-        document.querySelectorAll(".pkg").forEach(x => x.classList.remove("selected"));
-        div.classList.add("selected");
+        document.querySelectorAll(".pkg").forEach(x=>x.style.borderColor="transparent");
+        div.style.borderColor="#00ff88";
         selectedPkg = p;
     };
     grid.appendChild(div);
 });
 
-// UID চেক (ডেমো – তুই চাইলে API যোগ করতে পারবি)
-window.checkUID = () => {
-    let uid = document.getElementById("uid").value.trim();
-    let box = document.getElementById("playerName");
-    if(!uid){ box.innerHTML = "UID দিন!"; box.style.color="#ff4444"; return; }
-    box.innerHTML = "প্লেয়ার: HABIB YT"; // ডেমো নাম
-    box.style.color = "#00ffea";
-};
+// UID চেক (ডেমো)
+function checkUID(){
+    let uid = document.getElementById("uid").value;
+    if(uid.length < 8) return alert("সঠিক UID দিন");
+    document.getElementById("playerName").innerHTML = `প্লেয়ার: <b style="color:#00ffea">HABIB YT</b>`;
+}
 
 // পেমেন্ট সিলেক্ট
-window.selectPay = (type) => {
-    document.querySelectorAll(".pay").forEach(x => x.classList.remove("selected"));
-    event.target.closest(".pay").classList.add("selected");
-};
+function selectMethod(el){
+    document.querySelectorAll(".method").forEach(x=>x.classList.remove("active"));
+    el.classList.add("active");
+}
 
-// অর্ডার প্লেস (ডেমো)
-window.placeOrder = () => {
+// অর্ডার
+function buyNow(){
     if(!selectedPkg) return alert("প্যাকেজ সিলেক্ট করুন!");
     if(!document.getElementById("uid").value) return alert("UID দিন!");
-    alert(`অর্ডার সফল!\n${selectedPkg.name} - ৳${selectedPkg.price}\nUID: ${document.getElementById("uid").value}`);
-    // এখানে তোর পেমেন্ট গেটওয়ে লিঙ্ক দিবি
-};
+    alert(`অর্ডার সফল!\n${selectedPkg.name} - ৳${selectedPkg.price}\nUID: ${document.getElementById("uid").value}\nপেমেন্ট করুন bKash/Nagad-এ`);
+    // এখানে তুই পেমেন্ট লিংক দিবি
+}
 </script>
 
 </body>
