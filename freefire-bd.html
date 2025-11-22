@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Diamond [BD] - Habib Topup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Hind Siliguri',sans-serif;background:#0d0b2b;color:#fff;padding-bottom:100px;}
+        .container{max-width:480px;margin:0 auto;padding:10px;}
+        .header{background:#1a1a3d;padding:15px 10px;text-align:center;border-bottom:3px solid #00ff88;}
+        .header img{width:180px;}
+        .page-title{
+            background:linear-gradient(90deg,#00ff88,#00d4ff);
+            -webkit-background-clip:text;background-clip:text;
+            color:transparent;
+            font-size:28px;font-weight:700;text-align:center;margin:20px 0;
+        }
+        .packages{
+            display:grid;grid-template-columns:repeat(2,1fr);gap:15px;padding:0 10px;margin-bottom:30px;
+        }
+        .pkg{
+            background:rgba(255,255,255,0.08);border-radius:15px;padding:15px;text-align:center;
+            border:2px solid transparent;transition:0.3s;cursor:pointer;
+        }
+        .pkg:hover,.pkg.selected{
+            border-color:#00ff88;background:rgba(0,255,136,0.15);box-shadow:0 8px 25px rgba(0,255,136,0.3);
+        }
+        .pkg h3{font-size:18px;color:#00ffea;margin-bottom:8px;}
+        .pkg .price{font-size:24px;font-weight:700;color:#fff;}
+        .input-area{
+            background:rgba(255,255,255,0.08);margin:20px 10px;padding:20px;border-radius:15px;
+            border:1px solid rgba(0,255,136,0.3);
+        }
+        input,button{
+            width:100%;padding:12px;margin:10px 0;border-radius:12px;border:none;font-size:16px;
+        }
+        input{background:rgba(255,255,255,0.1);color:#fff;}
+        .check-btn{background:#00ff88;color:#000;font-weight:bold;}
+        #playerName{margin-top:10px;font-weight:600;color:#00ffea;}
+        .payment-box{
+            background:rgba(255,255,255,0.08);margin:20px 10px;padding:20px;border-radius:15px;
+            border:1px solid rgba(0,255,136,0.3);
+        }
+        .pay-option{display:flex;gap:12px;margin:15px 0;}
+        .pay{
+            flex:1;background:rgba(255,255,255,0.1);padding:15px;border-radius:15px;text-align:center;
+            border:2px solid transparent;cursor:pointer;transition:0.3s;
+        }
+        .pay.selected{border-color:#00ff88;background:rgba(0,255,136,0.2);}
+        .pay img{width:60px;margin-bottom:8px;}
+        .buy-btn{
+            background:linear-gradient(45deg,#00ff88,#00ffc4);color:#000;padding:15px;
+            border:none;border-radius:15px;font-size:20px;font-weight:900;margin-top:15px;
+        }
+        .nav{
+            position:fixed;bottom:0;left:0;right:0;background:#000;border-top:3px solid #00ff88;
+            display:flex;justify-content:space-around;padding:12px 0;z-index:999;
+        }
+        .nav a{color:#fff;text-decoration:none;text-align:center;font-size:12px;}
+        .nav i{font-size:24px;display:block;margin-bottom:5px;color:#00ff88;}
+        .nav a.active i{color:#fff;text-shadow:0 0 15px #00ff88;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <img src="https://i.ibb.co.com/0jY7Y7K/logo.png" alt="Habib Topup">
+    </div>
+
+    <h2 class="page-title">Free Fire Diamond [BD]</h2>
+
+    <!-- ১. প্যাকেজ সিলেক্ট -->
+    <div class="packages" id="packageGrid"></div>
+
+    <!-- ২. ইউজার ইনফো -->
+    <div class="input-area">
+        <b style="color:#00ffea">Player UID দিন</b>
+        <input type="number" id="uid" placeholder="উদাহরণ: 123456789">
+        <button class="check-btn" onclick="checkUID()">চেক করুন</button>
+        <div id="playerName"></div>
+    </div>
+
+    <!-- ৩. পেমেন্ট মেথড -->
+    <div class="payment-box">
+        <div class="pay-option">
+            <div class="pay selected" onclick="selectPay('bkash')">
+                <img src="https://i.ibb.co.com/bkash.png" alt="bKash">
+                <h4>bKash / Nagad / Rocket</h4>
+            </div>
+            <div class="pay" onclick="selectPay('manual')">
+                <img src="https://i.ibb.co.com/manual.png" alt="Manual">
+                <h4>Manual Pay</h4>
+            </div>
+        </div>
+        <button class="buy-btn" onclick="placeOrder()">অর্ডার করুন</button>
+    </div>
+</div>
+
+<!-- Bottom Nav -->
+<div class="nav">
+    <a href="/"><i class="fas fa-home"></i> হোম</a>
+    <a href="#" class="active"><i class="fas fa-gem"></i> টপআপ</a>
+    <a href="login.html"><i class="fas fa-user"></i> অ্যাকাউন্ট</a>
+    <a href="support.html"><i class="fas fa-headset"></i> সাপোর্ট</a>
+</div>
+
+<script>
+// সব ডায়মন্ড প্যাকেজ
+const packages = [
+    {name:"110 Diamond",price:95},{name:"220 Diamond",price:185},{name:"560 Diamond",price:460},
+    {name:"720 Diamond",price:580},{name:"1160 Diamond",price:920},{name:"2400 Diamond",price:1840},
+    {name:"Weekly Pass",price:160},{name:"Monthly Pass",price:750},{name:"Weekly + Monthly",price:850}
+];
+
+let selectedPkg = null;
+
+// প্যাকেজ দেখাও
+const grid = document.getElementById("packageGrid");
+packages.forEach((p,i) => {
+    let div = document.createElement("div");
+    div.className = "pkg";
+    div.innerHTML = `<h3>${p.name}</h3><div class="price">৳${p.price}</div>`;
+    div.onclick = () => {
+        document.querySelectorAll(".pkg").forEach(x => x.classList.remove("selected"));
+        div.classList.add("selected");
+        selectedPkg = p;
+    };
+    grid.appendChild(div);
+});
+
+// UID চেক (ডেমো – তুই চাইলে API যোগ করতে পারবি)
+window.checkUID = () => {
+    let uid = document.getElementById("uid").value.trim();
+    let box = document.getElementById("playerName");
+    if(!uid){ box.innerHTML = "UID দিন!"; box.style.color="#ff4444"; return; }
+    box.innerHTML = "প্লেয়ার: HABIB YT"; // ডেমো নাম
+    box.style.color = "#00ffea";
+};
+
+// পেমেন্ট সিলেক্ট
+window.selectPay = (type) => {
+    document.querySelectorAll(".pay").forEach(x => x.classList.remove("selected"));
+    event.target.closest(".pay").classList.add("selected");
+};
+
+// অর্ডার প্লেস (ডেমো)
+window.placeOrder = () => {
+    if(!selectedPkg) return alert("প্যাকেজ সিলেক্ট করুন!");
+    if(!document.getElementById("uid").value) return alert("UID দিন!");
+    alert(`অর্ডার সফল!\n${selectedPkg.name} - ৳${selectedPkg.price}\nUID: ${document.getElementById("uid").value}`);
+    // এখানে তোর পেমেন্ট গেটওয়ে লিঙ্ক দিবি
+};
+</script>
+
+</body>
+</html>
