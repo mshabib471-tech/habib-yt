@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="bn">
+<!DOCTYPE html><html lang="bn">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Dashboard</title>
-
-<style>
+<title>Dashboard</title><style>
   body {
     font-family: Poppins, sans-serif;
     background: #eef3ff;
@@ -77,27 +74,14 @@
   .pending { color: orange; font-weight:700; }
   .approved { color: green; font-weight:700; }
   .cancelled { color: red; font-weight:700; }
-</style>
-</head>
-
-<body>
-
-<header>Dashboard</header>
-
-<div class="card">
+</style></head><body><header>Dashboard</header><div class="card">
   <div>Your Wallet Balance</div>
-  <div class="big-balance" id="wallet">0 TK</div>
+  <div class="big-balance" id="wallet">0 TK</div><button class="btn" onclick="location.href='add-money.html'">Add Money</button> <button class="btn2" onclick="location.href='index.html'">Go to Home</button>
 
-  <button class="btn" onclick="location.href='add-money.html'">Add Money</button>
-  <button class="btn2" onclick="location.href='index.html'">Go to Home</button>
-</div>
-
-<div class="orders-box">
+</div><div class="orders-box">
   <h2>📦 My Orders</h2>
   <div id="orders">Loading...</div>
-</div>
-
-<script type="module">
+</div><script type="module">
 
 import { auth, db } from "./firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
@@ -148,7 +132,5 @@ onAuthStateChanged(auth, async (user) => {
     `;
   });
 });
-</script>
-
-</body>
+</script></body>
 </html>
