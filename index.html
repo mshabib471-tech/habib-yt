@@ -18,14 +18,33 @@ body{
 }
 .container{max-width:480px;margin:0 auto;padding:10px;}
 
-/* Header */
-.header{
-    background:#1a1a3d;
-    padding:18px 10px;
-    text-align:center;
-    border-bottom:4px solid #00ff88;
+/* HEADER */
+header{
+    background:#6a0dad;
+    padding:14px;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;top:0;
+    z-index:999;
+    box-shadow:0 3px 10px rgba(0,0,0,0.15);
 }
-.header img{width:180px;}
+header img{width:45px;height:45px;border-radius:50%;}
+.logo{font-size:20px;font-weight:700;line-height:18px;}
+#balanceBox{
+    background:#ff6b35;
+    padding:8px 16px;
+    border-radius:25px;
+    font-weight:700;
+}
+.login-btn{
+    background:white;
+    padding:8px 16px;
+    border-radius:25px;
+    font-weight:700;
+    color:#6a0dad;
+}
 
 /* Banner */
 .banner img{
@@ -138,10 +157,14 @@ body{
 
 <div class="container">
 
-    <!-- Header -->
-    <div class="header">
-        <img src="https://i.ibb.co.com/mF6C849K/Picsart-25-11-19-21-55-28-130.jpg">
+    <header>
+    <img src="https://i.ibb.co.com/0jY7Y7K/logo.png">
+    <div class="logo">HABIB<br>TOPUP</div>
+    <div id="userArea">
+        <button class="login-btn" onclick="location.href='login.html'">লগইন</button>
     </div>
+</header>
+
 
     <!-- Banner -->
     <div class="banner">
