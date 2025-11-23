@@ -1,156 +1,59 @@
-<!DOCTYPE html>
-<html lang="bn">
+<!DOCTYPE html><html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Money</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Add Money — Habib Topup</title>
 <style>
-  body {
-    margin: 0;
-    font-family: Poppins, sans-serif;
-    background: #f4f6ff;
-  }
-
-  header {
-    background: #0A7CFF;
-    padding: 15px;
-    text-align: center;
-    color: white;
-    font-size: 22px;
-    font-weight: 600;
-  }
-
-  .box {
-    background: white;
-    margin: 15px;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  }
-
-  input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-size: 17px;
-    margin-top: 8px;
-  }
-
-  .btn {
-    width: 100%;
-    padding: 12px;
-    background: #6a00ff;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    margin-top: 15px;
-    font-size: 18px;
-    cursor: pointer;
-  }
-
-  .red { color: red; font-size: 15px; margin-top: 10px; }
-
-  #step2 { display: none; }
+ body{background:#0d0b2b;font-family:Poppins,sans-serif;color:#fff;margin:0;padding-bottom:90px}
+ .container{max-width:480px;margin:auto;padding:15px}
+ header{background:#6a0dad;padding:15px;text-align:center;color:#fff;font-size:22px;font-weight:700;position:sticky;top:0;z-index:99}
+ .box{background:rgba(255,255,255,0.08);padding:20px;border-radius:14px;margin-top:20px;border:1px solid rgba(0,255,136,0.3)}
+ input{width:100%;padding:14px;border:none;border-radius:10px;margin-top:10px;background:#1a1a3d;color:#fff;font-size:16px}
+ button{width:100%;padding:14px;background:#00ff88;color:#000;border:none;border-radius:10px;font-size:18px;font-weight:700;margin-top:12px;cursor:pointer}
+ .method{display:flex;gap:15px;margin-top:15px}
+ .m{flex:1;background:#1a1a3d;border-radius:12px;padding:15px;text-align:center;border:2px solid transparent;cursor:pointer}
+ .m.active{border-color:#00ff88}
+ .nav{position:fixed;bottom:0;left:0;right:0;background:#000;border-top:3px solid #00ff88;display:flex;justify-content:space-around;padding:12px 0}
+ .nav a{text-align:center;color:#fff;text-decoration:none;font-size:13px}
+ .nav i{font-size:22px;color:#00ff88;margin-bottom:4px}
 </style>
 </head>
-
 <body>
-
 <header>Add Money</header>
-
-<!-- STEP - 1 -->
-<div id="step1" class="box">
-  <h2>Enter Amount</h2>
-
-  <input type="number" id="amount" placeholder="Enter amount">
-  <p id="error" class="red"></p>
-
-  <button class="btn" onclick="showStep2()">Click Here To Add Money</button>
+<div class="container">
+ <div class="box">
+  <h3>💳 Payment Method</h3>
+  <div class="method" id="payBox">
+    <div class="m active" onclick="selectMethod(this,'bkash')">Bkash</div>
+    <div class="m" onclick="selectMethod(this,'nagad')">Nagad</div>
+  </div>
+  <h3 style="margin-top:15px">📌 Amount</h3>
+  <input type="number" id="amount" placeholder="Amount লিখুন (যেমন: 200)">
+  <h3 style="margin-top:15px">📌 TrxID</h3>
+  <input type="text" id="trxid" placeholder="লেনদেন নম্বর (TrxID)">
+  <button onclick="sendRequest()">Submit Request</button>
+ </div>
 </div>
-
-<!-- STEP - 2 -->
-<div id="step2" class="box">
-  <center>
-    <img src="https://seeklogo.com/images/B/bkash-logo-250x250.png" width="100">
-  </center>
-
-  <h3>Wallet</h3>
-
-  <input type="text" id="showAmount" disabled>
-
-  <h3>ট্রানজেকশন আইডি দিন</h3>
-  <input type="text" id="trxid" placeholder="Enter Transaction ID">
-
-  <p style="padding:10px;background:#ffe5f2;border-radius:10px;">
-    ● *247# ডায়াল করুন বা bKash অ্যাপে যান <br><br>
-    ● "Send Money"-এ ক্লিক করুন <br><br>
-    ● প্রাপক নম্বর লিখুন:<br>
-    <b style="font-size:22px;color:#e8006f;">01868461577</b><br><br>
-    ● টাকার পরিমান দিন: <b id="amtText"></b> টাকা<br><br>
-    ● Send Money সম্পন্ন হলে আপনার SMS-এ Transaction ID পাবেন<br><br>
-    ● নিচে Transaction ID লিখে VERIFY চাপুন
-  </p>
-
-  <button class="btn" onclick="sendRequest()">VERIFY</button>
+<div class="nav">
+ <a href="index.html"><i class="fas fa-home"></i>হোম</a>
+ <a href="add-money.html" class="active"><i class="fas fa-gem"></i>টপআপ</a>
+ <a href="login.html"><i class="fas fa-user"></i>অ্যাকাউন্ট</a>
+ <a href="support.html"><i class="fas fa-headset"></i>সাপোর্ট</a>
 </div>
-
-
 <script type="module">
-import { auth, db } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-import { addDoc, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-
-let userUID = null;
-
-// CHECK LOGIN
-onAuthStateChanged(auth, (user) => {
-  if (!user) return location.href = "login.html";
-  userUID = user.uid;
-});
-
-// STEP 1 → STEP 2
-window.showStep2 = function () {
-  let amount = document.getElementById("amount").value;
-
-  if (!amount || amount < 5) {
-    document.getElementById("error").innerText = "Minimum amount 5 TK";
-    return;
-  }
-
-  document.getElementById("error").innerText = "";
-  document.getElementById("step1").style.display = "none";
-  document.getElementById("step2").style.display = "block";
-
-  document.getElementById("showAmount").value = amount + " TK";
-  document.getElementById("amtText").innerText = amount;
-};
-
-
-// SEND REQUEST TO FIREBASE → walletRequests
-window.sendRequest = async function () {
-  let trx = document.getElementById("trxid").value.trim();
-  let amount = document.getElementById("amount").value;
-
-  if (!trx) {
-    alert("Enter Transaction ID!");
-    return;
-  }
-
-  await addDoc(collection(db, "walletRequests"), {
-    user: userUID,
-    amount: Number(amount),
-    trxid: trx,
-    method: "bkash",
-    status: "pending",
-    time: new Date()
-  });
-
-  alert("Request Sent! Admin will approve soon.");
-  location.href = "dashboard.html";
-};
+ import {auth,db} from './firebase.js'
+ import {onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js'
+ import {collection,addDoc,serverTimestamp} from 'https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js'
+ let payMethod='bkash'
+ window.selectMethod=function(el,m){document.querySelectorAll('.m').forEach(x=>x.classList.remove('active'));el.classList.add('active');payMethod=m}
+ onAuthStateChanged(auth,(user)=>{if(!user){alert('Please login first');location.href='login.html'}})
+ window.sendRequest=async function(){let amount=document.getElementById('amount').value.trim();let trx=document.getElementById('trxid').value.trim();if(amount==''||trx==''){alert('সব তথ্য পূরণ করুন');return;}let u=auth.currentUser;if(!u){alert('Please login');return;}await addDoc(collection(db,'walletRequests'),{user:u.uid,amount:Number(amount),trxid:trx,method:payMethod,status:'pending',time:serverTimestamp()});alert('Request Sent!');location.href='dashboard.html'}
 </script>
-
-</body>
+<!-- Bottom Navigation -->
+<div class="nav">
+ <a href="index.html"><i class="fas fa-home"></i> হোম</a>
+ <a href="add-money.html" class="active"><i class="fas fa-gem"></i> টপআপ</a>
+ <a href="login.html"><i class="fas fa-user"></i> অ্যাকাউন্ট</a>
+ <a href="support.html"><i class="fas fa-headset"></i> সাপোর্ট</a>
+</div></body>
 </html>
