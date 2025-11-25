@@ -1,262 +1,191 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habib Topup — Best Game Topup BD</title>
-    <meta name="description" content="বাংলাদেশের সবচেয়ে সস্তা ও দ্রুত Free Fire, PUBG, COD, MLBB টপআপ। ২৪ ঘণ্টা ইন্সট্যান্ট ডেলিভারি।">
-    <meta property="og:title" content="Habib Topup — Best Game Topup BD">
-    <meta property="og:description" content="১০০% ট্রাস্টেড | সবচেয়ে কম দামে ইন্সট্যান্ট টপআপ">
-    <meta property="og:image" content="https://i.ibb.co.com/WvrSk7QR/Picsart-25-11-25-18-57-06-149.jpg">
-    <meta name="theme-color" content="#6a0dad">
-    <link rel="icon" href="favicon.ico">
-    <link rel="manifest" href="manifest.json">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box;}
-        html{scroll-behavior:smooth;}
-        body{font-family:'Hind Siliguri',sans-serif;background:#0d0b2b;color:#fff;padding-bottom:100px;overflow-x:hidden;}
-        .container{max-width:480px;margin:0 auto;padding:10px;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habib Topup — Best Game Topup BD</title>
 
-        /* Preloader */
-        #preloader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0d0b2b;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;}
-        .spinner{width:50px;height:50px;border:5px solid #6a0dad;border-top:5px solid #00ff88;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:20px;}
-        @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-        #preloader.fadeOut{animation:fadeout 0.8s forwards;}
-        @keyframe fadeout{to{opacity:0;visibility:hidden;}}
+<meta name="description" content="বাংলাদেশের সবচেয়ে সস্তা ও দ্রুত Free Fire, PUBG, COD, MLBB টপআপ।">
+<meta property="og:title" content="Habib Topup — Best Game Topup BD">
+<meta property="og:image" content="https://i.ibb.co.com/WvrSk7QR/Picsart-25-11-25-18-57-06-149.jpg">
 
-        header{background:#6a0dad;padding:14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:999;box-shadow:0 3px 10px rgba(0,0,0,0.15);}
-        header img{width:45px;height:45px;border-radius:50%;object-fit:cover;}
-        .logo{font-size:20px;font-weight:700;line-height:18px;}
-        #userArea{display:flex;align-items:center;gap:10px;}
-        #balanceBox{background:#ff6b35;padding:8px 18px;border-radius:25px;font-weight:700;font-size:15px;}
-        .profile-img{width:44px;height:44px;border-radius:50%;border:2px solid #00ff88;}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
 
-        /* Banner Slider */
-        .slider{position:relative;overflow:hidden;border-radius:15px;margin:16px 0;height:180px;}
-        .slides{position:relative;width:300%;display:flex;animation:slide 15s infinite;}
-        .slides img{width:33.333%;height:180px;object-fit:cover;}
-        @keyframes slide{
-            0%,30%{transform:translateX(0);}
-            35%,65%{transform:translateX(-33.333%);}
-            70%,100%{transform:translateX(-66.666%);}
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family:'Hind Siliguri',sans-serif;
+    background:#0d0b2b;
+    color:#fff;
+    padding-bottom:100px;
+    overflow-x:hidden;
+}
+.container{max-width:480px;margin:auto;padding:10px;}
 
-        .section-title{background:linear-gradient(90deg,#00ff88,#00d4ff);-webkit-background-clip:text;color:transparent;font-size:26px;font-weight:700;text-align:center;margin:30px 0 15px;}
+/* ---------------- PRELOADER FIXED ---------------- */
+#preloader{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:#0d0b2b;z-index:99999;
+    display:flex;align-items:center;justify-content:center;
+    flex-direction:column;
+}
+.spinner{
+    width:55px;height:55px;border:6px solid #6a0dad;
+    border-top:6px solid #00ff88;border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+@keyframes spin{100%{transform:rotate(360deg);}}
 
-        .products{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px;}
-        .product{background:rgba(255,255,255,0.09);border-radius:14px;border:1px solid rgba(0,255,136,0.3);overflow:hidden;text-align:center;transition:0.35s;cursor:pointer;}
-        .product img{width:100%;height:95px;object-fit:cover;loading:lazy;}
-        .product p{background:#000;padding:12px 5px;font-size:13px;color:#00ffea;font-weight:700;}
-        .product:hover{transform:translateY(-7px);box-shadow:0 8px 30px rgba(0,255,136,0.4);}
+.fadeOut{animation:fadeout .8s forwards;}
+@keyframes fadeout{to{opacity:0;visibility:hidden;}}
 
-        .recent-orders,.info-box,.testimonial-box,.payment-box{background:rgba(0,0,0,0.65);border:1px solid rgba(0,255,136,0.35);border-radius:16px;padding:18px;margin:25px 0;}
-        .order-item,.testimonial-item{background:rgba(0,255,136,0.15);padding:12px;margin:10px 0;border-radius:12px;display:flex;justify-content:space-between;font-size:14px;}
-        .testimonial-item{flex-direction:column;text-align:left;}
-        .testimonial-item small{color:#00ffea;}
+/* ---------------- HEADER ---------------- */
+header{
+    background:#6a0dad;padding:14px;
+    display:flex;justify-content:space-between;
+    align-items:center;border-radius:0 0 12px 12px;
+}
+header img{width:45px;height:45px;border-radius:50%;}
+.logo{font-size:20px;font-weight:700;line-height:18px;}
+.login-btn{
+    background:#fff;color:#6a0dad;padding:8px 18px;
+    border-radius:25px;font-weight:700;font-size:14px;
+}
+.profile-img{width:45px;height:45px;border-radius:50%;border:2px solid #00ff88;}
+#balanceBox{background:#ff6b35;padding:8px 14px;border-radius:20px;font-weight:700;}
 
-        .trust-badges{display:flex;justify-content:center;gap:15px;margin:25px 0;flex-wrap:wrap;}
-        .badge{background:#000;border:1px solid #00ff88;padding:10px 15px;border-radius:50px;font-size:13px;font-weight:600;}
+/* Banner Slider */
+.slider{overflow:hidden;border-radius:15px;margin:16px 0;height:180px;}
+.slides{display:flex;width:300%;animation:slide 15s infinite;}
+.slides img{width:33.33%;height:180px;object-fit:cover;}
+@keyframes slide{
+    0%,30%{transform:translateX(0);}
+    35%,65%{transform:translateX(-33.33%);}
+    70%,100%{transform:translateX(-66.66%);}
+}
 
-        .about-box,.stay-connected{text-align:center;background:linear-gradient(135deg,#6a0dad,#8a2be2);padding:25px;border-radius:16px;margin:25px 0;}
-        .about-box a,.stay-connected a{color:#00ffea;font-weight:700;text-decoration:none;font-size:18px;}
+/* Section */
+.section-title{
+    background:linear-gradient(90deg,#00ff88,#00d4ff);
+    -webkit-background-clip:text;color:transparent;
+    font-weight:700;font-size:26px;text-align:center;
+    margin:30px 0 15px;
+}
 
-        .support-grid,.payment-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:25px 0;}
-        .support-item,.payment-item{background:rgba(0,0,0,0.5);border:1px solid #00ff88;border-radius:12px;padding:15px;text-align:center;}
-        .support-item i,.payment-item i{font-size:28px;margin-bottom:8px;color:#00ffea;}
+/* Products */
+.products{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:14px;margin-bottom:32px;
+}
+.product{
+    background:rgba(255,255,255,0.08);
+    border-radius:14px;overflow:hidden;
+    border:1px solid rgba(0,255,136,0.3);
+    cursor:pointer;transition:0.35s;
+}
+.product img{width:100%;height:95px;object-fit:cover;}
+.product p{
+    background:#000;padding:10px 5px;
+    font-size:13px;font-weight:700;color:#00ffea;
+}
+.product:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 25px rgba(0,255,136,0.5);
+}
 
-        .faq-item{background:rgba(255,255,255,0.05);border-radius:12px;padding:15px;margin:12px 0;cursor:pointer;}
-        .faq-question{font-weight:600;color:#00ffea;}
-        .faq-answer{display:none;margin-top:10px;font-size:14px;color:#ddd;}
-        .faq-item.active .faq-answer{display:block;}
+/* Footer */
+.nav{
+    position:fixed;bottom:0;left:0;right:0;background:#000;
+    border-top:3px solid #00ff88;
+    display:flex;justify-content:space-around;padding:12px 0;
+}
+.nav a{text-align:center;color:#fff;text-decoration:none;font-size:13px;}
+.nav i{font-size:23px;margin-bottom:4px;color:#00ff88;}
+.nav a.active i{color:#fff;text-shadow:0 0 15px #00ff88;}
 
-        .nav{position:fixed;bottom:0;left:0;right:0;background:#000;border-top:3px solid #00ff88;display:flex;justify-content:space-around;padding:12px 0;z-index:998;}
-        .nav a{color:#fff;text-align:center;font-size:13px;text-decoration:none;display:block;}
-        .nav i{font-size:23px;margin-bottom:4px;color:#00ff88;display:block;}
-        .nav a.active i{color:#fff;text-shadow:0 0 20px #00ff88;}
-
-        .whatsapp-float{position:fixed;bottom:90px;right:15px;background:#25d366;color:#fff;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 3px 15px rgba(0,0,0,0.4);z-index:997;animation:pulse 2s infinite;}
-        @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.7)}70%{box-shadow:0 0 0 15px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
-    </style>
+</style>
 </head>
 <body>
 
+<!-- PRELOADER -->
 <div id="preloader">
     <div class="spinner"></div>
-    <p style="color:#00ff88;font-weight:600;">Habib Topup লোড হচ্ছে...</p>
+    <p style="margin-top:15px;color:#00ff88;font-size:17px;font-weight:600;">
+    Habib Topup লোড হচ্ছে...</p>
 </div>
 
 <div class="container">
 
-    <!-- Header + Login/Profile -->
-    <header>
-        <img src="https://i.ibb.co.com/fzkqRV4F/grok-image-19j43n-edit-318826266893536.jpg" alt="Logo">
-        <div class="logo">HABIB<br>TOPUP</div>
-        <div id="userArea">
-            <button class="login-btn" onclick="location.href='login.html'">লগইন / রেজিস্টার</button>
-        </div>
-    </header>
-
-    <script type="module">
-        import { auth, db } from "./firebase.js";
-        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-        import { getDoc, doc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const snap = await getDoc(doc(db, "wallets", user.uid));
-                let bal = "0";
-                if (snap.exists()) bal = snap.data().balance || "0";
-                const photoURL = user.photoURL || "https://i.ibb.co.com/3p3X3Y8/default-avatar.png";
-
-                document.getElementById("userArea").innerHTML = `
-                    <img src="${photoURL}" alt="Profile" class="profile-img">
-                    <div id="balanceBox">${bal}৳</div>
-                `;
-            }
-        });
-
-        window.addEventListener("load", () => {
-            document.getElementById("preloader").classList.add("fadeOut");
-        });
-    </script>
-
-    <!-- Auto Slider -->
-    <div class="slider">
-        <div class="slides">
-            <img src="https://i.ibb.co.com/WvrSk7QR/Picsart-25-11-25-18-57-06-149.jpg" loading="lazy">
-            <img src="https://i.ibb.co.com/KxdbXb5j/01-JZ705-B9-GMWQXC1-M5-NTMRZT21.png" loading="lazy">
-            <img src="https://i.ibb.co.com/yc2D5qmX/Picsart-25-11-25-19-22-39-639.jpg" loading="lazy">
-        </div>
+<!-- HEADER -->
+<header>
+    <img src="https://i.ibb.co.com/0jY7Y7K/logo.png">
+    <div class="logo">HABIB<br>TOPUP</div>
+    <div id="userArea">
+        <button class="login-btn" onclick="location.href='login.html'">লগইন / রেজিস্টার</button>
     </div>
+</header>
 
-    <!-- Trust Badges -->
-    <div class="trust-badges">
-        <div class="badge"><i class="fas fa-shield-alt"></i> 100% Trusted</div>
-        <div class="badge"><i class="fas fa-bolt"></i> Instant Delivery</div>
-        <div class="badge"><i class="fas fa-headset"></i> 24/7 Support</div>
+<!-- AUTO PROFILE LOAD -->
+<script type="module">
+import { auth, db } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+onAuthStateChanged(auth, async (user)=>{
+    if(user){
+        const snap = await getDoc(doc(db,"wallets",user.uid));
+        let bal = snap.exists() ? snap.data().balance : 0;
+
+        let img = user.photoURL || "https://i.ibb.co.com/3p3X3Y8/default-avatar.png";
+
+        document.getElementById("userArea").innerHTML = `
+            <img src="${img}" class="profile-img">
+            <div id="balanceBox">${bal}৳</div>
+        `;
+    }
+});
+
+window.onload = ()=> document.getElementById("preloader").classList.add("fadeOut");
+
+</script>
+
+<!-- Slider -->
+<div class="slider">
+    <div class="slides">
+        <img src="https://i.ibb.co.com/WvrSk7QR/Picsart-25-11-25-18-57-06-149.jpg">
+        <img src="https://i.ibb.co.com/KxdbXb5j/01-JZ705-B9-GMWQXC1-M5-NTMRZT21.png">
+        <img src="https://i.ibb.co.com/yc2D5qmX/Picsart-25-11-25-19-22-39-639.jpg">
     </div>
-
-    <!-- Products Sections 
+</div>
 
 <!-- FREE FIRE -->
-    <h2 class="section-title">FREE FIRE TOPUP</h2>
-    <div class="products">
-        <a href="freefire-bd.html"><div class="product"><img src="https://i.ibb.co.com/yc2D5qmX/Picsart-25-11-25-19-22-39-639.jpg" alt="FF BD" loading="lazy"><p>Free Fire [BD]</p></div></a>
-        <a href="weekly.html"><div class="product"><img src="https://i.ibb.co.com/GvN8mWSC/Picsart-25-11-25-19-25-01-966.jpg" alt="Weekly" loading="lazy"><p>Weekly Pass</p></div></a>
-        <a href="monthly.html"><div class="product"><img src="https://i.ibb.co.com/KzszJH1b/Picsart-25-11-25-19-23-14-530.jpg" alt="Monthly" loading="lazy"><p>Monthly Pass</p></div></a>
-        <a href="weekly-lite.html"><div class="product"><img src="https://i.ibb.co.com/9HkHSrcR/Picsart-25-11-25-19-25-53-613.jpg" alt="Weekly Lite" loading="lazy"><p>Weekly Lite</p></div></a>
-        <a href="level-up.html"><div class="product"><img src="https://i.ibb.co.com/B2CFHxcH/Picsart-25-11-25-19-26-39-507.jpg" alt="Level Up" loading="lazy"><p>Level Up</p></div></a>
-        <a href="evo-access.html"><div class="product"><img src="https://i.ibb.co.com/XZppzvp3/Picsart-25-11-25-19-24-20-252.jpg" alt="Evo Access" loading="lazy"><p>Evo Access</p></div></a>
-        <a href="airdrop.html"><div class="product"><img src="https://i.ibb.co.com/KxdbXb5j/01-JZ705-B9-GMWQXC1-M5-NTMRZT21.png" alt="Airdrop" loading="lazy"><p>Airdrop</p></div></a>
-        <a href="fflike.html"><div class="product"><img src="https://i.ibb.co.com/zTgSNsQF/Free-fire-like.webp" alt="FF Like" loading="lazy"><p>FF Id Like</p></div></a>
-    </div>
+<h2 class="section-title">FREE FIRE TOPUP</h2>
+<div class="products">
+    <a href="freefire-bd.html"><div class="product"><img src="https://i.ibb.co.com/yc2D5qmX/Picsart-25-11-25-19-22-39-639.jpg"><p>Free Fire BD</p></div></a>
+    <a href="weekly.html"><div class="product"><img src="https://i.ibb.co.com/GvN8mWSC/Picsart-25-11-25-19-25-01-966.jpg"><p>Weekly Pass</p></div></a>
+    <a href="monthly.html"><div class="product"><img src="https://i.ibb.co.com/KzszJH1b/Picsart-25-11-25-19-23-14-530.jpg"><p>Monthly Pass</p></div></a>
+    <a href="level-up.html"><div class="product"><img src="https://i.ibb.co.com/B2CFHxcH/Picsart-25-11-25-19-26-39-507.jpg"><p>Level Up</p></div></a>
+    <a href="evo-access.html"><div class="product"><img src="https://i.ibb.co.com/XZppzvp3/Picsart-25-11-25-19-24-20-252.jpg"><p>Evo Access</p></div></a>
+    <a href="airdrop.html"><div class="product"><img src="https://i.ibb.co.com/KxdbXb5j/01-JZ705-B9-GMWQXC1-M5-NTMRZT21.png"><p>Airdrop</p></div></a>
+</div>
 
-    <!-- Social Services -->
-    <h2 class="section-title">LIKE • FOLLOW • SUB</h2>
-    <div class="products">
-        <a href="fb-like.html"><div class="product"><img src="https://i.ibb.co.com/fb-like.png" alt="FB React" loading="lazy"><p>Facebook React</p></div></a>
-        <a href="fb-follow.html"><div class="product"><img src="https://i.ibb.co.com/fb-follow.png" alt="FB Follow" loading="lazy"><p>FB Page Like/Follow</p></div></a>
-        <a href="yt-sub.html"><div class="product"><img src="https://i.ibb.co.com/yt-sub.png" alt="YT Sub" loading="lazy"><p>YouTube Subscribe</p></div></a>
-        <a href="telegram.html"><div class="product"><img src="https://i.ibb.co.com/yt-like.png" alt="Telegram" loading="lazy"><p>Telegram Member</p></div></a>
-        <a href="tiktok.html"><div class="product"><img src="https://i.ibb.co.com/tiktok.png" alt="TikTok" loading="lazy"><p>TikTok Follow</p></div></a>
-        <a href="insta.html"><div class="product"><img src="https://i.ibb.co.com/insta.png" alt="Instagram" loading="lazy"><p>Instagram Follow</p></div></a>
-    </div>
+<!-- SOCIAL -->
+<h2 class="section-title">LIKE • FOLLOW • SUB</h2>
+<div class="products">
+    <a href="fb-like.html"><div class="product"><img src="https://i.ibb.co.com/fb-like.png"><p>Facebook Like</p></div></a>
+    <a href="yt-sub.html"><div class="product"><img src="https://i.ibb.co.com/yt-sub.png"><p>YouTube Sub</p></div></a>
+    <a href="tiktok.html"><div class="product"><img src="https://i.ibb.co.com/tiktok.png"><p>Tiktok Follow</p></div></a>
+</div>
 
-    <!-- Other Games -->
-    <h2 class="section-title">অন্যান্য গেমস</h2>
-    <div class="products">
-        <a href="efootball.html"><div class="product"><img src="https://i.ibb.co.com/ff-global.png" alt="eFootball" loading="lazy"><p>eFootball Coin</p></div></a>
-        <a href="pubg.html"><div class="product"><img src="https://i.ibb.co.com/pubg.png" alt="PUBG" loading="lazy"><p>PUBG Mobile</p></div></a>
-        <a href="coc.html"><div class="product"><img src="https://i.ibb.co.com/coc.png" alt="COC" loading="lazy"><p>Clash of Clans</p></div></a>
-        <a href="cod.html"><div class="product"><img src="https://i.ibb.co.com/codm.png" alt="COD" loading="lazy"><p>COD Mobile</p></div></a>
-        <a href="mlbb.html"><div class="product"><img src="https://i.ibb.co.com/mlbb.png" alt="MLBB" loading="lazy"><p>MLBB</p></div></a>
-        <a href="brawl.html"><div class="product"><img src="https://i.ibb.co.com/brawl.png" alt="Brawl Stars" loading="lazy"><p>Brawl Stars</p></div></a>
-    </div>
+<!-- OTHER GAMES -->
+<h2 class="section-title">OTHER GAMES</h2>
+<div class="products">
+    <a href="efootball.html"><div class="product"><img src="https://i.ibb.co.com/ff-global.png"><p>eFootball</p></div></a>
+    <a href="pubg.html"><div class="product"><img src="https://i.ibb.co.com/pubg.png"><p>PUBG</p></div></a>
+    <a href="cod.html"><div class="product"><img src="https://i.ibb.co.com/codm.png"><p>COD</p></div></a>
+</div>
 
-    <!-- Recent Orders -->
-    <h2 class="section-title">সর্বশেষ অর্ডার</h2>
-    <div class="recent-orders">
-        <div class="order-item"><span>Its CR7</span> <span style="color:#ff6b35;">Processing</span></div>
-        <div class="order-item"><span>Rakib Gamer</span> <span style="color:#00ff88;">Completed</span></div>
-        <div class="order-item"><span>Shah Muhammad</span> <span style="color:#ff6b35;">Processing</span></div>
-    </div>
-
-    <!-- About Me -->
-    <div class="about-box">
-        <h3>আমার সম্পর্কে জানুন</h3>
-        <p>হ্যালো, আমি মোঃ হাবিবুর রহমান। ২০২১ সাল থেকে গেমারদের পাশে আছি। ১০০% ট্রাস্টেড ও ইন্সট্যান্ট সার্ভিস দিয়ে আপনাদের ভালোবাসা পেয়েছি।</p>
-        <a href="https://habib-web.vercel.app" target="_blank">habib-web.vercel.app →</a>
-    </div>
-
-    <!-- Rules & Conditions -->
-    <div class="info-box">
-        <h3>নিয়মাবলী ও শর্তাবলী</h3>
-        <ul style="list-style:none;padding:0;">
-            <li style="margin:10px 0;padding-left:25px;position:relative;">শুধুমাত্র Bangladesh সার্ভারে ID Code দিয়ে টপ আপ হবে।<span style="position:absolute;left:0;color:#00ff88;">⦿</span></li>
-            <li style="margin:10px 0;padding-left:25px;position:relative;">Player ID ভুল হলে আমরা দায়ী নই।<span style="position:absolute;left:0;color:#00ff88;">⦿</span></li>
-            <li style="margin:10px 0;padding-left:25px;position:relative;">ডেলিভারি না পেলে ID+Pass দিয়ে চেক করা হবে।<span style="position:absolute;left:0;color:#00ff88;">⦿</span></li>
-            <li style="margin:10px 0;padding-left:25px;position:relative;">৫ মিনিটের মধ্যে ডেলিভারি না পেলে WhatsApp করুন।<span style="position:absolute;left:0;color:#00ff88;">⦿</span></li>
-        </ul>
-    </div>
-
-    <!-- Customer Testimonials -->
-    <h2 class="section-title">গ্রাহকদের মতামত</h2>
-    <div class="testimonial-box">
-        <div class="testimonial-item"><strong>Sakib Al Hasan</strong><br>ভাইয়া সত্যিই ট্রাস্টেড। ৩০ সেকেন্ডে ডায়মন্ড চলে আসছে!<small>★ ★ ★ ★ ★</small></div>
-        <div class="testimonial-item"><strong>Rakib FF</strong><br>১০০ টাকায় ৫৬০ ডায়মন্ড! কোথাও পাইনি এমন রেট।<small>★ ★ ★ ★ ★</small></div>
-    </div>
-
-    <!-- Payment Methods -->
-    <h2 class="section-title">পেমেন্ট মেথড</h2>
-    <div class="payment-grid">
-        <div class="payment-item"><i class="fas fa-mobile-alt"></i><br>bKash</div>
-        <div class="payment-item"><i class="fas fa-credit-card"></i><br>Nagad</div>
-        <div class="payment-item"><i class="fas fa-rocket"></i><br>Rocket</div>
-        <div class="payment-item"><i class="fas fa-university"></i><br>Bank Transfer</div>
-    </div>
-
-    <!-- Stay Connected -->
-    <div class="stay-connected">
-        <h3 style="font-size:24px;color:#00ffea;">STAY CONNECTED<br>Habib Topup</h3>
-        <p style="margin:15px 0;">House #80 (13rd Floor) Road # 17, Chandanish, Chattogram.</p>
-        <p style="background:#000;padding:15px;border-radius:12px;">
-            <i class="fas fa-mobile-alt"></i> OUR MOBILE APP<br>
-            <span style="color:#ff6b35;font-weight:700;">Coming Soon...</span> <i class="fab fa-google-play" style="font-size:28px;"></i>
-        </p>
-    </div>
-
-    <!-- Support Center -->
-    <h2 class="section-title">সাপোর্ট সেন্টার</h2>
-    <div class="support-grid">
-        <div class="support-item">
-            <i class="fab fa-whatsapp"></i><br>WhatsApp Live Support<br><small>Open [10AM-10PM]</small><br>
-            <a href="https://wa.me/88016xxxxxxxx">যোগাযোগ করুন</a>
-        </div>
-        <div class="support-item">
-            <i class="fab fa-telegram"></i><br>Telegram Live Support<br><small>Open [10AM-10PM]</small><br>
-            <a href="https://t.me/habib_topup">যোগাযোগ করুন</a>
-        </div>
-    </div>
-
-    <!-- FAQ -->
-    <h2 class="section-title">প্রশ্নোত্তর (FAQ)</h2>
-    <div class="info-box">
-        <div class="faq-item" onclick="this.classList.toggle('active')">
-            <div class="faq-question">ডেলিভারি কতক্ষণ লাগে?</div>
-            <div class="faq-answer">সাধারণত ৩০ সেকেন্ড থেকে ৫ মিনিটের মধ্যে।</div>
-        </div>
-        <div class="faq-item" onclick="this.classList.toggle('active')">
-            <div class="faq-question">রিফান্ড পলিসি কী?</div>
-            <div class="faq-answer">ভুল ID দিলে রিফান্ড হয় না। সঠিক ID হলে ১০০% রিফান্ড।</div>
-        </div>
-    </div>
-
-    <div style="text-align:center;padding:20px;color:#777;font-size:13px;">
-        © Copyright 2025 Habib Topup. All Rights Reserved<br>
-        Developed with ❤️ by Habib
-    </div>
 </div>
 
 <!-- Bottom Nav -->
@@ -266,11 +195,6 @@
     <a href="login.html"><i class="fas fa-user"></i> অ্যাকাউন্ট</a>
     <a href="support.html"><i class="fas fa-headset"></i> সাপোর্ট</a>
 </div>
-
-<!-- WhatsApp Float -->
-<a href="https://wa.me/8801868461577" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
 
 </body>
 </html>
