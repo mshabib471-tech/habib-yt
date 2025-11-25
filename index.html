@@ -3,152 +3,203 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Habib Topup — Best Game Topup BD</title>
+<title>Habib Topup — Best Topup BD</title>
 
-<meta name="description" content="বাংলাদেশের সবচেয়ে সস্তা ও দ্রুত Free Fire, PUBG, COD, MLBB টপআপ।">
-<meta property="og:title" content="Habib Topup — Best Game Topup BD">
-<meta property="og:image" content="https://i.ibb.co.com/WvrSk7QR/Picsart-25-11-25-18-57-06-149.jpg">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<meta name="description" content="বাংলাদেশের সবচেয়ে সস্তা ও দ্রুত Free Fire, PUBG, MLBB টপআপ। ২৪ ঘণ্টা ইন্সট্যান্ট সার্ভিস।">
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
     font-family:'Hind Siliguri',sans-serif;
     background:#0d0b2b;
-    color:#fff;
+    color:white;
     padding-bottom:100px;
-    overflow-x:hidden;
 }
 .container{max-width:480px;margin:auto;padding:10px;}
 
-/* ---------------- PRELOADER FIXED ---------------- */
-#preloader{
-    position:fixed;top:0;left:0;width:100%;height:100%;
-    background:#0d0b2b;z-index:99999;
-    display:flex;align-items:center;justify-content:center;
-    flex-direction:column;
-}
-.spinner{
-    width:55px;height:55px;border:6px solid #6a0dad;
-    border-top:6px solid #00ff88;border-radius:50%;
-    animation:spin 1s linear infinite;
-}
-@keyframes spin{100%{transform:rotate(360deg);}}
-
-.fadeOut{animation:fadeout .8s forwards;}
-@keyframes fadeout{to{opacity:0;visibility:hidden;}}
-
-/* ---------------- HEADER ---------------- */
+/* HEADER */
 header{
-    background:#6a0dad;padding:14px;
-    display:flex;justify-content:space-between;
-    align-items:center;border-radius:0 0 12px 12px;
+    background:#6a0dad;
+    padding:12px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:3px solid #00ff88;
 }
-header img{width:45px;height:45px;border-radius:50%;}
-.logo{font-size:20px;font-weight:700;line-height:18px;}
-.login-btn{
-    background:#fff;color:#6a0dad;padding:8px 18px;
-    border-radius:25px;font-weight:700;font-size:14px;
+.head-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
-.profile-img{width:45px;height:45px;border-radius:50%;border:2px solid #00ff88;}
-#balanceBox{background:#ff6b35;padding:8px 14px;border-radius:20px;font-weight:700;}
+.head-left img{
+    width:58px;
+    height:58px;
+}
+.head-title{
+    display:flex;
+    flex-direction:column;
+    line-height:17px;
+}
+.head-title h2{
+    font-size:19px;
+    font-weight:700;
+}
+.head-title span{
+    font-size:13px;
+    opacity:0.9;
+}
+#userArea{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.balanceBox{
+    background:#ff6b35;
+    padding:8px 15px;
+    border-radius:25px;
+    font-size:15px;
+    font-weight:700;
+}
+.profile-img{
+    width:45px;height:45px;border-radius:50%;
+    border:2px solid #00ff88;
+}
 
-/* Banner Slider */
-.slider{overflow:hidden;border-radius:15px;margin:16px 0;height:180px;}
-.slides{display:flex;width:300%;animation:slide 15s infinite;}
-.slides img{width:33.33%;height:180px;object-fit:cover;}
+/* Banner */
+.slider{
+    margin:15px 0;
+    border-radius:15px;
+    overflow:hidden;
+    height:170px;
+}
+.slides{
+    width:300%;
+    display:flex;
+    animation:slide 15s infinite;
+}
+.slides img{
+    width:33.333%;
+    height:170px;
+    object-fit:cover;
+}
 @keyframes slide{
     0%,30%{transform:translateX(0);}
     35%,65%{transform:translateX(-33.33%);}
     70%,100%{transform:translateX(-66.66%);}
 }
 
-/* Section */
+/* Section Title */
 .section-title{
     background:linear-gradient(90deg,#00ff88,#00d4ff);
     -webkit-background-clip:text;color:transparent;
-    font-weight:700;font-size:26px;text-align:center;
-    margin:30px 0 15px;
+    text-align:center;
+    font-size:25px;
+    margin:25px 0 15px;
+    font-weight:700;
 }
 
 /* Products */
 .products{
-    display:grid;grid-template-columns:repeat(3,1fr);
-    gap:14px;margin-bottom:32px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
 }
 .product{
     background:rgba(255,255,255,0.08);
-    border-radius:14px;overflow:hidden;
+    border-radius:14px;
     border:1px solid rgba(0,255,136,0.3);
-    cursor:pointer;transition:0.35s;
+    overflow:hidden;
+    transition:0.3s;
 }
-.product img{width:100%;height:95px;object-fit:cover;}
+.product img{
+    width:100%;
+    height:90px;
+    object-fit:cover;
+}
 .product p{
-    background:#000;padding:10px 5px;
-    font-size:13px;font-weight:700;color:#00ffea;
+    padding:8px 5px;
+    font-size:13px;
+    background:black;
+    color:#00ffea;
+    text-align:center;
+    font-weight:700;
 }
 .product:hover{
-    transform:translateY(-8px);
-    box-shadow:0 0 25px rgba(0,255,136,0.5);
+    transform:translateY(-7px);
+    box-shadow:0 8px 20px rgba(0,255,136,0.4);
+}
+
+/* Recent Orders */
+.recent-orders{
+    background:rgba(0,0,0,0.55);
+    border:1px solid rgba(0,255,136,0.3);
+    padding:15px;border-radius:15px;margin:25px 0;
+}
+.order-item{
+    background:rgba(0,255,136,0.15);
+    padding:10px;
+    border-radius:10px;
+    margin:8px 0;
+    display:flex;justify-content:space-between;
+    font-size:14px;
 }
 
 /* Footer */
+.footer{text-align:center;margin:25px 0;}
+.social a{font-size:25px;margin:0 10px;color:#00ffea;}
+
+/* Navigation */
 .nav{
-    position:fixed;bottom:0;left:0;right:0;background:#000;
+    position:fixed;
+    bottom:0;left:0;right:0;
+    background:#000;
+    display:flex;
+    justify-content:space-around;
+    padding:12px 0;
     border-top:3px solid #00ff88;
-    display:flex;justify-content:space-around;padding:12px 0;
 }
-.nav a{text-align:center;color:#fff;text-decoration:none;font-size:13px;}
-.nav i{font-size:23px;margin-bottom:4px;color:#00ff88;}
-.nav a.active i{color:#fff;text-shadow:0 0 15px #00ff88;}
+.nav a{
+    color:white;
+    text-align:center;
+    text-decoration:none;
+    font-size:13px;
+}
+.nav i{
+    font-size:22px;
+    margin-bottom:4px;
+    color:#00ff88;
+}
+.nav a.active i{
+    color:white;
+    text-shadow:0 0 20px #00ff88;
+}
 
 </style>
 </head>
-<body>
 
-<!-- PRELOADER -->
-<div id="preloader">
-    <div class="spinner"></div>
-    <p style="margin-top:15px;color:#00ff88;font-size:17px;font-weight:600;">
-    Habib Topup লোড হচ্ছে...</p>
-</div>
+<body>
 
 <div class="container">
 
 <!-- HEADER -->
 <header>
-    <img src="https://i.ibb.co.com/0jY7Y7K/logo.png">
-    <div class="logo">HABIB<br>TOPUP</div>
+    <div class="head-left">
+        <img src="https://i.ibb.co.com/yBGTR5RW/Picsart-25-11-25-19-23-36-262.png">
+        <div class="head-title">
+            <h2>Habib Topup</h2>
+            <span>Best Topup Site</span>
+        </div>
+    </div>
+
     <div id="userArea">
-        <button class="login-btn" onclick="location.href='login.html'">লগইন / রেজিস্টার</button>
+        <button onclick="location.href='login.html'" 
+            style="padding:8px 15px;border:none;border-radius:20px;background:white;color:#6a0dad;font-weight:700;cursor:pointer;">
+            লগইন / রেজিস্টার
+        </button>
     </div>
 </header>
-
-<!-- AUTO PROFILE LOAD -->
-<script type="module">
-import { auth, db } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-
-onAuthStateChanged(auth, async (user)=>{
-    if(user){
-        const snap = await getDoc(doc(db,"wallets",user.uid));
-        let bal = snap.exists() ? snap.data().balance : 0;
-
-        let img = user.photoURL || "https://i.ibb.co.com/3p3X3Y8/default-avatar.png";
-
-        document.getElementById("userArea").innerHTML = `
-            <img src="${img}" class="profile-img">
-            <div id="balanceBox">${bal}৳</div>
-        `;
-    }
-});
-
-window.onload = ()=> document.getElementById("preloader").classList.add("fadeOut");
-
-</script>
 
 <!-- Slider -->
 <div class="slider">
@@ -162,28 +213,65 @@ window.onload = ()=> document.getElementById("preloader").classList.add("fadeOut
 <!-- FREE FIRE -->
 <h2 class="section-title">FREE FIRE TOPUP</h2>
 <div class="products">
-    <a href="freefire-bd.html"><div class="product"><img src="https://i.ibb.co.com/yc2D5qmX/Picsart-25-11-25-19-22-39-639.jpg"><p>Free Fire BD</p></div></a>
-    <a href="weekly.html"><div class="product"><img src="https://i.ibb.co.com/GvN8mWSC/Picsart-25-11-25-19-25-01-966.jpg"><p>Weekly Pass</p></div></a>
-    <a href="monthly.html"><div class="product"><img src="https://i.ibb.co.com/KzszJH1b/Picsart-25-11-25-19-23-14-530.jpg"><p>Monthly Pass</p></div></a>
-    <a href="level-up.html"><div class="product"><img src="https://i.ibb.co.com/B2CFHxcH/Picsart-25-11-25-19-26-39-507.jpg"><p>Level Up</p></div></a>
-    <a href="evo-access.html"><div class="product"><img src="https://i.ibb.co.com/XZppzvp3/Picsart-25-11-25-19-24-20-252.jpg"><p>Evo Access</p></div></a>
-    <a href="airdrop.html"><div class="product"><img src="https://i.ibb.co.com/KxdbXb5j/01-JZ705-B9-GMWQXC1-M5-NTMRZT21.png"><p>Airdrop</p></div></a>
+
+    <a href="freefire-bd.html"><div class="product"><img src="https://i.ibb.co.com/ff-bd.png"><p>Free Fire BD</p></div></a>
+
+    <a href="weekly.html"><div class="product"><img src="https://i.ibb.co.com/weekly.png"><p>Weekly Pass</p></div></a>
+
+    <a href="monthly.html"><div class="product"><img src="https://i.ibb.co.com/combo.png"><p>Monthly Pass</p></div></a>
+
+    <a href="level-up.html"><div class="product"><img src="https://i.ibb.co.com/levelup.png"><p>Level Up</p></div></a>
+
+    <a href="evo-access.html"><div class="product"><img src="https://i.ibb.co.com/evo.png"><p>Evo Access</p></div></a>
+
+    <a href="airdrop.html"><div class="product"><img src="https://i.ibb.co.com/airdrop.png"><p>Airdrop</p></div></a>
+
 </div>
 
-<!-- SOCIAL -->
-<h2 class="section-title">LIKE • FOLLOW • SUB</h2>
+<!-- Social Services -->
+<h2 class="section-title">LIKE - FOLLOW - SUB</h2>
 <div class="products">
+
     <a href="fb-like.html"><div class="product"><img src="https://i.ibb.co.com/fb-like.png"><p>Facebook Like</p></div></a>
+
+    <a href="fb-follow.html"><div class="product"><img src="https://i.ibb.co.com/fb-follow.png"><p>Facebook Follow</p></div></a>
+
     <a href="yt-sub.html"><div class="product"><img src="https://i.ibb.co.com/yt-sub.png"><p>YouTube Sub</p></div></a>
-    <a href="tiktok.html"><div class="product"><img src="https://i.ibb.co.com/tiktok.png"><p>Tiktok Follow</p></div></a>
+
+    <a href="tiktok.html"><div class="product"><img src="https://i.ibb.co.com/tiktok.png"><p>TikTok Follow</p></div></a>
+
+    <a href="insta.html"><div class="product"><img src="https://i.ibb.co.com/insta.png"><p>Instagram</p></div></a>
+
 </div>
 
-<!-- OTHER GAMES -->
-<h2 class="section-title">OTHER GAMES</h2>
+<!-- Other Games -->
+<h2 class="section-title">অন্যান্য গেম</h2>
 <div class="products">
-    <a href="efootball.html"><div class="product"><img src="https://i.ibb.co.com/ff-global.png"><p>eFootball</p></div></a>
-    <a href="pubg.html"><div class="product"><img src="https://i.ibb.co.com/pubg.png"><p>PUBG</p></div></a>
-    <a href="cod.html"><div class="product"><img src="https://i.ibb.co.com/codm.png"><p>COD</p></div></a>
+
+    <a href="efootball.html"><div class="product"><img src="https://i.ibb.co.com/ff-global.png"><p>eFootball Coin</p></div></a>
+
+    <a href="pubg.html"><div class="product"><img src="https://i.ibb.co.com/pubg.png"><p>PUBG Mobile</p></div></a>
+
+    <a href="coc.html"><div class="product"><img src="https://i.ibb.co.com/coc.png"><p>Clash of Clans</p></div></a>
+
+    <a href="cod.html"><div class="product"><img src="https://i.ibb.co.com/codm.png"><p>COD Mobile</p></div></a>
+
+    <a href="mlbb.html"><div class="product"><img src="https://i.ibb.co.com/mlbb.png"><p>MLBB</p></div></a>
+
+    <a href="brawl.html"><div class="product"><img src="https://i.ibb.co.com/brawl.png"><p>Brawl Stars</p></div></a>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>FOLLOW ME</p>
+    <div class="social">
+        <a href="https://www.facebook.com/share/1A8xKKdbec/"><i class="fab fa-facebook"></i></a>
+        <a href="https://youtube.com/@h_a_b_i_b-yt"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@habibur_._rahman"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.instagram.com/md__habibur_rahman"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p style="margin-top:15px;">© 2025 Habib Topup | All Rights Reserved</p>
 </div>
 
 </div>
@@ -195,6 +283,27 @@ window.onload = ()=> document.getElementById("preloader").classList.add("fadeOut
     <a href="login.html"><i class="fas fa-user"></i> অ্যাকাউন্ট</a>
     <a href="support.html"><i class="fas fa-headset"></i> সাপোর্ট</a>
 </div>
+
+<!-- Firebase Login Profile Auto Load -->
+<script type="module">
+import { auth, db } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { getDoc, doc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+onAuthStateChanged(auth, async (user)=>{
+    if(!user) return;
+
+    const snap = await getDoc(doc(db,"wallets",user.uid));
+    let balance = snap.exists() ? snap.data().balance : 0;
+
+    const profile = user.photoURL || "https://i.ibb.co.com/3p3X3Y8/default-avatar.png";
+
+    document.getElementById("userArea").innerHTML = `
+        <div class="balanceBox">${balance}৳</div>
+        <img src="${profile}" class="profile-img">
+    `;
+});
+</script>
 
 </body>
 </html>
