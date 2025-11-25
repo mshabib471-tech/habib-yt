@@ -237,6 +237,7 @@ input{
 <header>
     <div class="header-left">
         <img src="https://i.ibb.co.com/yBGTR5RW/Picsart-25-11-25-19-23-36-262.png">
+        
         <div class="header-title">
             Habib Topup<br>
             <small>Best Topup Site</small>
@@ -244,7 +245,7 @@ input{
     </div>
 
     <div id="userArea">
-        <button class="login-btn" onclick="location.href='login.html'">লগইন</button>
+        <div id="balanceBox">0৳</div>
     </div>
 </header>
 
@@ -353,8 +354,7 @@ onAuthStateChanged(auth, async (user)=>{
         userBalance = snap.exists()? snap.data().balance : 0;
 
         document.getElementById("userArea").innerHTML = `
-            <div id="balanceBox">${userBalance}৳</div>
-            <img src="${user.photoURL || 'https://i.ibb.co.com/3p3X3Y8/default-avatar.png'}" class="profile-img">
+            <div id="balanceBox">${userBalance}৳</div>      
         `;
 
         document.getElementById("myBalance").innerText = userBalance;
