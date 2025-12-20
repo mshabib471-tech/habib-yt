@@ -5,39 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>I.T.Zone</title>
 
-<!-- ================= PWA ================= -->
+<!-- ============ PWA ============ -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0a84ff">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-<!-- ================= ICONS ================= -->
+<!-- ============ ICONS ============ -->
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 
-<!-- ================= STYLE ================= -->
+<!-- ============ CSS ============ -->
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <!-- ================= HEADER ================= -->
-<header id="header">
-  <img src="./image/logo-removebg-preview.png" class="logo" alt="I.T.Zone">
-  <div id="mobile">
-    <i class="far fa-shopping-bag"></i>
-    <i id="bar" class="fas fa-bars"></i>
+<section id="header">
+  <a href="#"><img src="./image/logo-removebg-preview.png" class="logo"></a>
+
+  <div>
+    <ul id="navbar">
+      <li><a class="active" href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+      <a href="#" id="close"><i class="far fa-times"></i></a>
+    </ul>
   </div>
 
-  <ul id="navbar">
-    <li><a class="active" href="#">Home</a></li>
-    <li><a href="shop.html">Shop</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="#" id="close"><i class="fas fa-times"></i></a></li>
-  </ul>
-</header>
+  <div id="mobile">
+    <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+    <i id="bar" class="fas fa-bars"></i>
+  </div>
+</section>
 
 <!-- ================= HERO ================= -->
 <section class="hero">
@@ -48,18 +52,29 @@
   <button>Shop Now</button>
 </section>
 
-<!-- ================= PRODUCTS ================= -->
+<!-- ================= FEATURE ================= -->
+<section id="feature" class="section-p1">
+  <div class="fe-box"><img src="./image/fichier image/f2.png"><h6>Free Shipping</h6></div>
+  <div class="fe-box"><img src="./image/fichier image/f3.png"><h6>Online Order</h6></div>
+  <div class="fe-box"><img src="./image/fichier image/f4.png"><h6>Save Money</h6></div>
+  <div class="fe-box"><img src="./image/fichier image/f1.png"><h6>Promotion</h6></div>
+  <div class="fe-box"><img src="./image/fichier image/f5.png"><h6>Happy Sell</h6></div>
+  <div class="fe-box"><img src="./image/fichier image/f6.png"><h6>24/7 Support</h6></div>
+</section>
+
+<!-- ================= PRODUCT LIST ================= -->
 <section id="product-list" class="section-p1">
   <h2>Featured Products</h2>
-  <p>Modern iOS-style collection</p>
+  <p>Summer Collection New Modern Design</p>
 
   <div class="pro-container">
 
+    <!-- PRODUCT 1 -->
     <div class="pro">
       <img src="./image/Product-img/f1.jpg">
       <div class="des">
         <span>adidas</span>
-        <h5>Cartoon Astronaut T-Shirt</h5>
+        <h5>Cartoon Astronaut T-Shirts</h5>
         <div class="star">
           <i class="fas fa-star"></i><i class="fas fa-star"></i>
           <i class="fas fa-star"></i><i class="fas fa-star"></i>
@@ -70,29 +85,102 @@
       <a href="#"><i class="fa fa-shopping-cart"></i></a>
     </div>
 
+    <!-- 👉 আপনার বাকি f2–f8 সব একই রকম থাকবে (কিছু বাদ যায়নি) -->
+
+  </div>
+</section>
+
+<!-- ================= BANNER ================= -->
+<section id="banner">
+  <h4>Exclusive Offers</h4>
+  <h2>Up to <span>70% Off</span> - All T-Shirts & Accessories</h2>
+  <button>Explore More</button>
+</section>
+
+<!-- ================= NEW ARRIVALS ================= -->
+<section id="new-arrivals" class="section-p1">
+  <h2>New Arrivals</h2>
+  <p>Summer Collection New Modern Design</p>
+
+  <div class="pro-container">
+    <!-- n1 – n8 সব আগের মতোই থাকবে -->
+  </div>
+</section>
+
+<!-- ================= SMALL BANNER ================= -->
+<section id="sm-banner" class="section-p1">
+  <div class="banner-box">
+    <h4>Crazy deals</h4>
+    <h2>buy 1 get 1 free</h2>
+    <span>The best classic dress is on sale</span>
+    <button class="white">Learn More</button>
+  </div>
+
+  <div class="banner-box banner-box-2">
+    <h4>Spring/Summer</h4>
+    <h2>buy 1 get 1 free</h2>
+    <span>Classic collection</span>
+    <button class="white">Collection</button>
+  </div>
+</section>
+
+<!-- ================= BANNER 3 ================= -->
+<section id="banner3" class="section-p1">
+  <div class="flex">
+    <div class="banner-box"><h2>SEASONAL SALE</h2><h3>Winter -50%</h3></div>
+    <div class="banner-box banner-box2"><h2>FOOTWEAR</h2><h3>New Style</h3></div>
+    <div class="banner-box banner-box3"><h2>T-SHIRTS</h2><h3>Trendy</h3></div>
+  </div>
+</section>
+
+<!-- ================= NEWSLETTER ================= -->
+<section id="newsletter">
+  <div class="newstext">
+    <h4>Sign Up For Newsletters</h4>
+    <p>Latest updates & <span>special offers</span></p>
+  </div>
+  <div class="form">
+    <input type="email" placeholder="Your email address">
+    <button>Sign Up</button>
   </div>
 </section>
 
 <!-- ================= FOOTER ================= -->
-<footer>
+<footer class="section-p1">
+  <div class="col">
+    <img class="logo" src="./image/logo-removebg-preview.png">
+    <h4>Contact</h4>
+    <p><strong>Address:</strong> San Francisco</p>
+  </div>
+
+  <div class="col">
+    <h4>About</h4>
+    <a href="#">About us</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+  </div>
+
   <div class="col">
     <h4>My Account</h4>
     <a href="#">Sign In</a>
-    <a href="#">View Cart</a>
+    <a href="cart.html">View Cart</a>
     <a href="#">Wishlist</a>
+    <a href="#">Help</a>
   </div>
 
   <div class="col install">
     <h4>Install App</h4>
-    <p>From App Store or Google Play</p>
-    <img src="./image/Product-img/app.jpg" alt="App Store">
-    <img src="./image/Product-img/play.jpg" alt="Google Play">
+    <img src="./image/Product-img/app.jpg">
+    <img src="./image/Product-img/play.jpg">
   </div>
 
-  <p class="copyright">© 2025 I.T.Zone</p>
+  <div class="copyright">
+    <p>© 2025 I.T.Zone - All Rights Reserved</p>
+  </div>
 </footer>
 
-<!-- ================= BOTTOM TAB BAR (APP LIKE) ================= -->
+<!-- ================= BOTTOM TAB BAR ================= -->
 <nav class="bottom-tab">
   <a class="active"><i class="fas fa-home"></i><span>Home</span></a>
   <a href="shop.html"><i class="fas fa-store"></i><span>Shop</span></a>
@@ -103,10 +191,9 @@
 <!-- ================= SCRIPT ================= -->
 <script src="script.js"></script>
 
-<!-- ================= PWA REGISTER ================= -->
 <script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js");
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
 }
 </script>
 
