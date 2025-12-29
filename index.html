@@ -6,10 +6,12 @@
 
 <title>I.T.Zone</title>
 
+<!-- ICON & CSS -->
+<link rel="shortcut icon" href="./image/logo.png">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 <link rel="stylesheet" href="style.css">
 
-<!-- PWA BASIC -->
+<!-- ================= PWA ================= -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0A84FF">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -21,15 +23,19 @@
 
 <!-- ================= HEADER ================= -->
 <section id="header">
-  <a href="#"><img src="./image/logo-removebg-preview.png" class="logo"></a>
+  <a href="index.html">
+    <img src="./image/logo-removebg-preview.png" class="logo" alt="I.T.Zone">
+  </a>
 
   <ul id="navbar">
-    <li><a class="active" href="#">Home</a></li>
+    <li><a class="active" href="index.html">Home</a></li>
     <li><a href="#">Shop</a></li>
     <li><a href="#">Blog</a></li>
     <li><a href="#">About</a></li>
     <li><a href="#">Contact</a></li>
-    <li><a href="#"><i class="far fa-shopping-bag"></i></a></li>
+    <li>
+      <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+    </li>
     <a href="#" id="close"><i class="far fa-times"></i></a>
   </ul>
 
@@ -38,13 +44,13 @@
   </div>
 </section>
 
-<!-- ================= HERO (BACKGROUND IMAGE FIXED) ================= -->
+<!-- ================= HERO ================= -->
 <section class="hero">
   <h4>Trade-in-offer</h4>
   <h2>Super value deals</h2>
   <h1>On all products</h1>
   <p>Save more with coupons & up to 70% off!</p>
-  <button>Shop Now</button>
+  <button onclick="location.href='#product-list'">Shop Now</button>
 </section>
 
 <!-- ================= FEATURE ================= -->
@@ -57,46 +63,16 @@
   <div class="fe-box"><img src="./image/fichier image/f6.png"><h6>24/7 Support</h6></div>
 </section>
 
-<!-- ================= PRODUCTS (STATIC – নিশ্চিত দেখাবে) ================= -->
+<!-- ================= PRODUCTS ================= -->
 <section id="product-list" class="section-p1">
   <h2>Featured Products</h2>
+  <p>Summer Collection New Modern Design</p>
 
+  <!-- PRODUCTS LOAD FROM JS -->
   <div class="pro-container" id="productContainer"></div>
-
-    <div class="pro">
-      <img src="./image/Product-img/f1.jpg">
-      <div class="des">
-        <span>adidas</span>
-        <h5>Cartoon Astronaut T-Shirt</h5>
-        <div class="star">
-          <i class="fas fa-star"></i><i class="fas fa-star"></i>
-          <i class="fas fa-star"></i><i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-        </div>
-        <h4>$78</h4>
-      </div>
-      <a href="#"><i class="fa fa-shopping-cart"></i></a>
-    </div>
-
-    <div class="pro">
-      <img src="./image/Product-img/f2.jpg">
-      <div class="des">
-        <span>adidas</span>
-        <h5>Cartoon Astronaut T-Shirt</h5>
-        <div class="star">
-          <i class="fas fa-star"></i><i class="fas fa-star"></i>
-          <i class="fas fa-star"></i><i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-        </div>
-        <h4>$78</h4>
-      </div>
-      <a href="#"><i class="fa fa-shopping-cart"></i></a>
-    </div>
-
-  </div>
 </section>
 
-<!-- ================= FOOTER (CONFIRMED) ================= -->
+<!-- ================= FOOTER ================= -->
 <footer class="section-p1">
   <div style="display:flex;justify-content:space-evenly;flex-wrap:wrap;gap:4rem;">
 
@@ -117,7 +93,7 @@
       <h4>Install App</h4>
       <p>From App Store or Google Play</p>
 
-      <!-- INSTALL IMAGE CLICK -->
+      <!-- CLICK INSTALL -->
       <img id="installApp" src="./image/Product-img/app.jpg" style="cursor:pointer;">
       <img id="installApp2" src="./image/Product-img/play.jpg" style="cursor:pointer;">
     </div>
@@ -129,9 +105,36 @@
   </div>
 </footer>
 
-<script src="products.js"></script> 
+<!-- ================= PWA INSTALL POPUP ================= -->
+<div id="pwa-install" class="pwa-install hidden">
+  <div class="pwa-card">
+    <img src="./icons/icon-192.png">
+    <h3>Install I.T.Zone App</h3>
+    <p>Fast • Offline • App-like experience</p>
+
+    <div class="pwa-actions">
+      <button id="installBtn">Install</button>
+      <button id="closePwa">Later</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script src="products.js"></script>
 <script src="script.js"></script>
+
+<script>
+/* Install image click → open popup */
+document.getElementById("installApp").onclick =
+document.getElementById("installApp2").onclick = () => {
+  document.getElementById("pwa-install").classList.remove("hidden");
+};
+
+/* SERVICE WORKER */
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
 
 </body>
 </html>
-
