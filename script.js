@@ -1,104 +1,147 @@
-/* ================= iOS 26 SCRIPT ================= */
+/* ================= SAFE DOM LOAD ================= */
+document.addEventListener("DOMContentLoaded", () => {
 
-/* ---------- Disable iOS white bounce ---------- */
-document.body.style.overscrollBehavior = "none";
+  /* ================= NAVBAR TOGGLE ================= */
+  const bar = document.getElementById("bar");
+  const nav = document.getElementById("navbar");
+  const close = document.getElementById("close");
 
-/* ---------- NAVBAR TOGGLE (Mobile) ---------- */
-const bar = document.getElementById("bar");
-const close = document.getElementById("close");
-const nav = document.getElementById("navbar");
-
-if (bar) {
-  bar.addEventListener("click", () => {
-    nav.style.display = "flex";
-    nav.classList.add("active");
-  });
-}
-
-if (close) {
-  close.addEventListener("click", () => {
-    nav.classList.remove("active");
-    nav.style.display = "none";
-  });
-}
-
-/* ---------- APP LIKE TAP EFFECT ---------- */
-document.querySelectorAll("a, button").forEach(el => {
-  el.addEventListener("touchstart", () => {
-    el.style.opacity = "0.6";
-  });
-  el.addEventListener("touchend", () => {
-    el.style.opacity = "1";
-  });
-});
-
-/* ---------- PRODUCT CLICK (FULL CARD CLICKABLE) ---------- */
-document.querySelectorAll(".pro").forEach(card => {
-  card.addEventListener("click", () => {
-    window.location.href = "shop.html";
-  });
-});
-
-/* ---------- SHOPPING CART CLICK FIX ---------- */
-document.querySelectorAll(".fa-shopping-cart").forEach(cart => {
-  cart.addEventListener("click", (e) => {
-    e.stopPropagation();
-    window.location.href = "cart.html";
-  });
-});
-
-/* ---------- SMOOTH PAGE LOAD (APP FEEL) ---------- */
-window.addEventListener("load", () => {
-  document.body.style.opacity = "0";
-  setTimeout(() => {
-    document.body.style.transition = "opacity .4s ease";
-    document.body.style.opacity = "1";
-  }, 50);
-});
-
-/* ---------- BOTTOM TAB ACTIVE STATE ---------- */
-const tabs = document.querySelectorAll(".bottom-tab a");
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    tabs.forEach(t => t.classList.remove("active"));
-    tab.classList.add("active");
-  });
-});
-
-/* ---------- iOS STYLE SCROLL SHADOW ---------- */
-const header = document.getElementById("header");
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 10) {
-    header.style.boxShadow = "0 8px 30px rgba(0,0,0,.12)";
-  } else {
-    header.style.boxShadow = "none";
+  if (bar) {
+    bar.addEventListener("click", () => {
+      nav.style.display = "flex";
+    });
   }
+
+  if (close) {
+    close.addEventListener("click", () => {
+      nav.style.display = "none";
+    });
+  }
+
+  /* ================= PRODUCT LOAD ================= */
+  const productContainer = document.getElementById("productContainer");
+
+  if (productContainer && typeof products !== "undefined") {
+    productContainer.innerHTML = "";
+
+    products.forEach(p => {
+
+      let stars = "";
+      for (let i = 0; i < p.rating; i++) {
+        stars += `<i class="fas fa-star"></i>`;
+      }
+
+      productContainer.innerHTML += `
+        <div class="pro">
+          <img src="${p.image}" alt="${p.name}">
+          <div class="des">
+            <span>${p.brand}</span>
+            <h5>${p.name}</h5>
+            <div class="star">${stars}</div>
+            <h4>$${p.price}</h4>
+          </div>
+          <a href="javascript:void(0)" onclick="addToCart(${p.id})">
+            <i class="fa fa-shopping-cart"></i>
+          </a>
+        </div>
+      `;
+    });
+
+    console.log("✅ Products loaded:", products.length);
+  } else {
+    console.warn("⚠ productContainer or products not found");
+  }
+
+  /* ================= PWA INSTALL IMAGE CLICK ================= */
+  const installImg1 = document.getElementById("installApp");
+  const installImg2 = document.getElementById("installApp2");
+  const pwaPopup = document.getElementById("pwa-install");
+
+  if (installImg1 && pwaPopup) {
+    installImg1.addEventListener("click", () => {
+      pwaPopup.classList.remove("hidden");
+    });
+  }
+
+  if (installImg2 && pwaPopup) {
+    installImg2.addEventListener("click", () => {
+      pwaPopup.classList.remove("hidden");
+    });
+  }
+
 });
 
-/* ---------- INSTALL APP PROMPT (PWA) ---------- */
+
+/* ================= CART SYSTEM ================= */
+function addToCart(productId) {
+  if (typeof products === "undefined") return;
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+
+  const exist = cart.find(item => item.id === productId);
+
+  if (exist) {
+    exist.qty += 1;
+  } else {
+    cart.push({ ...product, qty: 1 });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("✅ Product added to cart");
+}
+
+
+/* ================= PWA INSTALL LOGIC ================= */
 let deferredPrompt;
+const installBtn = document.getElementById("installBtn");
+const closePwa = document.getElementById("closePwa");
+const pwaBox = document.getElementById("pwa-install");
+
+/* ANDROID / CHROME */
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  console.log("PWA Ready to install");
 });
 
-/* ---------- FORCE SAFARI FIX ---------- */
-document.addEventListener("gesturestart", function (e) {
-  e.preventDefault();
-});
-
-/* ---------- SAFE AREA (iPhone Notch Fix) ---------- */
-const style = document.createElement("style");
-style.innerHTML = `
-body{
-  padding-bottom: env(safe-area-inset-bottom);
+/* INSTALL BUTTON */
+if (installBtn) {
+  installBtn.addEventListener("click", async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      if (pwaBox) pwaBox.classList.add("hidden");
+    }
+  });
 }
-.bottom-tab{
-  padding-bottom: env(safe-area-inset-bottom);
-}
-`;
-document.head.appendChild(style);
 
-/* ---------- iOS 26 FINISH ---------- */
-console.log("iOS 26 UI Loaded Successfully 🚀");
+/* CLOSE POPUP */
+if (closePwa) {
+  closePwa.addEventListener("click", () => {
+    if (pwaBox) pwaBox.classList.add("hidden");
+  });
+}
+
+/* iOS SAFARI MESSAGE */
+const isIos = /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+const isInStandalone = window.navigator.standalone === true;
+
+if (isIos && !isInStandalone && pwaBox) {
+  setTimeout(() => {
+    pwaBox.classList.remove("hidden");
+
+    if (installBtn) installBtn.style.display = "none";
+    if (closePwa) {
+      closePwa.innerText = "How to Install?";
+      closePwa.onclick = () => {
+        alert("Safari → Share → Add to Home Screen");
+      };
+    }
+  }, 2500);
+}
+
+/* ================= UX FIX ================= */
+document.body.style.overscrollBehavior = "none";
