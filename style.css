@@ -1,190 +1,230 @@
+/* ================= iOS 26 ROOT ================= */
+:root{
+  --ios-bg:#f2f2f7;
+  --ios-card:#ffffffcc;
+  --ios-dark-bg:#000000;
+  --ios-dark-card:#1c1c1ecc;
+  --ios-blue:#0A84FF;
+  --ios-gray:#8e8e93;
+  --ios-radius:16px;
+  --ios-shadow:0 20px 40px rgba(0,0,0,.08);
+}
+
 /* ================= RESET ================= */
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:'Spartan',sans-serif;
 }
 
-html,body{
-  width:100%;
-  overflow-x:hidden;
-  background:#fff;
-  color:#222;
+html{
+  scroll-behavior:smooth;
 }
 
-/* ================= COMMON ================= */
-a{text-decoration:none;color:inherit}
-li{list-style:none}
-img{max-width:100%;display:block}
+body{
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  background:var(--ios-bg);
+  color:#000;
+  -webkit-font-smoothing:antialiased;
+  overscroll-behavior:none;
+}
 
-h1{font-size:50px;line-height:64px}
-h2{font-size:46px;line-height:54px}
-h4{font-size:20px}
+a{
+  text-decoration:none;
+  color:inherit;
+  -webkit-tap-highlight-color:transparent;
+}
 
-.logo{height:70px;width:134px}
+button{
+  border:none;
+  cursor:pointer;
+}
 
 /* ================= HEADER ================= */
 #header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 40px;
-  background:#414343;
   position:sticky;
   top:0;
   z-index:999;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 24px;
+  backdrop-filter:blur(20px);
+  background:rgba(255,255,255,.8);
+  border-bottom:1px solid rgba(0,0,0,.05);
+}
+
+.logo{
+  height:42px;
 }
 
 #navbar{
   display:flex;
   align-items:center;
+  gap:24px;
 }
 
 #navbar li{
-  padding:0 18px;
-  position:relative;
+  list-style:none;
 }
 
 #navbar li a{
-  color:#cdbcbc;
-  font-size:16px;
-  transition:.3s;
+  font-size:15px;
+  color:#1c1c1e;
 }
 
-#navbar li a.active,
-#navbar li a:hover{
-  color:#088178;
+#navbar li a.active{
+  color:var(--ios-blue);
+  font-weight:600;
 }
 
-#navbar li a.active::after,
-#navbar li a:hover::after{
-  content:"";
-  width:30%;
-  height:2px;
-  background:#088178;
-  position:absolute;
-  bottom:-4px;
-  left:20px;
+#mobile{
+  display:none;
 }
-
-#mobile{display:none;gap:10px}
 
 /* ================= HERO ================= */
 .hero{
-  background:url(./image/expressive-young-woman-posing-studio.jpg) center/cover no-repeat;
-  min-height:80vh;
-  padding:0 40px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  padding:90px 24px;
+  background:linear-gradient(135deg,#0A84FF,#5AC8FA);
+  color:#fff;
+  border-bottom-left-radius:28px;
+  border-bottom-right-radius:28px;
 }
 
-.hero h1{color:#088178}
+.hero h4{opacity:.9;}
+.hero h1{font-size:40px;margin:10px 0;}
+.hero h2{font-size:26px;}
+.hero p{opacity:.9;}
 
 .hero button{
-  background:url("image/button.png") no-repeat;
-  background-color:transparent;
-  border:none;
-  padding:14px 80px 14px 65px;
-  font-weight:700;
-  cursor:pointer;
-  color:#088178;
+  margin-top:20px;
+  padding:14px 30px;
+  border-radius:999px;
+  background:#fff;
+  color:#0A84FF;
+  font-size:16px;
 }
 
 /* ================= SECTION ================= */
 .section-p1{
-  padding:40px 40px;
+  padding:60px 24px;
 }
 
-/* ================= FEATURE ================= */
+/* ================= FEATURES ================= */
 #feature{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-between;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
   gap:20px;
 }
 
-#feature .fe-box{
-  width:180px;
-  padding:20px;
-  border:1px solid #cce7d0;
+.fe-box{
+  background:white;
+  padding:22px;
+  border-radius:18px;
+  text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,.05);
+}
+
+.fe-box img{
+  width:60px;
+  margin-bottom:10px;
+}
+
+/* ================= PRODUCTS ================= */
+#product-list h2,
+#new-arrivals h2{
+  font-size:28px;
   text-align:center;
 }
 
-/* ================= PRODUCTS (IMPORTANT FIX) ================= */
-#product-list,
-#new-arrivals{
+#product-list p,
+#new-arrivals p{
   text-align:center;
+  color:var(--ios-gray);
+  margin-bottom:30px;
 }
 
 .pro-container{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:16px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:24px;
 }
 
 .pro{
-  background:#fff;
-  border:1px solid #cce7d0;
-  border-radius:12px;
-  padding:10px;
-  position:relative;
+  background:var(--ios-card);
+  backdrop-filter:blur(14px);
+  border-radius:var(--ios-radius);
+  box-shadow:var(--ios-shadow);
+  overflow:hidden;
+  transition:.35s ease;
+}
+
+.pro:hover{
+  transform:translateY(-6px) scale(1.02);
 }
 
 .pro img{
-  border-radius:12px;
+  width:100%;
+  border-radius:16px 16px 0 0;
 }
 
 .pro .des{
-  text-align:left;
-  padding:8px 0;
+  padding:16px;
 }
 
 .pro .des span{
   font-size:12px;
-  color:#606063;
+  color:var(--ios-gray);
 }
 
 .pro .des h5{
-  font-size:14px;
+  font-size:15px;
+  margin:6px 0;
 }
 
-.pro .des i{
-  color:gold;
-  font-size:12px;
+.star{
+  color:#ffcc00;
+  font-size:13px;
 }
 
 .pro h4{
-  color:#088178;
-  font-size:15px;
+  margin-top:8px;
 }
 
 .pro a{
   position:absolute;
-  bottom:10px;
-  right:10px;
-  width:38px;
-  height:38px;
+  right:16px;
+  bottom:16px;
+  background:var(--ios-blue);
+  color:white;
+  padding:12px;
   border-radius:50%;
-  background:#e8f6ea;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#088178;
-  pointer-events:auto;
 }
 
-/* ================= BANNER ================= */
+/* ================= BANNERS ================= */
+#banner,
+#sm-banner .banner-box,
+#banner3 .banner-box{
+  border-radius:20px;
+}
+
 #banner{
-  background:url(./image/Product-img/b2.jpg) center/cover no-repeat;
-  padding:40px 20px;
+  margin:40px 24px;
+  padding:50px 20px;
   text-align:center;
+  background:linear-gradient(135deg,#ff9f0a,#ff375f);
+  color:white;
 }
 
-#banner h2{color:#fff}
-#banner h4{color:#fff}
-#banner span{color:#ef3636}
+#banner span{color:#fff;font-weight:700;}
+
+#banner button{
+  margin-top:16px;
+  padding:14px 30px;
+  background:white;
+  color:#ff375f;
+  border-radius:999px;
+}
 
 /* ================= SMALL BANNER ================= */
 #sm-banner{
@@ -194,110 +234,100 @@ h4{font-size:20px}
 }
 
 .banner-box{
-  background-size:cover;
-  padding:30px;
-  color:#fff;
-}
-
-/* ================= BANNER 3 ================= */
-#banner3 .flex{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-}
-
-#banner3 .banner-box{
-  background-size:cover;
-  padding:20px;
+  padding:40px 20px;
+  background:#1c1c1e;
+  color:white;
+  border-radius:20px;
 }
 
 /* ================= NEWSLETTER ================= */
 #newsletter{
-  background:#041e42;
-  color:#fff;
-  padding:40px 20px;
+  margin:40px 24px;
+  padding:40px;
+  background:#1c1c1e;
+  border-radius:22px;
+  color:white;
   display:flex;
   flex-wrap:wrap;
-  gap:20px;
   justify-content:space-between;
-}
-
-#newsletter .form{
-  display:flex;
-  width:100%;
-  max-width:400px;
+  gap:20px;
 }
 
 #newsletter input{
-  flex:1;
-  padding:10px;
+  padding:14px;
+  width:260px;
+  border-radius:999px;
+  border:none;
 }
 
 #newsletter button{
-  background:#088178;
-  color:#fff;
-  border:none;
-  padding:10px 16px;
+  padding:14px 26px;
+  border-radius:999px;
+  background:var(--ios-blue);
+  color:white;
 }
 
 /* ================= FOOTER ================= */
 footer{
-  padding:40px 20px;
-  background:#f5f5f5;
+  padding-bottom:100px;
 }
 
-footer .col{
-  margin-bottom:30px;
+footer h4{
+  margin-bottom:10px;
 }
 
-footer a:hover,
-footer i:hover{
-  color:#088178;
+footer a{
+  display:block;
+  margin:6px 0;
+  color:var(--ios-gray);
 }
 
-/* ================= MOBILE ================= */
+/* ================= BOTTOM TAB ================= */
+.bottom-tab{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  height:72px;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  backdrop-filter:blur(20px);
+  background:rgba(255,255,255,.85);
+  border-top:1px solid rgba(0,0,0,.1);
+  z-index:999;
+}
+
+.bottom-tab a{
+  font-size:22px;
+  color:var(--ios-gray);
+}
+
+.bottom-tab a.active{
+  color:var(--ios-blue);
+}
+
+/* ================= DARK MODE ================= */
+@media (prefers-color-scheme: dark){
+  body{
+    background:var(--ios-dark-bg);
+    color:white;
+  }
+
+  .pro,.fe-box{
+    background:var(--ios-dark-card);
+  }
+
+  #header,.bottom-tab{
+    background:rgba(28,28,30,.8);
+  }
+
+  footer a{
+    color:#b0b0b5;
+  }
+}
+
+/* ================= RESPONSIVE ================= */
 @media(max-width:768px){
-
-  #header{
-    padding:15px 20px;
-  }
-
-  #navbar{
-    flex-direction:column;
-    position:fixed;
-    top:0;
-    right:-100%;
-    width:260px;
-    height:100vh;
-    background:#E3E6F3;
-    padding-top:80px;
-    transition:.3s;
-  }
-
-  #navbar.active{
-    right:0;
-  }
-
-  #mobile{
-    display:flex;
-    font-size:22px;
-  }
-
-  .hero{
-    padding:40px 20px;
-    min-height:auto;
-  }
-
-  #feature{
-    justify-content:center;
-  }
-
-  #feature .fe-box{
-    width:45%;
-  }
-}
-
-@media(max-width:480px){
-  h1{font-size:36px}
-  h2{font-size:30px}
+  #navbar{display:none;}
+  #mobile{display:flex;gap:16px;font-size:22px;}
 }
