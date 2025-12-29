@@ -229,3 +229,27 @@ footer img{
     font-size:22px;
   }
 }
+
+/* ================= CART QTY BUTTON (iOS STYLE) ================= */
+.qty-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:8px;
+}
+
+.qty-box button{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  border:none;
+  background:#0A84FF;
+  color:white;
+  font-size:18px;
+}
+
+.qty-box span{
+  min-width:20px;
+  text-align:center;
+  font-weight:600;
+}
