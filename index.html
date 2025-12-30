@@ -3,150 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
 <title>I.T.Zone</title>
 
-<!-- ICON & CSS -->
-<link rel="shortcut icon" href="./image/logo.png">
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 
-<!-- ================= PWA ================= -->
+<!-- PWA -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0A84FF">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-<section id="header">
-  <a href="index.html">
-    <img src="./image/logo-removebg-preview.png" class="logo" alt="I.T.Zone">
-  </a>
+<!-- ========== HEADER / MENU ========== -->
+<header id="header">
+  <img src="./image/logo-removebg-preview.png" class="logo">
 
   <ul id="navbar">
-    <li><a class="active" href="index.html">Home</a></li>
-    <li><a href="#">Shop</a></li>
-    <li><a href="#">Blog</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Contact</a></li>
-    <li>
-      <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
-    </li>
-    <a href="#" id="close"><i class="far fa-times"></i></a>
+    <li><a class="active">Home</a></li>
+    <li><a href="#product-list">Products</a></li>
+    <li><a href="#offers">Offers</a></li>
+    <li><a href="#newsletter">Newsletter</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a href="register.html">Register</a></li>
+    <li><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+    <i id="close" class="far fa-times"></i>
   </ul>
 
-  <div id="mobile">
-    <i id="bar" class="fas fa-bars"></i>
+  <i id="bar" class="fas fa-bars"></i>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <h4>Trade-in-offer</h4>
+  <h1>Best Tech Deals 2026</h1>
+  <p>Save more with coupons & special offers</p>
+  <button onclick="document.getElementById('product-list').scrollIntoView()">Shop Now</button>
+</section>
+
+<!-- ========== OFFERS (BACKGROUND IMAGE) ========== -->
+<section id="offers" class="offers">
+  <div class="offer-box">
+    <h2>🔥 Summer Sale</h2>
+    <p>Up to 50% OFF</p>
+  </div>
+  <div class="offer-box">
+    <h2>🎁 Buy 1 Get 1</h2>
+    <p>Selected Accessories</p>
   </div>
 </section>
 
-<!-- ================= HERO ================= -->
-<section class="hero">
-  <h4>Trade-in-offer</h4>
-  <h2>Super value deals</h2>
-  <h1>On all products</h1>
-  <p>Save more with coupons & up to 70% off!</p>
-  <button onclick="location.href='#product-list'">Shop Now</button>
-</section>
-
-<!-- ================= FEATURE ================= -->
-<section id="feature" class="section-p1">
-  <div class="fe-box"><img src="./image/fichier image/f1.png"><h6>Promotion</h6></div>
-  <div class="fe-box"><img src="./image/fichier image/f2.png"><h6>Free Shipping</h6></div>
-  <div class="fe-box"><img src="./image/fichier image/f3.png"><h6>Online Order</h6></div>
-  <div class="fe-box"><img src="./image/fichier image/f4.png"><h6>Save Money</h6></div>
-  <div class="fe-box"><img src="./image/fichier image/f5.png"><h6>Happy Sell</h6></div>
-  <div class="fe-box"><img src="./image/fichier image/f6.png"><h6>24/7 Support</h6></div>
-</section>
-
-<!-- ================= PRODUCTS ================= -->
+<!-- ========== PRODUCTS ========== -->
 <section id="product-list" class="section-p1">
   <h2>Featured Products</h2>
-  <p>Summer Collection New Modern Design</p>
-
-  <!-- PRODUCTS LOAD FROM JS -->
   <div class="pro-container" id="productContainer"></div>
 </section>
 
-<!-- ================= FOOTER ================= -->
+<!-- ========== NEWSLETTER (AUTO EMAIL FORWARD) ========== -->
+<section id="newsletter">
+  <h2>Sign Up For Newsletters</h2>
+  <p>Get E-mail updates about our latest shop and special offers.</p>
+
+  <!-- AUTO EMAIL FORWARD -->
+  <form action="https://formsubmit.co/YOUR_EMAIL@gmail.com" method="POST">
+    <input type="email" name="email" required placeholder="Your Email">
+    <input type="hidden" name="_subject" value="New Newsletter Signup">
+    <button type="submit">Sign Up</button>
+  </form>
+</section>
+
+<!-- ========== FOOTER ========== -->
 <footer class="section-p1">
-  <div style="display:flex;justify-content:space-evenly;flex-wrap:wrap;gap:4rem;">
+  <div class="footer-grid">
 
-    <!-- CONTACT -->
-    <div class="col">
-      <img class="logo" src="./image/logo-removebg-preview.png">
+    <div>
       <h4>Contact</h4>
-      <p><strong>Address:</strong> 526 Wellington Road, Street 32, San Francisco</p>
-      <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+      <p>526 Wellington Road, Street 32, San Francisco</p>
+      <p>10:00 - 18:00 (Mon - Sat)</p>
 
-      <h4>Follow us</h4>
-      <div style="display:flex;gap:14px;font-size:18px;">
-        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+      <div class="social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
       </div>
     </div>
 
-    <!-- ACCOUNT -->
-    <div class="col">
+    <div>
       <h4>Account</h4>
-      <a href="#">Sign</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
       <a href="cart.html">View Cart</a>
-      <a href="#">My Wishlist</a>
-      <a href="#">Track My Order</a>
+      <a href="#">Wishlist</a>
       <a href="#">Help</a>
     </div>
 
-    <!-- INSTALL -->
-    <div class="col install">
+    <div>
       <h4>Install App</h4>
-      <p>From App Store or Google Play</p>
-      <img id="installApp" src="./image/Product-img/app.jpg" style="cursor:pointer;">
-      <img id="installApp2" src="./image/Product-img/play.jpg" style="cursor:pointer;">
+      <img id="installApp" src="./image/Product-img/app.jpg">
+      <img id="installApp2" src="./image/Product-img/play.jpg">
     </div>
 
   </div>
 
-  <div class="copyright">
-    <p>©2026 Habibur Rahman</p>
-  </div>
+  <p class="copyright">©2026 Habibur Rahman</p>
 </footer>
 
-
-<!-- ================= PWA INSTALL POPUP ================= -->
-<div id="pwa-install" class="pwa-install hidden">
-  <div class="pwa-card">
-    <img src="./icons/icon-192.png">
-    <h3>Install I.T.Zone App</h3>
-    <p>Fast • Offline • App-like experience</p>
-
-    <div class="pwa-actions">
-      <button id="installBtn">Install</button>
-      <button id="closePwa">Later</button>
-    </div>
+<!-- ========== PRODUCT POPUP MODAL ========== -->
+<div id="productModal" class="modal hidden">
+  <div class="modal-box">
+    <span class="close" onclick="closeModal()">×</span>
+    <img id="modalImg">
+    <h3 id="modalTitle"></h3>
+    <p id="modalPrice"></p>
+    <button>Add To Cart</button>
   </div>
 </div>
 
-<!-- ================= SCRIPT ================= -->
 <script src="products.js"></script>
 <script src="script.js"></script>
 
-<script>
-/* Install image click → open popup */
-document.getElementById("installApp").onclick =
-document.getElementById("installApp2").onclick = () => {
-  document.getElementById("pwa-install").classList.remove("hidden");
-};
-
-/* SERVICE WORKER */
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js");
-}
+<!-- ========== LIVE CHAT (REAL) ========== -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{};
+(function(){
+var s=document.createElement("script");
+s.src='https://embed.tawk.to/YOUR_TAWK_ID/1abcd';
+s.async=true;
+document.body.appendChild(s);
+})();
 </script>
 
 </body>
