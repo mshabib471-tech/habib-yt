@@ -263,12 +263,20 @@ body{
   border-radius:999px;
 }
 
-/* =================================================
-   FOOTER
-================================================= */
+/* ===== FOOTER MOBILE FIX ===== */
 footer{
   background:#1c1c1e;
   color:white;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px;
+}
+
+footer h4{
+  margin-bottom:12px;
 }
 
 footer a{
@@ -278,22 +286,22 @@ footer a{
   text-decoration:none;
 }
 
-.social a{
-  margin-right:14px;
-  font-size:18px;
+@media(max-width:600px){
+  .footer-grid{
+    text-align:left;
+  }
 }
 
-/* =================================================
-   PRODUCT POPUP MODAL
-================================================= */
+
+/* ===== PRODUCT MODAL FIX ===== */
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.55);
+  background:rgba(0,0,0,.6);
   display:flex;
-  justify-content:center;
   align-items:center;
-  z-index:9999;
+  justify-content:center;
+  z-index:10000; /* VERY IMPORTANT */
 }
 
 .modal.hidden{
@@ -301,12 +309,13 @@ footer a{
 }
 
 .modal-box{
-  background:white;
-  padding:24px;
-  border-radius:20px;
+  background:#fff;
   width:90%;
   max-width:420px;
-  text-align:center;
+  border-radius:22px;
+  padding:20px;
+  position:relative;
+  animation:popUp .25s ease;
 }
 
 .modal-box img{
@@ -316,11 +325,17 @@ footer a{
 
 .modal-box .close{
   position:absolute;
-  top:20px;
-  right:24px;
-  font-size:22px;
+  top:12px;
+  right:14px;
+  font-size:24px;
   cursor:pointer;
 }
+
+@keyframes popUp{
+  from{transform:scale(.9);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
 
 /* =================================================
    PWA INSTALL POPUP
@@ -346,3 +361,11 @@ footer a{
   border-radius:26px 26px 0 0;
   padding:24px;
 }
+
+#installApp,
+#installApp2{
+  cursor:pointer;
+  z-index:50;
+  position:relative;
+}
+
