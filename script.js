@@ -18,6 +18,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* ================= MOBILE MENU FIX ================= */
+const bar = document.getElementById("bar");
+const nav = document.getElementById("navbar");
+const closeBtn = document.getElementById("close");
+
+if (bar) {
+  bar.addEventListener("click", () => {
+    nav.classList.add("active");
+  });
+}
+
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    nav.classList.remove("active");
+  });
+}
+
+  
   /* ================= PRODUCT LOAD ================= */
   const productContainer = document.getElementById("productContainer");
 
@@ -94,54 +112,32 @@ function addToCart(productId) {
 }
 
 
-/* ================= PWA INSTALL LOGIC ================= */
+/* ================= INSTALL APP FIX ================= */
 let deferredPrompt;
-const installBtn = document.getElementById("installBtn");
-const closePwa = document.getElementById("closePwa");
-const pwaBox = document.getElementById("pwa-install");
+const installBox = document.getElementById("pwa-install");
 
-/* ANDROID / CHROME */
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
 });
 
-/* INSTALL BUTTON */
-if (installBtn) {
-  installBtn.addEventListener("click", async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      await deferredPrompt.userChoice;
-      deferredPrompt = null;
-      if (pwaBox) pwaBox.classList.add("hidden");
-    }
-  });
-}
+const installImgs = [document.getElementById("installApp"), document.getElementById("installApp2")];
 
-/* CLOSE POPUP */
-if (closePwa) {
-  closePwa.addEventListener("click", () => {
-    if (pwaBox) pwaBox.classList.add("hidden");
-  });
-}
-
-/* iOS SAFARI MESSAGE */
-const isIos = /iphone|ipad|ipod/i.test(window.navigator.userAgent);
-const isInStandalone = window.navigator.standalone === true;
-
-if (isIos && !isInStandalone && pwaBox) {
-  setTimeout(() => {
-    pwaBox.classList.remove("hidden");
-
-    if (installBtn) installBtn.style.display = "none";
-    if (closePwa) {
-      closePwa.innerText = "How to Install?";
-      closePwa.onclick = () => {
+installImgs.forEach(img=>{
+  if(img){
+    img.addEventListener("click", async ()=>{
+      if(deferredPrompt){
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+      }else{
+        // iOS Guide
         alert("Safari → Share → Add to Home Screen");
-      };
-    }
-  }, 2500);
-}
+      }
+    });
+  }
+});
+
 
 /* ================= UX FIX ================= */
 document.body.style.overscrollBehavior = "none";
