@@ -253,3 +253,41 @@ footer img{
   text-align:center;
   font-weight:600;
 }
+/* ===== MOBILE NAV ===== */
+#navbar{
+  transition:0.35s ease;
+}
+
+@media(max-width:768px){
+  #navbar{
+    position:fixed;
+    top:0;
+    right:-100%;
+    width:280px;
+    height:100vh;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(20px);
+    flex-direction:column;
+    padding:80px 20px;
+    gap:20px;
+    box-shadow:-10px 0 30px rgba(0,0,0,.15);
+    z-index:1000;
+  }
+
+  #navbar.active{
+    right:0;
+  }
+
+  #close{
+    position:absolute;
+    top:20px;
+    right:20px;
+    font-size:22px;
+  }
+
+  #mobile{
+    display:block;
+    font-size:24px;
+    cursor:pointer;
+  }
+}
