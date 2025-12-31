@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login / Register – I.T.Zone</title>
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+<style>
+/* ========== BASE ========== */
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  background:linear-gradient(135deg,#0A84FF,#5AC8FA);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ========== CONTAINER ========== */
+.auth-box{
+  width:92%;
+  max-width:380px;
+  background:#fff;
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 30px 60px rgba(0,0,0,.25);
+  position:relative;
+  animation:fadeUp .4s ease;
+}
+
+@keyframes fadeUp{
+  from{transform:translateY(40px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+/* ========== HEADER SWITCH ========== */
+.auth-header{
+  display:flex;
+  gap:10px;
+  margin-bottom:24px;
+}
+
+.auth-header button{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:999px;
+  font-size:15px;
+  cursor:pointer;
+  background:#f2f2f7;
+}
+
+.auth-header button.active{
+  background:#0A84FF;
+  color:#fff;
+}
+
+/* ========== FORM ========== */
+.form{
+  display:none;
+}
+
+.form.active{
+  display:block;
+}
+
+.form h2{
+  text-align:center;
+  margin-bottom:16px;
+}
+
+.input-box{
+  margin-bottom:14px;
+}
+
+.input-box input{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid #ddd;
+  font-size:15px;
+}
+
+.submit-btn{
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  border:none;
+  border-radius:999px;
+  background:#0A84FF;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* ========== EXTRA ========== */
+.small{
+  text-align:center;
+  margin-top:14px;
+  font-size:14px;
+  color:#555;
+}
+</style>
+</head>
+
+<body>
+
+<div class="auth-box">
+
+  <!-- SWITCH -->
+  <div class="auth-header">
+    <button id="loginTab" class="active">Login</button>
+    <button id="registerTab">Register</button>
+  </div>
+
+  <!-- LOGIN FORM -->
+  <div id="loginForm" class="form active">
+    <h2>Welcome Back</h2>
+
+    <div class="input-box">
+      <input type="email" id="loginEmail" placeholder="Email" required>
+    </div>
+
+    <div class="input-box">
+      <input type="password" id="loginPassword" placeholder="Password" required>
+    </div>
+
+    <button class="submit-btn" onclick="login()">Login</button>
+
+    <p class="small">Forgot password? (Firebase reset possible)</p>
+  </div>
+
+  <!-- REGISTER FORM -->
+  <div id="registerForm" class="form">
+    <h2>Create Account</h2>
+
+    <div class="input-box">
+      <input type="email" id="registerEmail" placeholder="Email" required>
+    </div>
+
+    <div class="input-box">
+      <input type="password" id="registerPassword" placeholder="Password" required>
+    </div>
+
+    <button class="submit-btn" onclick="register()">Register</button>
+
+    <p class="small">By continuing, you agree to our terms</p>
+  </div>
+
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>
