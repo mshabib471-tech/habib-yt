@@ -1,6 +1,4 @@
-/* =================================================
-   FIREBASE IMPORT (MODULE)
-================================================= */
+/* ================= FIREBASE MODULE IMPORT ================= */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
   getAuth,
@@ -9,13 +7,10 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   sendPasswordResetEmail,
-  signOut,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-/* =================================================
-   FIREBASE CONFIG (YOUR PROJECT)
-================================================= */
+/* ================= YOUR FIREBASE CONFIG ================= */
 const firebaseConfig = {
   apiKey: "AIzaSyAaLdtzOIZVYB-Bdc42CXm2T8iclWLc4o0",
   authDomain: "habib-yt.firebaseapp.com",
@@ -25,95 +20,74 @@ const firebaseConfig = {
   appId: "1:656628491244:web:e01ccd42bd8a2b1b4c96c9"
 };
 
-/* =================================================
-   INIT
-================================================= */
+/* ================= INIT ================= */
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-/* =================================================
-   ADMIN ROLE (EMAIL BASED)
-================================================= */
-const ADMIN_EMAIL = "admin@it-zone.com"; // ← change if needed
-
-/* =================================================
-   LOGIN
-================================================= */
+/* ================= EMAIL LOGIN ================= */
 window.login = function () {
   const email = document.getElementById("loginEmail").value;
   const pass = document.getElementById("loginPassword").value;
 
+  if (!email || !pass) {
+    alert("Please fill all fields");
+    return;
+  }
+
   signInWithEmailAndPassword(auth, email, pass)
     .then(() => {
-      alert("Login successful");
-      window.location.href = "index.html";
+      window.location.href = "index.html"; // dashboard
     })
     .catch(err => alert(err.message));
 };
 
-/* =================================================
-   REGISTER
-================================================= */
+/* ================= REGISTER ================= */
 window.register = function () {
   const email = document.getElementById("registerEmail").value;
   const pass = document.getElementById("registerPassword").value;
 
+  if (!email || !pass) {
+    alert("Please fill all fields");
+    return;
+  }
+
   createUserWithEmailAndPassword(auth, email, pass)
     .then(() => {
-      alert("Account created");
-      window.location.href = "index.html";
+      window.location.href = "index.html"; // dashboard
     })
     .catch(err => alert(err.message));
 };
 
-/* =================================================
-   GOOGLE LOGIN
-================================================= */
+/* ================= GOOGLE LOGIN ================= */
 window.googleLogin = function () {
   signInWithPopup(auth, provider)
     .then(() => {
-      alert("Google login successful");
-      window.location.href = "index.html";
+      window.location.href = "index.html"; // dashboard
     })
     .catch(err => alert(err.message));
 };
 
-/* =================================================
-   PASSWORD RESET
-================================================= */
-window.resetPassword = function () {
-  const email = prompt("Enter your email for password reset:");
-  if (!email) return;
+/* ================= PASSWORD RESET ================= */
+window.resetPassword = function (email) {
+  if (!email) {
+    alert("Enter your email");
+    return;
+  }
 
   sendPasswordResetEmail(auth, email)
     .then(() => alert("Password reset email sent"))
     .catch(err => alert(err.message));
 };
 
-/* =================================================
-   LOGOUT
-================================================= */
-window.logout = function () {
-  signOut(auth).then(() => {
-    localStorage.clear();
-    window.location.href = "login.html";
-  });
-};
-
-/* =================================================
-   AUTH STATE (USER / ADMIN)
-================================================= */
-onAuthStateChanged(auth, user => {
+/* ================= AUTO REDIRECT IF LOGGED IN ================= */
+onAuthStateChanged(auth, (user) => {
   if (user) {
-    document.body.classList.add("logged-in");
-
-    if (user.email === ADMIN_EMAIL) {
-      localStorage.setItem("role", "admin");
-    } else {
-      localStorage.setItem("role", "user");
-    }
-
     localStorage.setItem("userEmail", user.email);
+    // Already logged in → dashboard
+    // (avoid loop in login page)
+    if (!window.location.pathname.includes("index.html")) {
+      console.log("Logged in as:", user.email);
+    }
   }
 });
